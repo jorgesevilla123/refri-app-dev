@@ -1,0 +1,74 @@
+.sidenav-container{
+    height: 100%;
+}
+
+
+.sidenav{
+    width: 200px;
+    box-shadow: 3px rgba(114, 112, 112, 0.116);
+
+}
+
+
+
+.hidden{
+    display: none;
+}
+
+mat-toolbar{
+    height: auto;
+    background-color: rgba(153, 153, 153, 0.068);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+
+}
+
+
+
+
+@media (max-width: 881px) and (min-width: 581px){
+
+    
+mat-toolbar .desktop-display{
+    display: none;
+}        
+
+
+
+mat-toolbar a img {
+
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;  
+    width: 200px;
+    }
+
+}
+
+
+
+
+/* media breakpoints for mobile devices  */
+@media (max-width: 580px ) and (min-width: 280px){
+
+    
+
+mat-toolbar .desktop-display{
+    display: none;
+}        
+
+
+
+mat-toolbar a img {
+
+    
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 200px;
+}
+
+
+}
+
+

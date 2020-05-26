@@ -1,0 +1,208 @@
+
+
+/* media breakpoint for laptops and desktop devices */
+@media (max-width: 1483px) and (min-width: 1183px){
+
+
+  mat-card, figure{
+    height: 400px;
+  }
+
+  
+h1, mat-card-title, mat-grid-tile p{
+  color: black;
+  font-weight: 100;
+  font-size: 23px;
+}
+
+
+mat-grid-tile div button { /* main buttons styles */
+  width: 200px;
+  height: 200px;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: auto ;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+#inventario{
+  background-color: rgba(255, 166, 0, 0.801);
+  
+
+}
+
+#pos{
+  background-color: rgba(2, 148, 2, 0.76);
+
+}
+
+#config{
+  background-color: rgba(0, 102, 255, 0.822);
+
+}
+
+#busqueda{
+  background-color: rgba(255, 0, 0, 0.753);
+
+}
+
+mat-card{
+  color: white
+}
+
+mat-card-subtitle{
+  color: white;
+  font-weight: 100;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+
+
+
+#main-menu-cards-icon{
+  font-size: 80px;
+  display: inline;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+#main-menu-cards{
+  display: inline;
+
+}
+
+p {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-size: 20px;
+}
+
+
+}
+
+
+/* media breakpoint for laptops */
+@media (max-width: 1182px) and (min-width: 882px){
+
+  
+
+}
+
+
+/* media breakpoints for tablets  */
+@media (max-width: 881px) and (min-width: 581px){
+
+    
+  
+} 
+  
+ 
+  
+  /* media breakpoints for mobile devices  */
+@media (max-width: 580px ) and (min-width: 280px){
+
+
+
+ 
+  
+.grid-container {
+  margin: 20px;
+}
+
+
+
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+  
+
+  #main-menu-cards-icon{
+    font-size: 40px;
+    display: inline;
+    margin-right: auto;
+    margin-left: auto;
+  
+  }
+
+  mat-card{
+    height: auto;
+  }
+
+
+  #main-menu-cards{
+    display: inline;
+  
+  }
+
+  h1, mat-card-title, mat-grid-tile p{  /* font letter styles */
+    color: black;
+    font-weight: 300;
+    font-size: 13px;
+  }
+  
+  
+    
+
+mat-grid-tile div button { /* main buttons styles */
+  width: 100px;
+  height: 100px;
+}
+
+#inventario{
+  background-color: rgba(255, 166, 0, 0.801);
+  
+
+}
+
+#pos{
+  background-color: rgba(2, 148, 2, 0.76);
+
+}
+
+#config{
+  background-color: rgba(0, 102, 255, 0.822);
+
+}
+
+#busqueda{
+  background-color: rgba(255, 0, 0, 0.753);
+
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 5px;
+}
+
+      
+  
+
+  
+  
+  }
+  
+

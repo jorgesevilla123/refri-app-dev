@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "refri-data"
+    }
+  },
+  "defaultProject": "refri-data",
+  "cli": {
+    "analytics": "304cafa1-2acd-46b1-a7d9-f93d9d622278"
+  }
 }

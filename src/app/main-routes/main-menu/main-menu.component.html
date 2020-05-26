@@ -1,0 +1,48 @@
+
+
+<!-- main menu showing all the modules of the app and the how to access them -->
+
+
+<div class="grid-container">
+  <h1 class="mat-h1">Panel de control</h1>
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+       dashboard's cards  content 
+      <mat-card class="dashboard-card" id="{{card.id}}">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+
+        <!-- dashboards's buttons for accessing the interface  -->
+
+        <mat-card-content class="dashboard-card-content">
+        
+            <mat-grid-list cols="2">
+              <mat-grid-tile>
+                  <p>{{card.button_1}}</p>
+                <button  mat-raised-button id="{{card.id}}" routerLink="/{{card.route_1}}">
+                  <mat-icon aria-hidden="false" aria-label="Example home icon" id="main-menu-cards-icon">{{card.icon_1}}</mat-icon>
+                </button>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <p>{{card.button_2}}</p>
+                  <button mat-raised-button id="{{card.id}}" routerLink="/{{card.route_2}}"><mat-icon id="main-menu-cards-icon">{{card.icon_2}}</mat-icon></button>
+                  </mat-grid-tile>
+
+            </mat-grid-list>
+          
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
