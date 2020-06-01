@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MainMenuComponent } from './main-routes/main-menu/main-menu.component';
 import { InventoryComponent } from './main-routes/inventory/inventory.component';
 import { FlexLayoutModule } from "@angular/flex-layout"
+import { HttpClientModule } from "@angular/common/http";
 
 
 
@@ -28,7 +29,7 @@ import { FlexLayoutModule } from "@angular/flex-layout"
     InventoryComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     FlexLayoutModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -40,7 +41,8 @@ import { FlexLayoutModule } from "@angular/flex-layout"
     LayoutModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
