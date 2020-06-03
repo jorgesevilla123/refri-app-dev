@@ -1,1 +1,13 @@
 <h1>Inventory working</h1>
+
+
+<ul class="heroes">
+    <li *ngFor="let product of products">
+      <a routerLink="/detail/{{product._id}}">
+        <span class="badge">{{product._id}}</span> {{product.title}}
+      </a>
+      <button class="delete" title="delete hero"></button>
+        delete
+    </li>
+  </ul>
+  
