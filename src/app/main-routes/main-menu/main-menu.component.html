@@ -1,48 +1,41 @@
-
-
 <!-- main menu showing all the modules of the app and the how to access them -->
 
 
-<div class="grid-container">
-  <h1 class="mat-h1">Panel de control</h1>
-  <mat-grid-list cols="2" rowHeight="400px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-       dashboard's cards  content 
-      <mat-card class="dashboard-card" id="{{card.id}}">
+<div class="bounds">
+  <h1>Panel de control</h1>
+
+  <div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+
+    <div fxFlex="50" class="sec1" fxFlex.xs="50" fxFlexAlign="center center">
+      <!-- card header -->
+      <mat-card id="inventory-card">
         <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
+          <mat-card-title class="cards-title">
+            Inventario
+            <button id="more-button" mat-button [matMenuTriggerFor]="menu"><mat-icon id="more-link">more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item><mat-icon class="regular-icon">create</mat-icon> Editar inventario</button>
+              <button mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
             </mat-menu>
           </mat-card-title>
+
         </mat-card-header>
+        <!-- card body  -->
+        <mat-card-content>
+          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventory">
+            <mat-icon>
+              store
+            </mat-icon>
+          </button>
 
-        <!-- dashboards's buttons for accessing the interface  -->
-
-        <mat-card-content class="dashboard-card-content">
-        
-            <mat-grid-list cols="2">
-              <mat-grid-tile>
-                  <p>{{card.button_1}}</p>
-                <button  mat-raised-button id="{{card.id}}" routerLink="/{{card.route_1}}">
-                  <mat-icon aria-hidden="false" aria-label="Example home icon" id="main-menu-cards-icon">{{card.icon_1}}</mat-icon>
-                </button>
-                </mat-grid-tile>
-
-                <mat-grid-tile>
-                    <p>{{card.button_2}}</p>
-                  <button mat-raised-button id="{{card.id}}" routerLink="/{{card.route_2}}"><mat-icon id="main-menu-cards-icon">{{card.icon_2}}</mat-icon></button>
-                  </mat-grid-tile>
-
-            </mat-grid-list>
-          
         </mat-card-content>
       </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+
+    </div>
+    <div fxFlex="50" class="sec3" fxFlex.xs="50" fxFlexAlign="center">
+      second section
+    </div>
+
+  </div>
+
 </div>
