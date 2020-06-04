@@ -1,3 +1,13 @@
+* {
+    font-weight: 300;
+
+}
+
+
+mat-toolbar .desktop-display{
+    font-size: 20px;
+}
+
 .sidenav-container{
     height: 100%;
 }
@@ -20,6 +30,15 @@ mat-toolbar{
     background-color: rgba(153, 153, 153, 0.068);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
+
+}
+
+mat-toolbar a img{
+    
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;  
+    width: 250px;
 
 }
 

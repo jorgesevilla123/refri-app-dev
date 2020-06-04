@@ -1,49 +1,105 @@
 
 
+
+* { /* general fonts display */
+  font-weight: 200;
+  color: black;
+
+
+}
+
+
+
 /* media breakpoint for laptops and desktop devices */
 @media (max-width: 1483px) and (min-width: 1183px){
 
+  #more-button{
+    width: auto;
+  }
 
-  mat-card, figure{
-    height: 400px;
+  mat-card-title{
+    width: 200px;
   }
 
   
-h1, mat-card-title, mat-grid-tile p{
+
+  #more-link{
+    font-size: 30px;
+    float: right;
+  }
+
+
+  button mat-icon{
+    font-size: 20px;
+  }
+
+
+
+
+  mat-icon #card-title-icon{ /* card title icons */
+     display: inline;
+   
+  }
+
+
+  button mat-icon{  /* main buttons icons alignment and sizing */
+    display: inline; 
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 80px;
+    
+  }
+
+
+  
+  button .regular-icon{  /* general icon alignment and sizing */
+    display: inline; 
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 22px;
+    color: black;
+
+   
+    
+  }
+
+   .inventory-button{  /* main buttons alignment */
+    
+    height: 200px;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    
+  }
+
+  div mat-card{   /* cards height */
+    height: 300px;
+  }
+
+
+  div{   /* cards div positioning and spacing */
+    text-align: center;
+    margin: 10px;
+    margin-top: 20px;
+    height: 200px;
+  }
+
+
+  
+h1, p{
   color: black;
   font-weight: 100;
   font-size: 23px;
 }
 
 
-mat-grid-tile div button { /* main buttons styles */
-  width: 200px;
-  height: 200px;
-}
 
-.grid-container {
-  margin: 20px;
-}
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: auto ;
-}
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
 
-.dashboard-card-content {
-  text-align: center;
-}
 
-#inventario{
+#inventory-button, #inventory-card{
   background-color: rgba(255, 166, 0, 0.801);
   
 
@@ -68,12 +124,6 @@ mat-card{
   color: white
 }
 
-mat-card-subtitle{
-  color: white;
-  font-weight: 100;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
-}
 
 
 
@@ -118,36 +168,58 @@ font-size: 20px;
  
   
   /* media breakpoints for mobile devices  */
+
+
+
 @media (max-width: 580px ) and (min-width: 280px){
 
-
-
- 
-  
-.grid-container {
-  margin: 20px;
-}
-
-
-
-  .more-button {
-    position: absolute;
-    top: 5px;
-    right: 10px;
+  * { /* general base font styles */
+    font-weight: 200;
   }
+
+
+  #more-link{  /* more icon alignment and sizing */
+    font-size: 25px;
+    float: right;
+  }
+
+
+
+
+
+
   
 
-  #main-menu-cards-icon{
-    font-size: 40px;
-    display: inline;
-    margin-right: auto;
+  button mat-icon{  /* icons alignment */
+    display: inline; 
     margin-left: auto;
-  
+    margin-right: auto;
+    font-size: 70px;
+    
+  }
+
+
+  div .sec1{
+    width: 300px;
+    height: 300px;
   }
 
   mat-card{
-    height: auto;
+    height: 200px;
   }
+
+
+
+  div{ /* card alignment and spacing */
+  
+    text-align: center;
+    margin: 10px;
+
+  }
+
+
+ 
+
 
 
   #main-menu-cards{
@@ -155,23 +227,37 @@ font-size: 20px;
   
   }
 
-  h1, mat-card-title, mat-grid-tile p{  /* font letter styles */
-    color: black;
-    font-weight: 300;
-    font-size: 13px;
-  }
-  
-  
-    
 
-mat-grid-tile div button { /* main buttons styles */
-  width: 100px;
-  height: 100px;
-}
 
-#inventario{
+
+ .cards-title{  /* cards title font size and positioning */
+   font-size: 18px;
+   float: left;
+   width: 250px;
+   text-align: center;
+  
+
+
+ }
+
+  
+
+
+#inventory-card{  /* main card styling */
+      
+  width: 250px;
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: rgba(255, 166, 0, 0.801);
   
+
+}
+
+#inventory-button{  /* main button styling */
+  width: 200px;
+  height: 150px;
+  background-color: rgba(255, 166, 0, 0.801);
 
 }
 
@@ -190,19 +276,23 @@ mat-grid-tile div button { /* main buttons styles */
 
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 5px;
+#more-button{
+  float: right;
 }
 
-      
+button .regular-icon{  /* general icon alignment and sizing */
+  display: inline; 
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 22px;
+  color: black;
+
+ 
   
+}
+
 
   
   
   }
   
-

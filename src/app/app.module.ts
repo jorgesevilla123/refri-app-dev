@@ -18,6 +18,7 @@ import { MainMenuComponent } from './main-routes/main-menu/main-menu.component';
 import { InventoryComponent } from './main-routes/inventory/inventory.component';
 import { FlexLayoutModule } from "@angular/flex-layout"
 import { HttpClientModule } from "@angular/common/http";
+import { MatTableModule } from "@angular/material/table";
 
 
 
@@ -42,7 +43,8 @@ import { HttpClientModule } from "@angular/common/http";
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
