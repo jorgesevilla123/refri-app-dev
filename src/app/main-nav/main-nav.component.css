@@ -3,6 +3,10 @@
 
 }
 
+mat-sidenav-container {     /* main nav bottom margin */
+    margin-bottom: 15px;
+}
+
 
 mat-toolbar .desktop-display{
     font-size: 20px;

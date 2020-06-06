@@ -19,7 +19,12 @@ import { InventoryComponent } from './main-routes/inventory/inventory.component'
 import { FlexLayoutModule } from "@angular/flex-layout"
 import { HttpClientModule } from "@angular/common/http";
 import { MatTableModule } from "@angular/material/table";
-
+import { MatSortModule } from "@angular/material/sort";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -44,7 +49,13 @@ import { MatTableModule } from "@angular/material/table";
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
