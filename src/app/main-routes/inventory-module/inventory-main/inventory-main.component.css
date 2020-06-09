@@ -1,27 +1,7 @@
-table{
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+body {
+    background-color: white;
 }
 
-
-th{ /* Table header styles */
-    color: black;
-    font-weight: bold;
-    font-size: 18 px;
-
-}
-
-td{ 
-    color: black;
-    font-weight: 400;
-}
-
-.hide{      /* for hiding the loading footer */
-    display: none;
-}
-
-/* mat table */
 
 
 .inventory-search-div{
@@ -32,7 +12,6 @@ td{
     width: 60%;
     margin-left: 10px;
     padding: 5px 10px;
-    background-color: white;
     border-radius: 5px;
 }
 
@@ -59,6 +38,6 @@ td{
 
 
 #add-button {
-    background-color: rgba(7, 163, 7, 0.712);
+    background-color: rgba(2, 214, 2, 0.712);
 
 }

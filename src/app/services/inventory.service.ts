@@ -29,6 +29,11 @@ export class InventoryService {
 
   }
 
+
+  addProducts() {
+    
+  }
+
   //error handleling instance
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -44,6 +49,9 @@ export class InventoryService {
       return of(result as T);
     };
   }
+
+
+  
 
   
 }

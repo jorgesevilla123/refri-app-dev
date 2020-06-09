@@ -1,0 +1,15 @@
+mat-label{
+    color: black;
+}
+
+h2 {
+    text-align: center;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-dialog-actions button {
+    float: right;
+}

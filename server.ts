@@ -30,6 +30,10 @@ export function app() {
     res.json(products);
 
   });
+
+  server.post('/api/products', async (req, res) => {
+    
+  })
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'

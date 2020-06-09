@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InventoryComponent } from "./main-routes/inventory/inventory.component";
+import { InventoryComponent } from "./main-routes/inventory-module/inventory-table/inventory-table.component";
 import { MainMenuComponent } from "./main-routes/main-menu/main-menu.component";
 import { PointOfSaleComponent } from "./main-routes/point-of-sale/point-of-sale.component";
 import { ConfigurationsComponent } from "./main-routes/configurations/configurations.component";
@@ -9,12 +9,14 @@ import { QuickConfigurationComponent } from "./main-routes/quick-configuration/q
 import { EditInventoryComponent } from "./main-routes/edit-inventory/edit-inventory.component";
 import { SalesComponent } from "./main-routes/sales/sales.component";
 import { SearchBySpecificationComponent } from "./main-routes/search-by-specification/search-by-specification.component";
+import { InventoryMainComponent } from "./main-routes/inventory-module/inventory-main/inventory-main.component";
 
 //Routes to render all the views in main-routes folder
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: MainMenuComponent},
-  {path: 'inventory', component: InventoryComponent},
+  {path: 'inventory-table', component: InventoryComponent},
+  {path: 'inventory-main', component: InventoryMainComponent},
   {path: 'edit-inventory', component: EditInventoryComponent},
   {path: 'point-of-sale', component: PointOfSaleComponent},
   {path: 'sales', component: SalesComponent},
