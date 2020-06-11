@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { FormBuilder } from "@angular/forms";
+import { InventoryService } from "../../../services/inventory.service";
+import { Products } from "../../../products";
+
+
+
 
 
 
@@ -13,20 +18,30 @@ export class InventoryManageProductsComponent implements OnInit {
 
   constructor(
      public dialog: MatDialog
+     
   ) { }
+products: Products[]
+
+  
 
   ngOnInit(): void {
 
   }
 
-   //Dialog for adding new products
-   onAdd() {
-    const dialogConfig = new MatDialogConfig;
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    this.dialog.open(InventoryManageProductsComponent, dialogConfig);
+ 
+   
+
+  onSubmit(description, model, cost, quantity){
+    const title = description;
+    const modelo = model;
+    const precio = cost;
+    const cantidad = quantity;
+    console.log(title, modelo, precio, cantidad);
+
 
   }
 
+onFileUpload(event) {
+  console.log(event)
 }
+
