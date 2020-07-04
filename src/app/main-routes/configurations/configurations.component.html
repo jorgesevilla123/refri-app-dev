@@ -1,1 +1,59 @@
-<p>configurations works!</p>
+<!-- main menu showing all the modules of the app and the how to access them -->
+
+
+
+<h1 class="config-title">Configuraciones del negocio <mat-icon>settings</mat-icon></h1>
+
+
+<mat-grid-list cols="3" rowHeight="300px">
+  <mat-grid-tile>
+    <mat-card class="currency-display-card">
+       <!-- card header --> 
+         <mat-card-header>
+            <mat-card-title>
+                Cotizacion del dolar actual
+            </mat-card-title> 
+        </mat-card-header>  
+        <!-- card body  -->
+         <mat-card-content >
+            <mat-card>
+                <mat-card-title id="currency-display-price">{{currency.precio | currency: 'Bs/$':'symbol':'4.2-2':'fr'}}</mat-card-title>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+
+        <mat-card class="currency-setup-card"> 
+            <!-- card header -->
+             <mat-card-header>
+                <mat-card-title style="text-align: center; font-size: 20px;">Establecer cotizacion del dolar</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="currencyForm" (submit)="addCurrency()">
+                <!-- card body  -->
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cotizacion del dolar</mat-label>
+                        <input matInput placeholder="Cotizacion del dolar" type="number" formControlName="precio">
+                    </mat-form-field>
+                    <div class="currency-form-actions">
+                        <button id="currency-form-buttons" type="submit" mat-raised-button>Establecer precio
+                            <mat-icon>attach_money</mat-icon></button>
+                    </div> 
+                </mat-card-content>
+            </form>
+        </mat-card>
+
+</mat-grid-tile>
+
+<mat-grid-tile>
+
+</mat-grid-tile>
+
+
+</mat-grid-list>
+
+
+
+

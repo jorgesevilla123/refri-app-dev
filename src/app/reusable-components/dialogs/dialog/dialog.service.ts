@@ -13,7 +13,7 @@ export class DialogService {
   
  
 
-
+  //resusable dialog component
   open(component, close: boolean, autofocus: boolean, width: string, height: string ){
     const dialogConfig = new MatDialogConfig;
     dialogConfig.disableClose = close;

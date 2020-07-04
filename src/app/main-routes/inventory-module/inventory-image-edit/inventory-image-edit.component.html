@@ -1,0 +1,27 @@
+<h2 class="image-update-title" mat-dialog-title>Añadir producto</h2>
+<form [formGroup]="inventoryService.photoForm" (submit)="editPhoto()" enctype="multipart/form-data">
+
+<div class="dialog-content" mat-dialog-content>
+   
+        
+        
+    <mat-form-field  id="id-field" appearance="outline">
+        <mat-label>Descripcion del producto</mat-label>
+        <input matInput formControlName="_id">
+    </mat-form-field>
+     
+            <button type="button" id="file-button" mat-raised-button (click)="fileInput.click()"> Subir imagen <mat-icon>get_app</mat-icon><mat-icon>insert_photo</mat-icon></button>
+        <input name="newImage"  #fileInput  style="display: none;" type="file" (change)="onFileUpload($event)">
+       </div>
+    
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button> <mat-icon>add</mat-icon> Crear</button>
+            <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
+        </div>
+    </form>
+
+
+
+
+
+

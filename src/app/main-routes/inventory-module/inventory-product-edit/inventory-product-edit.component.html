@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Añadir producto</h2>
+
+
+<form [formGroup]="inventoryService.productsForm" (submit)="editProduct()">
+<div mat-dialog-content>
+
+
+    <mat-form-field  id="id-field" appearance="outline">
+        <mat-label>Descripcion del producto</mat-label>
+        <input  #description matInput formControlName="_id">
+    </mat-form-field>
+
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descripcion del producto</mat-label>
+            <input #description matInput placeholder="Ej. COMPRESOR DE 1/4" formControlName="title">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Modelo o Codigo</mat-label>
+            <input #model matInput placeholder="Ej. EMI 80HLP" formControlName="modelo">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Precio costo</mat-label>
+            <input #cost type="number" matInput placeholder="Costo del producto" formControlName="precio">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Cantidad en almacen</mat-label>
+            <input  #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
+        </mat-form-field>
+</div>
+        
+
+    
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button > <mat-icon>add</mat-icon> Crear</button>
+            <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
+        </div>
+        </form>
+  
+
+
+
+
+
+

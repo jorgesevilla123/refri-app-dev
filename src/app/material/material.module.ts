@@ -14,7 +14,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatCardModule } from "@angular/material/card";
-
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatChipsModule } from "@angular/material/chips";
 
 
 @NgModule({
@@ -35,6 +37,9 @@ import { MatCardModule } from "@angular/material/card";
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatChipsModule
     
   ],
   exports: [
@@ -52,6 +57,9 @@ import { MatCardModule } from "@angular/material/card";
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatChipsModule
 
   ]
 })

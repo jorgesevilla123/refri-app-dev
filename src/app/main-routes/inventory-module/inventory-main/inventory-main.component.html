@@ -12,7 +12,7 @@
         </button>
       </mat-form-field>
 
-      <button mat-raised-button routerLink="/inventory-table" >Ver productos en tabla</button>
+      <button mat-raised-button routerLink="/inventory-table" >Ver productos en tabla <mat-icon>table_chart</mat-icon></button>
 
 
     </div>
@@ -21,3 +21,10 @@
 
 
     <h5>Grid with products goes here</h5>
+
+    <div>
+      <ul *ngFor="let product of products">
+        <li>{{product | json}}</li>
+      </ul>
+
+    </div>

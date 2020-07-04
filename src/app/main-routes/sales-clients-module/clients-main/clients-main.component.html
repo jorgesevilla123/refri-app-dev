@@ -1,0 +1,49 @@
+<h1 class="clients-title">Clientes</h1>
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Nuevo cliente
+      </mat-panel-title>
+      <mat-panel-description>
+        Agregar nuevo cliente
+        <mat-icon>person_add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput>
+
+    </mat-form-field>
+
+
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+<mat-grid-list cols="2" rowHeight="300px">
+  <mat-grid-tile *ngFor="let client of clients">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <mat-card-title>{{client.name}}</mat-card-title>
+        <mat-card-subtitle>{{client.phoneNumber}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h3>Productos comprados:</h3>
+        <mat-chip-list aria-label="Fish selection" *ngFor="let product of client.productsBought">
+          <mat-chip>{{product.title}}</mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="client-details" mat-button>Ver detalles</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

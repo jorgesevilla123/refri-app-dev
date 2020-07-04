@@ -1,0 +1,15 @@
+.products-bought{
+    font-weight: 200;
+}
+
+.clients-title{
+    font-weight: 200;
+    text-align: center;
+
+}
+
+
+.client-details{
+    background-color: rgba(0, 102, 255, 0.822);
+    color: white;
+}

@@ -18,10 +18,12 @@
       <a routerLink="/"><img src="../../assets/finishedlogo.png" alt=""></a>
       <span class="spacer"></span>
       <!-- menu for navigating through the app -->
-      <button class="desktop-display" mat-button [matMenuTriggerFor]="menu">Navegacion    <mat-icon>more_vert</mat-icon></button>
+      <button class="desktop-display" mat-button [matMenuTriggerFor]="menu">Navegacion    <mat-icon>expand_more</mat-icon></button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/inventory-main">Inventario</button>
-  <button mat-menu-item>Item 2</button>
+  <button mat-menu-item routerLink="/inventory-search">Inventario <mat-icon>store</mat-icon></button>
+  <button mat-menu-item routerLink="/configurations">Configuraciones <mat-icon>settings</mat-icon></button>
+  <button mat-menu-item routerLink="/products-search">Configuraciones <mat-icon>search</mat-icon></button>
+  <button mat-menu-item routerLink="/sales-and-clients">Compras y clientes <mat-icon>search</mat-icon></button>
 </mat-menu>
 
     </mat-toolbar>

@@ -5,11 +5,11 @@ import { MainMenuComponent } from "./main-routes/main-menu/main-menu.component";
 import { PointOfSaleComponent } from "./main-routes/point-of-sale/point-of-sale.component";
 import { ConfigurationsComponent } from "./main-routes/configurations/configurations.component";
 import { ProductSearchComponent } from "./main-routes/product-search/product-search.component";
-import { QuickConfigurationComponent } from "./main-routes/quick-configuration/quick-configuration.component";
-import { EditInventoryComponent } from "./main-routes/edit-inventory/edit-inventory.component";
-import { SalesComponent } from "./main-routes/sales/sales.component";
-import { SearchBySpecificationComponent } from "./main-routes/search-by-specification/search-by-specification.component";
 import { InventoryMainComponent } from "./main-routes/inventory-module/inventory-main/inventory-main.component";
+import { InventorySearchComponent } from "./main-routes/inventory-module/inventory-search/inventory-search.component";
+import { SalesClientsComponent } from "./main-routes/sales-clients-module/sales-clients/sales-clients.component";
+import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.component";
+import { ClientsMainComponent } from "./main-routes/sales-clients-module/clients-main/clients-main.component";
 
 //Routes to render all the views in main-routes folder
 const routes: Routes = [
@@ -17,13 +17,13 @@ const routes: Routes = [
   {path: 'dashboard', component: MainMenuComponent},
   {path: 'inventory-table', component: InventoryComponent},
   {path: 'inventory-main', component: InventoryMainComponent},
-  {path: 'edit-inventory', component: EditInventoryComponent},
+  {path: 'inventory-search', component: InventorySearchComponent},
   {path: 'point-of-sale', component: PointOfSaleComponent},
-  {path: 'sales', component: SalesComponent},
+  {path: 'sales-and-clients/sales', component: SalesComponent},
   {path: 'configurations', component: ConfigurationsComponent},
-  {path: 'quick-configurations', component: QuickConfigurationComponent},
   {path: 'products-search', component: ProductSearchComponent},
-  {path: 'search-by-specification', component: SearchBySpecificationComponent},
+  {path: 'sales-and-clients', component: SalesClientsComponent},
+  {path: 'sales-and-clients/clients', component: ClientsMainComponent},
 ];
 
 @NgModule({

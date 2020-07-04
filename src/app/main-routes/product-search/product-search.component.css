@@ -1,0 +1,61 @@
+#search-by-title{
+    margin: 20px;
+    width: 550px;
+    
+}
+
+.product-search-form{
+    width: 400px;
+}
+
+
+
+#search-section{
+    
+    display: inline-flex;
+}
+
+.category-search{
+    height: 45px;
+    background-color: rgba(0, 102, 255, 0.822);
+    color: white;
+
+}
+
+
+
+#search-button{
+    background-color: rgba(0, 102, 255, 0.822);
+    color: white;
+    margin-left: 20px;
+    height: 45px;
+}
+
+
+div{
+    max-width: 100%;
+    display: inline-block;
+}
+
+
+
+.content{
+    width: 100%;
+}
+
+.card-title{
+    font-weight: 200;
+    
+    }
+    
+    .product-card-img{
+        width: 130px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    
+    .inventory-products-card{
+        width: 320px;
+    }

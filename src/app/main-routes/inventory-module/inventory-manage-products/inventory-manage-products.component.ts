@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { InventoryService } from "../../../services/inventory.service";
 import { Products } from "../../../products";
+
 
 
 
@@ -15,33 +16,71 @@ import { Products } from "../../../products";
   styleUrls: ['./inventory-manage-products.component.css']
 })
 export class InventoryManageProductsComponent implements OnInit {
+  productsForm;
+  products: Products[];
+
+
 
   constructor(
-     public dialog: MatDialog
-     
-  ) { }
-products: Products[]
+    public inventoryService: InventoryService,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
 
-  
+
+  ) {
+    this.productsForm = this.formBuilder.group({
+      title: '',
+      modelo: '',
+      precio: '',
+      cantidad: '',
+    })
+  }
+  imagePath;
+
+
+
 
   ngOnInit(): void {
 
   }
 
- 
-   
 
-  onSubmit(description, model, cost, quantity){
-    const title = description;
-    const modelo = model;
-    const precio = cost;
-    const cantidad = quantity;
-    console.log(title, modelo, precio, cantidad);
-
-
+  addProduct() {
+    const title = this.productsForm.get('title').value;
+    const modelo = this.productsForm.get('modelo').value;
+    const precio = this.productsForm.get('precio').value;
+    const cantidad = this.productsForm.get('cantidad').value;
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('modelo', modelo);
+    formData.append('precio', precio);
+    formData.append('cantidad', cantidad);
+    formData.append('imagePath', this.imagePath);
+    if (this.imagePath === undefined) {
+      console.log('no image yet');
+    } else {
+      this.inventoryService.addProducts(formData)
+      this.productsForm.reset();
+      setTimeout( () => {
+        location.reload();
+      }, 1000)
+    }
   }
 
-onFileUpload(event) {
-  console.log(event)
-}
 
+  onFileUpload(event) {
+    try {
+      const file = event.target.files[0];
+      this.imagePath = file
+    } catch (error) {
+      console.log(`Unexpected error getting file at "onFileUpload": ${error} `);
+    }
+  }
+
+
+
+  
+
+
+  
+}

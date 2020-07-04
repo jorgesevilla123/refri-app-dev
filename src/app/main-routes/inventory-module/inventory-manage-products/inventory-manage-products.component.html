@@ -1,35 +1,41 @@
 <h2 mat-dialog-title>Añadir producto</h2>
-<mat-dialog-content>
-    <form >
+<form [formGroup]="productsForm" (submit)="addProduct()" enctype="multipart/form-data">
+
+<div mat-dialog-content>
+   
         <mat-form-field appearance="outline">
+
             <mat-label>Descripcion del producto</mat-label>
-            <input #description matInput placeholder="Ej. COMPRESOR DE 1/4">
+            <input #description matInput placeholder="Ej. COMPRESOR DE 1/4" formControlName="title">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Modelo o Codigo</mat-label>
-            <input #model matInput placeholder="Ej. EMI 80HLP">
+            <input #model matInput placeholder="Ej. EMI 80HLP" formControlName="modelo">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Precio costo</mat-label>
-            <input #cost type="number" matInput placeholder="Costo del producto">
+            <input #cost type="number" matInput placeholder="Costo del producto" formControlName="precio">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Cantidad en almacen</mat-label>
-            <input #quantity type="number" matInput placeholder="Cantidad en almacen">
+            <input  #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
         </mat-form-field>
-        <input #fileInput style="display: none;" type="file" (change)="onFileUpload($event)">
-        <button ng-click="clickUpload()" id="file-button" mat-raised-button ><mat-icon>get_app</mat-icon> Subir imagen</button>
 
+     
+            <button id="file-button" mat-raised-button (click)="fileInput.click()"><mat-icon>get_app</mat-icon> Subir imagen</button>
+        <input name="imagePath" #fileInput  style="display: none;" type="file" (change)="onFileUpload($event)">
+       </div>
+    
 
-        <mat-dialog-actions>
-            <button type="submit" mat-raised-button (submit)="onSubmit(description.value, model.value, cost.value, quantity.value);"> <mat-icon>add</mat-icon> Crear</button>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button > <mat-icon>add</mat-icon> Crear</button>
             <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
-        </mat-dialog-actions>
+        </div>
     </form>
-</mat-dialog-content>
+
 
 
 

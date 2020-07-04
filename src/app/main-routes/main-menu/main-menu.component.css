@@ -146,6 +146,12 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 font-size: 20px;
 }
 
+.cards-title{
+  width: 100%;
+  float: left;
+  margin-left: 10px;
+}
+
 
 }
 
@@ -233,7 +239,7 @@ font-size: 20px;
  .cards-title{  /* cards title font size and positioning */
    font-size: 18px;
    float: left;
-   width: 250px;
+   width: 100%;
    text-align: center;
   
 

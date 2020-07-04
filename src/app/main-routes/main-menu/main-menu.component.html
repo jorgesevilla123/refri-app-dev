@@ -22,7 +22,7 @@
         </mat-card-header>
         <!-- card body  -->
         <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventory-main">
+          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventory-search">
             <mat-icon>
               store
             </mat-icon>
@@ -33,7 +33,55 @@
 
     </div>
     <div fxFlex="50" class="sec3" fxFlex.xs="50" fxFlexAlign="center">
-      second section
+      <!-- card header -->
+      <mat-card id="config">
+        <mat-card-header>
+          <mat-card-title class="cards-title">
+            Configuraciones del negocio
+            <button id="more-button" mat-button [matMenuTriggerFor]="menu"><mat-icon id="more-link">more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Acceder a configuraciones</button>
+              <button mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
+            </mat-menu>
+          </mat-card-title>
+
+        </mat-card-header>
+        <!-- card body  -->
+        <mat-card-content>
+          <button class="inventory-button" mat-raised-button id="config" routerLink="/configurations">
+            <mat-icon>
+            settings
+            </mat-icon>
+          </button>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div fxFlex="50" class="sec3" fxFlex.xs="50" fxFlexAlign="center">
+      <!-- card header -->
+      <mat-card id="busqueda">
+        <mat-card-header>
+          <mat-card-title class="cards-title">
+            Busqueda de productos
+            <button id="more-button" mat-button [matMenuTriggerFor]="menu"><mat-icon id="more-link">more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Acceder a configuraciones</button>
+              <button mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
+            </mat-menu>
+          </mat-card-title>
+
+        </mat-card-header>
+        <!-- card body  -->
+        <mat-card-content>
+          <button class="inventory-button" mat-raised-button id="busqueda" routerLink="/products-search">
+            <mat-icon>
+            search
+            </mat-icon>
+          </button>
+
+        </mat-card-content>
+      </mat-card>
     </div>
 
   </div>

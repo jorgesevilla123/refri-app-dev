@@ -14,7 +14,14 @@ import { InventoryManageProductsComponent } from "./main-routes/inventory-module
 import { InventoryMainComponent } from "./main-routes/inventory-module/inventory-main/inventory-main.component";
 import { MaterialModule } from "./material/material.module";
 import { DialogComponent } from './reusable-components/dialogs/dialog/dialog.component';
-
+import { InventoryProductEditComponent } from './main-routes/inventory-module/inventory-product-edit/inventory-product-edit.component';
+import { ConfirmationComponent } from './reusable-components/confirmation/confirmation.component';
+import { InventorySearchComponent } from './main-routes/inventory-module/inventory-search/inventory-search.component';
+import { ConfigurationsComponent } from "./main-routes/configurations/configurations.component";
+import { ProductSearchComponent } from "./main-routes/product-search/product-search.component";
+import { InventoryImageEditComponent } from './main-routes/inventory-module/inventory-image-edit/inventory-image-edit.component';
+import { SalesClientsComponent } from './main-routes/sales-clients-module/sales-clients/sales-clients.component';
+import { ClientsMainComponent } from './main-routes/sales-clients-module/clients-main/clients-main.component';
 
 
 @NgModule({
@@ -25,7 +32,15 @@ import { DialogComponent } from './reusable-components/dialogs/dialog/dialog.com
     InventoryComponent,
     InventoryMainComponent,
     InventoryManageProductsComponent,
-    DialogComponent
+    DialogComponent,
+    InventoryProductEditComponent,
+    ConfirmationComponent,
+    InventorySearchComponent,
+    ConfigurationsComponent,
+    ProductSearchComponent,
+    InventoryImageEditComponent,
+    SalesClientsComponent,
+    ClientsMainComponent
     
 
   ],

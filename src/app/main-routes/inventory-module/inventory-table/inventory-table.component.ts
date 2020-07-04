@@ -5,9 +5,14 @@ import { InventoryService } from "../../../services/inventory.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
+import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { ConfirmationComponent } from "../../../reusable-components/confirmation/confirmation.component";
+import { InventoryProductEditComponent } from '../inventory-product-edit/inventory-product-edit.component';
+
+
+
 
 
 
@@ -17,7 +22,7 @@ import { DialogService } from "../../../reusable-components/dialogs/dialog/dialo
   styleUrls: ['./inventory-table.component.css']
 })
 export class InventoryComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'modelo', 'precio', 'cantidad']  //you can change the order of columns here
+  displayedColumns: string[] = ['title', 'modelo', 'precio', 'cantidad', 'buttons']  //you can change the order of columns here
  
 
   products: Products[]   //Defining the data type of the products
@@ -26,8 +31,12 @@ export class InventoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator; 
   searchKey: string
 
-  constructor(private inventoryService: InventoryService,
-    private  dialogService: DialogService
+  constructor(
+    private inventoryService: InventoryService,
+    private  dialogService: DialogService,
+    private alertService: AlertService,
+  
+
     ) { } //Injecting the service with DI
   listData : MatTableDataSource<any>
 
@@ -35,6 +44,7 @@ export class InventoryComponent implements OnInit {
   ngOnInit() {
 
     this.getProducts();
+    
 
   }
 
@@ -78,6 +88,29 @@ export class InventoryComponent implements OnInit {
     this.dialogService.open(InventoryManageProductsComponent, true, true, "40%", "auto");
 
   }
+
+
+  deleteProduct(product: Products): void {
+    alert("Estas seguro que quieres eliminar este producto?");
+    this.inventoryService.deleteProduct(product); 
+    this.alertService.notify("Producto eliminado");
+    setTimeout( () => {
+      location.reload();
+    }, 1000);
+  
+
+    // this.products = this.products.filter(p => p !== product);
+    // this.inventoryService.deleteProduct(product).subscribe();
+
+  }
+
+  onEdit(row){
+    this.inventoryService.populateForm(row);
+    this.dialogService.open(InventoryProductEditComponent, true, true, "40%", "auto");
+
+  }
+
+  
 
 
  

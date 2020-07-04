@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import * as mongoose from "mongoose"
 
 //Configurating, initializing and connecting to mongodb
 

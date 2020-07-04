@@ -12,17 +12,6 @@ mat-toolbar .desktop-display{
     font-size: 20px;
 }
 
-.sidenav-container{
-    height: 100%;
-}
-
-
-.sidenav{
-    width: 200px;
-    box-shadow: 3px rgba(114, 112, 112, 0.116);
-
-}
-
 
 
 .hidden{

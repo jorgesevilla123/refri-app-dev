@@ -1,1 +1,56 @@
-<p>product-search works!</p>
+<div id="search-section">
+    <mat-card id="search-by-title">
+        <mat-form-field appearance="outline" class="product-search-form">
+            <mat-label>Buscar productos por descripcion o modelo</mat-label>
+            <input matInput #searchBox [(ngModel)]="searchKeyTitle" placeholder="Ej. Compresor o EMI 60HLP"
+                (input)="search(searchBox.value)">
+            <button mat-button matSuffix mat-icon-button aria-label="clear" *ngIf="searchKeyTitle"
+                (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+
+        </mat-form-field>
+        <button id="search-button" mat-raised-button>
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-card>
+
+    <!--       for next update
+
+      <button id="category-search" mat-button [matMenuTriggerFor]="menu">Buscar por categoria<mat-icon>more_vert</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Aceite</button>
+        <button mat-menu-item>Evaporador</button>
+        <button mat-menu-item>Motor</button>
+        <button mat-menu-item>Motor</button>
+        <button mat-menu-item>Motor</button>
+        <button mat-menu-item>Motor</button>
+      </mat-menu> -->
+
+
+
+</div>
+
+<h2>Productos mostrados aqui</h2>
+
+
+
+
+<mat-grid-list cols="3" rowHeight="420px">
+    <mat-grid-tile *ngFor="let product of products$ | async">
+        <mat-card class="inventory-products-card">
+            <mat-card-header>
+                <mat-card-title class="card-title">
+                    {{product.title}}
+                </mat-card-title>
+            </mat-card-header>
+            <img class="product-card-img" mat-card-image src="assets/products-images{{product.imagePath}}">
+            <mat-card-content>
+                <h3>Modelo: {{product.modelo}}</h3>
+                <h3>Precio: {{product.precio | currency}}</h3>
+                <h3>Precio en {{product.precio * currency.precio | currency: 'Bs.':'symbol'}}</h3> 
+                <h3>Cantidad: {{product.cantidad}}</h3>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
