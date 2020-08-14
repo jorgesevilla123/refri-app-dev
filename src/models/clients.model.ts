@@ -1,26 +1,28 @@
 import { Schema, model, Document } from "mongoose";
-import { ProductInterface } from "./products-model"
-import { ProductSchema } from "./products-model";
-
+import { shoppingBasketInterface, ProductSchema } from "./shopping-basket";
 
 
 
 export interface Client extends Document {
     name: string,
+    cedula: number,
+    email: string
     constantBuyer: boolean,
-    productsBought: [ProductInterface],
-    mostBought: ProductInterface,
-    phoneNumber: string,
+    productsBought: [shoppingBasketInterface],
+    mostBought: shoppingBasketInterface,
+    phoneNumber: number,
     lastPurchase: Date
 
 }
 
 const ClientSchema: Schema = new Schema({
     name: String,
+    cedula: Number,
+    email: String,
     constantBuyer: Boolean,
-    productsBought: [ProductSchema],
+    productsBought: {type: [ProductSchema], default: [{title: 'No ha comprado productos'}]},
     mostBought: ProductSchema,
-    phoneNumber: String,
+    phoneNumber: Number,
     lastPurchase: {type: Date, default: Date.now}
 })
 

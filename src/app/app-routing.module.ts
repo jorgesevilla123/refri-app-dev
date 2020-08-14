@@ -10,10 +10,15 @@ import { InventorySearchComponent } from "./main-routes/inventory-module/invento
 import { SalesClientsComponent } from "./main-routes/sales-clients-module/sales-clients/sales-clients.component";
 import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.component";
 import { ClientsMainComponent } from "./main-routes/sales-clients-module/clients-main/clients-main.component";
+import { ClientDetailsComponent } from "./main-routes/sales-clients-module/client-details/client-details.component";
+import { SalesProcessComponent } from "./main-routes/sales-clients-module/sales-process/sales-process.component";
+
 
 //Routes to render all the views in main-routes folder
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: 'clients/:id', redirectTo: '/client/:id'},
+  {path: 'client/:id', component: ClientDetailsComponent},
   {path: 'dashboard', component: MainMenuComponent},
   {path: 'inventory-table', component: InventoryComponent},
   {path: 'inventory-main', component: InventoryMainComponent},
@@ -24,6 +29,8 @@ const routes: Routes = [
   {path: 'products-search', component: ProductSearchComponent},
   {path: 'sales-and-clients', component: SalesClientsComponent},
   {path: 'sales-and-clients/clients', component: ClientsMainComponent},
+  {path: 'sales-and-clients/sales/:id', component: SalesProcessComponent}
+
 ];
 
 @NgModule({

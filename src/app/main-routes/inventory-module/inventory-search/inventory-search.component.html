@@ -1,6 +1,6 @@
 <div class="inventory-search-div">
-  <button id="add-button" mat-raised-button (click)="onAdd()">
-    <mat-icon>add</mat-icon> Añadir productos
+  <button id="add-button" mat-fab (click)="onAdd()">
+    <mat-icon>add</mat-icon>
 
   </button>
 
@@ -9,6 +9,7 @@
     <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
     <button mat-button matSuffix mat-icon-button aria-label="clear" *ngIf="searchKeyTitle" (click)="onSearchClear()">
       <mat-icon>close</mat-icon>
+      <mat-icon matSuffix>search</mat-icon>
     </button>
   </mat-form-field>
 
@@ -19,8 +20,9 @@
 </div>
 
 
-<h5>Resultados de busqueda</h5>
 
+
+<h3 style="margin: 30px; font-weight: 200" >Hay <b>{{products}}</b> productos en el inventario</h3>
 
 <mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
   <mat-grid-tile *ngFor="let product of products$ | async">

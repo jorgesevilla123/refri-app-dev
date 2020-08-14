@@ -1,9 +1,3 @@
-<h2>Ventas</h2>
-
-
-
-<h5>Seleccionar cliente</h5>
-
 <mat-form-field appearance="outline" class="clients-search-form">
     <mat-label>Buscar clientes</mat-label>
     <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
@@ -13,11 +7,8 @@
     </button> -->
   </mat-form-field>
 
-  
 
-
-<div class="search-results">
-<mat-grid-list cols="4" rowHeight="300px">
+<mat-grid-list cols="4" rowHeight="280px">
     <mat-grid-tile *ngFor="let client of clients$ | async">
       <mat-card class="clients-card">
         <mat-card-header>
@@ -28,14 +19,10 @@
           <mat-card-subtitle>{{client.phoneNumber}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-          <button class="client-select" mat-raised-button matTooltip="Seleccionar cliente" [routerLink]="['/sales-and-clients/sales', client._id]">Seleccionar</button>
+          <button class="client-details" mat-mini-fab matTooltip="Mas informacion" [routerLink]="['/clients', client._id]"><mat-icon>info</mat-icon></button>
+          <button class="client-edit" mat-mini-fab (click)="onEditClient(client)" matTooltip="Editar cliente"><mat-icon>create</mat-icon></button>
+          <button class="delete" mat-mini-fab matTooltip="Eliminar cliente" (click)="deleteClient(client)"><mat-icon class="delete-icon">delete</mat-icon></button>
         </mat-card-actions> 
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-  </div>
-
-
-
-
-

@@ -1,0 +1,49 @@
+.clients-search-form{
+    width: 60%;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+.add-client-button{
+    margin-left: 10px;
+    background-color: rgba(0, 102, 255, 0.822);
+    color: white;
+
+}
+
+.client-details{
+    background-color: rgba(71, 71, 71, 0.726);
+    color: white;
+    margin: 4px;
+
+}
+
+.client-edit{
+    background-color: rgba(0, 102, 255, 0.822);
+    color: white;
+    margin: 4px;
+}
+
+
+
+.clients-card{
+    width: 280px;
+}
+
+.delete{
+    background-color: red;
+    
+}
+
+.delete-icon{
+    color: white;
+}
+
+
+
+
+
+
+

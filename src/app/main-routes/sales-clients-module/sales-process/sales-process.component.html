@@ -1,0 +1,72 @@
+<div *ngIf="client$ | async as client">
+
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile>
+
+    <h5>cliente: {{client.name}}</h5>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <div *ngFor="let product of productsBought">
+        <h5>{{product.title}}</h5>
+        <button mat-icon-button (click)="removeProduct(product)"><mat-icon>clear</mat-icon></button>
+      </div>
+
+       
+
+      <button mat-button-raised (click)="buyProduct(client, productsBought)">Comprar producto</button>
+     
+
+      </mat-grid-tile>
+
+
+
+    </mat-grid-list>
+
+
+  
+
+</div>
+
+
+<h5>Seleccionar productos</h5>
+
+<mat-form-field style="margin-left: 20px;" appearance="outline" class="inventory-search-form">
+    <mat-label>Buscar productos</mat-label>
+    <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
+    <button mat-button matSuffix mat-icon-button aria-label="clear" *ngIf="searchKeyTitle" >
+      <mat-icon>close</mat-icon>
+      <mat-icon matSuffix>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+
+  <div class="search-results">
+<mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
+  <mat-grid-tile *ngFor="let product of products$ | async">
+    <mat-card class="inventory-products-card">
+      <mat-card-header>
+        <mat-card-title class="card-title">
+          {{product.title}}
+        </mat-card-title>
+      </mat-card-header>
+      <img class="product-card-img" mat-card-image src="assets/products-images{{product.imagePath}}">
+      <mat-card-content>
+        <h3>Modelo: {{product.modelo}}</h3>
+        <h3>Precio: {{product.precio | currency}}</h3>
+        <h3>Cantidad: {{product.cantidad}}</h3>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button-raised (click)="addToShoppingBasket(product)">Agregar a cesta de compras <mat-icon>shopping_basket</mat-icon></button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+</div>

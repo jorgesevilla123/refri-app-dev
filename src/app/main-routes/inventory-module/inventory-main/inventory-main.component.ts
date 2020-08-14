@@ -15,6 +15,7 @@ import { Products } from "../../../products";
 export class InventoryMainComponent implements OnInit {
   searchKey: string
   products: Products[]
+  allProducts: number
 
 
   constructor(private dialogService: DialogService,
@@ -38,7 +39,9 @@ export class InventoryMainComponent implements OnInit {
 
   getProducts(): void {
     this.inventoryService.getProducts()
-    .subscribe(products => this.products = products);
+    .subscribe(products => {
+      this.products = products.slice(0, products.length/(products.length/40)),
+    this.allProducts = products.length});
 
   }
 

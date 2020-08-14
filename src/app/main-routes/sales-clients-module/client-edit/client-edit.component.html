@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Editar cliente: {{client}}</h2>
+<form [formGroup]="clientService.clientsEditForm" (submit)="onClientSubmit()">
+
+<div mat-dialog-content>
+
+    <mat-form-field style="display: none;" appearance="outline" class="form-fields">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="_id">
+        <mat-icon matSuffix>account_circle</mat-icon>
+    </mat-form-field>
+
+
+   
+        <mat-form-field appearance="outline" class="form-fields">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name">
+            <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-fields">
+            <mat-label>Numero de cedula</mat-label>
+            <input type="number" matInput formControlName="cedula">
+            <mat-icon matSuffix>branding_watermark</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-fields">
+            <mat-label>Correo electronico</mat-label>
+            <input  type="text" matInput placeholder="Costo del producto" formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-fields">
+            <mat-label>Numero de telefono</mat-label>
+            <input  type="number" matInput formControlName="phoneNumber">
+            <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+</div>
+
+     
+           
+    
+
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button > <mat-icon>add</mat-icon> Editar</button>
+            <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
+        </div>
+    </form>
+
+
+
+
+
+

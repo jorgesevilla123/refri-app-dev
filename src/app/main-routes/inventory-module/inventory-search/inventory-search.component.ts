@@ -25,6 +25,7 @@ export class InventorySearchComponent implements OnInit {
   products$ : Observable<Products[]>
   private searchKeys = new Subject<string>();
   product: Promise<Products>
+  products: number
 
   constructor(
     private inventoryService: InventoryService,
@@ -34,12 +35,15 @@ export class InventorySearchComponent implements OnInit {
 
   //Pushing a search term into the Observable stream
 
+
+
   search(term: string): void {
     this.searchKeys.next(term);
 
   }
 
   ngOnInit(): void {
+    this.getProducts();
     this.products$ = this.searchKeys.pipe(
 
       //waiting 300 ms between every keystroke before considering the term
@@ -53,6 +57,13 @@ export class InventorySearchComponent implements OnInit {
       switchMap((term: string) => this.inventoryService.searchProduct(term)),
 
     );
+
+  }
+
+
+  getProducts(): void {
+    this.inventoryService.getProducts()
+    .subscribe(products => this.products = products.length);
 
   }
 

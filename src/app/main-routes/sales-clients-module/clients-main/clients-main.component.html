@@ -8,15 +8,43 @@
       </mat-panel-title>
       <mat-panel-description>
         Agregar nuevo cliente
-        <mat-icon>person_add</mat-icon>
+        <mat-icon style="margin-left: 8px;">person_add</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input type="text" matInput>
 
+    <form [formGroup]="clientService.clientsForm" (submit)="onClientSubmit()">
+
+    <mat-form-field class="name-field" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput formControlName="name">
+      <mat-icon matSuffix>account_circle</mat-icon>
     </mat-form-field>
+
+    <mat-form-field class="id-field" appearance="outline">
+      <mat-label>Numero de cedula</mat-label>
+      <input type="number" matInput formControlName="cedula">
+      <mat-icon matSuffix>branding_watermark</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="email-field" appearance="outline">
+      <mat-label>Correo electronico</mat-label>
+      <input type="email" matInput formControlName="email">
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="number-field" appearance="outline">
+      <mat-label>Numero de telefono</mat-label>
+      <input type="number" matInput formControlName="phoneNumber">
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+      <button class="add-client-button" mat-raised-button>Agregar cliente  <mat-icon>person_add</mat-icon></button>
+  
+
+    <h4 class="constantBuyer-field">Comprador constante?</h4>
+    <mat-checkbox id="constant" formControlName="constantBuyer" class="yes-check" (change)="toggle($event)">Si</mat-checkbox> 
+    </form>
+
 
 
 
@@ -25,25 +53,31 @@
 
 
 
-<mat-grid-list cols="2" rowHeight="300px">
-  <mat-grid-tile *ngFor="let client of clients">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar>
-          <mat-icon>account_circle</mat-icon>
-        </div>
-        <mat-card-title>{{client.name}}</mat-card-title>
-        <mat-card-subtitle>{{client.phoneNumber}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <h3>Productos comprados:</h3>
-        <mat-chip-list aria-label="Fish selection" *ngFor="let product of client.productsBought">
-          <mat-chip>{{product.title}}</mat-chip>
-        </mat-chip-list>
-      </mat-card-content>
-      <mat-card-actions>
-        <button class="client-details" mat-button>Ver detalles</button>
-      </mat-card-actions>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+
+
+
+<app-client-search></app-client-search>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

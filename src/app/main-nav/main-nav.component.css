@@ -3,6 +3,28 @@
 
 }
 
+
+.inventory{
+    color: rgba(255, 166, 0, 0.801);
+}
+
+.config{
+    color: rgba(0, 102, 255, 0.822);
+}
+
+.busqueda{
+    color: red
+}
+
+.ventas{
+    color: rgba(2, 148, 2, 0.76);
+
+}
+
+.clientes{
+    color: rgba(2, 148, 2, 0.76);
+}
+
 mat-sidenav-container {     /* main nav bottom margin */
     margin-bottom: 15px;
 }

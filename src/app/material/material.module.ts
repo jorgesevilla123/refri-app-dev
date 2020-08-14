@@ -17,6 +17,9 @@ import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatChipsModule } from "@angular/material/chips";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { MatChipsModule } from "@angular/material/chips";
     MatDialogModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatChipsModule
+    MatChipsModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatTooltipModule
     
   ],
   exports: [
@@ -59,7 +65,10 @@ import { MatChipsModule } from "@angular/material/chips";
     MatDialogModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatChipsModule
+    MatChipsModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatTooltipModule
 
   ]
 })

@@ -1,0 +1,57 @@
+<button  style="font-size: 25px; margin-left: 20px" mat-icon-button routerLink="/sales-and-clients/clients"><mat-icon style="font-size: 40px;margin-right: 20px">keyboard_backspace</mat-icon> Volver a clientes</button>
+
+
+
+
+<mat-grid-list cols="2" rowHeight="400px">
+    <div *ngIf="client$ | async as client">
+    <mat-grid-tile>
+        <mat-card style="width: 500px">
+            <!-- card header --> 
+        <div>
+            <mat-card-header style="margin-bottom: 20px; height: 80px">
+                <div style="width: 100px;" mat-card-avatar>
+                    <mat-icon style="font-size: 80px">account_circle</mat-icon>
+                  </div>
+                  <mat-card-title style="font-size: 50px; margin-top: 20px;">{{client.name}}</mat-card-title>
+        
+             </mat-card-header>  
+        </div>
+             <!-- card body  -->
+              <mat-card-content>
+              <h3><b>Informacion del cliente</b></h3>
+              <h4><b>Numero de cedula: </b> {{client.cedula}}</h4>
+              <h4><b>Correo electronico: </b> {{client.email}}</h4>
+              <h4><b>Numero de contacto: </b> {{client.phoneNumber}}</h4>
+             </mat-card-content>
+         </mat-card>
+        
+    </mat-grid-tile>
+
+
+    <mat-grid-tile>
+        <mat-card>
+            <!-- card header --> 
+              <mat-card-header>
+               
+                  <mat-card-title style="font-size: 40px">Productos Comprados</mat-card-title>
+             </mat-card-header>  
+             <!-- card body  -->
+              <mat-card-content style="margin-top: 20px;">
+                <mat-chip-list aria-label="Product selection" *ngFor="let product of client.productsBought">
+                    <mat-chip>{{product.title}}</mat-chip>
+                  </mat-chip-list>
+             
+             </mat-card-content>
+         </mat-card>
+    </mat-grid-tile>
+    </div>
+
+
+
+
+
+
+
+</mat-grid-list>
+

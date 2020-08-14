@@ -22,7 +22,11 @@ import { ProductSearchComponent } from "./main-routes/product-search/product-sea
 import { InventoryImageEditComponent } from './main-routes/inventory-module/inventory-image-edit/inventory-image-edit.component';
 import { SalesClientsComponent } from './main-routes/sales-clients-module/sales-clients/sales-clients.component';
 import { ClientsMainComponent } from './main-routes/sales-clients-module/clients-main/clients-main.component';
-
+import { ClientSearchComponent } from './main-routes/sales-clients-module/client-search/client-search.component';
+import { ClientEditComponent } from './main-routes/sales-clients-module/client-edit/client-edit.component';
+import { ClientDetailsComponent } from './main-routes/sales-clients-module/client-details/client-details.component';
+import { SalesProcessComponent } from './main-routes/sales-clients-module/sales-process/sales-process.component';
+import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.component";
 
 @NgModule({
   declarations: [
@@ -40,7 +44,12 @@ import { ClientsMainComponent } from './main-routes/sales-clients-module/clients
     ProductSearchComponent,
     InventoryImageEditComponent,
     SalesClientsComponent,
-    ClientsMainComponent
+    ClientsMainComponent,
+    ClientSearchComponent,
+    ClientEditComponent,
+    ClientDetailsComponent,
+    SalesProcessComponent,
+    SalesComponent
     
 
   ],

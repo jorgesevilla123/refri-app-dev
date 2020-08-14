@@ -13,3 +13,43 @@
     background-color: rgba(0, 102, 255, 0.822);
     color: white;
 }
+
+
+
+
+
+.name-field{
+    margin: 6px;
+}
+
+.phone-field{
+    margin: 6px;
+}
+.id-field{
+    margin: 6px;
+}
+
+.email-field{
+    margin: 6px;
+}
+
+.constantBuyer-field{
+    font-weight: bold;
+}
+
+.yes-check{
+    margin-left: 5px
+}
+
+.no-check{
+    margin-left: 8px;
+}
+
+.add-client-button{
+    margin-left: 10px;
+    background-color: rgba(0, 102, 255, 0.822);
+    color: white;
+
+}
+
+
