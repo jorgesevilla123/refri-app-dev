@@ -13,6 +13,8 @@ import Client from "./src/models/clients.model";
 import * as multer from 'multer';
 import 'fs-extra';
 import { unlink } from 'fs-extra';
+import shoppingBasket from './src/models/shopping-basket';
+import { title } from 'process';
 
 
 
@@ -132,7 +134,6 @@ export function app() {
     try {
       let id = req.params.id;
     const { title, modelo, precio, cantidad } = req.body
-    console.log(req.body);
     await Product.findOneAndUpdate({ _id: id }, { title: title, modelo: modelo, precio: precio, cantidad: cantidad}, { upsert: false }, (err, doc) => {
         if (err) {
             res.status(500).send(err);
@@ -236,16 +237,139 @@ server.get('/api/clients/getClients', async (req, res) => {
 
 
 
-server.post('/api/clients/addClient', async (req, res) => {
+server.post('/api/clients/addClient', upload.none(), async (req, res) => {
   try {
-    const {name, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase } = req.body
-    const newClient = new Client({name, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase})
+    const {name, cedula, email, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase } = req.body
+    const newClient = new Client({name, cedula, email, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase})
     await newClient.save()
     console.log(newClient)
-    res.status(200);
+    res.json(newClient);
   } catch (error) {
     
   }
+
+})
+
+server.delete('/api/clients/deleteClient/:id', async (req, res) => {
+  try {
+    const client = await Client.findByIdAndDelete(req.params.id);
+    res.json('Deleted succesfully');
+  
+  
+          
+  } catch (error) {
+    console.error('Unexpected error deleting product at DELETE route ', error);
+  
+    
+  }
+
+})
+
+
+server.put('/api/clients/updateClient/:id', upload.none(), async (req, res) => {
+  try {
+    const id = req.params.id
+    const {name, cedula, email, phoneNumber} = req.body
+    await Client.findOneAndUpdate({ _id: id }, {name, cedula, email, phoneNumber}, { upsert: false },  (err, client)=> {
+      if (err) {
+          res.status(500).send(err);
+      } else
+          client.save();
+      res.status(200)
+
+  });
+
+    
+  } catch (error) {
+    console.log('Error updating product at updateClient: ', error);
+
+    
+  }
+})
+
+server.put('/api/clients/buyProduct/:id', async (req, res) => {
+  const id = req.params.id;
+  var products = req.body;
+  await Client.findByIdAndUpdate({_id: id},  {$addToSet:{ productsBought: {$each: products}}, $sort: {fecha_de_compra: 1}}, {upsert: true}, (err, result) => {
+    if(err){
+      res.send(err);
+      console.log(err);
+    }
+    result.save();
+    res.send(200);
+    console.log(result);
+
+  }
+    )
+
+
+})
+
+
+server.get('/api/clients/searchClient?', async (req, res) => {
+  try {
+    let client = req.query.name;
+    let clients = await Client.find({name : new RegExp(`${client}`, 'gi')});
+    res.json(clients);
+
+
+    
+  } catch (error) {
+    console.error('Unexpected error searching clients at GET route: ', error);
+    
+  }
+
+})
+
+
+server.get('/api/shoppingBasket/showProducts', async (req, res) => {
+  try {
+    const inBasket = await shoppingBasket.find();
+    res.json(inBasket)
+    console.log('showing products');
+  } catch (error) {
+    console.log('Unexpected error getting product at shoppingBasket GET route', error);
+    
+  }
+
+})
+
+
+server.post('/api/shoppingBasket/addToBasket', async (req, res) => {
+  try {
+    const {title, modelo, precio, cantidad, fecha_de_compra} = req.body;
+    const newShoppingBasket = new shoppingBasket({ title, modelo, precio, cantidad, fecha_de_compra})
+    await newShoppingBasket.save();
+    console.log('Product successfully bought!');
+    res.status(200)
+          //If anything goes wrong with the request it throws this error
+  } catch (error) {
+   console.error('Unexpected error buying products at POST route: ', error);
+    res.status(500).send('Unexpected error posting products at POST route');
+
+    
+  }
+
+});
+
+server.delete('/api/shoppingBasket/removeProduct/:id', async (req, res) => {
+  const id = req.params.id
+  await shoppingBasket.findByIdAndDelete(id);
+
+})
+
+server.delete('/api/shoppingBasket/emptyBasket', async (req, res) => {
+
+  await shoppingBasket.find().remove( (err, result) => {
+    if(err){
+      res.json('an error occurred at emptyBasket');
+    }
+    res.json('removed successfully');
+  })
+
+
+  
+
 
 
 })
