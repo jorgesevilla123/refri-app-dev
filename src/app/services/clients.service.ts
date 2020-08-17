@@ -122,6 +122,15 @@ export class ClientsService {
 
   }
 
+  addToCart(client, product){
+    const id = client._id
+    const url = `${this.ClientsUrl}/addToCart/${id}`;
+    return this.http.put(url, product).subscribe(
+      
+    )
+
+  }
+
 
 
 

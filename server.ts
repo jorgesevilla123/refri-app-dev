@@ -15,6 +15,7 @@ import 'fs-extra';
 import { unlink } from 'fs-extra';
 import shoppingBasket from './src/models/shopping-basket';
 import { title } from 'process';
+import { async } from '@angular/core/testing';
 
 
 
@@ -73,6 +74,8 @@ export function app() {
   });
 
 
+
+
   server.get('/api/products/search?', async (req, res) => { 
     try {
       let product = req.query.title;
@@ -87,6 +90,7 @@ export function app() {
 
   });
 
+  
 
   
 
@@ -291,6 +295,24 @@ server.put('/api/clients/buyProduct/:id', async (req, res) => {
   const id = req.params.id;
   var products = req.body;
   await Client.findByIdAndUpdate({_id: id},  {$addToSet:{ productsBought: {$each: products}}, $sort: {fecha_de_compra: 1}}, {upsert: true}, (err, result) => {
+    if(err){
+      res.send(err);
+      console.log(err);
+    }
+    result.save();
+    res.send(200);
+    console.log(result);
+
+  }
+    )
+
+})
+
+
+server.put('/api/clients/addToCart/:id', async (req, res) => {
+  const id = req.params.id;
+  var products = req.body;
+  await Client.findByIdAndUpdate({_id: id},  {$addToSet:{ cart: {$each: products}}, $sort: {fecha_de_compra: 1}}, {upsert: true}, (err, result) => {
     if(err){
       res.send(err);
       console.log(err);

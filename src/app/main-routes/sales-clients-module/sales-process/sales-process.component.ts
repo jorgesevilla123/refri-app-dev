@@ -79,37 +79,8 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
 
   }
 
-  showShoppingBasket(){
-    this.shoppingBasketService.showBasket()
-    .subscribe(product => {
-      this.productsBought = product
-    })
-
-  }
-
-
-  addToShoppingBasket(product: shoppingBasket){
-    let toBasket = {
-      title: product.title,
-      modelo: product.modelo,
-      precio: product.precio,
-      cantidad: product.cantidad,
-      fecha_de_compra: new Date()
-
-    }
-
-    this.shoppingBasketService.shopProduct(toBasket);
-    this.showShoppingBasket();
-
-
-
-
-
-
-
-
-  }
-
+  
+ 
 
   buyProduct(client: Client, products: shoppingBasket[]){
     this.clientService.buyProduct(client, products);
@@ -118,12 +89,13 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
       result => console.log('successfully empty'),
       error => console.log('Error in empty')
     )
-    this.showShoppingBasket(); 
 
-    
 
   }
 
+  addToCart(client: Client, products: shoppingBasket[]){
+    this.clientService
+  }
 
   removeProduct(product: shoppingBasket){
     this.shoppingBasketService.deleteProduct(product);
