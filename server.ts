@@ -13,7 +13,7 @@ import Client from "./src/models/clients.model";
 import * as multer from 'multer';
 import 'fs-extra';
 import { unlink } from 'fs-extra';
-import shoppingBasket from './src/models/shopping-basket';
+
 import { title } from 'process';
 import { async } from '@angular/core/testing';
 
@@ -344,57 +344,57 @@ server.get('/api/clients/searchClient?', async (req, res) => {
 })
 
 
-server.get('/api/shoppingBasket/showProducts', async (req, res) => {
-  try {
-    const inBasket = await shoppingBasket.find();
-    res.json(inBasket)
-    console.log('showing products');
-  } catch (error) {
-    console.log('Unexpected error getting product at shoppingBasket GET route', error);
+// server.get('/api/shoppingBasket/showProducts', async (req, res) => {
+//   try {
+//     const inBasket = await shoppingBasket.find();
+//     res.json(inBasket)
+//     console.log('showing products');
+//   } catch (error) {
+//     console.log('Unexpected error getting product at shoppingBasket GET route', error);
     
-  }
+//   }
 
-})
+// })
 
 
-server.post('/api/shoppingBasket/addToBasket', async (req, res) => {
-  try {
-    const {title, modelo, precio, cantidad, fecha_de_compra} = req.body;
-    const newShoppingBasket = new shoppingBasket({ title, modelo, precio, cantidad, fecha_de_compra})
-    await newShoppingBasket.save();
-    console.log('Product successfully bought!');
-    res.status(200)
-          //If anything goes wrong with the request it throws this error
-  } catch (error) {
-   console.error('Unexpected error buying products at POST route: ', error);
-    res.status(500).send('Unexpected error posting products at POST route');
+// server.post('/api/shoppingBasket/addToBasket', async (req, res) => {
+//   try {
+//     const {title, modelo, precio, cantidad, fecha_de_compra} = req.body;
+//     const newShoppingBasket = new shoppingBasket({ title, modelo, precio, cantidad, fecha_de_compra})
+//     await newShoppingBasket.save();
+//     console.log('Product successfully bought!');
+//     res.status(200)
+//           //If anything goes wrong with the request it throws this error
+//   } catch (error) {
+//    console.error('Unexpected error buying products at POST route: ', error);
+//     res.status(500).send('Unexpected error posting products at POST route');
 
     
-  }
+//   }
 
-});
+// });
 
-server.delete('/api/shoppingBasket/removeProduct/:id', async (req, res) => {
-  const id = req.params.id
-  await shoppingBasket.findByIdAndDelete(id);
+// server.delete('/api/shoppingBasket/removeProduct/:id', async (req, res) => {
+//   const id = req.params.id
+//   await shoppingBasket.findByIdAndDelete(id);
 
-})
+// })
 
-server.delete('/api/shoppingBasket/emptyBasket', async (req, res) => {
+// server.delete('/api/shoppingBasket/emptyBasket', async (req, res) => {
 
-  await shoppingBasket.find().remove( (err, result) => {
-    if(err){
-      res.json('an error occurred at emptyBasket');
-    }
-    res.json('removed successfully');
-  })
+//   await shoppingBasket.find().remove( (err, result) => {
+//     if(err){
+//       res.json('an error occurred at emptyBasket');
+//     }
+//     res.json('removed successfully');
+//   })
 
 
   
 
 
 
-})
+// })
 
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {

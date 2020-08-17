@@ -71,7 +71,7 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
 
 
 
-    this.showShoppingBasket();
+
 
 
 
@@ -97,10 +97,5 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
     this.clientService
   }
 
-  removeProduct(product: shoppingBasket){
-    this.shoppingBasketService.deleteProduct(product);
-    this.showShoppingBasket();
-
-  }
 
 }
