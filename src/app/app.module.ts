@@ -27,6 +27,7 @@ import { ClientEditComponent } from './main-routes/sales-clients-module/client-e
 import { ClientDetailsComponent } from './main-routes/sales-clients-module/client-details/client-details.component';
 import { SalesProcessComponent } from './main-routes/sales-clients-module/sales-process/sales-process.component';
 import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.component";
+import { SalesProductSearchComponent } from './main-routes/sales-clients-module/sales-product-search/sales-product-search.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.c
     ClientEditComponent,
     ClientDetailsComponent,
     SalesProcessComponent,
-    SalesComponent
+    SalesComponent,
+    SalesProductSearchComponent
     
 
   ],

@@ -1,7 +1,8 @@
 import { Schema, model, Document } from "mongoose";
 
 
-interface shoppingBasketInterface extends Document {
+export interface shoppingBasketInterface extends Document {
+    _id: string,
     title: string,
     modelo: string,
     precio: number,
@@ -39,11 +40,15 @@ const ClientSchema: Schema = new Schema({
     cedula: Number,
     email: String,
     constantBuyer: Boolean,
-    productsBought: {type: [ProductSchema], default: [{title: 'No ha comprado productos'}]},
+    productsBought: {type: [ProductSchema]},
+    cart: {type: [ProductSchema]},
     mostBought: ProductSchema,
     phoneNumber: Number,
     lastPurchase: {type: Date, default: Date.now}
 })
 
 
-export default model<Client>('Client', ClientSchema);
+export default model<Client>('Client', ClientSchema)
+
+
+

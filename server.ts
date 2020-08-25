@@ -14,8 +14,7 @@ import * as multer from 'multer';
 import 'fs-extra';
 import { unlink } from 'fs-extra';
 
-import { title } from 'process';
-import { async } from '@angular/core/testing';
+
 
 
 
@@ -72,6 +71,7 @@ export function app() {
   
 
   });
+
 
 
 
@@ -239,6 +239,23 @@ server.get('/api/clients/getClients', async (req, res) => {
 
 })
 
+server.get('/api/clients/loadClient/:id', (req, res) => {
+  try {
+    const id = req.params.id
+    Client.findOne({_id: id}, (err, client) => {
+      if(err){
+        console.log(err)
+      }
+      res.json(client);
+    });
+  
+    
+  } catch (error) {
+  console.log(error);
+    
+  }
+})
+
 
 
 server.post('/api/clients/addClient', upload.none(), async (req, res) => {
@@ -291,41 +308,86 @@ server.put('/api/clients/updateClient/:id', upload.none(), async (req, res) => {
   }
 })
 
-server.put('/api/clients/buyProduct/:id', async (req, res) => {
+server.post('/api/clients/buyProduct/:id', async (req, res) => {
   const id = req.params.id;
   var products = req.body;
-  await Client.findByIdAndUpdate({_id: id},  {$addToSet:{ productsBought: {$each: products}}, $sort: {fecha_de_compra: 1}}, {upsert: true}, (err, result) => {
-    if(err){
-      res.send(err);
+  Client.findOne({_id: id}, (err, client) => {
+    if (client){
+      client.productsBought.push(products);
+      client.save();
+      res.json(client);
+    }
+    else {
+      console.log(err)
+    }
+  })
+  
+})
+
+
+server.post('/api/clients/addToCart/:id', (req, res) => {
+  const id = req.params.id;
+  var products = req.body;
+   Client.findOne({_id: id}, (err, client) => {
+    if(client){
+      client.cart.push(products)
+      client.save();
+      res.json(client);
+    }
+    else{
       console.log(err);
     }
-    result.save();
-    res.send(200);
-    console.log(result);
-
-  }
-    )
+  })
+  
+  // exec( (err, client) => {
+  //   if(err){
+  //     console.log(err);
+  //   }
+  //   client.cart.push(products);
+  //   client.save();    
+  //   res.sendStatus(200)
+  // })
 
 })
 
 
-server.put('/api/clients/addToCart/:id', async (req, res) => {
-  const id = req.params.id;
-  var products = req.body;
-  await Client.findByIdAndUpdate({_id: id},  {$addToSet:{ cart: {$each: products}}, $sort: {fecha_de_compra: 1}}, {upsert: true}, (err, result) => {
-    if(err){
-      res.send(err);
-      console.log(err);
-    }
-    result.save();
-    res.send(200);
-    console.log(result);
+  server.delete('/api/clients/removeFromCart/:clientId/:productId',  (req, res) => {
+    const ClientId = req.params.clientId;
+    const ProductId = req.params.productId;
 
-  }
-    )
+    Client.findOne({_id: ClientId}, (err, client) => {
+      if(client){
+        var product = client.cart.find( ({ _id }) => _id ==`${ProductId}`);
+        product.remove();
+        client.save();
+        res.json(client);
+      }
+      else{
+        console.log(err)
+      }
+    })
+  })
+
+  server.delete('/api/clients/clearCart/:id', (req, res) => {
+    const id = req.params.id
+    Client.findOne({_id: id}, (err, client) => {
+      if(client){
+        client.cart.splice(0, client.cart.length);
+        client.save();
+        res.json(client);
+      }
+      else{
+        console.log(err);
+      }
+
+      
+    })
+  })
+   
 
 
-})
+
+
 
 
 server.get('/api/clients/searchClient?', async (req, res) => {

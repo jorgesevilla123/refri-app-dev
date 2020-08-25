@@ -1,0 +1,55 @@
+
+
+#sales-product-searchBox{
+    width: 300px;
+    height: 30px;
+    padding-top: 20px;
+  
+    
+    
+}
+
+
+.product-card-img{
+    width: 90px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dialog-title{
+    height: 100px;
+
+}
+
+.dialog-title-content{
+    margin-left: 100px;
+    display: inline;
+}
+
+.inner-toolbat{
+   padding-top: 30px;
+}
+
+#add-to-basket{
+    background-color: rgba(0, 102, 255, 0.822);
+}
+
+.cart-products-card{
+
+    height: 350px;
+
+
+
+}
+
+#to-basket-button{
+
+    background-color: rgba(2, 214, 2, 0.712);
+
+}
+
+
+
+
+

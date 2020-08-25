@@ -1,72 +1,46 @@
-<div *ngIf="client$ | async as client">
 
-  <mat-grid-list cols="2" rowHeight="400px">
-    <mat-grid-tile>
+<button  style="font-size: 18px; margin-left: 20px; margin-bottom: 20px; font-weight: 200;" mat-icon-button routerLink="/sales-and-clients/sales"><mat-icon style="font-size: 25px; margin-right: 10px;">keyboard_backspace</mat-icon>Volver</button>
 
-    <h5>cliente: {{client.name}}</h5>
+<div class="bounds"  *ngIf="client">
 
-    </mat-grid-tile>
+    <div fxFlex="50" class="sec1" fxFlex.xs="50" fxFlexAlign="center center">
+      <mat-card class="client-display-card">
+        <mat-card-title class="process-title">Cliente <mat-icon>account_box</mat-icon></mat-card-title>
+        <mat-card-content>
+          <h4>Nombre: {{client.name}}</h4>
+          <h4>Cedula: {{client.cedula}}</h4>
+          <h4>Numero de telefono: {{client.phoneNumber}}</h4>
 
-    <mat-grid-tile>
 
-      <div *ngFor="let product of productsBought">
-        <h5>{{product.title}}</h5>
-        <button mat-icon-button ><mat-icon>clear</mat-icon></button>
+        </mat-card-content>
+
+
+      </mat-card>
+
+      
+  <button class="add-to-basket" mat-raised-button (click)="searchDialog()">Añadir al carrito <mat-icon>add_shopping_cart</mat-icon></button>
       </div>
-
-       
-
-      <button mat-button-raised (click)="buyProduct(client, productsBought)">Comprar producto</button>
-     
-
-      </mat-grid-tile>
-
-
-
-    </mat-grid-list>
-
-
-  
-
+      <div fxFlex="50" class="sec2" fxFlex.xs="50" fxFlexAlign="center center">
+        <mat-card class="shopping-basket-card">
+          <mat-card-title class="process-title">Cesta de productos <mat-icon>shopping_basket</mat-icon></mat-card-title>
+          <mat-card-content *ngFor="let product of client.cart">
+            <mat-card>
+              <mat-card-content>
+                <div>
+                  <h4>{{product.title}}</h4>
+                  <h4>Precio: {{product.precio}}$</h4>
+                  <h4>Cantidad: {{product.cantidad}}$</h4>
+                  <button id="remove-from-cart" mat-raised-button color="warn" (click)="removeFromCart(product)">Eliminar <mat-icon>delete</mat-icon></button>
+                </div>
+                </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+          <button id="buy-products" mat-raised-button (click)="buyProduct()">Realizar compra <mat-icon>point_of_sale</mat-icon></button>
+        </mat-card>
+      </div>
 </div>
 
 
-<h5>Seleccionar productos</h5>
-
-<mat-form-field style="margin-left: 20px;" appearance="outline" class="inventory-search-form">
-    <mat-label>Buscar productos</mat-label>
-    <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
-    <button mat-button matSuffix mat-icon-button aria-label="clear" *ngIf="searchKeyTitle" >
-      <mat-icon>close</mat-icon>
-      <mat-icon matSuffix>search</mat-icon>
-    </button>
-  </mat-form-field>
 
 
 
-  <div class="search-results">
-<mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
-  <mat-grid-tile *ngFor="let product of products$ | async">
-    <mat-card class="inventory-products-card">
-      <mat-card-header>
-        <mat-card-title class="card-title">
-          {{product.title}}
-        </mat-card-title>
-      </mat-card-header>
-      <img class="product-card-img" mat-card-image src="assets/products-images{{product.imagePath}}">
-      <mat-card-content>
-        <h3>Modelo: {{product.modelo}}</h3>
-        <h3>Precio: {{product.precio | currency}}</h3>
-        <h3>Cantidad: {{product.cantidad}}</h3>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button-raised>Agregar a cesta de compras <mat-icon>shopping_basket</mat-icon></button>
-
-      </mat-card-actions>
-
-    </mat-card>
-
-  </mat-grid-tile>
-
-</mat-grid-list>
-</div>

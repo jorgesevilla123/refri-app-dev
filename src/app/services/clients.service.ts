@@ -44,16 +44,18 @@ export class ClientsService {
   }
 
 
-  getOneClient(id: string | number){
-    return this.getClients().pipe(
-      map((clients: Client[]) => clients.find(client => client._id === id))
-    );
+
+  getOneClient(id: string | number): Observable<Client>{
+    const url = `${this.ClientsUrl}/loadClient/${id}`;
+    return this.http.get<Client>(url)
 
   }
 
   addClient(formData: FormData){
     return this.http.post(`${this.ClientsUrl}/addClient`, formData).subscribe(
-      product => console.log(product)
+      product => console.log(product),
+      error => console.log(error),
+      () => console.log('Client added')
     )
   }
 
@@ -62,7 +64,8 @@ export class ClientsService {
     const url = `${this.ClientsUrl}/updateClient/${id}`;
     return this.http.put(url, client).subscribe(
       client => console.log(client),
-      error => console.log(error)
+      error => console.log(error),
+      () => console.log('client updated')
 
     )
   }
@@ -113,22 +116,34 @@ export class ClientsService {
     console.log(product);
     const id = client._id
     const url = `${this.ClientsUrl}/buyProduct/${id}`;
-    return this.http.put(url, product).subscribe(
+    return this.http.post(url, product).subscribe(
       result => console.log(result),
-      error => console.log(error)
+      error => console.log(error),
+      () => console.log('request completed')
 
     )
 
 
   }
 
-  addToCart(client, product){
+  addToCart(client, product): Observable<Client>{
     const id = client._id
     const url = `${this.ClientsUrl}/addToCart/${id}`;
-    return this.http.put(url, product).subscribe(
-      
-    )
+    return this.http.post<Client>(url, product);
 
+  }
+
+  removeFromCart(client, product): Observable<Client>{
+    const ClientId = client._id;
+    const ProductId = product._id;
+    const url = `${this.ClientsUrl}/removeFromCart/${ClientId}/${ProductId}`;
+    return this.http.delete<Client>(url);
+  }
+
+  clearCart(client): Observable<Client>{
+    const ClientId = client._id;
+    const url = `${this.ClientsUrl}/clearCart/${ClientId}`;
+    return this.http.delete<Client>(url);
   }
 
 

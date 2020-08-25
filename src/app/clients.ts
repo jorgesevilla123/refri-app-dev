@@ -7,6 +7,7 @@ export interface Client {
     email: string,
     constantBuyer: boolean,
     productsBought: [Products],
+    cart: [Products],
     mostBought: Products,
     phoneNumber: string,
     lastPurchase: Date
