@@ -37,23 +37,23 @@ currency: Currency
   ngOnInit(): void {
     this.getCurrency();
 
-    this.products$ = this.searchKeys.pipe(
+    // this.products$ = this.searchKeys.pipe(
 
-      //waits 500ms before executing the search by the term
-      debounceTime(1500),
+    //   //waits 500ms before executing the search by the term
+    //   debounceTime(1500),
 
-      //ignores a term if it is the same as the previous
-      distinctUntilChanged(),
-
-
-      //switch to a new search observable everytime the term changes
-      switchMap((term: string) => this.inventoryService.searchProduct(term))
+    //   //ignores a term if it is the same as the previous
+    //   distinctUntilChanged(),
 
 
+    //   //switch to a new search observable everytime the term changes
+    //   switchMap((term: string) => this.inventoryService.searchProduct(term))
 
 
 
-    )
+
+
+    // )
 
     this.mediaSub = this.mediaObserver.media$.subscribe((result: MediaChange) => {
       console.log(result.mqAlias);

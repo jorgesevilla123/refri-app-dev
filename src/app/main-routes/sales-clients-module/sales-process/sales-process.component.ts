@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit, OnDestroy, Input, Optional} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from "rxjs";
 import { Client } from "../../../clients";
 import { ClientsService } from "../../../services/clients.service";
 import { InventoryService } from "../../../services/inventory.service";
 import { Products } from "../../../products";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
-import { ShoppingBasketService } from '../../../services/shopping-basket.service';
 import { shoppingBasket } from '../../../shopping-basket';
 import {ChangeDetectorRef} from '@angular/core'
-import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
 import { SalesProductSearchComponent } from "../sales-product-search/sales-product-search.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { AlertService } from "../../../reusable-components/alerts/alert/alert.service"; 
+
 
 
 
@@ -26,6 +26,7 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
   products$ : Observable<Products[]>
   private searchKeys = new Subject<string>();
   productsBought: shoppingBasket[]
+  cart : boolean 
 
 
 
@@ -35,9 +36,18 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
     private clientService: ClientsService,
      private inventoryService: InventoryService,
      private ref: ChangeDetectorRef,
-     public dialog: MatDialog
+     public dialog: MatDialog,
+     public alert: AlertService
+    
  
-  ) { }
+  ) 
+
+  {
+  
+  }
+
+  
+  
 
 
 
@@ -57,28 +67,34 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
     
   }
 
+  
+
   ngOnInit(): void {
-
-
-    this.getClient();
 
    
 
-    this.products$ = this.searchKeys.pipe(
 
-      //waiting 300 ms between every keystroke before considering the term
-      debounceTime(1500),
-
-      //ignore new term if it's the same as previous
-      distinctUntilChanged(),
-
-      //switch to new search observable every time the term changes
-
-      switchMap((term: string) => this.inventoryService.searchProduct(term)),
-
-    );
+    this.getClient();
+ 
 
 
+
+
+   
+
+    // this.products$ = this.searchKeys.pipe(
+
+    //   //waiting 300 ms between every keystroke before considering the term
+    //   debounceTime(1500),
+
+    //   //ignore new term if it's the same as previous
+    //   distinctUntilChanged(),
+
+    //   //switch to new search observable every time the term changes
+
+    //   switchMap((term: string) => this.inventoryService.searchProduct(term)),
+
+    // );
 
 
 
@@ -92,16 +108,28 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
   getClient(){
     const id = this.route.snapshot.paramMap.get('id');
     this.clientService.getOneClient(id).subscribe(
-      client => this.client = client,
+      client => {
+        if(client.cart.length < 1){
+          this.client = client;
+          this.cart = false;
+
+        }
+        else{
+          this.client = client;
+          this.cart = true;
+        }
+      }
+      ,
+
       error => console.log(error),
+
       () => console.log('completed successfully')
-
     )
-
   }
 
-  
- 
+
+
+
 
   buyProduct(){
     this.client.cart.forEach(product => {
@@ -114,10 +142,30 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
 
 
 
-
   removeFromCart(product){
     this.clientService.removeFromCart(this.client, product).subscribe(
-      client => this.client = client,
+      client => {
+        if(client.cart.length < 1){
+          this.client = client;
+          this.cart = false;
+
+
+        }
+        else{
+          this.client = client;
+          this.cart = true;
+        }
+
+        if(product){
+          this.alert.notifyWarn('Producto eliminado del carrito', 2500, 'top', 'center')
+
+        }
+        else {
+          this.alert.notifyWarn('No se encontro producto para eliminar', 2500, 'top', 'center')
+        }
+
+
+      },
       error => console.log(error),
       () => console.log('product removed from cart')
 
@@ -140,18 +188,29 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
     dialogConfig.data = this.client
     dialogConfig.width = '1500px'
     const dialogRef = this.dialog.open(SalesProductSearchComponent, dialogConfig);
-
     dialogRef.afterClosed().subscribe(
-      result => this.client = result.data,
+      result => {
+        if(result.data.cart.length < 1){
+          this.client = result.data;
+          this.cart = false;
+        }
+        else{
+          this.client = result.data
+          this.cart = true;
+        }
+        
+      
+      },
       error => console.log(error),
       () => console.log('Completed')
 
-    )
-   
-  
-
-    
+    ) 
   }
+
+
+
+
+
 
 
 

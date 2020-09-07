@@ -7,6 +7,7 @@ import { Client } from "../../../clients";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 import {ActivatedRoute} from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
 
 
 
@@ -19,16 +20,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 export class SalesProductSearchComponent implements OnInit {
 
   client: Client;
-
+  products: any;
   quantity: number;
-  private searchKeys = new Subject<string>()
-  products$: Observable<Products[]>
+  public searchKeys$ = new Subject<string>()
+  
 
   constructor(
     public inventoryService: InventoryService,
     public clientService: ClientsService,
     public route: ActivatedRoute,
-    public dialogRef: MatDialogRef<SalesProductSearchComponent> ,
+    public dialogRef: MatDialogRef<SalesProductSearchComponent>,
+    public alert: AlertService,
     //Optional is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Client
   ) { 
@@ -37,28 +39,16 @@ export class SalesProductSearchComponent implements OnInit {
   }
 
   
-  search(term: string){
-    this.searchKeys.next(term);
-
-  }
-
 
   ngOnInit(): void {
 
+    
+    this.inventoryService.searchProduct(this.searchKeys$).subscribe(
+      products => { this.products = products }
+    )
 
-    this.products$ = this.searchKeys.pipe(
 
-      //waiting 300 ms between every keystroke before considering the term
-      debounceTime(1500),
 
-      //ignore new term if it's the same as previous
-      distinctUntilChanged(),
-
-      //switch to new search observable every time the term changes
-
-      switchMap((term: string) => this.inventoryService.searchProduct(term)),
-
-    );
 
 
   }
@@ -66,10 +56,20 @@ export class SalesProductSearchComponent implements OnInit {
   addToCart(product: Products){
     product.cantidad = this.quantity;
     this.clientService.addToCart(this.client, product).subscribe(
-      client => this.client = client,
+      client => {
+       if(product){
+         this.client = client
+         this.alert.notifySuccess('Producto añadido al carrito', 100000, 'top', 'center')
+       }
+       else{
+       this.client = client
+       this.alert.notifySuccess('No se añadio el producto', 2500, 'top', 'center')
+       }
+      },
       error => console.log(error),
       () => console.log('Product added to cart')
     )
+    
   
   }
 

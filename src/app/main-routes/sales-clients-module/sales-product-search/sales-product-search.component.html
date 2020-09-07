@@ -4,7 +4,7 @@
 <mat-form-field  id="sales-product-searchBox">
   <mat-label>Buscar productos</mat-label>
   <mat-icon matSuffix>search</mat-icon>
-  <input id="search-box" #searchBox matInput placeholder="Buscar" (keyup)="search(searchBox.value)">
+  <input id="search-box" #searchBox matInput placeholder="Buscar" (keyup)="searchKeys$.next($event.target.value)">
 </mat-form-field> 
 </div>
 </mat-toolbar>
@@ -14,7 +14,7 @@
  
   <div class="search-results">
 <mat-grid-list cols="2" gutterSize="10px" rowHeight="420px">
-  <mat-grid-tile *ngFor="let product of products$ | async">
+  <mat-grid-tile *ngFor="let product of products">
     <mat-card class="cart-products-card">
       <mat-card-header>
         <mat-card-title class="card-title">
@@ -37,7 +37,7 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-</div>
+</div> 
 </div>
 
 <mat-dialog-actions align="end">

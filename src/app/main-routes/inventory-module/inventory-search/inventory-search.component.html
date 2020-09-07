@@ -6,7 +6,7 @@
 
   <mat-form-field appearance="outline" class="inventory-search-form">
     <mat-label>Buscar productos</mat-label>
-    <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
+    <input #searchBox matInput id="search-box" placeholder="Buscar" (keyup)="searchKeys$.next($event.target.value)" />
     <button mat-button matSuffix mat-icon-button aria-label="clear" *ngIf="searchKeyTitle" (click)="onSearchClear()">
       <mat-icon>close</mat-icon>
       <mat-icon matSuffix>search</mat-icon>
@@ -22,11 +22,11 @@
 
 
 
-<h3 style="margin: 30px; font-weight: 200" >Hay <b>{{products}}</b> productos en el inventario</h3>
+<h3 style="margin: 30px; font-weight: 200" >Hay <b>cantidad</b> productos en el inventario</h3>
 
 <mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
-  <mat-grid-tile *ngFor="let product of products$ | async">
-    <mat-card class="inventory-products-card">
+  <mat-grid-tile *ngFor="let product of products">
+    <mat-card id="{{product._id}}" class="inventory-products-card">
       <mat-card-header>
         <mat-card-title class="card-title">
           {{product.title}}

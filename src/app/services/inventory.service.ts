@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from "rxjs";
 import { Products } from "../products";
 import {  FormControl, FormGroup } from "@angular/forms";
+import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { tap, catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -68,25 +70,19 @@ export class InventoryService {
 
   }
 
-  deleteProduct(product: Products | string){
+  deleteProduct(product: Products | string): Observable<any>{
     const id = typeof product === 'string' ? product : product._id;
-    const url = `${this.productsUrl}/${id}`;
-    return this.http.delete(url).subscribe({
-      next: data => console.log(data),
-      error: error => console.error(error)
-    }
+    const url = `${this.productsUrl}/delete-product/${id}`;
+    return this.http.delete<Products>(url).pipe(
+      map(res => console.log(res))
     )
 
   }
 
-  editProduct(product: FormData){
+  editProduct(product: FormData): Observable<Products>{
     const id = product.get('_id');
     const url = `${this.productsUrl}/update/${id}`;
-    return this.http.put(url, product).subscribe({
-      next: data => console.log(data),
-      error: error => console.log(error)
-    }
-    )
+    return this.http.put<Products>(url, product);
 
   }
 
@@ -101,20 +97,41 @@ export class InventoryService {
   }
   
 
-  searchProduct(keyLetter: string): Observable<Products[]>{
-    if(!keyLetter.trim()){
+  searchProduct(keyLetter: Observable<string>){
+    // if(!keyLetter.trim()){
       //if there's no search term return empty product 
-      return of([]);
-    }
-    return this.http.get<Products[]>(`${this.productsUrl}/search?title=${keyLetter}`).pipe(
-      tap(L => L.length ?
-        console.log('found products matching') : 
-        console.log('no products found')),
-        catchError(this.handleError<Products[]>('searchProduct', [])
-          )
+      // return of([]);
+    // }
+
+    return keyLetter.pipe(
+
+      debounceTime(1500),
+
+      distinctUntilChanged(),
+
+      switchMap( term => this.searchEntries(term))
+
+
     )
 
+    
+    //
 
+
+  }
+
+
+    searchEntries(keyLetter){
+      if(!keyLetter.trim()){
+        return of([]);
+      }
+      else{
+      return this.http.get(`${this.productsUrl}/search?title=${keyLetter}`).pipe(
+        map( res => {return res})
+      )
+   
+
+    }
   }
 
 

@@ -1,5 +1,5 @@
 
-<button  style="font-size: 18px; margin-left: 20px; margin-bottom: 20px; font-weight: 200;" mat-icon-button routerLink="/sales-and-clients/sales"><mat-icon style="font-size: 25px; margin-right: 10px;">keyboard_backspace</mat-icon>Volver</button>
+<button  style="font-size:18px; margin-left: 20px; margin-bottom: 20px; font-weight: 200;" mat-icon-button routerLink="/sales-and-clients/sales"><mat-icon style="font-size: 25px; margin-right: 10px;">keyboard_backspace</mat-icon>Volver</button>
 
 <div class="bounds"  *ngIf="client">
 
@@ -30,12 +30,17 @@
                   <h4>{{product.title}}</h4>
                   <h4>Precio: {{product.precio}}$</h4>
                   <h4>Cantidad: {{product.cantidad}}$</h4>
-                  <button id="remove-from-cart" mat-raised-button color="warn" (click)="removeFromCart(product)">Eliminar <mat-icon>delete</mat-icon></button>
+                  <button id="remove-from-cart" mat-raised-button color="warn" (click)="removeFromCart(product)">Eliminar de carrito <mat-icon>remove_shopping_cart</mat-icon></button>
                 </div>
                 </mat-card-content>
             </mat-card>
           </mat-card-content>
+          <div *ngIf="cart ; else noProductsYet">
           <button id="buy-products" mat-raised-button (click)="buyProduct()">Realizar compra <mat-icon>point_of_sale</mat-icon></button>
+        </div>
+        <ng-template #noProductsYet>
+          <h3>No hay productos en el carrito</h3>
+        </ng-template>
         </mat-card>
       </div>
 </div>

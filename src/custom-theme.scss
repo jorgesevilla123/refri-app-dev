@@ -54,3 +54,25 @@ $refri-data-theme: mat-light-theme($refri-data-primary, $refri-data-accent, $ref
 // that you are using.
 @include angular-material-theme($refri-data-theme);
 
+
+
+//  Custom styling for the snackbar
+.success-class{
+    background: black
+}
+
+.warn-class{
+    background: #f52222;
+}
+
+.success-class .mat-simple-snackbar-action{
+    color: dodgerblue;
+}
+
+.warn-class .mat-simple-snackbar-action {
+    color: black;
+}
+
+
+
+

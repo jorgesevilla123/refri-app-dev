@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from "rxjs";
-import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { InventoryService } from "../../../services/inventory.service";
 import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
 import { InventoryManageProductsComponent } from "../../inventory-module/inventory-manage-products/inventory-manage-products.component";
@@ -10,6 +10,7 @@ import { Products } from "../../../products";
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/en-DE";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 registerLocaleData(localeDe, 'fr');
 
@@ -22,49 +23,46 @@ registerLocaleData(localeDe, 'fr');
 })
 export class InventorySearchComponent implements OnInit {
   searchKeyTitle: string
-  products$ : Observable<Products[]>
-  private searchKeys = new Subject<string>();
+  products: any
+  productsArray: any
+  searchKeys$ = new Subject<string>();
   product: Promise<Products>
-  products: number
+  productsCount: number;
 
   constructor(
     private inventoryService: InventoryService,
     private dialogService: DialogService,
-    private alert: AlertService
+    private alert: AlertService,
+    private dialog: MatDialog
   ) { }
 
   //Pushing a search term into the Observable stream
 
 
 
-  search(term: string): void {
-    this.searchKeys.next(term);
-
-  }
 
   ngOnInit(): void {
-    this.getProducts();
-    this.products$ = this.searchKeys.pipe(
 
-      //waiting 300 ms between every keystroke before considering the term
-      debounceTime(1500),
+    this.inventoryService.searchProduct(this.searchKeys$).subscribe(
+      products => { this.products = products }
+    )
 
-      //ignore new term if it's the same as previous
-      distinctUntilChanged(),
 
-      //switch to new search observable every time the term changes
-
-      switchMap((term: string) => this.inventoryService.searchProduct(term)),
-
-    );
 
   }
 
 
   getProducts(): void {
-    this.inventoryService.getProducts()
-    .subscribe(products => this.products = products.length);
+    this.inventoryService.getProducts().subscribe(
+      products => {
+        if (products.length > 1) {
+          this.products = products.splice(0, products.length);
 
+        }
+
+
+
+      })
   }
 
   onAdd() {
@@ -72,38 +70,121 @@ export class InventorySearchComponent implements OnInit {
 
   }
 
-  
+
   onSearchClear() {
     this.searchKeyTitle = '';
   }
 
-  onEdit(product: Products){
-    this.inventoryService.populateForm(product);
-    this.dialogService.open(InventoryProductEditComponent, true, true, "40%", "auto");
+  onEdit(productForm: Products) {
+    this.inventoryService.populateForm(productForm)
+    console.log(productForm);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = productForm;
+    const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      product => {
+
+        let theOne = ''
+        let array = ''
+        for (var i = 0; i < this.products.length; i++) {
+          array += [
+            this.products[i]
+          ]
+          if (this.products[i]._id == product.data._id) {
+            this.products[i] = product.data
+            array += [
+              this.products[i]
+            ]
+
+          }
+
+
+        }
+
+        if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
+          productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio) {
+
+          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
+
+        }
+        else {
+
+          this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
+
+        }
+
+
+
+
+
+
+      },
+
+
+      error => console.log(error),
+
+      () => console.log('completed')
+
+
+    )
+
+
 
 
   }
-  
-  onEditPhoto(product: Products){
+
+  onEditPhoto(product: Products) {
     this.inventoryService.populatePhotoForm(product);
     this.dialogService.open(InventoryImageEditComponent, true, true, "40%", "auto");
   }
 
-  
 
-  onDelete(product: Products): void {
-    alert("estas seguro que quieres eliminar este producto");
-    this.inventoryService.deleteProduct(product);
-    this.alert.notify(`${product.title} eliminado`);
-    setTimeout( () => {
-      location.reload();
-    }, 1400);
-    
+
+  onDelete(product: Products) {
+    this.inventoryService.deleteProduct(product).subscribe(
+      product => {
+        if (product) {
+          console.log(product)
+          let array = ''
+          for (var i = 0; i < this.products.length; i++) {
+
+            if (this.products[i]._id == product._id) {
+              this.products[i] = ''
+
+              array += [
+                this.products[i]
+              ]
+
+            }
+
+            array += [
+              this.products[i]
+            ]
+
+          }
+
+
+          let productCard = document.getElementById(`${product._id}`)
+          productCard.remove();
+
+          this.alert.notifyWarn(`Producto ${product.title} eliminado`, 2500, 'top', 'center');
+
+        }
+        else {
+          this.alert.notifyWarn(`No se elimino ningun producto`, 2500, 'top', 'center');
+        }
+      }
+
+    )
+ 
+
 
   }
 
- 
 
+
+  
 
 
 }

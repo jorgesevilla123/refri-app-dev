@@ -62,7 +62,7 @@ export class ClientSearchComponent implements OnInit {
 
   deleteClient(client: Client){
     this.clientService.deleteClient(client);
-    this.alertService.notify("Cliente eliminado");
+    this.alertService.notifySuccess("Cliente eliminado", 3000, 'top', 'center');
     setTimeout( () => {
       location.reload();
     }, 1000);

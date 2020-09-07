@@ -10,7 +10,7 @@ import { DialogService } from "../../../reusable-components/dialogs/dialog/dialo
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
 import { ConfirmationComponent } from "../../../reusable-components/confirmation/confirmation.component";
 import { InventoryProductEditComponent } from '../inventory-product-edit/inventory-product-edit.component';
-
+import { map } from "rxjs/operators";
 
 
 
@@ -92,13 +92,25 @@ export class InventoryComponent implements OnInit {
 
   deleteProduct(product: Products): void {
     alert("Estas seguro que quieres eliminar este producto?");
-    this.inventoryService.deleteProduct(product); 
-    this.alertService.notify("Producto eliminado");
-    setTimeout( () => {
-      location.reload();
-    }, 1000);
-  
+    this.inventoryService.deleteProduct(product).subscribe(
+      product => {
+        if(product){
+          this.alertService.notifyWarn(`Producto ${product.title} has sido eliminado`, 2500, 'top', 'center' );
+          return this.getProducts();
+        }
+        else{
+          this.alertService.notifyWarn(`No se ha eliminado el producto`, 2500, 'top', 'center' );
+          
+        }
+      },
 
+      error => console.log(error),
+
+      () => console.log('Product deleted')
+    
+    )
+  ;
+    
     // this.products = this.products.filter(p => p !== product);
     // this.inventoryService.deleteProduct(product).subscribe();
 
