@@ -36,12 +36,17 @@ body {
 
 }
 
+#add-icon {
+    font-size: 24px;
+    padding-bottom: 1px;
+}
+
 
 #add-button {
-    color: white;
-    background-color: rgba(0, 102, 255, 0.822);
-
+    color: dodgerblue;
+      
 }
+
 
 .inventory-edit-button{
   
@@ -78,6 +83,15 @@ font-weight: 200;
 .inventory-products-card{
     width: 320px;
 }
+
+
+.center-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
 
 
 

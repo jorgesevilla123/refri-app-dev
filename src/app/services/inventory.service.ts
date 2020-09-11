@@ -51,21 +51,23 @@ export class InventoryService {
 
 
   getProducts():  Observable<Products[]> {
-    return this.http.get<Products[]>(this.productsUrl).pipe()
+    return this.http.get<Products[]>(this.productsUrl).pipe(
+      map(products => {return products})
+    )
 
+  }
+
+  countProducts(): Observable<any>{
+    return this.http.get<any>(this.productsUrl).pipe(
+      map(products => {return products.length})
+    )
   }
 
 
 
 
-  addProducts(product: FormData) {
-    return this.http.post(this.productsUrl, product).subscribe({
-      next: data => console.log(data),
-      error: error => console.log(error)
-    }
-    
-
-    )
+  addProducts(product: FormData): Observable<Products> {
+    return this.http.post<Products>(this.productsUrl, product)
 
 
   }
@@ -74,7 +76,7 @@ export class InventoryService {
     const id = typeof product === 'string' ? product : product._id;
     const url = `${this.productsUrl}/delete-product/${id}`;
     return this.http.delete<Products>(url).pipe(
-      map(res => console.log(res))
+      map(res => {return res})
     )
 
   }
@@ -86,14 +88,10 @@ export class InventoryService {
 
   }
 
-  editProductPhoto(product: FormData){
+  editProductPhoto(product: FormData): Observable<Products>{
     const id = product.get('_id');
     const url = `${this.productsUrl}/update-photo/${id}`;
-    return this.http.put(url, product).subscribe({
-      next: data => console.log(data),
-      error: error => console.log(error)
-    }
-    )
+    return this.http.put<Products>(url, product);
   }
   
 

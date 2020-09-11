@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Request, Response} from 'express';
 import Client from "../models/clients.model";
+import upload from "../fileProcessing";
 
 const router = Router();
 
@@ -65,7 +66,7 @@ router.route('/clients/searchClient?').get( (req: Request, res: Response) => {
     })
 })
 
-router.route('/clients/addClient').post( async (req: Request, res: Response) => {
+router.route('/clients/addClient').post(upload.none(), async (req: Request, res: Response) => {
     const {name, cedula, email, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase } = req.body
     const newClient = new Client({name, cedula, email, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase})
     await newClient.save()
@@ -149,7 +150,7 @@ router.route('/clients/clearCart/:id').delete( (req: Request, res: Response) => 
 })
 
 
-router.route('/clients/updateClient/:id').put( (req: Request, res: Response) => {
+router.route('/clients/updateClient/:id').put(upload.none(), (req: Request, res: Response) => {
     const id = req.params.id
     const {name, cedula, email, phoneNumber} = req.body
     Client.findOneAndUpdate({ _id: id }, {name, cedula, email, phoneNumber}, { upsert: false },  (err, client) => {

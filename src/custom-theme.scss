@@ -73,6 +73,10 @@ $refri-data-theme: mat-light-theme($refri-data-primary, $refri-data-accent, $ref
     color: black;
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: dodgerblue;
+}
+
 
 
 

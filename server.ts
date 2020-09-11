@@ -18,20 +18,7 @@ import currencyRoutes from "./routes/currency-routes";
 
 
 
-//file uploading with multer
-var storage = multer.diskStorage({
-  destination: function(req, file, cb){
-    cb(null, path.join(__dirname, '../../../src/assets/products-images/uploads'));
-  },
-  filename: function(req, file, cb){
-    cb(null, file.originalname)
 
-  }
-
-});
-
-
-var upload = multer({storage});
 
 
 
@@ -63,6 +50,9 @@ export function app() {
   server.use('/api', productsRoutes);
   server.use('/api', clientsRoutes);
   server.use('/api', currencyRoutes);
+
+  //Path for the navigator to access the photos 
+  server.use('/uploads', express.static(path.resolve('uploads')));
 
 
 

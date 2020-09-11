@@ -16,8 +16,8 @@
         </mat-card-header>  
         <!-- card body  -->
          <mat-card-content >
-            <mat-card>
-                <mat-card-title id="currency-display-price">{{currency.precio | currency: 'Bs/$':'symbol':'4.2-2':'fr'}}</mat-card-title>
+            <mat-card *ngIf="currency">
+                <mat-card-title id="currency-display-price">{{currency.precio | currency}}</mat-card-title>
             </mat-card>
         </mat-card-content>
     </mat-card>

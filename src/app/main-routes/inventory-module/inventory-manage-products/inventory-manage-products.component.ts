@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { InventoryService } from "../../../services/inventory.service";
 import { Products } from "../../../products";
+import {  MatDialogRef } from "@angular/material/dialog";
 
 
 
@@ -25,6 +26,7 @@ export class InventoryManageProductsComponent implements OnInit {
     public inventoryService: InventoryService,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<InventoryManageProductsComponent>
 
 
   ) {
@@ -59,11 +61,14 @@ export class InventoryManageProductsComponent implements OnInit {
     if (this.imagePath === undefined) {
       console.log('no image yet');
     } else {
-      this.inventoryService.addProducts(formData)
-      this.productsForm.reset();
-      setTimeout( () => {
-        location.reload();
-      }, 1000)
+      this.inventoryService.addProducts(formData).subscribe(
+        product => {
+          this.dialogRef.close({data: product});
+        }
+
+      )
+    
+   
     }
   }
 

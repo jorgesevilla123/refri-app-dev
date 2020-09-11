@@ -42,13 +42,11 @@ export class InventorySearchComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.countedProducts();
 
     this.inventoryService.searchProduct(this.searchKeys$).subscribe(
       products => { this.products = products }
     )
-
-
-
   }
 
 
@@ -59,14 +57,36 @@ export class InventorySearchComponent implements OnInit {
           this.products = products.splice(0, products.length);
 
         }
-
-
-
       })
   }
 
+  countedProducts(){
+    this.inventoryService.countProducts().subscribe(
+      count => this.productsCount = count,
+      error => console.log(error),
+      () => console.log('completed')
+
+
+    )
+  }
+
+
+
   onAdd() {
-    this.dialogService.open(InventoryManageProductsComponent, true, true, "40%", "auto");
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    const dialogRef = this.dialog.open(InventoryManageProductsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      product => {
+        if (product) {
+          this.alert.notifySuccess(`Se añadio ${product.data.title} a los productos`, 2500, 'top', 'center')
+        }
+        else {
+          this.alert.notifyWarn('No se ha añadido el producto', 2500, 'top', 'center');
+        }
+      }
+
+    )
 
   }
 
@@ -84,7 +104,6 @@ export class InventorySearchComponent implements OnInit {
     const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       product => {
-
         let theOne = ''
         let array = ''
         for (var i = 0; i < this.products.length; i++) {
@@ -114,11 +133,6 @@ export class InventorySearchComponent implements OnInit {
 
         }
 
-
-
-
-
-
       },
 
 
@@ -134,9 +148,56 @@ export class InventorySearchComponent implements OnInit {
 
   }
 
-  onEditPhoto(product: Products) {
-    this.inventoryService.populatePhotoForm(product);
-    this.dialogService.open(InventoryImageEditComponent, true, true, "40%", "auto");
+  onEditPhoto(productChosen: Products) {
+    
+    this.inventoryService.populatePhotoForm(productChosen);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = productChosen
+    const dialogRef = this.dialog.open(InventoryImageEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      product => {
+        let theOne = ''
+        let array = ''
+        for (var i = 0; i < this.products.length; i++) {
+          array += [
+            this.products[i]
+          ]
+          if (this.products[i]._id == product.data._id) {
+            this.products[i] = product.data
+            array += [
+              this.products[i]
+            ]
+
+          }
+
+
+        }
+
+        if (productChosen.imagePath === product.data.imagePath) {
+
+          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
+
+        }
+        else {
+
+          this.alert.notifySuccess('Imagen editada', 2500, 'top', 'center');
+
+        }
+
+      },
+
+
+      error => console.log(error),
+
+      () => console.log('completed')
+
+
+    )
+
+
+
+    
   }
 
 
@@ -146,27 +207,26 @@ export class InventorySearchComponent implements OnInit {
       product => {
         if (product) {
           console.log(product)
-          let array = ''
-          for (var i = 0; i < this.products.length; i++) {
+          // let array = ''
+          // for (var i = 0; i < this.products.length; i++) {
 
-            if (this.products[i]._id == product._id) {
-              this.products[i] = ''
+          //   if (this.products[i]._id == product._id) {
+          //     this.products[i] = ''
 
-              array += [
-                this.products[i]
-              ]
+          //     array += [
+          //       this.products[i]
+          //     ]
 
-            }
+          //   }
 
-            array += [
-              this.products[i]
-            ]
-
-          }
+          //   array += [
+          //     this.products[i]
+          //   ]
+          // }
 
 
           let productCard = document.getElementById(`${product._id}`)
-          productCard.remove();
+          productCard.remove()
 
           this.alert.notifyWarn(`Producto ${product.title} eliminado`, 2500, 'top', 'center');
 

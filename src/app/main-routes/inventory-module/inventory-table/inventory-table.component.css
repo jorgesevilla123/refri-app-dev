@@ -54,11 +54,16 @@ td{
 }
 
 
-#add-button {
-    background-color: rgba(2, 214, 2, 0.712);
-
+#add-icon {
+    font-size: 24px;
+    padding-bottom: 1px;
 }
 
 .delete-button{
     color: rgba(255, 0, 0, 0.925);
+}
+
+
+#add-button {
+    color: dodgerblue;
 }

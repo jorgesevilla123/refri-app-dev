@@ -19,14 +19,16 @@ export class BusinessConfigurationsService {
 
   addCurrency(value: FormData){
     return this.http.post(`${this.currencyUrl}/addPrice`, value).subscribe(
-      (res) => console.log(res),
-      (error) => console.log(`Error in configurations service: ${error}`)
+      res => console.log(res),
+      error => console.log(`Error in configurations service: ${error}`)
     )
 
   }
 
-  getCurrency(): Observable<Currency>{
-    return this.http.get<Currency>(`${this.currencyUrl}/most-recent`).pipe()
+  getCurrency(): Observable<any>{
+    return this.http.get(`${this.currencyUrl}/most-recent`).pipe(
+      map( currentCurrency => {return currentCurrency})
+    )
   
     
     

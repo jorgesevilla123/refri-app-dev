@@ -47,11 +47,6 @@ button{
 }
 
 
-#add-button {
-    color: white;
-    background-color: rgba(0, 102, 255, 0.822);
-
-}
 
 
 .card-title{
@@ -71,7 +66,30 @@ button{
     .inventory-products-card{
         width: 320px;
     }
+
+
+
     
+#add-icon {
+    font-size: 24px;
+    padding-bottom: 1px;
+}
+
+
+#add-button {
+    color: dodgerblue;
+      
+}
+
+    
+    
+
+    .center-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 200px;
+    }
     
     
     

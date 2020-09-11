@@ -1,8 +1,12 @@
-<div class="inventory-search-div">
-  <button id="add-button" mat-raised-button (click)="onAdd()"> 
-    <mat-icon >add</mat-icon> Añadir producto
 
+
+
+<div class="inventory-search-div">
+
+ <button id="add-button" mat-stroked-button (click)="onAdd()">
+    Añadir producto <mat-icon>add</mat-icon>
   </button>
+
   <mat-form-field appearance="outline" class="inventory-search-form">
     <mat-label>Buscar productos</mat-label>
     <input matInput [(ngModel)]="searchKey" placeholder="Buscar" (keyup)="applyFilter()">

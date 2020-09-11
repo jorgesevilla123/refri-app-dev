@@ -20,6 +20,7 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatChipsModule,
     MatStepperModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
     
   ],
   exports: [
@@ -68,7 +70,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatChipsModule,
     MatStepperModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
 
   ]
 })

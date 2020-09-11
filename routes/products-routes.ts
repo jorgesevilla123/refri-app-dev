@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import { Request, Response} from 'express';
 import Product, { ProductInterface } from "../models/products-model";
+import upload from "../fileProcessing";
+import * as fs from "fs-extra";
+import * as path from "path";
 
 const router = Router();
 
@@ -51,25 +54,36 @@ router.route('/products/:id').get( (req: Request, res: Response)  => {
     })
 })
 
-router.route('/products').post( async (req: Request, res: Response)  => {
+router.route('/products').post(upload.single('imagePath'), (req: Request, res: Response)  => {
     const {title, modelo, precio, cantidad} = req.body;
-    const imagePath = '/uploads/' + req.file.filename;
+    const imagePath = `/${req.file.destination}/${req.file.filename}`
     const newProduct = new Product({title, modelo, cantidad, precio, imagePath})
-    await newProduct.save();
-    console.log('Product saved')
-    res.sendStatus(200)
+    newProduct.save( (err, product) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+            res.json(product)
+            console.log('Product saved!');
+        }
+
+    });
+ 
+ 
 })
 
 
-router.route('/products/delete-product/:id').delete( async (req: Request, res: Response)  => {
+router.route('/products/delete-product/:id').delete((req: Request, res: Response)  => {
     const id = req.params.id
-    Product.findByIdAndRemove({_id: id}, (err, product) => {
+    Product.findByIdAndRemove({_id: id}, async (err, product) => {
         if(err){
             console.log(err)
             res.json({ message: 'Error deleting product' })
         }
         else {
+            await fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
             res.json(product);
+            console.log('Product deleted!');
         }
     })
    
@@ -77,7 +91,7 @@ router.route('/products/delete-product/:id').delete( async (req: Request, res: R
 
 
 
-router.route('/products/update/:id').put( (req: Request, res: Response)  => {
+router.route('/products/update/:id').put(upload.none(), (req: Request, res: Response)  => {
     const id = req.params.id
     const { title, modelo, precio, cantidad } = req.body
     Product.findByIdAndUpdate({_id: id}, { title: title, modelo: modelo, precio: precio, cantidad: cantidad}, { upsert: false }, (err, product) => {
@@ -91,15 +105,15 @@ router.route('/products/update/:id').put( (req: Request, res: Response)  => {
     })
 })
 
-router.route('/products/update-photo/:id').put( (req: Request, res: Response)  => {
+router.route('/products/update-photo/:id').put(upload.single('newImage'), (req: Request, res: Response)  => {
     const id = req.params.id
-    const imagePath = '/uploads/' +  req.file.filename;
+    const imagePath = `/${req.file.destination}/${req.file.filename}`
     Product.findOneAndUpdate({ _id: id }, {imagePath: imagePath}, { upsert: false }, (err, doc) => {
         if (err) {
             res.sendStatus(500)
         } else
             doc.save();
-        res.sendStatus(200)
+        res.json(doc);
 
     });
 })

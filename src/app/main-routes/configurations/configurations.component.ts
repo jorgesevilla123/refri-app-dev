@@ -42,7 +42,7 @@ currency: Currency
     const value = this.currencyForm.get('precio').value;
     const formData = new FormData();
     formData.append('precio', value);
-    this.config.addCurrency(formData);
+    this.config.addCurrency(formData)
     this.currencyForm.reset();
     location.reload();
     

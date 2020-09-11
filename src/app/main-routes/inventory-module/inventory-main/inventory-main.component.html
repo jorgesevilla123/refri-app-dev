@@ -1,8 +1,9 @@
 <div class="inventory-search-div">
-    <button id="add-button" mat-fab (click)="onAdd()"> 
-        <mat-icon>add</mat-icon>
 
-    </button>
+
+     <button id="add-button" mat-stroked-button (click)="onAdd()">
+    Añadir producto <mat-icon id="add-icon">add</mat-icon>
+  </button>
 
 
 
@@ -15,6 +16,17 @@
     </div>
 
 
+    <div  *ngIf="!products; else productsGrid">
+      <div class="center-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+
+
+
+<ng-template #productsGrid>
+
+  
     
 <mat-grid-list cols="3" gutterSize="10px" rowHeight="450px">
   <h3 style="margin-left: 30px; font-weight: 200" >mostrando <b>{{products.length}}</b> productos de <b>{{allProducts}}</b> en inventario</h3>
@@ -36,7 +48,7 @@
               add_photo_alternate</mat-icon></button>
         </mat-menu> -->
       </mat-card-header>
-      <img class="product-card-img" mat-card-image src="assets/products-images{{product.imagePath}}">
+      <img class="product-card-img" mat-card-image [src]="'http://localhost:4200/' + product.imagePath">
       <mat-card-content>
         <h3>Modelo: {{product.modelo}}</h3>
         <h3>Precio: {{product.precio | currency}}</h3>
@@ -49,5 +61,7 @@
 
 </mat-grid-list>
     
+
+</ng-template>
 
 
