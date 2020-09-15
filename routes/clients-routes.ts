@@ -74,6 +74,12 @@ router.route('/clients/addClient').post(upload.none(), async (req: Request, res:
 })
 
 
+
+
+
+//Cart operations
+
+
 router.route('/clients/buyProduct/:id').post( async (req: Request, res: Response) => {
     const id = req.params.id;
     var products = req.body;
@@ -158,7 +164,7 @@ router.route('/clients/updateClient/:id').put(upload.none(), (req: Request, res:
           res.status(500).send(err);
       } else {
           client.save();
-      res.status(200)
+      res.json(client);
       }
   });
 

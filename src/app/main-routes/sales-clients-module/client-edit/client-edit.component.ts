@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from "../../../services/clients.service";
+import { MatDialogRef } from "@angular/material/dialog";
 
 
 
@@ -14,6 +15,7 @@ export class ClientEditComponent implements OnInit {
 
   constructor(
     public clientService: ClientsService,
+    public dialogRef: MatDialogRef<ClientEditComponent>
     
   ) { }
 
@@ -35,10 +37,19 @@ export class ClientEditComponent implements OnInit {
     formData.append('cedula', cedula);
     formData.append('email', email);
     formData.append('phoneNumber', phone); 
-    this.clientService.updateClient(formData);
-    setTimeout(() => {
-      location.reload();
-    }, 1000)
+    this.clientService.updateClient(formData).subscribe(
+      client => {
+        if(client){
+          this.dialogRef.close({ clientData: client})
+        }
+        else {
+          this.dialogRef.close({ clientData: false })
+        }
+        
+      }
+  
+
+    )
 
 
     
@@ -48,6 +59,13 @@ export class ClientEditComponent implements OnInit {
   clientName(){
     this.client = this.clientService.clientsEditForm.get('name').value;
     
+  }
+
+
+  onClose(){
+
+    this.dialogRef.close({ clientData: false });
+
   }
 
 }

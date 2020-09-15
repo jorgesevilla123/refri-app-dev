@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('refri-data app is running!');
+    expect(page.getTitleText()).toEqual('more_vert');
   });
 
   afterEach(async () => {

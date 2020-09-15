@@ -133,9 +133,16 @@ export class SalesProcessComponent implements OnInit, OnDestroy {
 
   buyProduct(){
     this.client.cart.forEach(product => {
-      this.clientService.buyProduct(this.client, product);
+      this.clientService.buyProduct(this.client, product).subscribe(
+        product => console.log(product)
+      )
     })
     this.clearCart(this.client);
+    this.alert.notifySuccess('Compra exitosa!', 3000, 'top', 'center')
+    setTimeout( () => {
+    location.reload()
+      
+    }, 3000)
 
   
   }

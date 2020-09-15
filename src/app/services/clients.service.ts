@@ -3,7 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { Client } from "../clients";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Observable, of } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Products } from '../products';
+
 
 @Injectable({
   providedIn: 'root'
@@ -47,60 +49,67 @@ export class ClientsService {
 
   getOneClient(id: string | number): Observable<Client>{
     const url = `${this.ClientsUrl}/loadClient/${id}`;
-    return this.http.get<Client>(url)
+    return this.http.get<Client>(url).pipe(
+      map(res => {return res})
+    )
 
   }
 
-  addClient(formData: FormData){
-    return this.http.post(`${this.ClientsUrl}/addClient`, formData).subscribe(
-      product => console.log(product),
-      error => console.log(error),
-      () => console.log('Client added')
+  addClient(formData: FormData): Observable<Client>{
+    return this.http.post<Client>(`${this.ClientsUrl}/addClient`, formData).pipe(
+      map( res => {return res})
     )
   }
 
-  updateClient(client: FormData){
+  updateClient(client: FormData): Observable<Client>{
     const id = client.get('_id');
     const url = `${this.ClientsUrl}/updateClient/${id}`;
-    return this.http.put(url, client).subscribe(
-      client => console.log(client),
-      error => console.log(error),
-      () => console.log('client updated')
-
+    return this.http.put<Client>(url, client).pipe(
+      map(res => {return res})
     )
   }
 
 
 
-  deleteClient(client: Client | string){
+  deleteClient(client: Client | string): Observable<Client>{
     const id = typeof client === 'string' ? client : client._id;
     const url = `${this.ClientsUrl}/deleteClient/${id}`;
-    return this.http.delete(url).subscribe(
-      client => console.log(client),
-      error => console.log(error)
-
-
-
-
-      
+    return this.http.delete<Client>(url).pipe(
+      map(res => {return res})
     )
-
   }
 
 
-  searchClient(keyLetter: string): Observable<Client[]>{
+
+
+  searchEntries(keyLetter) {
     if(!keyLetter.trim()){
-      return of([])
-
+      return of([]);
     }
-    return this.http.get<Client[]>(`${this.ClientsUrl}/searchClient?name=${keyLetter}`).pipe(
-      tap(L => L.length ? 
-        console.log('found products matching') :
-        console.log('No products matching')),
-        catchError(this.handleError<Client[]>('searchClient', [])
-        )
+    else{
+    return this.http.get(`${this.ClientsUrl}/searchClient?name=${keyLetter}`).pipe(
+      map( res => {return res})
+    )
+ 
+
+  }
+  }
+
+
+  searchClient(keyLetter): Observable<Client[]>{
+
+
+    return keyLetter.pipe(
+
+      debounceTime(1500),
+
+      distinctUntilChanged(),
+
+      switchMap( term => this.searchEntries(term))
+
     )
   }
+
 
   populateForm(client: Client){
     this.clientsEditForm.patchValue({
@@ -112,15 +121,12 @@ export class ClientsService {
     })
   }
 
-  buyProduct(client, product){
+  buyProduct(client, product): Observable<Products[]>{
     console.log(product);
     const id = client._id
     const url = `${this.ClientsUrl}/buyProduct/${id}`;
-    return this.http.post(url, product).subscribe(
-      result => console.log(result),
-      error => console.log(error),
-      () => console.log('request completed')
-
+    return this.http.post<Products[]>(url, product).pipe(
+      map( res => {return res})
     )
 
 

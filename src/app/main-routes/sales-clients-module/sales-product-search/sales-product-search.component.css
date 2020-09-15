@@ -45,7 +45,10 @@
 
 #to-basket-button{
 
-    background-color: rgba(2, 214, 2, 0.712);
+    font-weight: 300;
+    color: black;
+    background-color: #51B0FF;
+    border-radius: 40px;
 
 }
 

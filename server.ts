@@ -12,8 +12,10 @@ import { startConnection } from "./db";
 import productsRoutes from "./routes/products-routes";
 import clientsRoutes from "./routes/clients-routes";
 import currencyRoutes from "./routes/currency-routes";
+import * as dotenv from "dotenv"
 
 
+dotenv.config();
 
 
 

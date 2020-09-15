@@ -12,10 +12,10 @@
         <mat-card-header>
           <mat-card-title class="cards-title">
             Inventario
-            <button id="more-button" mat-button [matMenuTriggerFor]="menu"><mat-icon id="more-link">more_vert</mat-icon></button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item><mat-icon class="regular-icon">create</mat-icon> Editar inventario</button>
-              <button mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
+            <button id="more-button" mat-button [matMenuTriggerFor]="inventoryMenu"><mat-icon id="more-link">more_vert</mat-icon></button>
+            <mat-menu #inventoryMenu="matMenu">
+              <button class="inventory-search-button"  mat-menu-item routerLink="/inventory-search"><mat-icon class="regular-icon">search</mat-icon> Buscar en inventario</button>
+              <button class="inventory-table-button" mat-menu-item routerLink="/inventory-table"> <mat-icon class="regular-icon">toc</mat-icon> Ver productos en tabla</button>
             </mat-menu>
           </mat-card-title>
 
@@ -38,10 +38,10 @@
         <mat-card-header>
           <mat-card-title class="cards-title">
             Configuraciones del negocio
-            <button id="more-button" mat-button [matMenuTriggerFor]="menu"><mat-icon id="more-link">more_vert</mat-icon></button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Acceder a configuraciones</button>
-              <button mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
+            <button id="more-button" mat-button [matMenuTriggerFor]="configMenu"><mat-icon id="more-link">more_vert</mat-icon></button>
+            <mat-menu #configMenu="matMenu">
+              <button class="config-main-button" mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Acceder a configuraciones</button>
+              <button class="config-main-button" mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver configuraciones</button>
             </mat-menu>
           </mat-card-title>
 
@@ -64,10 +64,10 @@
         <mat-card-header>
           <mat-card-title class="cards-title">
             Busqueda de productos
-            <button id="more-button" mat-button [matMenuTriggerFor]="menu"><mat-icon id="more-link">more_vert</mat-icon></button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Acceder a configuraciones</button>
-              <button mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
+            <button id="more-button" mat-button [matMenuTriggerFor]="searchMenu"><mat-icon id="more-link">more_vert</mat-icon></button>
+            <mat-menu #searchMenu="matMenu">
+              <button class="search-main-button" mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Buscar productos</button>
+              <button class="search-main-button" mat-menu-item> <mat-icon class="regular-icon">store</mat-icon> Ver inventario</button>
             </mat-menu>
           </mat-card-title>
 

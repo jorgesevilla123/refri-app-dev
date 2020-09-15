@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { Products } from "../../../products";
 import { InventoryService } from "../../../services/inventory.service";
 import { MatTableDataSource } from "@angular/material/table";
@@ -8,9 +7,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
-import { ConfirmationComponent } from "../../../reusable-components/confirmation/confirmation.component";
 import { InventoryProductEditComponent } from '../inventory-product-edit/inventory-product-edit.component';
-import { map } from "rxjs/operators";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 
 
@@ -30,11 +28,15 @@ export class InventoryComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort; //Querying the element in the DOM that matches the property and watching for changes
   @ViewChild(MatPaginator) paginator: MatPaginator; 
   searchKey: string
+  
+
 
   constructor(
     private inventoryService: InventoryService,
     private  dialogService: DialogService,
     private alertService: AlertService,
+    public dialog : MatDialog,
+    public alert: AlertService
   
 
     ) { } //Injecting the service with DI
@@ -62,6 +64,7 @@ export class InventoryComponent implements OnInit {
         this.listData = new MatTableDataSource(array);
         this.listData.sort = this.sort;
         this.listData.paginator = this.paginator;
+        this.products = list
 
       }
     ) 
@@ -118,7 +121,52 @@ export class InventoryComponent implements OnInit {
 
   onEdit(row){
     this.inventoryService.populateForm(row);
-    this.dialogService.open(InventoryProductEditComponent, true, true, "40%", "auto");
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = row
+    console.log(row);
+    const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      product => {
+        let theOne = ''
+        let array = ''
+        for (var i = 0; i < this.products.length; i++) {
+          array += [
+            this.products[i]
+          ]
+          if (this.products[i]._id == product.data._id) {
+            this.products[i] = product.data
+            array += [
+              this.products[i]
+            ]
+
+          }
+        }
+
+        if (row.title === product.data.title && row.modelo === product.data.modelo &&
+          row.cantidad === product.data.cantidad && row.precio === product.data.precio) {
+
+          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
+
+
+        }
+        else {
+
+          this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
+          return this.getProducts();
+
+        }
+
+      },
+
+
+      error => console.log(error),
+
+      () => console.log('completed')
+
+
+    )
+
 
   }
 

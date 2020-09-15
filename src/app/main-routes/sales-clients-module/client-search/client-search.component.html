@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline" class="clients-search-form">
     <mat-label>Buscar clientes</mat-label>
-    <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
+    <input #searchBox matInput id="search-box" placeholder="Buscar" (keyup)="searchKeys$.next($event.target.value)" />
     <mat-icon matSuffix>search</mat-icon>
     <!-- <button mat-button matSuffix mat-icon-button aria-label="clear">
       <mat-icon>close</mat-icon>
@@ -8,8 +8,8 @@
   </mat-form-field>
 
 
-<mat-grid-list cols="4" rowHeight="280px">
-    <mat-grid-tile *ngFor="let client of clients$ | async">
+<mat-grid-list cols="4" rowHeight="200px">
+    <mat-grid-tile *ngFor="let client of clients">
       <mat-card class="clients-card">
         <mat-card-header>
           <div mat-card-avatar>

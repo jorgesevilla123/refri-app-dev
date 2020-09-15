@@ -59,7 +59,7 @@ export class SalesProductSearchComponent implements OnInit {
       client => {
        if(product){
          this.client = client
-         this.alert.notifySuccess('Producto añadido al carrito', 100000, 'top', 'center')
+         this.alert.notifySuccess('Producto añadido al carrito', 2500, 'top', 'center')
        }
        else{
        this.client = client

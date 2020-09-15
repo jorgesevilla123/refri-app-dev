@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from "../../../services/clients.service";
 import { Client } from "../../../clients";
+import { AlertService } from "../../../reusable-components/alerts/alert/alert.service"
 
 
 @Component({
@@ -14,7 +15,8 @@ export class ClientsMainComponent implements OnInit {
 
 
   constructor(
-    public clientService: ClientsService
+    public clientService: ClientsService,
+    public alert: AlertService
   ) { }
 
   
@@ -57,11 +59,24 @@ export class ClientsMainComponent implements OnInit {
     formData.append('email', correo);
     formData.append('phoneNumber', phone);
     formData.append('constantBuyer', constantBuyer);
-    this.clientService.addClient(formData);
-    setTimeout(() => {
-      location.reload()
-    }, 1000)
-    this.clientService.clientsForm.reset();
+    this.clientService.addClient(formData).subscribe(
+      client => {
+        if(client) {
+          this.alert.notifySuccess(`Cliente añadido`, 2500, 'top', 'center');
+          setTimeout(() => {
+            location.reload()
+          }, 2000)
+          this.clientService.clientsForm.reset();
+
+
+        }
+        else {
+          this.alert.notifyWarn(`No se agrego ningun cliente`, 2500, 'top', 'center');
+        }
+      }
+
+    )
+    
 
 
 

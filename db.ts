@@ -4,7 +4,7 @@ import { connect } from 'mongoose'
 
 export function startConnection(){
     
- connect('mongodb://localhost/Refridb', {
+ connect(process.env.Refridb, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false

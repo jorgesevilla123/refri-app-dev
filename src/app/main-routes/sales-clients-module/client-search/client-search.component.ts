@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from "../../../services/clients.service";
-import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 import { Observable, Subject } from "rxjs";
 import { Client } from "../../../clients";
 import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
 import { ClientEditComponent } from "../client-edit/client-edit.component";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+
 
 
 
@@ -16,13 +17,13 @@ import { AlertService } from "../../../reusable-components/alerts/alert/alert.se
   styleUrls: ['./client-search.component.css']
 })
 export class ClientSearchComponent implements OnInit {
-  clients$ : Observable<Client[]>
-  private searchKeys = new Subject<string>();
+  clients : Client[]
+  public searchKeys$ = new Subject<string>();
 
   constructor(
     public clientService : ClientsService,
-    public dialog : DialogService,
-    public alertService: AlertService,
+    public alert: AlertService,
+    public dialog: MatDialog
     
 
   ) { }
@@ -30,44 +31,61 @@ export class ClientSearchComponent implements OnInit {
 
   
   
-  search(term: string): void {
-    this.searchKeys.next(term);
 
-  }
 
   ngOnInit(): void {
 
-    this.clients$ = this.searchKeys.pipe(
+    this.clientService.searchClient(this.searchKeys$).subscribe(
+      client => this.clients = client
+    )
 
-      //waiting 300 ms between every keystroke before considering the term
-      debounceTime(1500),
 
-      //ignore new term if it's the same as previous
-      distinctUntilChanged(),
 
-      //switch to new search observable every time the term changes
 
-      switchMap((term: string) => this.clientService.searchClient(term),
 
-    ))
+    
   }
 
 
-  onEditClient(client: Client){
-    this.clientService.populateForm(client);
-    this.dialog.open(ClientEditComponent, true, true, "40%", "auto");
+  onEditClient(clientChosed: Client){
+    this.clientService.populateForm(clientChosed);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    const dialogRef = this.dialog.open(ClientEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      client => {
+        console.log(client.clientData)
+        if(client.clientData.name === clientChosed.name && client.clientData.cedula === clientChosed.cedula && client.clientData.email === clientChosed.email
+          && client.clientData.phoneNumber === clientChosed.phoneNumber) {
+          this.alert.notifySuccess('No se ha editado el cliente', 2500, 'top', 'center')
+          }
+        
+        else {
+          this.alert.notifySuccess('Cliente editado', 2500, 'top', 'center')
+        }
+      }
+
+    )
+
 
   }
 
 
   deleteClient(client: Client){
-    this.clientService.deleteClient(client);
-    this.alertService.notifySuccess("Cliente eliminado", 3000, 'top', 'center');
-    setTimeout( () => {
-      location.reload();
-    }, 1000);
-    
-    
+    this.clientService.deleteClient(client).subscribe(
+      client => {
+        if(client) {
+          this.alert.notifySuccess('Cliente borrado', 2500, 'top', 'center')
+          setTimeout( () => {
+            location.reload()
+          }, 2000)
+        }
+        else {
+          this.alert.notifyWarn('No se borrado el cliente', 2500, 'top', 'center')
+        }
+      }
+    )
+
   }
 
 

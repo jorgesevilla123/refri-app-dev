@@ -21,6 +21,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import {ScrollingModule} from "@angular/cdk/scrolling"
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatStepperModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ScrollingModule
     
   ],
   exports: [
@@ -71,7 +73,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatStepperModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ScrollingModule
 
   ]
 })

@@ -94,7 +94,6 @@ export class InventoryService {
     return this.http.put<Products>(url, product);
   }
   
-
   searchProduct(keyLetter: Observable<string>){
     // if(!keyLetter.trim()){
       //if there's no search term return empty product 

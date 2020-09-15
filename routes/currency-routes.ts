@@ -44,7 +44,7 @@ router.route('/currency-change/addPrice').post(upload.none(), async (req: Reques
     const {precio} = req.body;
     const newPrecio = new CurrencyChange({ precio });
     await newPrecio.save();
-    res.sendStatus(200);
+    res.json(newPrecio);
 })
 
 

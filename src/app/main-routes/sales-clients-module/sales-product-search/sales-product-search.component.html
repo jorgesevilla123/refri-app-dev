@@ -21,7 +21,7 @@
           {{product.title}}
         </mat-card-title>
       </mat-card-header>
-      <img class="product-card-img" mat-card-image src="assets/products-images{{product.imagePath}}">
+      <img class="product-card-img" mat-card-image [src]="'http://localhost:4200' +  product.imagePath">
       <mat-card-content>
         <h3>Precio: {{product.precio | currency}}</h3>
         <form class="example-form">
@@ -32,7 +32,7 @@
           </form>
       </mat-card-content>
       <mat-card-actions>
-        <button id="to-basket-button" mat-flat-button (click)="addToCart(product)">Agregar a cesta de compras <mat-icon>shopping_basket</mat-icon></button>
+        <button id="to-basket-button" mat-raised-button (click)="addToCart(product)">Agregar a cesta de compras <mat-icon>shopping_basket</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

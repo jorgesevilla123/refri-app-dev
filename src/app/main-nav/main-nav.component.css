@@ -25,6 +25,18 @@
     color: rgba(2, 148, 2, 0.76);
 }
 
+.nav-menu-buttons:hover {
+    font-size: 16px;
+
+}
+
+.nav-menu-buttons {
+    transition: 200ms;
+}
+
+
+
+
 mat-sidenav-container {     /* main nav bottom margin */
     margin-bottom: 15px;
 }

@@ -1,24 +1,34 @@
-<h2>Ventas</h2>
 
 
 
-<h5>Seleccionar cliente</h5>
+<div class="sales-search-container">
+
+
+<h2>Ventas por clientes</h2>
+
+
 
 <mat-form-field appearance="outline" class="clients-search-form">
     <mat-label>Buscar clientes</mat-label>
-    <input #searchBox matInput id="search-box" placeholder="Buscar" (input)="search(searchBox.value)" />
+    <input #searchBox matInput id="search-box" placeholder="Buscar" (keyup)="searchKeys$.next($event.target.value)" />
     <mat-icon matSuffix>search</mat-icon>
     <!-- <button mat-button matSuffix mat-icon-button aria-label="clear">
       <mat-icon>close</mat-icon>
     </button> -->
   </mat-form-field>
 
+
+</div>
+
+
+
+
   
 
 
 <div class="search-results">
 <mat-grid-list cols="4" rowHeight="300px">
-    <mat-grid-tile *ngFor="let client of clients$ | async">
+    <mat-grid-tile *ngFor="let client of clients">
       <mat-card class="clients-card">
         <mat-card-header>
           <div mat-card-avatar>

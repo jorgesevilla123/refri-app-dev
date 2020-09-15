@@ -10,6 +10,61 @@
 
 
 
+.inventory-search-button:hover, .inventory-table-button:hover, .regular-icon:hover {
+  
+  color: rgba(255, 166, 0, 0.801);
+  font-size: 16px;
+
+}
+
+.inventory-search-button, .inventory-table-button, .regular-icon {
+  transition: 300ms;
+  
+}
+
+.config-main-button:hover {
+
+  color: rgba(0, 102, 255, 0.822);
+  font-size: 16px;
+
+}
+
+.config-main-button {
+
+  transition: 300ms;
+
+}
+
+
+
+.search-main-button:hover {
+
+  color:  rgba(255, 0, 0, 0.753);
+  font-size: 16px;
+  
+
+}
+
+.search-main-button {
+
+  transition: 300ms;
+
+}
+
+
+.inventory-button:hover {
+  width: 250px;
+  height: 250px;
+
+}
+
+.inventory-button {
+  transition: 200ms;
+}
+
+
+
+
 /* media breakpoint for laptops and desktop devices */
 @media (max-width: 1483px) and (min-width: 1183px){
 

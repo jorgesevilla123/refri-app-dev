@@ -1,6 +1,11 @@
 
 
 
+.sales-search-container {
+    margin-left: 40px;
+
+}
+
 .client-select{
     background-color: rgba(0, 102, 255, 0.822);
     color: white;
@@ -9,4 +14,9 @@
 
 .clients-card{
     width: 300px;
+}
+
+
+.clients-search-form {
+    width: 500px;
 }

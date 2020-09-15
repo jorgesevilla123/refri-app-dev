@@ -10,20 +10,16 @@ import { MatAccordion } from '@angular/material/expansion';
 })
 export class SalesClientsComponent implements OnInit {
 @ViewChild(MatAccordion) accordion: MatAccordion
-clients: Client[]
+
 
   constructor(
     private clientService: ClientsService
   ) { }
 
   ngOnInit(): void {
-    this.getClients();
+ 
   }
 
-  getClients(){
-    this.clientService.getClients().subscribe(
-      clients => this.clients = clients
-    )
-  }
+
 
 }

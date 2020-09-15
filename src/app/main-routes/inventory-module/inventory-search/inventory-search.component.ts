@@ -12,6 +12,7 @@ import localeDe from "@angular/common/locales/en-DE";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
+
 registerLocaleData(localeDe, 'fr');
 
 
