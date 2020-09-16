@@ -12,7 +12,7 @@ import { Products } from '../products';
 })
 export class ClientsService {
 
-  private ClientsUrl = '/api/clients';
+  private ClientsUrl = 'api/clients';
 
   constructor(
     private http: HttpClient

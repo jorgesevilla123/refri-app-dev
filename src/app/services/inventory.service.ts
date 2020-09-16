@@ -13,7 +13,7 @@ import { tap, catchError } from 'rxjs/operators';
 export class InventoryService {
  
 
-  private productsUrl = '/api/products';
+  private productsUrl = 'api/products';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'multipart/form-data'})

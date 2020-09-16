@@ -9,7 +9,7 @@ import { Currency } from "../currency";
 })
 export class BusinessConfigurationsService {
 
-  private currencyUrl = '/api/currency-change';
+  private currencyUrl = 'api/currency-change';
 
 
   constructor(
