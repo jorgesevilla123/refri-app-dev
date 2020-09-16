@@ -76,7 +76,7 @@ function run() {
   const port = process.env.PORT || 4000;
 
   //start connection of the server to the database
-  startConnection();
+  // startConnection();
 
   // Start up the Node server
   const server = app();
