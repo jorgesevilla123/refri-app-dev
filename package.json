@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.ts",
-    "build": "ng build",
+    "start": "npm run serve:ssr",
+    "build": "npm run build:ssr",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run refri-data:serve-ssr",
     "serve:ssr": "node dist/refri-data/server/main.js",
     "build:ssr": "ng build --prod && ng run refri-data:server:production",
-    "prerender": "ng run refri-data:prerender"
+    "prerender": "ng run refri-data:prerender",
+    "postinstall": "ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
