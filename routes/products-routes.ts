@@ -14,6 +14,9 @@ router.route('/checkProducts').get( (req: Request, res: Response) => {
 })
 
 
+
+
+
 router.route('/products').get( (req: Request, res: Response) => {
     Product.find( (err, products) =>{
         if(err){
@@ -53,6 +56,9 @@ router.route('/products/:id').get( (req: Request, res: Response)  => {
         }
     })
 })
+
+
+
 
 router.route('/products').post(upload.single('imagePath'), (req: Request, res: Response)  => {
     const {title, modelo, precio, cantidad} = req.body;

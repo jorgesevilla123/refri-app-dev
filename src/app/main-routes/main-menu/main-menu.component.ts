@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { InventoryService } from "../../services/inventory.service";
 
 @Component({
   selector: 'app-main-menu',
@@ -8,6 +9,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent {
+  response: string
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -43,5 +45,14 @@ export class MainMenuComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+            public inventoryService: InventoryService
+    ) {}
+
+
+  getApi() {
+    this.inventoryService.testToApi().subscribe(
+      res => this.response = res.message
+    )
+  }
 }

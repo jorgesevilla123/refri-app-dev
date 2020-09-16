@@ -48,6 +48,15 @@ export class InventoryService {
 
 
 
+  testToApi(): Observable<any> {
+    return this.http.get(`${this.productsUrl}/checkProducts`).pipe(
+      res => {return res}
+    )
+
+  }
+
+
+
 
 
   getProducts():  Observable<Products[]> {
