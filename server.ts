@@ -8,7 +8,7 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync} from 'fs';
 import * as multer from 'multer';
-// import { startConnection } from "./db";
+import { startConnection } from "./db";
 import productsRoutes from "./routes/products-routes";
 import clientsRoutes from "./routes/clients-routes";
 import currencyRoutes from "./routes/currency-routes";
@@ -76,7 +76,7 @@ function run() {
   const port = process.env.PORT || 4000;
 
   //start connection of the server to the database
-  // startConnection();
+  startConnection();
 
   // Start up the Node server
   const server = app();
