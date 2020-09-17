@@ -12,8 +12,8 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class InventoryService {
  
-
-  private productsUrl = 'api/products';
+  //env variable for api
+  private productsUrl = process.env.PRODUCTS_API;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'multipart/form-data'})

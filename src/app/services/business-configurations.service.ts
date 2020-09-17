@@ -10,7 +10,8 @@ import { Currency } from "../currency";
 })
 export class BusinessConfigurationsService {
 
-  private currencyUrl = 'api/currency-change';
+  //env variable for api
+  private currencyUrl = process.env.CONFIG_API;
 
 
   constructor(

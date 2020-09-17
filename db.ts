@@ -4,7 +4,7 @@ import { connect } from 'mongoose'
 
 export function startConnection(){
     
- connect('mongodb+srv://Joche:Joche2784@cluster0.a2hsl.mongodb.net/refritest?retryWrites=true&w=majority', {
+ connect(process.env.REFRI_DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false

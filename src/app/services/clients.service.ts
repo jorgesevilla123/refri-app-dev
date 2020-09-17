@@ -12,8 +12,8 @@ import { Products } from '../products';
   providedIn: 'root'
 })
 export class ClientsService {
-
-  private ClientsUrl = 'api/clients';
+  //env variable for api
+  private ClientsUrl = process.env.CLIENTS_API;
 
   constructor(
     private http: HttpClient
