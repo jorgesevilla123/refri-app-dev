@@ -8,8 +8,8 @@ import * as path from "path";
 const router = Router();
 
 
-router.route('/checkProducts').get( (req: Request, res: Response) => {
-    res.json({message: 'Product route working good'})
+router.route('/products/checkProducts').get( (req: Request, res: Response) => {
+    res.json({ message: 'Product route working good' })
 
 })
 
