@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Observable, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Products } from '../products';
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.prod";
 
 
 @Injectable({
