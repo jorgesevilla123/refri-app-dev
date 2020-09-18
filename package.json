@@ -13,7 +13,7 @@
     "serve:ssr": "npm run config -- --environment=dev && node dist/refri-data/server/main.js",
     "build:ssr": "npm run config -- --environment=prod && ng build --prod && ng run refri-data:server:production",
     "prerender": "ng run refri-data:prerender",
-    "postinstall": "ng build --prod --aot"
+    "postinstall": "npm run config -- --environment=prod && ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
