@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run serve:ssr",
-    "build": "npm run build:ssr",
+    "start": "npm run config -- --environment=dev npm run serve:ssr",
+    "build": "npm run config -- --environment=prod && npm run build:ssr",
     "config": "node set-env.ts",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "npm run config -- --environment=dev && ng run refri-data:serve-ssr",
-    "serve:ssr": "node dist/refri-data/server/main.js",
-    "build:ssr": "ng build --prod && ng run refri-data:server:production",
+    "serve:ssr": "npm run config -- --environment=dev && node dist/refri-data/server/main.js",
+    "build:ssr": "npm run node -- --environment=prod && ng build --prod && ng run refri-data:server:production",
     "prerender": "ng run refri-data:prerender",
-    "postinstall": "ng build --prod --aot"
+    "postinstall": "npm run config -- --environment=prod && ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
