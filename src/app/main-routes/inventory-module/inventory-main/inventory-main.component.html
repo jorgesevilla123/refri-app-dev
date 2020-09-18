@@ -48,7 +48,7 @@
               add_photo_alternate</mat-icon></button>
         </mat-menu> -->
       </mat-card-header>
-      <img class="product-card-img" mat-card-image [src]="'http://localhost:4200/' + product.imagePath">
+      <img class="product-card-img" mat-card-image [src]="product.imagePath">
       <mat-card-content>
         <h3>Modelo: {{product.modelo}}</h3>
         <h3>Precio: {{product.precio | currency}}</h3>

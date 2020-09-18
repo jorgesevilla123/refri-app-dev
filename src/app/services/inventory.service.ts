@@ -5,6 +5,8 @@ import { Products } from "../products";
 import {  FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from "../../environments/environment";
+
 
 
 @Injectable({
@@ -13,7 +15,7 @@ import { tap, catchError } from 'rxjs/operators';
 export class InventoryService {
  
   //env variable for api
-  private productsUrl = process.env.PRODUCTS_API;
+  private productsUrl : string;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'multipart/form-data'})
@@ -25,8 +27,11 @@ export class InventoryService {
 
   constructor(
     private http: HttpClient,
+  
 
-  ) {}
+  ) {
+    this.productsUrl = environment.PRODUCTS_API
+  }
 
 
   
