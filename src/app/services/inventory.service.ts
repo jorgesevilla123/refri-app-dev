@@ -5,7 +5,7 @@ import { Products } from "../products";
 import {  FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { tap, catchError } from 'rxjs/operators';
-import { environment } from "../../environments/environment.prod"
+
 
 
 
@@ -15,7 +15,7 @@ import { environment } from "../../environments/environment.prod"
 export class InventoryService {
  
   //env variable for api
-  private productsUrl : string;
+  private productsUrl : 'api/products'
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type' : 'multipart/form-data'})
@@ -30,7 +30,7 @@ export class InventoryService {
   
 
   ) {
-    this.productsUrl = environment.PRODUCTS_API
+
   }
 
 
