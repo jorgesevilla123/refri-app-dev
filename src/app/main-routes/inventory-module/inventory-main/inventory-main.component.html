@@ -36,19 +36,14 @@
         <mat-card-title class="card-title">
           {{product.title}}
         </mat-card-title>
-        <!-- <button [matMenuTriggerFor]="menu" style="float: right;" mat-icon-button>
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
-            </mat-icon></button>
-          <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
-            </mat-icon></button>
-          <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
-              add_photo_alternate</mat-icon></button>
-        </mat-menu> -->
+     
       </mat-card-header>
-      <img class="product-card-img" mat-card-image [src]="product.imagePath">
+      <div *ngIf="product.imagePath == 'no-photo'; else image">
+        <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
+      </div>
+      <ng-template #image>
+        <img class="product-card-img" mat-card-image [src]="product.imagePath">
+      </ng-template>
       <mat-card-content>
         <h3>Modelo: {{product.modelo}}</h3>
         <h3>Precio: {{product.precio | currency}}</h3>

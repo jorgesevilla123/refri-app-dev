@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { InventoryService } from "../../../services/inventory.service";
 import { Products } from "../../../products";
+import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 
 
@@ -18,8 +18,11 @@ export class InventoryMainComponent implements OnInit {
   allProducts: number
 
 
-  constructor(private dialogService: DialogService,
-    public inventoryService: InventoryService) { }
+  constructor(
+    public inventoryService: InventoryService,
+    public alert: AlertService,
+     public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -27,7 +30,26 @@ export class InventoryMainComponent implements OnInit {
   }
 
   onAdd() {
-    this.dialogService.open(InventoryManageProductsComponent, true, true, "40%", "auto");
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    const dialogRef = this.dialog.open(InventoryManageProductsComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe(
+      product => {
+        if (product) {
+          this.alert.notifySuccess(`Se añadio ${product.data.title} a los productos`, 2500, 'top', 'center')
+          setTimeout( () => {
+            location.reload()
+          }, 2000)
+        }
+        else {
+          this.alert.notifyWarn('No se ha añadido el producto', 2500, 'top', 'center');
+        }
+      }
+
+    )
+
+
+
 
    
 
