@@ -25,7 +25,7 @@
         </mat-form-field>
 
      
-            <button id="file-button" mat-raised-button (click)="fileInput.click()"><mat-icon>get_app</mat-icon> Subir imagen</button>
+            <button type="button" id="file-button" mat-raised-button (click)="fileInput.click()"><mat-icon>get_app</mat-icon> Subir imagen</button>
         <input name="imagePath" #fileInput  style="display: none;" type="file" (change)="onFileUpload($event)">
        </div>
     

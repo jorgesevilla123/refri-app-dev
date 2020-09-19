@@ -58,18 +58,11 @@ export class InventoryManageProductsComponent implements OnInit {
     formData.append('precio', precio);
     formData.append('cantidad', cantidad);
     formData.append('imagePath', this.imagePath);
-    if (this.imagePath === undefined) {
-      console.log('no image yet');
-    } else {
       this.inventoryService.addProducts(formData).subscribe(
         product => {
           this.dialogRef.close({data: product});
         }
-
       )
-    
-   
-    }
   }
 
 

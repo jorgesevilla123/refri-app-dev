@@ -47,7 +47,12 @@
               add_photo_alternate</mat-icon></button>
         </mat-menu>
       </mat-card-header>
-      <img class="product-card-img" mat-card-image [src]="product.imagePath">
+      <div *ngIf="product.imagePath == 'no-photo'; else image">
+        <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
+      </div>
+      <ng-template #image>
+        <img class="product-card-img" mat-card-image [src]="product.imagePath">
+      </ng-template>
       <mat-card-content>
         <h3>Modelo: {{product.modelo}}</h3>
         <h3>Precio: {{product.precio | currency}}</h3>

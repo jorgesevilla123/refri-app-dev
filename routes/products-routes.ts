@@ -62,7 +62,14 @@ router.route('/products/:id').get( (req: Request, res: Response)  => {
 
 router.route('/products').post(upload.single('imagePath'), (req: Request, res: Response)  => {
     const {title, modelo, precio, cantidad} = req.body;
-    const imagePath = `/${req.file.destination}/${req.file.filename}`
+    
+    let imagePath
+    if(req.file == undefined){
+        imagePath = 'no-photo'
+    }
+    else {
+        imagePath = `/${req.file.destination}/${req.file.filename}`
+    }
     const newProduct = new Product({title, modelo, cantidad, precio, imagePath})
     newProduct.save( (err, product) => {
         if(err) {

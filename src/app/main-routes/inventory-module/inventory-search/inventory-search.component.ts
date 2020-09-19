@@ -81,6 +81,9 @@ export class InventorySearchComponent implements OnInit {
       product => {
         if (product) {
           this.alert.notifySuccess(`Se añadio ${product.data.title} a los productos`, 2500, 'top', 'center')
+          setTimeout( () => {
+            location.reload()
+          }, 2000)
         }
         else {
           this.alert.notifyWarn('No se ha añadido el producto', 2500, 'top', 'center');
