@@ -98,7 +98,9 @@ export class InventoryService {
   editProduct(product: FormData): Observable<Products>{
     const id = product.get('_id');
     const url = `${this.productsUrl}/update/${id}`;
-    return this.http.put<Products>(url, product);
+    return this.http.put<Products>(url, product).pipe(
+      map( res => {return res})
+    )
 
   }
 

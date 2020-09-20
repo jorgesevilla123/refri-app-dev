@@ -41,7 +41,7 @@
     
 
         <div mat-dialog-actions>
-            <button type="submit" mat-raised-button > <mat-icon>add</mat-icon> Editar</button>
+            <button type="submit" mat-raised-button (click)="onClientSubmit()"> <mat-icon>add</mat-icon> Editar</button>
             <button mat-raised-button (click)="onClose()"><mat-icon>close</mat-icon> Cancelar</button>
         </div>
     </form>

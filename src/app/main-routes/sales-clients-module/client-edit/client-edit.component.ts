@@ -49,7 +49,9 @@ export class ClientEditComponent implements OnInit {
       }
   
 
-    )
+    ),
+    error => console.log(error),
+    () => {return }
 
 
     

@@ -108,22 +108,8 @@ export class InventorySearchComponent implements OnInit {
     const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       product => {
-        let theOne = ''
-        let array = ''
-        for (var i = 0; i < this.products.length; i++) {
-          array += [
-            this.products[i]
-          ]
-          if (this.products[i]._id == product.data._id) {
-            this.products[i] = product.data
-            array += [
-              this.products[i]
-            ]
-
-          }
-
-
-        }
+       
+      
 
         if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
           productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio) {
@@ -134,6 +120,9 @@ export class InventorySearchComponent implements OnInit {
         else {
 
           this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
+          setTimeout( () => {
+            location.reload()
+          }, 2000)
 
         }
 

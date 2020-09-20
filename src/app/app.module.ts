@@ -8,7 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MainMenuComponent } from './main-routes/main-menu/main-menu.component';
 import { InventoryComponent } from './main-routes/inventory-module/inventory-table/inventory-table.component';
 import { FlexLayoutModule } from "@angular/flex-layout"
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InventoryManageProductsComponent } from "./main-routes/inventory-module/inventory-manage-products/inventory-manage-products.component"
 import { InventoryMainComponent } from "./main-routes/inventory-module/inventory-main/inventory-main.component";
@@ -28,6 +28,8 @@ import { ClientDetailsComponent } from './main-routes/sales-clients-module/clien
 import { SalesProcessComponent } from './main-routes/sales-clients-module/sales-process/sales-process.component';
 import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.component";
 import { SalesProductSearchComponent } from './main-routes/sales-clients-module/sales-product-search/sales-product-search.component';
+import { LoadingComponent } from './reusable-components/loading/loading/loading.component';
+import { LoadingInterceptorService } from './services/loading-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { SalesProductSearchComponent } from './main-routes/sales-clients-module/
     ClientDetailsComponent,
     SalesProcessComponent,
     SalesComponent,
-    SalesProductSearchComponent
+    SalesProductSearchComponent,
+    LoadingComponent
     
 
   ],
@@ -66,7 +69,13 @@ import { SalesProductSearchComponent } from './main-routes/sales-clients-module/
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptorService,
+      multi : true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents:[InventoryManageProductsComponent]
 })

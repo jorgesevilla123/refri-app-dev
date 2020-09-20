@@ -52,12 +52,12 @@ export class InventoryProductEditComponent implements OnInit {
     this.inventoryService.editProduct(formData).subscribe(
       product =>{
         if(product){
-          this.product = product
+        
           this.dialogRef.close({data: product})
 
         }
         else {
-          this.product = product
+    
           this.alert.notifyWarn('No se ha editado el producto', 2500, 'top', 'center');
           this.dialogRef.close({data: product})
         }

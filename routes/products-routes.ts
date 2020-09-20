@@ -94,9 +94,16 @@ router.route('/products/delete-product/:id').delete((req: Request, res: Response
             res.json({ message: 'Error deleting product' })
         }
         else {
+            if(product.imagePath == 'no-photo'){
+                res.json(product);
+            
+            } else {
+
+            
             await fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
             res.json(product);
             console.log('Product deleted!');
+            }
         }
     })
    
