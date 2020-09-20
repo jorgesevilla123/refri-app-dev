@@ -21,7 +21,7 @@ export class ClientEditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.clientName();
+ 
   }
 
 
@@ -58,10 +58,7 @@ export class ClientEditComponent implements OnInit {
 
   }
 
-  clientName(){
-    this.client = this.clientService.clientsEditForm.get('name').value;
-    
-  }
+  
 
 
   onClose(){

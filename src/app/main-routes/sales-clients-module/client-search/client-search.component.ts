@@ -54,8 +54,7 @@ export class ClientSearchComponent implements OnInit {
     const dialogRef = this.dialog.open(ClientEditComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       client => {
-        console.log(client.clientData, clientChosed);
-
+      
         if(client.clientData.name === clientChosed.name && client.clientData.cedula === clientChosed.cedula && client.clientData.email === clientChosed.email
           && client.clientData.phoneNumber === clientChosed.phoneNumber) {
           this.alert.notifySuccess('No se ha editado el cliente', 2500, 'top', 'center')
