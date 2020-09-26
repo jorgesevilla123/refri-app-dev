@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientsService } from "../../../services/clients.service";
-import { Client } from "../../../clients";
+import { Client } from "../../../interfaces-models/clients";
 import { MatAccordion } from '@angular/material/expansion';
 
 @Component({

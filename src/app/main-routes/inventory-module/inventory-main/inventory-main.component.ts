@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { InventoryService } from "../../../services/inventory.service";
-import { Products } from "../../../products";
+import { Products } from "../../../interfaces-models/products";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 

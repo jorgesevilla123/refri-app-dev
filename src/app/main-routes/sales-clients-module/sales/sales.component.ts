@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientsService } from "../../../services/clients.service";
 import { Observable, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
-import { Client } from "../../../clients";
+import { Client } from "../../../interfaces-models/clients";
 
 @Component({
   selector: 'app-sales',

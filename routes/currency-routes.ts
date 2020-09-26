@@ -12,7 +12,7 @@ router.route('/checkCurrency').get( (req: Request, res: Response) => {
 
 })
 
-router.route('/currency-change').get( (req: Request, res: Response)  => {
+router.route('/').get( (req: Request, res: Response)  => {
     CurrencyChange.find( (err, currencyData) => {
         if(err) {
             console.log(err)
@@ -26,7 +26,7 @@ router.route('/currency-change').get( (req: Request, res: Response)  => {
 })
 
 
-router.route('/currency-change/most-recent').get( (req: Request, res: Response)  => {
+router.route('/most-recent').get( (req: Request, res: Response)  => {
     CurrencyChange.findOne( (err, currencyData) => {
         if(err) {
             console.log(err)
@@ -40,7 +40,7 @@ router.route('/currency-change/most-recent').get( (req: Request, res: Response) 
 })
 
 
-router.route('/currency-change/addPrice').post(upload.none(), async (req: Request, res: Response)  => {
+router.route('/addPrice').post(upload.none(), async (req: Request, res: Response)  => {
     const {precio} = req.body;
     const newPrecio = new CurrencyChange({ precio });
     await newPrecio.save();

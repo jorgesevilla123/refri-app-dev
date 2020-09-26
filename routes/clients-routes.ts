@@ -11,7 +11,7 @@ router.route('/checkClients').get( (req: Request, res: Response) => {
 
 })
 
-router.route('/clients/getClients').get( (req: Request, res: Response) => {
+router.route('/getClients').get( (req: Request, res: Response) => {
     Client.find( (err, client) => {
         if(err){
             console.log(err)
@@ -25,7 +25,7 @@ router.route('/clients/getClients').get( (req: Request, res: Response) => {
 
 })
 
-router.route('/clients/getClients').get( (req: Request, res: Response) => {
+router.route('/getClients').get( (req: Request, res: Response) => {
     Client.find( (err, client) => {
         if(err){
             console.log(err)
@@ -41,7 +41,7 @@ router.route('/clients/getClients').get( (req: Request, res: Response) => {
 
 
 
-router.route('/clients/loadClient/:id').get( (req: Request, res: Response) => {
+router.route('/loadClient/:id').get( (req: Request, res: Response) => {
     const id = req.params.id
     Client.findOne({_id: id}, (err, client) => {
       if(err){
@@ -53,7 +53,7 @@ router.route('/clients/loadClient/:id').get( (req: Request, res: Response) => {
 })
 
 
-router.route('/clients/searchClient?').get( (req: Request, res: Response) => {
+router.route('/searchClient?').get( (req: Request, res: Response) => {
     let client = req.query.name;
     Client.find({name : new RegExp(`${client}`, 'gi')}, (err, client) => {
         if(err){
@@ -66,7 +66,7 @@ router.route('/clients/searchClient?').get( (req: Request, res: Response) => {
     })
 })
 
-router.route('/clients/addClient').post(upload.none(), async (req: Request, res: Response) => {
+router.route('/addClient').post(upload.none(), async (req: Request, res: Response) => {
     const {name, cedula, email, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase } = req.body
     const newClient = new Client({name, cedula, email, constantBuyer, productsBought, mostBought, phoneNumber, lastPurchase})
     await newClient.save()
@@ -80,14 +80,14 @@ router.route('/clients/addClient').post(upload.none(), async (req: Request, res:
 //Cart operations
 
 
-router.route('/clients/buyProduct/:id').post( async (req: Request, res: Response) => {
+router.route('/buyProduct/:id').post( async (req: Request, res: Response) => {
     const id = req.params.id;
     var products = req.body;
     Client.findOne({_id: id}, (err, client) => {
       if (client){
         client.productsBought.push(products);
         client.save();
-        res.json(client);
+      res.json(client);
       }
       else {
           console.log(err);
@@ -96,7 +96,7 @@ router.route('/clients/buyProduct/:id').post( async (req: Request, res: Response
 
 })
 
-router.route('/clients/addToCart/:id').post( async (req: Request, res: Response) => {
+router.route('/addToCart/:id').post( async (req: Request, res: Response) => {
     const id = req.params.id;
     var products = req.body;
      Client.findOne({_id: id}, (err, client) => {
@@ -111,7 +111,7 @@ router.route('/clients/addToCart/:id').post( async (req: Request, res: Response)
     })
 })
 
-router.route('/clients/deleteClient/:id').delete( (req: Request, res: Response) => {
+router.route('/deleteClient/:id').delete( (req: Request, res: Response) => {
     const id = req.params.id
     Client.findByIdAndDelete({_id : id}, (err, client) => {
         if(err) {
@@ -123,7 +123,7 @@ router.route('/clients/deleteClient/:id').delete( (req: Request, res: Response) 
 })
 })
 
-router.route('/clients/removeFromCart/:clientId/:productId').delete( (req: Request, res: Response) => {
+router.route('/removeFromCart/:clientId/:productId').delete( (req: Request, res: Response) => {
     const ClientId = req.params.clientId;
     const ProductId = req.params.productId;
 
@@ -141,7 +141,7 @@ router.route('/clients/removeFromCart/:clientId/:productId').delete( (req: Reque
 })
 
 
-router.route('/clients/clearCart/:id').delete( (req: Request, res: Response) => {
+router.route('/clearCart/:id').delete( (req: Request, res: Response) => {
     const id = req.params.id
     Client.findOne({_id: id}, (err, client) => {
       if(client){
@@ -156,7 +156,7 @@ router.route('/clients/clearCart/:id').delete( (req: Request, res: Response) => 
 })
 
 
-router.route('/clients/updateClient/:id').put(upload.none(), (req: Request, res: Response) => {
+router.route('/updateClient/:id').put(upload.none(), (req: Request, res: Response) => {
     const id = req.params.id
     const {name, cedula, email, phoneNumber} = req.body
     Client.findOneAndUpdate({ _id: id }, {name, cedula, email, phoneNumber}, { upsert: false },  (err, client) => {

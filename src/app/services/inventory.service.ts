@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from "rxjs";
-import { Products } from "../products";
+import { Products } from "../interfaces-models/products";
 import {  FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { tap, catchError } from 'rxjs/operators';

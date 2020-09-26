@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Client } from "../clients";
+import { Client } from "../interfaces-models/clients";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Observable, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { Products } from '../products';
+import { Products } from '../interfaces-models/products';
 
 
 

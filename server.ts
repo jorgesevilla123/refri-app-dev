@@ -12,6 +12,7 @@ import { startConnection } from "./db";
 import productsRoutes from "./routes/products-routes";
 import clientsRoutes from "./routes/clients-routes";
 import currencyRoutes from "./routes/currency-routes";
+import usersRoutes from "./routes/users-routes";
 import * as dotenv from "dotenv"
 
 
@@ -49,9 +50,10 @@ export function app() {
 
 
   //All routes for the API
-  server.use('/api', productsRoutes);
-  server.use('/api', clientsRoutes);
-  server.use('/api', currencyRoutes);
+  server.use('/api/products', productsRoutes);
+  server.use('/api/clients', clientsRoutes);
+  server.use('/api/currency-change', currencyRoutes);
+  server.use('/api/users', usersRoutes);
 
   //Path for the navigator to access the photos 
   server.use('/uploads', express.static(path.resolve('uploads')));

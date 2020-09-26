@@ -3,8 +3,8 @@ import { Observable } from "rxjs";
 import { MatDialogConfig, MatDialog} from "@angular/material/dialog";
 import { DialogComponent } from "./dialog.component";
 import { map, take } from 'rxjs/operators';
-import { Client } from "../../../clients";
-import { Products } from "../../../products";
+import { Client } from "../../../interfaces-models/clients";
+import { Products } from "../../../interfaces-models/products";
 
 
 @Injectable({

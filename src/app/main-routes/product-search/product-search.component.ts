@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from "../../services/inventory.service";
 import { Observable, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
-import { Products } from "../../products";
+import { Products } from "../../interfaces-models/products";
 import { MediaObserver, MediaChange } from "@angular/flex-layout";
 import { Subscription } from "rxjs";
 import { BusinessConfigurationsService } from '../../services/business-configurations.service'
-import { Currency } from "../../currency";
+import { Currency } from "../../interfaces-models/currency";
 
 @Component({
   selector: 'app-product-search',

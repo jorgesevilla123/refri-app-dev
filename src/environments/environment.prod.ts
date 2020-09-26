@@ -1,5 +1,7 @@
 
 export const environment = {
-    production: true
-  };
-  
+    production: true,
+    PRODUCTS_API: "products",
+    CLIENTS_API: "undefined",
+    CONFIG_API: "undefined",
+};

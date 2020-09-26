@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from "@angular/router";
+import { map, filter } from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,38 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'refri-data';
+
+  
+
+
+  constructor(
+    public router: Router
+
+  ) {
+    
+
+    router.events.subscribe(
+      event => {
+        console.log(event);
+        if(event instanceof NavigationEnd){
+          this.currentRoute = event.url
+          console.log(this.currentRoute);
+        }
+
+      }
+    )
+
+    
+
+  }
+
+  currentRoute: string
+
+
+
+
+
+
+
+
 }

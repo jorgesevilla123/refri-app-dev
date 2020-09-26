@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Input, Optional} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from "rxjs";
-import { Client } from "../../../clients";
+import { Client } from "../../../interfaces-models/clients";
 import { ClientsService } from "../../../services/clients.service";
 import { InventoryService } from "../../../services/inventory.service";
-import { Products } from "../../../products";
+import { Products } from "../../../interfaces-models/products";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
-import { shoppingBasket } from '../../../shopping-basket';
+import { shoppingBasket } from '../../../interfaces-models/shopping-basket';
 import {ChangeDetectorRef} from '@angular/core'
 import { SalesProductSearchComponent } from "../sales-product-search/sales-product-search.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";

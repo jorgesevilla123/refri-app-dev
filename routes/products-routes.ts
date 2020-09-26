@@ -8,7 +8,7 @@ import * as path from "path";
 const router = Router();
 
 
-router.route('/products/checkProducts').get( (req: Request, res: Response) => {
+router.route('/checkProducts').get( (req: Request, res: Response) => {
     res.json({ message: 'Product route working good' })
 
 })
@@ -17,7 +17,7 @@ router.route('/products/checkProducts').get( (req: Request, res: Response) => {
 
 
 
-router.route('/products').get( (req: Request, res: Response) => {
+router.route('/').get( (req: Request, res: Response) => {
     Product.find( (err, products) =>{
         if(err){
             console.log(err)
@@ -30,7 +30,7 @@ router.route('/products').get( (req: Request, res: Response) => {
 })
 
 
-router.route('/products/search?').get( (req: Request, res: Response) => {
+router.route('/search?').get( (req: Request, res: Response) => {
     let product = req.query.title
     Product.find({ $or: [{title: new RegExp(`${product}`, 'gi')}, {modelo: new RegExp(`${product}`, 'gi')}]}, (err, product) => {
         if(err) {
@@ -44,7 +44,7 @@ router.route('/products/search?').get( (req: Request, res: Response) => {
 })
 
 
-router.route('/products/:id').get( (req: Request, res: Response)  => {
+router.route('/:id').get( (req: Request, res: Response)  => {
     const id = req.params.id
     Product.findById({_id: id}, (err, product) => {
         if(err){
@@ -60,7 +60,7 @@ router.route('/products/:id').get( (req: Request, res: Response)  => {
 
 
 
-router.route('/products').post(upload.single('imagePath'), (req: Request, res: Response)  => {
+router.route('/').post(upload.single('imagePath'), (req: Request, res: Response)  => {
     const {title, modelo, precio, cantidad} = req.body;
     
     let imagePath
@@ -86,7 +86,7 @@ router.route('/products').post(upload.single('imagePath'), (req: Request, res: R
 })
 
 
-router.route('/products/delete-product/:id').delete((req: Request, res: Response)  => {
+router.route('/delete-product/:id').delete((req: Request, res: Response)  => {
     const id = req.params.id
     Product.findByIdAndRemove({_id: id}, async (err, product) => {
         if(err){
@@ -111,7 +111,7 @@ router.route('/products/delete-product/:id').delete((req: Request, res: Response
 
 
 
-router.route('/products/update/:id').put(upload.none(), (req: Request, res: Response)  => {
+router.route('/update/:id').put(upload.none(), (req: Request, res: Response)  => {
     const id = req.params.id
     const { title, modelo, precio, cantidad } = req.body
     Product.findByIdAndUpdate({_id: id}, { title: title, modelo: modelo, precio: precio, cantidad: cantidad}, { upsert: false }, (err, product) => {
@@ -125,7 +125,7 @@ router.route('/products/update/:id').put(upload.none(), (req: Request, res: Resp
     })
 })
 
-router.route('/products/update-photo/:id').put(upload.single('newImage'), (req: Request, res: Response)  => {
+router.route('/update-photo/:id').put(upload.single('newImage'), (req: Request, res: Response)  => {
     const id = req.params.id
     const imagePath = `/${req.file.destination}/${req.file.filename}`
     Product.findOneAndUpdate({ _id: id }, {imagePath: imagePath}, { upsert: false }, (err, doc) => {

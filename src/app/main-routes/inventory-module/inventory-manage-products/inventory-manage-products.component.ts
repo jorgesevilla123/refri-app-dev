@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { InventoryService } from "../../../services/inventory.service";
-import { Products } from "../../../products";
+import { Products } from "../../../interfaces-models/products";
 import {  MatDialogRef } from "@angular/material/dialog";
 
 

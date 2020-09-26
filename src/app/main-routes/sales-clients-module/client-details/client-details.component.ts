@@ -3,7 +3,7 @@ import { ClientEditComponent } from "../client-edit/client-edit.component";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Client } from "../../../clients";
+import { Client } from "../../../interfaces-models/clients";
 import { ClientsService } from "../../../services/clients.service";
 
 

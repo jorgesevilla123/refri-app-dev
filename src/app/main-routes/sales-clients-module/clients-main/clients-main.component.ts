@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from "../../../services/clients.service";
-import { Client } from "../../../clients";
+import { Client } from "../../../interfaces-models/clients";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service"
 
 

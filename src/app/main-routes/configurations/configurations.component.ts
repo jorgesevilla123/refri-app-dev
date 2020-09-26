@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { BusinessConfigurationsService } from "../../services/business-configurations.service";
-import { Currency } from "../../currency";
+import { Currency } from "../../interfaces-models/currency";
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/en-DE";
 import { MatTableDataSource } from "@angular/material/table";

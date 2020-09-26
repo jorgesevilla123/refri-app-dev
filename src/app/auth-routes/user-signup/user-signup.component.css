@@ -1,0 +1,65 @@
+.login-bounds {
+    height: 100%
+}
+
+
+
+
+
+.login-form{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+
+}
+
+
+.login-card {
+    width: 400px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+
+}
+
+
+
+.form-field {
+
+    margin-top: 20px;
+
+
+}
+
+
+.form-submit-button {
+    background-color: dodgerblue;
+    color: white;
+
+}
+
+
+
+
+label {
+    margin-left: 50px;
+    font-size: 17px;
+}
+
+
+
+mat-form-field{
+    display: block;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  
+
+}
+
+mat-error {
+    font-size: 12px;
+}

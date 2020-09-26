@@ -1,5 +1,19 @@
-<app-main-nav></app-main-nav>
+
+
+<app-main-nav *ngIf="currentRoute !== '/login' && currentRoute !== '/signup'"></app-main-nav>
 <app-loading></app-loading>
 <router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
 
 

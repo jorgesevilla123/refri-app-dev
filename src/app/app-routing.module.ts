@@ -12,6 +12,8 @@ import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.c
 import { ClientsMainComponent } from "./main-routes/sales-clients-module/clients-main/clients-main.component";
 import { ClientDetailsComponent } from "./main-routes/sales-clients-module/client-details/client-details.component";
 import { SalesProcessComponent } from "./main-routes/sales-clients-module/sales-process/sales-process.component";
+import { UserLoginComponent } from "./auth-routes/user-login/user-login.component";
+import { UserSignupComponent } from "./auth-routes/user-signup/user-signup.component";
 
 
 //Routes to render all the views in main-routes folder
@@ -29,7 +31,10 @@ const routes: Routes = [
   {path: 'products-search', component: ProductSearchComponent},
   {path: 'sales-and-clients', component: SalesClientsComponent},
   {path: 'sales-and-clients/clients', component: ClientsMainComponent},
-  {path: 'sales-and-clients/sales/:id', component: SalesProcessComponent}
+  {path: 'sales-and-clients/sales/:id', component: SalesProcessComponent},
+  {path: 'login', component: UserLoginComponent},
+  {path: 'signup', component: UserSignupComponent},
+
 
 ];
 

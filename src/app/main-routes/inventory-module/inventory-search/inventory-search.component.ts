@@ -6,7 +6,7 @@ import { DialogService } from "../../../reusable-components/dialogs/dialog/dialo
 import { InventoryManageProductsComponent } from "../../inventory-module/inventory-manage-products/inventory-manage-products.component";
 import { InventoryProductEditComponent } from "../inventory-product-edit/inventory-product-edit.component";
 import { InventoryImageEditComponent } from "../inventory-image-edit/inventory-image-edit.component";
-import { Products } from "../../../products";
+import { Products } from "../../../interfaces-models/products";
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/en-DE";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";

@@ -3,7 +3,7 @@ import { HttpClient} from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError, map, tap } from 'rxjs/operators';
-import { Currency } from "../currency";
+import { Currency } from "../interfaces-models/currency";
 
 
 @Injectable({

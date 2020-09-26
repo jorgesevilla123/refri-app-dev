@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Products } from "../../../products";
+import { Products } from "../../../interfaces-models/products";
 import { InventoryService } from "../../../services/inventory.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";

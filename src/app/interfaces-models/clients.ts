@@ -1,4 +1,4 @@
-import { Products } from "./products";
+import { Products } from "../interfaces-models/products";
 
 export interface Client {
     _id: string,

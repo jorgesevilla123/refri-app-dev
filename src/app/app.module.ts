@@ -30,6 +30,9 @@ import { SalesComponent } from "./main-routes/sales-clients-module/sales/sales.c
 import { SalesProductSearchComponent } from './main-routes/sales-clients-module/sales-product-search/sales-product-search.component';
 import { LoadingComponent } from './reusable-components/loading/loading/loading.component';
 import { LoadingInterceptorService } from './services/loading-interceptor.service';
+import { UsersComponent } from './auth-routes/users/users.component';
+import { UserSignupComponent } from './auth-routes/user-signup/user-signup.component';
+import { UserLoginComponent } from './auth-routes/user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,10 @@ import { LoadingInterceptorService } from './services/loading-interceptor.servic
     SalesProcessComponent,
     SalesComponent,
     SalesProductSearchComponent,
-    LoadingComponent
+    LoadingComponent,
+    UsersComponent,
+    UserSignupComponent,
+    UserLoginComponent
     
 
   ],

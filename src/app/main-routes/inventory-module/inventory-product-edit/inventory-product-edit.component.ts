@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, Optional} from '@angular/core';
 import { InventoryService } from "../../../services/inventory.service";
 import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Products } from "../../../products";
+import { Products } from "../../../interfaces-models/products";
 import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
 
 
