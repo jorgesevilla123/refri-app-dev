@@ -34,6 +34,7 @@ import { UsersComponent } from './auth-routes/users/users.component';
 import { UserSignupComponent } from './auth-routes/user-signup/user-signup.component';
 import { UserLoginComponent } from './auth-routes/user-login/user-login.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,10 @@ import { UserLoginComponent } from './auth-routes/user-login/user-login.componen
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptorService,
       multi : true
-    }
+    },
+
+
+    
   ],
   bootstrap: [AppComponent],
   entryComponents:[InventoryManageProductsComponent]

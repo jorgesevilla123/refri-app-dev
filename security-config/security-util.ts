@@ -7,7 +7,7 @@ import { userInterface } from "../models/users-model";
 
 export const randomBytes = util.promisify(crypto.randomBytes);
 
-export const signJwt = util.promisify(jwt.sign);
+
 
 
 
@@ -24,16 +24,24 @@ const SESSION_DURATION = 1000;
 
 export async function createSessionToken(user: userInterface) {
 
-    return signJwt({
-        nivel: user.nivel
-        
 
-    }, RSA_PRIVATE_KEY, {
+    jwt.sign({
+        user: user
+    }, RSA_PRIVATE_KEY,
+    {
         algorithm: 'RS256',
         expiresIn: 240,
         subject: user._id.toString()
-    }
-    )
+    }, (err, token) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+            console.log(token)
+        }
+    })
+
+
 }
 
 export async function decodeJwt(token: string) {

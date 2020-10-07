@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from "../../services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-user-signup',
   templateUrl: './user-signup.component.html',
   styleUrls: ['./user-signup.component.css']
 })
-export class UserSignupComponent implements OnInit {
+export class UserSignupComponent {
 
   constructor(
-    public userService: UserService
+    public userService: UserService,
+    public router: Router
   ) { }
 
   
@@ -19,45 +21,46 @@ export class UserSignupComponent implements OnInit {
   noPassword: boolean;
   noEmail: boolean;
 
-  ngOnInit(): void {
-  }
+  
+
 
 
   signupUser() {
-    const email = this.userService.loginForm.get('email').value;
-    const password = this.userService.loginForm.get('password').value;
-    const confirmPassword = this.userService.loginForm.get('confirmPassword').value;
+    const email = this.userService.signupForm.get('email').value;
+    const password = this.userService.signupForm.get('password').value;
+    const confirmPassword = this.userService.signupForm.get('passwordConfirm').value;
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    formData.append('confirmPassword', confirmPassword);
-    if(password == null || confirmPassword == null) {
-      this.noPassword = true
-      setTimeout( () => {
-        this.noPassword = false
-      }, 4500)
-
-    }
-    else if(email == null) {
+    formData.append('passwordConfirm', confirmPassword);
+     if(email == null) {
       this.noEmail = true
       setTimeout( () => {
         this.noEmail = false
       }, 4500)
 
     }
+    else if(password == null || confirmPassword == null) {
+      this.noPassword = true
+      setTimeout( () => {
+        this.noPassword = false
+      }, 4500)
+
+    }
+
     else {
 
     
-    this.userService.loginUsers(formData).subscribe(
+    this.userService.signUsers(formData).subscribe(
       user => {
-        console.log(user.ALREADY_IN, user.NO_MATCH);
+
         if(user.ALREADY_IN) {
           this.alreadyRegistered = true
           setTimeout( () => {
             this.alreadyRegistered = false
           }, 4500)
-          this.userService.loginForm.get('password').reset();
-          this.userService.loginForm.get('confirmPassword').reset();
+          this.userService.signupForm.get('password').reset();
+          this.userService.signupForm.get('confirmPassword').reset();
           
         }
 
@@ -66,15 +69,16 @@ export class UserSignupComponent implements OnInit {
           setTimeout( () => {
             this.passwordsMatch = false
           }, 4500)
-          this.userService.loginForm.get('password').reset();
-          this.userService.loginForm.get('confirmPassword').reset();
+          this.userService.signupForm.get('password').reset();
+          this.userService.signupForm.get('confirmPassword').reset();
           
 
         }
         else
         {
           console.log('usuario creado')
-          this.userService.loginForm.reset();
+          this.userService.signupForm.reset();
+          this.router.navigateByUrl('/dashboard');
         }
       }
     )

@@ -1,87 +1,101 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from "../../services/user.service";
+import { tap } from "rxjs/operators";
+import { Router, RouterEvent } from "@angular/router";
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent {
 
   constructor(
-    public userService: UserService
+    public userService: UserService,
+    private router: Router
   ) { }
 
+  incorrectPassword: boolean  
+  loggedIn: boolean
+  noPassword: boolean
+  noEmail: boolean 
+  notFound: boolean
+  isAuthenticated: boolean = false
 
-  alreadyRegistered: boolean;
-  passwordsMatch: boolean;
-  noPassword: boolean;
-  noEmail: boolean;
-
-
-  ngOnInit(): void {
-  }
 
 
 
   loginUser(){
     const email = this.userService.loginForm.get('email').value;
     const password = this.userService.loginForm.get('password').value;
-    const confirmPassword = this.userService.loginForm.get('confirmPassword').value;
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('confirmPassword', confirmPassword);
-    if(password == null || confirmPassword == null) {
+    if(password === null) {
       this.noPassword = true
       setTimeout( () => {
         this.noPassword = false
-      }, 4500)
+      })
 
+      return
     }
-    else if(email == null) {
+    else if(email === null) {
       this.noEmail = true
       setTimeout( () => {
         this.noEmail = false
       }, 4500)
 
+      return
     }
-    else {
-
     
-    this.userService.loginUsers(formData).subscribe(
-      user => {
-        console.log(user.ALREADY_IN, user.NO_MATCH);
-        if(user.ALREADY_IN) {
-          this.alreadyRegistered = true
-          setTimeout( () => {
-            this.alreadyRegistered = false
-          }, 4500)
-          this.userService.loginForm.get('password').reset();
-          this.userService.loginForm.get('confirmPassword').reset();
-          
-        }
+    else {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+      this.userService.loginUsers(formData).subscribe(
+        user => {
+          if(user.NOT_FOUND){
+  
+            this.notFound = true
+            setTimeout( () => {
+              this.notFound = false
+            }, 4500)
+            return 
+  
+          }
+          else if(user.WRONG_PASS) {  
+            this.incorrectPassword = true
+  
+            setTimeout( () => {
+              this.incorrectPassword = false
+            }, 4500)
 
-        else if (user.NO_MATCH){
-          this.passwordsMatch = true
-          setTimeout( () => {
-            this.passwordsMatch = false
-          }, 4500)
-          this.userService.loginForm.get('password').reset();
-          this.userService.loginForm.get('confirmPassword').reset();
-          
+            this.isAuthenticated = false
 
-        }
-        else
-        {
-          console.log('usuario creado')
-          this.userService.loginForm.reset();
-        }
-      }
-    )
+            return this.isAuthenticated
+  
+            
+  
+          }
+          else if(user.LOGGED_IN){
+            console.log('user logged in');
+            this.isAuthenticated = true;
+
+            this.router.navigateByUrl('/dashboard');
+            
+
+
+            return this.isAuthenticated
+            
+          }
+
+        
+         
+        })
+
+      
+    }
+ 
+  
 
     
   }
-}
 
 }

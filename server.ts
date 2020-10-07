@@ -2,7 +2,7 @@ import 'zone.js/dist/zone-node';
 import 'multer';
 import * as parser from "body-parser";
 import { ngExpressEngine } from '@nguniversal/express-engine';
-import * as express from 'express';
+import express, {Request, Response, NextFunction, Errback} from 'express';
 import * as path from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
@@ -14,9 +14,29 @@ import clientsRoutes from "./routes/clients-routes";
 import currencyRoutes from "./routes/currency-routes";
 import usersRoutes from "./routes/users-routes";
 import * as dotenv from "dotenv"
+import * as cookieParser from "cookie-parser";
+import session from "express-session";
+import connectRedis from "connect-redis";
+import { REDIS_OPTIONS } from "./config/cache";
+import { SESSION_OPTIONS } from "./config/session";
+import Redis from "ioredis";
+import { internalServerError, notFound } from 'middlewares/errors';
+
+
 
 
 dotenv.config();
+
+
+//enviroment set
+// export const {
+//   NODE_ENV = 'development' } = process.env
+
+// export const IN_PROD = NODE_ENV === 'production'
+
+
+
+
 
 
 
@@ -45,6 +65,20 @@ export function app() {
   server.use(express.json());
   server.use(parser.urlencoded({extended: false}))
   server.use(parser.json());
+  server.use(cookieParser());
+
+
+  var redisStore = connectRedis(session)
+
+
+
+const client = new Redis(REDIS_OPTIONS)
+
+const store = new redisStore({client})
+
+  
+  //Session configuration
+  server.use(session({...SESSION_OPTIONS, store: store }))
 
 
 
@@ -57,6 +91,18 @@ export function app() {
 
   //Path for the navigator to access the photos 
   server.use('/uploads', express.static(path.resolve('uploads')));
+
+
+  //Handleling routes errors and timeouts
+  server.use(notFound);
+
+
+  server.use(internalServerError);
+
+
+
+
+
 
 
 
@@ -75,7 +121,12 @@ export function app() {
 }
 
 function run() {
+  //Node server port
   const port = process.env.PORT || 4000;
+
+
+
+  
 
   //start connection of the server to the database
   startConnection();
@@ -83,7 +134,7 @@ function run() {
   // Start up the Node server
   const server = app();
   server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port} and REFRI_DB varible changed to ${process.env.REFRI_DB}`);
+    console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
 

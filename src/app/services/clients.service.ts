@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Observable, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Products } from '../interfaces-models/products';
-
+import { environment } from "../../environments/environment";
 
 
 @Injectable({
@@ -13,11 +13,13 @@ import { Products } from '../interfaces-models/products';
 })
 export class ClientsService {
   //env variable for api
-  private ClientsUrl = 'api/clients'
+  private ClientsUrl: string
 
   constructor(
     private http: HttpClient
   ) {
+
+    this.ClientsUrl = environment.CLIENTS_API
 
  
    }

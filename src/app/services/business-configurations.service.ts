@@ -4,6 +4,7 @@ import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError, map, tap } from 'rxjs/operators';
 import { Currency } from "../interfaces-models/currency";
+import { environment } from "../../environments/environment";
 
 
 @Injectable({
@@ -12,12 +13,14 @@ import { Currency } from "../interfaces-models/currency";
 export class BusinessConfigurationsService {
 
   //env variable for api
-   currencyUrl = 'api/currency-change'
+   currencyUrl: string
 
 
   constructor(
     private http: HttpClient
   ) { 
+
+    this.currencyUrl = environment.CONFIG_API
   
   }
 

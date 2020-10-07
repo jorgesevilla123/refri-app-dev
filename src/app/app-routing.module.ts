@@ -14,24 +14,25 @@ import { ClientDetailsComponent } from "./main-routes/sales-clients-module/clien
 import { SalesProcessComponent } from "./main-routes/sales-clients-module/sales-process/sales-process.component";
 import { UserLoginComponent } from "./auth-routes/user-login/user-login.component";
 import { UserSignupComponent } from "./auth-routes/user-signup/user-signup.component";
+import { AuthGuard } from "./services/auth.guard";
 
 
 //Routes to render all the views in main-routes folder
 const routes: Routes = [
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  {path: 'clients/:id', redirectTo: '/client/:id'},
-  {path: 'client/:id', component: ClientDetailsComponent},
-  {path: 'dashboard', component: MainMenuComponent},
-  {path: 'inventory-table', component: InventoryComponent},
-  {path: 'inventory-main', component: InventoryMainComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'clients/:id', redirectTo: '/client/:id', canActivate: [AuthGuard]},
+  {path: 'client/:id', component: ClientDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', component: MainMenuComponent, canActivate: [AuthGuard]},
+  {path: 'inventory-table', component: InventoryComponent, canActivate: [AuthGuard]},
+  {path: 'inventory-main', component: InventoryMainComponent, canActivate: [AuthGuard]},
   {path: 'inventory-search', component: InventorySearchComponent},
-  {path: 'point-of-sale', component: PointOfSaleComponent},
-  {path: 'sales-and-clients/sales', component: SalesComponent},
-  {path: 'configurations', component: ConfigurationsComponent},
-  {path: 'products-search', component: ProductSearchComponent},
-  {path: 'sales-and-clients', component: SalesClientsComponent},
-  {path: 'sales-and-clients/clients', component: ClientsMainComponent},
-  {path: 'sales-and-clients/sales/:id', component: SalesProcessComponent},
+  {path: 'point-of-sale', component: PointOfSaleComponent, canActivate: [AuthGuard]},
+  {path: 'sales-and-clients/sales', component: SalesComponent, canActivate: [AuthGuard]},
+  {path: 'configurations', component: ConfigurationsComponent, canActivate: [AuthGuard]},
+  {path: 'products-search', component: ProductSearchComponent, canActivate: [AuthGuard]},
+  {path: 'sales-and-clients', component: SalesClientsComponent, canActivate: [AuthGuard]},
+  {path: 'sales-and-clients/clients', component: ClientsMainComponent, canActivate: [AuthGuard]},
+  {path: 'sales-and-clients/sales/:id', component: SalesProcessComponent, canActivate: [AuthGuard]},
   {path: 'login', component: UserLoginComponent},
   {path: 'signup', component: UserSignupComponent},
 

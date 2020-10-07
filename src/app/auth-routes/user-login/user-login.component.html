@@ -24,11 +24,11 @@
                         <mat-label>Correo electronico</mat-label>
                         <input id="email"  #email matInput formControlName="email">
                     </mat-form-field>
-                    <mat-error class="already-in" *ngIf="alreadyRegistered">
-                        Este correo ya esta registrado
+                    <mat-error class="already-in" *ngIf="notFound">
+                        Este correo electronico no esta registrado
                     </mat-error>
                     <mat-error class="already-in" *ngIf="noEmail">
-                        Debes escribir un correo electronico
+                        Debes escribir tu correo electronico
                     </mat-error>
                     </div>
 
@@ -40,7 +40,7 @@
                         <input id="password" #password matInput type="password" formControlName="password">
                         
                     </mat-form-field>
-                    <mat-error class="password-match" *ngIf="passwordsMatch">
+                    <mat-error class="password-match" *ngIf="incorrectPassword">
                         Las contraseñas es incorrecta
                     </mat-error>
                     <mat-error class="password-match" *ngIf="noPassword">
@@ -60,12 +60,10 @@
 
                 </form>
                 <div class="register">
-                <small>No tienes una cuenta?</small> <button style="margin-left: 20px;" mat-raised-button>Registrate</button>
+                <small>No tienes una cuenta?</small> <button routerLink="/signup" style="margin-left: 20px;" mat-raised-button>Registrate</button>
                 </div>
 
             </mat-card-content>
-
-
 
         </mat-card>
 
