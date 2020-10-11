@@ -1,14 +1,8 @@
+import { register, getLogin, getLogout } from "../controllers/users-controllers"
 import { Router } from "express";
-import { Request, Response, NextFunction } from "express";
-import Users, { userInterface } from '../models/users-model'
-import * as bcrypt from "bcryptjs";
-import upload from "../fileProcessing";
-import * as fs from "fs";
-import { registerSchema } from "../validation/auth";
-import { login } from "../aux-functions/login-functions";
-import { guest } from "../middlewares/pre-register";
-
-
+import upload from "../../fileProcessing";
+import { logOut } from "../../aux-functions/login-functions";
+import { auth, guest } from "../../middlewares/pre-register"
 
 
 //Cache middleware
@@ -36,7 +30,7 @@ import { guest } from "../middlewares/pre-register";
 
 
 
-const RSA_PRIVATE_KEY = fs.readFileSync('./demos/private.key', 'utf-8');
+// const RSA_PRIVATE_KEY = fs.readFileSync('./demos/private.key', 'utf-8');
 const router = Router();
 
 
@@ -78,126 +72,21 @@ const router = Router();
 
 
 
-
-router.route('/getUsers').get((req: Request, res: Response) => {
-    Users.find((err, users) => {
-        if (err) {
-            console.log(err)
-        } else {
-            res.json(users)
-        }
-
-    });
-});
+// This route retrieves all users, only for admin operations
+router.route('/getUsers').get();
 
 
-// Signup
-
-router.route('/signup').post(guest, upload.none(), async (req: Request, res: Response) => {
-    await registerSchema.validateAsync(req.body, {abortEarly: false});
-
-
-    const { email, password } = req.body
-    console.log(password);
-
-    const found = await Users.exists({ email})
-
-    if(found){
-        res.json({ ALREADY_IN: true })
-    }
-
-    else {
-
-        
-                //creating the new user with the hashed password
-                const newUser = new Users({ email, password });
-
-                // Hashing the password using bcrypt function
-
-
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(password, salt, async (err, hash) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        else {
-                            newUser.password = hash
-
-                            //Creating the session id
-                            login(req, newUser._id)
-
-
-                            // Saving the user with the hashed password
-                            newUser.save((err, userAdded) => {
-                                if (err) {
-                                    console.log(err)
-                                }
-                                else {
-                                    res.json({ userAdded, LOGGED_IN: true});
-                                    console.log(res);
-                                }
-                            })
-                        }
-                    })
-                })
-
-        
-
-    }
-
-    })
+// Users register, for more info look for users-controllers file
+router.route('/signup').post(guest, upload.none(), register);
 
 
 
-
-router.route('/login').post(upload.none(), (req: Request, res: Response) => {
-    const { email, password } = req.body
-    console.log(email);
-    Users.findOne({ email: email }, async (err, user) => {
-        if (err) {
-            console.log(err);
-        }
-        else if (!user) {
-            return res.json({ NOT_FOUND: true });
-        }
-
-        else {
+//Users login, for more info look for users-controllers file
+router.route('/login').post(guest, upload.none(), getLogin);
 
 
-            //Comparing hashed password with password typed 
-            const isPasswordValid = await bcrypt.compare(password, user.password);
-            if (!isPasswordValid) {
-                res.json({ WRONG_PASS: true });
-            }
-            else {
-
-                try {
-
-                    //Setting the session id
-                    req.session.userId = user._id;
-                    console.log(req.session.userId);
-
-
-
-
-                    //this response is the login confirmation for validation in frontend
-                    res.json({ LOGGED_IN: true });
-
-
-                }
-                catch (err) {
-                    res.sendStatus(403);
-
-                }
-
-
-            }
-
-        }
-
-    })
-
-})
+////Users logout, for more info look for users-controllers file
+router.route('/logout').post(auth, getLogout);
 
 
 

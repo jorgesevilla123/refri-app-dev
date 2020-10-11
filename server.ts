@@ -9,18 +9,18 @@ import { APP_BASE_HREF } from '@angular/common';
 import { existsSync} from 'fs';
 import * as multer from 'multer';
 import { startConnection } from "./db";
-import productsRoutes from "./routes/products-routes";
-import clientsRoutes from "./routes/clients-routes";
-import currencyRoutes from "./routes/currency-routes";
-import usersRoutes from "./routes/users-routes";
+import productsRoutes from "./routes-and-controllers/routes/products-routes";
+import clientsRoutes from "./routes-and-controllers/routes/clients-routes";
+import currencyRoutes from "./routes-and-controllers/routes/currency-routes";
+import usersRoutes from "./routes-and-controllers/routes/users-routes";
 import * as dotenv from "dotenv"
-import * as cookieParser from "cookie-parser";
 import session from "express-session";
 import connectRedis from "connect-redis";
-import { REDIS_OPTIONS } from "./config/cache";
-import { SESSION_OPTIONS } from "./config/session";
-import Redis from "ioredis";
+import redis from 'redis';
 import { internalServerError, notFound } from 'middlewares/errors';
+
+
+
 
 
 
@@ -33,13 +33,6 @@ dotenv.config();
 //   NODE_ENV = 'development' } = process.env
 
 // export const IN_PROD = NODE_ENV === 'production'
-
-
-
-
-
-
-
 
 
 
@@ -65,20 +58,26 @@ export function app() {
   server.use(express.json());
   server.use(parser.urlencoded({extended: false}))
   server.use(parser.json());
-  server.use(cookieParser());
+
 
 
   var redisStore = connectRedis(session)
 
 
+const redisClient = redis.createClient();
 
-const client = new Redis(REDIS_OPTIONS)
 
-const store = new redisStore({client})
 
   
   //Session configuration
-  server.use(session({...SESSION_OPTIONS, store: store }))
+  server.use(session({
+    secret : "redisSecret",
+    name: "redis_practice",
+    resave: false,
+    saveUninitialized: true,
+    cookie : {secure: false},
+    store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
+  }))
 
 
 

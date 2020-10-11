@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Request, Response} from 'express';
-import Client from "../models/clients.model";
-import upload from "../fileProcessing";
+import Client from "../../models/clients.model";
+import upload from "../../fileProcessing";
 
 const router = Router();
 

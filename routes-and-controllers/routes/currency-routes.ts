@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Request, Response} from 'express';
-import CurrencyChange from "../models/currency-change-model";
-import upload from "../fileProcessing";
+import CurrencyChange from "../../models/currency-change-model";
+import upload from "../../fileProcessing";
 
 
 const router = Router();

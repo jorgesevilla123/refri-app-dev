@@ -1,6 +1,6 @@
 
 import { Schema, model, Document } from 'mongoose';
-import * as bcrypt from "bcryptjs";
+import bcryptjs from "bcryptjs";
 
 
 
@@ -8,7 +8,7 @@ export interface userInterface extends Document{
     email: string,
     password: string,
     nivel: string,
-    hashPassword(password): any
+    matchesPassword(password: string): Promise<boolean>
 
 }
 
@@ -21,6 +21,11 @@ export const userSchema = new Schema({
 
     
 });
+
+userSchema.methods.matchesPassword = function(password: string) {
+    return bcryptjs.compare(password, this.password);
+    
+}
 
 
 

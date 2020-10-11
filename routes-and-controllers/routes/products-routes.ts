@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Request, Response} from 'express';
-import Product, { ProductInterface } from "../models/products-model";
-import upload from "../fileProcessing";
+import Product, { ProductInterface } from "../../models/products-model";
+import upload from "../../fileProcessing";
 import * as fs from "fs-extra";
 import * as path from "path";
 
