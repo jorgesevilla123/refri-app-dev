@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'dashboard', component: MainMenuComponent, canActivate: [AuthGuard]},
   {path: 'inventory-table', component: InventoryComponent, canActivate: [AuthGuard]},
   {path: 'inventory-main', component: InventoryMainComponent, canActivate: [AuthGuard]},
-  {path: 'inventory-search', component: InventorySearchComponent},
+  {path: 'inventory-search', component: InventorySearchComponent, canActivate: [AuthGuard]},
   {path: 'point-of-sale', component: PointOfSaleComponent, canActivate: [AuthGuard]},
   {path: 'sales-and-clients/sales', component: SalesComponent, canActivate: [AuthGuard]},
   {path: 'configurations', component: ConfigurationsComponent, canActivate: [AuthGuard]},

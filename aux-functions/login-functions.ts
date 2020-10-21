@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 
 
 export const isLoggedIn = (req: Request): boolean => {
-    console.log("is logged In executed")
     return !!req.session!.userId
 
 }

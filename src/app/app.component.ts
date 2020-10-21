@@ -21,10 +21,9 @@ export class AppComponent {
 
     router.events.subscribe(
       event => {
-        console.log(event);
+      
         if(event instanceof NavigationEnd){
           this.currentRoute = event.url
-          console.log(this.currentRoute);
         }
 
       }

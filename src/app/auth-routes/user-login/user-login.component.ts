@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/user.service";
-import { tap } from "rxjs/operators";
+import { tap, map } from "rxjs/operators";
 import { Router, RouterEvent } from "@angular/router";
+
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit {
 
   constructor(
     public userService: UserService,
@@ -24,24 +25,70 @@ export class UserLoginComponent {
 
 
 
+  get email() {
+    return this.userService.loginForm.get('email');
+  }
+
+  get password() {
+    return this.userService.loginForm.get('password');
+  }
+
+
+
+  ngOnInit(): void {
+
+
+
+
+
+  }
+
+
+
+  checkLoggedIn(){
+    this.userService.getUsers().subscribe(
+      res => {
+        console.log(res);
+      }
+    )
+    // this.userService.checkSession().subscribe(
+    //   res => {
+    //     if(res.LOGGED_IN){
+    //       console.log('you are logged in')
+    //       this.userService.isAuthenticated = true
+    //       this.router.navigateByUrl('/dashboard');
+    //     }
+    //     else {
+    //       console.log('you are not logged in')
+    //       this.userService.isAuthenticated = false
+    //     }
+    //   },
+    //   error => {
+    //     console.log(error)
+    //   },
+    //   () => {console.log('request completed')}
+
+    // )
+
+  }
+
+
+
+
+
+  
+
+
 
   loginUser(){
     const email = this.userService.loginForm.get('email').value;
     const password = this.userService.loginForm.get('password').value;
     if(password === null) {
-      this.noPassword = true
-      setTimeout( () => {
-        this.noPassword = false
-      })
-
+    
       return
     }
     else if(email === null) {
-      this.noEmail = true
-      setTimeout( () => {
-        this.noEmail = false
-      }, 4500)
-
+    
       return
     }
     
@@ -60,29 +107,23 @@ export class UserLoginComponent {
             return 
   
           }
-          else if(user.WRONG_PASS) {  
+          if(user.NO_MATCH) {  
             this.incorrectPassword = true
-  
             setTimeout( () => {
               this.incorrectPassword = false
             }, 4500)
 
-            this.isAuthenticated = false
-
-            return this.isAuthenticated
-  
-            
+            return
   
           }
-          else if(user.LOGGED_IN){
+           if(user.LOG_IN){
             console.log('user logged in');
             this.isAuthenticated = true;
 
             this.router.navigateByUrl('/dashboard');
-            
-
 
             return this.isAuthenticated
+          
             
           }
 

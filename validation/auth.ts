@@ -1,24 +1,27 @@
 import Joi from "joi";
 
 
+export const validation: any = {} 
 
 
-    const email = Joi.string().email().min(8).max(254).lowercase().trim().required()
-    const password =  Joi.string().min(8).max(72, 'utf8').required()
-    const passwordConfirm =  Joi.valid(Joi.ref('password')).required()
+//If cannot implement server-side validation implement joi again
 
 
+validation.validateEmail = (email): boolean => {
+    const emailReg = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    return emailReg.test(String(email).toLowerCase());
+
+}
 
 
-export const registerSchema = Joi.object({
-    email,
-    password,
-    passwordConfirm
+validation.minPassword = (password: string): boolean => {
+    return password.length >= 8;
 
+}
 
-})
+validation.passwordMatches = (password: string, passwordConfirm : string): boolean => {
+    console.log(password, passwordConfirm);
+    return password == passwordConfirm;
 
-export const loginSchema = Joi.object({
-    email,
-    password
-})
+}
+

@@ -6,8 +6,8 @@ import { isLoggedIn } from "../aux-functions/login-functions";
 
 export const guest = (req: Request, res: Response, next: NextFunction) => {
     if(isLoggedIn(req)) {
-        console.log('you are already logged in')
-        res.json({LOGGED_IN: true, message: 'you are already logged in'})
+        console.log('you are already logged in');
+        res.json({message: true})
         
     }
     else {

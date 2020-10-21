@@ -17,7 +17,7 @@ import * as dotenv from "dotenv"
 import session from "express-session";
 import connectRedis from "connect-redis";
 import redis from 'redis';
-import { internalServerError, notFound } from 'middlewares/errors';
+
 
 
 
@@ -33,6 +33,10 @@ dotenv.config();
 //   NODE_ENV = 'development' } = process.env
 
 // export const IN_PROD = NODE_ENV === 'production'
+
+
+
+
 
 
 
@@ -60,11 +64,13 @@ export function app() {
   server.use(parser.json());
 
 
+ const redisClient = redis.createClient();
+
 
   var redisStore = connectRedis(session)
 
 
-const redisClient = redis.createClient();
+
 
 
 
@@ -75,7 +81,9 @@ const redisClient = redis.createClient();
     name: "redis_practice",
     resave: false,
     saveUninitialized: true,
-    cookie : {secure: false},
+    cookie : {
+      secure: false,
+      sameSite: true,},
     store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
   }))
 
@@ -93,11 +101,6 @@ const redisClient = redis.createClient();
 
 
   //Handleling routes errors and timeouts
-  server.use(notFound);
-
-
-  server.use(internalServerError);
-
 
 
 

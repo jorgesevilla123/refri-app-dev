@@ -1,8 +1,9 @@
-import { register, getLogin, getLogout } from "../controllers/users-controllers"
+import { register, getLogin, getLogout, checkSession, checkObservable, getUsers} from "../controllers/users-controllers"
 import { Router } from "express";
 import upload from "../../fileProcessing";
 import { logOut } from "../../aux-functions/login-functions";
 import { auth, guest } from "../../middlewares/pre-register"
+
 
 
 //Cache middleware
@@ -73,20 +74,34 @@ const router = Router();
 
 
 // This route retrieves all users, only for admin operations
-router.route('/getUsers').get();
+router.route('/getUsers').get(getUsers);
 
 
 // Users register, for more info look for users-controllers file
-router.route('/signup').post(guest, upload.none(), register);
+router.route('/signup').post( upload.none(), register);
 
 
 
 //Users login, for more info look for users-controllers file
-router.route('/login').post(guest, upload.none(), getLogin);
+router.route('/login').post( upload.none(), getLogin);
+
+
+
+router.route('/check-session').post(checkSession);
+
+
+router.route('/check-observable').post(checkObservable);
+
+
+
+
+
 
 
 ////Users logout, for more info look for users-controllers file
 router.route('/logout').post(auth, getLogout);
+
+
 
 
 

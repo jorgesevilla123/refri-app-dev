@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
 
@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   templateUrl: './user-signup.component.html',
   styleUrls: ['./user-signup.component.css']
 })
-export class UserSignupComponent {
+export class UserSignupComponent implements OnInit {
 
   constructor(
     public userService: UserService,
@@ -20,8 +20,27 @@ export class UserSignupComponent {
   passwordsMatch: boolean;
   noPassword: boolean;
   noEmail: boolean;
+  validationError: boolean;
+  invalidEmail: boolean;
+  minLength: boolean;
 
+
+  ngOnInit() {
+    
   
+
+  }
+
+
+  get email() {
+    return this.userService.signupForm.get('email');
+  }
+
+
+
+  get password() {
+    return this.userService.signupForm.get('password');
+  }
 
 
 
@@ -29,23 +48,19 @@ export class UserSignupComponent {
     const email = this.userService.signupForm.get('email').value;
     const password = this.userService.signupForm.get('password').value;
     const confirmPassword = this.userService.signupForm.get('passwordConfirm').value;
+    console.log(this.userService.signupForm.errors)
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
     formData.append('passwordConfirm', confirmPassword);
      if(email == null) {
-      this.noEmail = true
-      setTimeout( () => {
-        this.noEmail = false
-      }, 4500)
+       return
 
     }
     else if(password == null || confirmPassword == null) {
-      this.noPassword = true
-      setTimeout( () => {
-        this.noPassword = false
-      }, 4500)
 
+      return
+  
     }
 
     else {
@@ -54,32 +69,52 @@ export class UserSignupComponent {
     this.userService.signUsers(formData).subscribe(
       user => {
 
-        if(user.ALREADY_IN) {
-          this.alreadyRegistered = true
-          setTimeout( () => {
-            this.alreadyRegistered = false
-          }, 4500)
-          this.userService.signupForm.get('password').reset();
-          this.userService.signupForm.get('confirmPassword').reset();
-          
-        }
+        
+       if(user.ALREADY_IN) {
+        this.alreadyRegistered = true
+        setTimeout( () => {
+          this.alreadyRegistered = false
+        
+        }, 4500)
+        return
+      }
 
-        else if (user.NO_MATCH){
+      if(user.INVALID_EMAIL){
+        this.invalidEmail = true
+        setTimeout( () => {
+          this.invalidEmail = false
+        }, 3000)
+        return
+      }
+
+      if(user.MIN_LENGTH){
+        this.minLength = true
+        setTimeout( () => {
+          this.minLength = false
+
+        }, 3000)
+        return
+
+      }
+
+        if (user.NO_MATCH){
           this.passwordsMatch = true
           setTimeout( () => {
             this.passwordsMatch = false
           }, 4500)
-          this.userService.signupForm.get('password').reset();
-          this.userService.signupForm.get('confirmPassword').reset();
+          return
+
           
 
         }
-        else
+        if(user.LOGGED_IN)
         {
           console.log('usuario creado')
           this.userService.signupForm.reset();
           this.router.navigateByUrl('/dashboard');
         }
+    console.log(user);
+  
       }
     )
 
