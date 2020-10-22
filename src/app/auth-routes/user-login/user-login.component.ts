@@ -37,20 +37,28 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.checkLoggedIn();
 
-
+    
 
 
   }
 
 
+  
 
   checkLoggedIn(){
     this.userService.getUsers().subscribe(
       res => {
-        console.log(res);
-      }
+        console.log(res)
+      },
+      error => {
+        console.log('this error ocurred', error)
+      },
+      () => {console.log('completed successfully')}
     )
+
+
     // this.userService.checkSession().subscribe(
     //   res => {
     //     if(res.LOGGED_IN){

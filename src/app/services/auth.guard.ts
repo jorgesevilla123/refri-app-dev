@@ -33,6 +33,7 @@ export class AuthGuard implements CanActivate {
    return this.userService.checkSession().pipe(
       map(res => {
         if(res.LOGGED_IN){
+          console.log('can activate executed')
           return true
         } else {
           return false

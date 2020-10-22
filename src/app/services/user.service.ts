@@ -17,6 +17,10 @@ interface isLoggedIn {
 @Injectable({
   providedIn: 'root'
 })
+
+
+
+
 export class UserService {
 
 
@@ -25,7 +29,7 @@ export class UserService {
 
 
   constructor(
-    private http: HttpClient
+    public http: HttpClient
   ) {
 
     this.usersUrl = environment.USERS_API
@@ -58,7 +62,7 @@ export class UserService {
 
   getUsers(): Observable<userInterface> {
     return this.http.get<userInterface>(`${this.usersUrl}/getUsers`).pipe(
-      res => { return res}
+      res => {return res}
     )
 
   }
@@ -88,14 +92,9 @@ export class UserService {
 
 
   checkSession(): Observable<isLoggedIn> {
-    return this.http.post<isLoggedIn>(`${this.usersUrl}/check-session`, 'hello').pipe(
-      map( res => {return res})
-    )
+    return this.http.post<isLoggedIn>(`${this.usersUrl}/check-session`, 'hello');
 
-  }
-
-
-
+}
 
 
 

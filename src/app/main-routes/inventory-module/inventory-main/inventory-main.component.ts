@@ -16,16 +16,19 @@ export class InventoryMainComponent implements OnInit {
   searchKey: string
   products: Products[]
   allProducts: number
+  response: any
 
 
   constructor(
     public inventoryService: InventoryService,
     public alert: AlertService,
      public dialog: MatDialog
+
     ) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.getTest();
     
   }
 
@@ -52,6 +55,21 @@ export class InventoryMainComponent implements OnInit {
 
 
    
+
+  }
+
+
+
+  getTest() {
+    this.inventoryService.testToApi().subscribe(
+      res => {
+        this.response = res
+        console.log(this.response);
+      },
+      error => {
+        console.log('Error', error);
+      }
+    )
 
   }
 
