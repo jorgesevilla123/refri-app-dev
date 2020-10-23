@@ -15,10 +15,13 @@ import { SalesProcessComponent } from "./main-routes/sales-clients-module/sales-
 import { UserLoginComponent } from "./auth-routes/user-login/user-login.component";
 import { UserSignupComponent } from "./auth-routes/user-signup/user-signup.component";
 import { AuthGuard } from "./services/auth.guard";
+import { LoginGuard } from "./services/login.guard"
 
 
 //Routes to render all the views in main-routes folder
 const routes: Routes = [
+  {path: 'login', component: UserLoginComponent},
+  {path: 'signup', component: UserSignupComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'clients/:id', redirectTo: '/client/:id', canActivate: [AuthGuard]},
   {path: 'client/:id', component: ClientDetailsComponent, canActivate: [AuthGuard]},
@@ -33,8 +36,7 @@ const routes: Routes = [
   {path: 'sales-and-clients', component: SalesClientsComponent, canActivate: [AuthGuard]},
   {path: 'sales-and-clients/clients', component: ClientsMainComponent, canActivate: [AuthGuard]},
   {path: 'sales-and-clients/sales/:id', component: SalesProcessComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: UserLoginComponent},
-  {path: 'signup', component: UserSignupComponent},
+
 
 
 ];
@@ -42,7 +44,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled'
-})],
+}),
+
+],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

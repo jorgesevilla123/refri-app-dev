@@ -22,11 +22,11 @@ export const checkSession = (req: Request, res: Response) => {
     try {
         if(!!req.session.userId){
             console.log('already logged in')
-            res.json({LOGGED_IN: true});
+            return res.json({LOGGED_IN: true});
         }
         else {
             console.log('Not logged in')
-            res.json({LOGGED_IN: false})
+           return res.json({LOGGED_IN: false})
         }
         
     } catch (error) {

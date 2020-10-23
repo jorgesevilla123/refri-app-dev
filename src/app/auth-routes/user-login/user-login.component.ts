@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 import { UserService } from "../../services/user.service";
 import { tap, map } from "rxjs/operators";
 import { Router, RouterEvent } from "@angular/router";
@@ -9,7 +9,7 @@ import { Router, RouterEvent } from "@angular/router";
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent {
 
   constructor(
     public userService: UserService,
@@ -34,54 +34,7 @@ export class UserLoginComponent implements OnInit {
   }
 
 
-
-  ngOnInit(): void {
-
-    this.checkLoggedIn();
-
-    
-
-
-  }
-
-
   
-
-  checkLoggedIn(){
-    this.userService.getUsers().subscribe(
-      res => {
-        console.log(res)
-      },
-      error => {
-        console.log('this error ocurred', error)
-      },
-      () => {console.log('completed successfully')}
-    )
-
-
-    // this.userService.checkSession().subscribe(
-    //   res => {
-    //     if(res.LOGGED_IN){
-    //       console.log('you are logged in')
-    //       this.userService.isAuthenticated = true
-    //       this.router.navigateByUrl('/dashboard');
-    //     }
-    //     else {
-    //       console.log('you are not logged in')
-    //       this.userService.isAuthenticated = false
-    //     }
-    //   },
-    //   error => {
-    //     console.log(error)
-    //   },
-    //   () => {console.log('request completed')}
-
-    // )
-
-  }
-
-
-
 
 
   
@@ -126,12 +79,9 @@ export class UserLoginComponent implements OnInit {
           }
            if(user.LOG_IN){
             console.log('user logged in');
-            this.isAuthenticated = true;
-
             this.router.navigateByUrl('/dashboard');
 
-            return this.isAuthenticated
-          
+       
             
           }
 

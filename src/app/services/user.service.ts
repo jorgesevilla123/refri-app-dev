@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core"
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { userInterface } from "../interfaces-models/users";
 import { debounceTime, distinctUntilChanged, switchMap, map, catchError } from "rxjs/operators";
 import {  FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable, throwError} from "rxjs";
 import { environment } from "../../environments/environment";
+import { Router } from "@angular/router";
 
 interface isLoggedIn {
 
@@ -29,7 +30,8 @@ export class UserService {
 
 
   constructor(
-    public http: HttpClient
+    public http: HttpClient,
+    public router: Router
   ) {
 
     this.usersUrl = environment.USERS_API

@@ -33,8 +33,9 @@ import { LoadingInterceptorService } from './services/loading-interceptor.servic
 import { UsersComponent } from './auth-routes/users/users.component';
 import { UserSignupComponent } from './auth-routes/user-signup/user-signup.component';
 import { UserLoginComponent } from './auth-routes/user-login/user-login.component';
-import { UserService } from "./services/user.service";
-import { AuthGuard } from "./services/auth.guard";
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -84,9 +85,8 @@ import { AuthGuard } from "./services/auth.guard";
       useClass: LoadingInterceptorService,
       multi : true
     },
-    UserService,
-    AuthGuard
-    
+    AuthGuard,
+    AuthService
 
 
     

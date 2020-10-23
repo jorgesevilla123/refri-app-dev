@@ -90,9 +90,6 @@ router.route('/login').post( upload.none(), getLogin);
 router.route('/check-session').post(checkSession);
 
 
-router.route('/check-observable').post(checkObservable);
-
-
 
 
 
