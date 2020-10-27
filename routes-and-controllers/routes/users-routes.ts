@@ -93,8 +93,6 @@ router.route('/check-session').post(checkSession);
 
 
 
-
-
 ////Users logout, for more info look for users-controllers file
 router.route('/logout').post(auth, getLogout);
 

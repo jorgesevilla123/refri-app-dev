@@ -1,13 +1,12 @@
 import { Component, OnInit, Inject, Optional} from '@angular/core';
 import {Observable, Subject} from 'rxjs'
-import { InventoryService } from "../../../services/inventory.service";
-import { ClientsService } from "../../../services/clients.service";
-import { Products } from "../../../interfaces-models/products";
-import { Client } from "../../../interfaces-models/clients";
-import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
+import { InventoryService } from "../../services/inventory.service";
+import { ClientsService } from "../../services/clients.service";
+import { Products } from "../../interfaces-models/products";
+import { Client } from "../../interfaces-models/clients";
 import {ActivatedRoute} from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 
 
 

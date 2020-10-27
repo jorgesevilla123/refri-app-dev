@@ -229,7 +229,7 @@ export const getLogout = async (req: Request, res: Response, next: NextFunction)
                 reject(err);
             }
             else {
-                res.clearCookie('redis_practice').send({ message: 'logged out' }) //Add corresponding name argument
+                res.clearCookie('redis_practice').send({LOGGED_OUT: true}) //Add corresponding name argument
                 resolve();
             }
         })

@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Products } from "../../../interfaces-models/products";
-import { InventoryService } from "../../../services/inventory.service";
+import { Products } from "../../interfaces-models/products";
+import { InventoryService } from "../../services/inventory.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
-import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
-import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { DialogService } from "../../reusable-components/dialogs/dialog/dialog.service";
+import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { InventoryProductEditComponent } from '../inventory-product-edit/inventory-product-edit.component';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 

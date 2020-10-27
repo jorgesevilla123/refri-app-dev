@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientsService } from "../../../services/clients.service";
+import { ClientsService } from "../../services/clients.service";
 import { Observable, Subject } from "rxjs";
-import { Client } from "../../../interfaces-models/clients";
-import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
+import { Client } from "../../interfaces-models/clients";
 import { ClientEditComponent } from "../client-edit/client-edit.component";
-import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 

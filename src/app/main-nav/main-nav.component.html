@@ -15,7 +15,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a routerLink="/"><img src="../../assets/finishedlogo.png" alt=""></a>
+      <a routerLink="/dashboard"><img src="../../assets/finishedlogo.png" alt=""></a>
       <span class="spacer"></span>
       <!-- menu for navigating through the app -->
       <button class="desktop-display" mat-button [matMenuTriggerFor]="menu">Navegacion    <mat-icon>expand_more</mat-icon></button>
@@ -25,7 +25,7 @@
   <button class="nav-menu-buttons" mat-menu-item routerLink="/products-search">Busqueda de productos <mat-icon class="busqueda">search</mat-icon></button>
   <button class="nav-menu-buttons" mat-menu-item routerLink="/sales-and-clients">Compras y clientes <mat-icon class="clientes">people</mat-icon></button>
 </mat-menu>
-<button mat-raised-button routerLink="/login">Iniciar sesion</button>
+<button mat-stroked-button (click)="onLogout()">Cerrar sesion</button>
 
     </mat-toolbar>
     <ng-content></ng-content>

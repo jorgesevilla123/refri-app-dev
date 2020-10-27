@@ -91,11 +91,15 @@ export class UserService {
   }
 
 
-
-
   checkSession(): Observable<isLoggedIn> {
     return this.http.post<isLoggedIn>(`${this.usersUrl}/check-session`, 'hello');
 
+}
+
+userLogout(): Observable<any> {
+  return this.http.post<any>(`${this.usersUrl}/logout`, '').pipe(
+    map( res => {return res})
+  )
 }
 
 

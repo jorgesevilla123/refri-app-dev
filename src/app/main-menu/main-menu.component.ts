@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { InventoryService } from "../../services/inventory.service";
+import { InventoryService } from "../services/inventory.service";
 
 @Component({
   selector: 'app-main-menu',
