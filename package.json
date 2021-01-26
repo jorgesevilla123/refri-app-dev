@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "server:test": "ts-node server.ts",
-    "start": "npm run serve:ssr",
+    "start": "npm build",
     "build": "npm run build:ssr",
     "config": "ts-node set-env.ts",
     "test": "ng test",
