@@ -28,12 +28,15 @@ constructor(
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if(this.auth.isLoggedIn){
         return true 
+
       }
 
       return this.userService.checkSession().pipe(map( res => {
         if(res.LOGGED_IN) {
           this.router.navigate(['dashboard']);
+          console.log(route)
           return false
+       
 
         } else {
           

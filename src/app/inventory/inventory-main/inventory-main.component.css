@@ -18,57 +18,7 @@ button{
     background-color: rgba(0, 102, 255, 0.822);
 }
 
-.inventory-search-form{
-    width: 60%;
-    margin-left: 10px;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.inventory-search-form div .mat-form-field-underline{
-    display: none;
-}
-
-.inventory-search-form div .mat-form-field-infix{
-    border-top: 0px;
-
-}
-
-.inventory-search-form div .mat-form-field-wrapper{
-    padding-bottom: 0px;
-
-}
-
-.inventory-search-form div .mat-form-field-suffix button{
-    height: 32px;
-    width: 32px;
-
-
-}
-
-
-
-
-.card-title{
-    font-weight: 200;
-    font-size: 24px;
     
-    }
-    
-    .product-card-img{
-        width: 130px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    
-    .inventory-products-card{
-        width: 320px;
-    }
-
-
-
     
 #add-icon {
     font-size: 24px;
@@ -78,24 +28,80 @@ button{
 
 #add-button {
     color: dodgerblue;
-      
 }
 
-    
-    
 
-    .center-spinner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 200px;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+/* inventory options cards from here */
+
+.bounds{
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+
+.inventory-card {
+  /* main card styling */
+      
+  width: 80%;
+  height: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+  border-radius: 2%;
+  background-color: rgba(255, 166, 0, 0.801);
+  
+} 
+
+
+.inventory-grid {
+  margin-top: 20px;
+
+}
+
+.inventory-tile {
+  margin: 10px;
+
+}
+
+.inventory-card-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.inventory-button {
+  height: 200px;
+  width: 200px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+   transition: 200ms;
+}
+
+
+.inventory-button:hover {
+  width: 250px;
+  height: 250px;
+
+}
+
+
+
+.inventory-icon {
+  display: inline; 
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 80px;
+}
+
+
+
+.cards-title {
+  width: 100%;
+  float: left;
+  margin-left: 10px;
+}

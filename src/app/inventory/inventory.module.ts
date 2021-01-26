@@ -8,6 +8,16 @@ import { InventorySearchComponent } from "./inventory-search/inventory-search.co
 import { InventoryComponent } from "./inventory-table/inventory-table.component";
 import { InventoryRoutingModule } from "./inventory-routing.module";
 import { InventoryService } from "../services/inventory.service"
+import { MaterialModule } from '../material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainNavModule } from "../main-nav/main-nav.module";
+import { InventoryOutOfStockComponent } from './inventory-out-of-stock/inventory-out-of-stock.component';
+import { InventoryLowStockComponent } from './inventory-low-stock/inventory-low-stock.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { InventoryProductsToBuyComponent } from './inventory-products-to-buy/inventory-products-to-buy.component';
+import { SearchComponent } from './search/search.component';
+
+
 
 @NgModule({
   declarations: [
@@ -16,11 +26,20 @@ import { InventoryService } from "../services/inventory.service"
     InventoryManageProductsComponent,
     InventoryProductEditComponent,
     InventorySearchComponent,
-    InventoryComponent
+    InventoryComponent,
+    InventoryOutOfStockComponent,
+    InventoryLowStockComponent,
+    InventoryProductsToBuyComponent,
+    SearchComponent,
   ],
   imports: [
     InventoryRoutingModule,
-    CommonModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MainNavModule,
+    FlexLayoutModule,
   ],
   exports: [
     InventoryImageEditComponent,

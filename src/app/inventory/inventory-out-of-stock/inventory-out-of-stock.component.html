@@ -1,0 +1,85 @@
+<app-main-nav></app-main-nav>
+
+<button  style="font-size: 18px; margin-left: 20px; margin-top: 20px; font-weight: 200;" mat-button routerLink="/inventario">Volver a inventario <mat-icon>store</mat-icon></button>
+
+<h2 style="font-weight: 200; margin-left: 20px">Productos sin stock</h2>
+
+
+<h2>Buscar productos que esten bajos en stock</h2>
+
+
+<form (submit)="searchProducts(searchBox.value)">
+<mat-form-field appearance="outline" class="inventory-search-form">
+    <mat-label>Buscar productos</mat-label>
+    <input #searchBox matInput id="search-box" placeholder="Buscar"/>
+      <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <button style="background-color: dodgerblue" type="submit" mat-fab>
+   <mat-icon>search</mat-icon>
+  </button>
+  </form>
+
+
+
+  <mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
+    <mat-grid-tile *ngFor="let product of pageOfItems">
+      <mat-card id="{{product._id}}" class="inventory-products-card">
+        <mat-card-header>
+          <mat-card-title class="card-title">
+            {{product.title}}
+          </mat-card-title>
+        </mat-card-header>
+        <div *ngIf="product.cantidad < 5; else onStock">
+          <mat-card-subtitle style="color: red">
+            Bajo stock
+          </mat-card-subtitle>
+          </div>
+          <ng-template #onStock>
+            <mat-card-subtitle style="color: #49ce49">
+              En stock
+            </mat-card-subtitle>
+             
+          </ng-template>
+        <mat-card-content>
+          <h3>Modelo: {{product.modelo}}</h3>
+          <h3>Precio: {{product.precio | currency}}</h3>
+          <h3>Cantidad: {{product.cantidad}}</h3>
+        </mat-card-content>
+  
+      </mat-card>
+  
+    </mat-grid-tile>
+  
+  </mat-grid-list>
+  
+  
+  
+  
+
+
+
+
+  <div class="card-footer pb-0 pt-3 mb-4 d-block mx-auto">
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+            <a [routerLink]="['/inventario/fuera-de-stock']" [queryParams]="{ page: 1 }" class="page-link">Primera</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+            <a [routerLink]="['/inventario/fuera-de-stock']" [queryParams]="{ page: pager.currentPage - 1 }" class="page-link"><mat-icon>navigate_before</mat-icon></a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+            <a [routerLink]="['/inventario/fuera-de-stock']" [queryParams]="{ page: page }" class="page-link">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+            <a [routerLink]="['/inventario/fuera-de-stock']" [queryParams]="{ page: pager.currentPage + 1 }" class="page-link"><mat-icon>navigate_next</mat-icon></a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+            <a [routerLink]="['/inventario/fuera-de-stock']" [queryParams]="{ page: pager.totalPages }" class="page-link">Ultima</a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+

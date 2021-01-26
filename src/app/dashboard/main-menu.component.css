@@ -10,6 +10,8 @@
 
 
 
+
+
 .inventory-search-button:hover, .inventory-table-button:hover, .regular-icon:hover {
   
   color: rgba(255, 166, 0, 0.801);
@@ -160,7 +162,7 @@ h1, p{
 
 }
 
-#pos{
+#clientes{
   background-color: rgba(2, 148, 2, 0.76);
 
 }

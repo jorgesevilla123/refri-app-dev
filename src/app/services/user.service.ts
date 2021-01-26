@@ -7,7 +7,7 @@ import { Observable, throwError} from "rxjs";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 
-interface isLoggedIn {
+export interface isLoggedIn {
 
   LOGGED_IN: boolean
     
@@ -81,10 +81,12 @@ export class UserService {
   loginUsers(userForm: FormData): Observable<any>{
     return this.http.post<any>(`${this.usersUrl}/login`, userForm).pipe(
       map(res => {
-        console.log(res);
         if(res.LOG_IN) {
           this.isAuthenticated = true
           return this.isAuthenticated && res
+        } else {
+          this.isAuthenticated = false;
+          return res
         }
         })
     )
@@ -92,9 +94,19 @@ export class UserService {
 
 
   checkSession(): Observable<isLoggedIn> {
-    return this.http.post<isLoggedIn>(`${this.usersUrl}/check-session`, 'hello');
+    return this.http.post<isLoggedIn>(`${this.usersUrl}/check-session`, 'hello')
 
 }
+
+
+checkLoggedIn(): Observable<isLoggedIn> { 
+  return this.http.post<isLoggedIn>(`${this.usersUrl}/check-session`, 'hello').pipe(
+    map( res => {
+      return res
+    })
+  )
+}
+
 
 userLogout(): Observable<any> {
   return this.http.post<any>(`${this.usersUrl}/logout`, '').pipe(

@@ -5,6 +5,15 @@ import { Products } from "../../interfaces-models/products";
 import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
+export interface Tile {
+  color: string;
+  cols: number;
+  rows: number;
+  text: string;
+  icon?: string;
+  routeLink: string | string[]
+  queryParams?: Object
+}
 
 
 @Component({
@@ -13,10 +22,23 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
   styleUrls: ['./inventory-main.component.css']
 })
 export class InventoryMainComponent implements OnInit {
+  
   searchKey: string
   products: Products[]
-  allProducts: number
+  allProducts: number 
   response: any
+  firstPage: any = 1
+
+
+  tiles: Tile[] = [
+    {text: 'Busqueda de productos en inventario', cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'search', routeLink: '/inventario/busqueda'},
+    {text: 'Productos con poco stock', cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'report_problem', routeLink: '/inventario/bajo-stock'},
+    {text: 'Productos sin stock', cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'remove_shopping_cart', routeLink: ['/inventario/fuera-de-stock'], queryParams: {page : 1}  },
+    {text: 'Productos por pedir', cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'add_business', routeLink: '/inventario/por-pedir'},
+  ];
+
+
+
 
 
   constructor(

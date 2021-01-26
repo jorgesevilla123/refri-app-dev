@@ -5,7 +5,8 @@ export interface ProductInterface extends Document {
     modelo: string,
     precio: number,
     cantidad: number,
-    imagePath: string
+    imagePath: string,
+    categorias: string[]
 }
 
 
@@ -14,7 +15,8 @@ export const ProductSchema: Schema = new Schema({
     modelo: {type: String, index: true},
     precio: Number,
     cantidad: Number,
-    imagePath: String
+    imagePath: String,
+    categorias: Array
     
 })
 

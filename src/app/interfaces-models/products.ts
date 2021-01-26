@@ -4,5 +4,6 @@ export interface Products {
     modelo: string,
     precio: number,
     cantidad: number,
+    categorias: string,
     imagePath: string
 }

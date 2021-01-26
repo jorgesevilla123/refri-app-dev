@@ -21,11 +21,9 @@ export const getUsers = (req: Request, res: Response) => {
 export const checkSession = (req: Request, res: Response) => {
     try {
         if(!!req.session.userId){
-            console.log('already logged in')
             return res.json({LOGGED_IN: true});
         }
         else {
-            console.log('Not logged in')
            return res.json({LOGGED_IN: false})
         }
         

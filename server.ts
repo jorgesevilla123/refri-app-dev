@@ -55,6 +55,9 @@ export function app() {
 
 
 
+
+
+
   //Middlewares
   server.set('view engine', 'html');
   server.set('views', distFolder);

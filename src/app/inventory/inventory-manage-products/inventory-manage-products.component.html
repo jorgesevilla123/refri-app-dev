@@ -24,6 +24,14 @@
             <input  #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
         </mat-form-field>
 
+
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Categoria del producto</mat-label>
+            <input  #category matInput placeholder="Categoria del producto" formControlName="categoria">
+        </mat-form-field>
+
+
      
             <button type="button" id="file-button" mat-raised-button (click)="fileInput.click()"><mat-icon>get_app</mat-icon> Subir imagen</button>
         <input name="imagePath" #fileInput  style="display: none;" type="file" (change)="onFileUpload($event)">

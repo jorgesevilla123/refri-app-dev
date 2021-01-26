@@ -80,9 +80,6 @@ export class UserLoginComponent {
            if(user.LOG_IN){
             console.log('user logged in');
             this.router.navigateByUrl('/dashboard');
-
-       
-            
           }
 
         

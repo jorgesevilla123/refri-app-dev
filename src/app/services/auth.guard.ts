@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { observable, Observable } from 'rxjs';
 import { UserService } from "./user.service";
-import { catchError, map } from "rxjs/operators"
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { HttpErrorResponse } from '@angular/common/http';
+import { map } from "rxjs/operators"
 import { AuthService } from './auth.service';
 
 
@@ -32,20 +30,27 @@ export class AuthGuard implements CanActivate {
 
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    if(this.auth.isLoggedIn){
+    if(this.userService.isAuthenticated){
       return true
+    }
+    else {
+      return this.userService.checkSession().pipe( 
+        map( res => {
+        if(res.LOGGED_IN){
+          return true
+        }
+        else {
+          console.log('passed this')
+          this.router.navigateByUrl('/login');
+          return false
+        }
+      }))
+  
 
     }
+   
+    
 
-    return this.userService.checkSession().pipe(map( res => {
-      if(res.LOGGED_IN){
-        return true
-      }
-      else {
-        this.router.navigate(['login'])
-      }
-    }))
  
     
 

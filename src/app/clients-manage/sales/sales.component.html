@@ -1,5 +1,5 @@
 
-
+<app-main-nav></app-main-nav>
 
 <div class="sales-search-container">
 
@@ -28,7 +28,7 @@
 
 <div class="search-results">
 <mat-grid-list cols="4" rowHeight="300px">
-    <mat-grid-tile *ngFor="let client of clients">
+    <mat-grid-tile *ngFor="let client of clients"> 
       <mat-card class="clients-card">
         <mat-card-header>
           <div mat-card-avatar>
@@ -38,7 +38,7 @@
           <mat-card-subtitle>{{client.phoneNumber}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-          <button class="client-select" mat-raised-button matTooltip="Seleccionar cliente" [routerLink]="['/sales-and-clients/sales', client._id]">Seleccionar</button>
+          <button class="client-select" mat-raised-button matTooltip="Seleccionar cliente" [routerLink]="['/venta-por-cliente', client._id]">Seleccionar</button>
         </mat-card-actions> 
       </mat-card>
     </mat-grid-tile>

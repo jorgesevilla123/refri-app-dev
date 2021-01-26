@@ -1,11 +1,16 @@
 <!-- main menu showing all the modules of the app and the how to access them -->
 
+<app-main-nav></app-main-nav>
+
+
+
+
 
 <div class="bounds">
   <h1>Panel de control</h1>
 
   <button mat-raised-button  (click)="getApi()">Prueba a la API {{response}}</button>
-  <app-users></app-users>
+
 
   <div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
 
@@ -25,7 +30,7 @@
         </mat-card-header>
         <!-- card body  -->
         <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventory-main">
+          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
             <mat-icon>
               store
             </mat-icon>
@@ -51,7 +56,7 @@
         </mat-card-header>
         <!-- card body  -->
         <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="config" routerLink="/configurations">
+          <button class="inventory-button" mat-raised-button id="config" routerLink="/finanzas">
             <mat-icon>
             settings
             </mat-icon>
@@ -63,10 +68,10 @@
 
     <div fxFlex="50" class="sec3" fxFlex.xs="50" fxFlexAlign="center">
       <!-- card header -->
-      <mat-card id="busqueda">
+      <mat-card id="clientes">
         <mat-card-header>
           <mat-card-title class="cards-title">
-            Busqueda de productos
+            Clientes y compras
             <button id="more-button" mat-button [matMenuTriggerFor]="searchMenu"><mat-icon id="more-link">more_vert</mat-icon></button>
             <mat-menu #searchMenu="matMenu">
               <button class="search-main-button" mat-menu-item><mat-icon class="regular-icon">settings</mat-icon>Buscar productos</button>
@@ -77,7 +82,7 @@
         </mat-card-header>
         <!-- card body  -->
         <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="busqueda" routerLink="/products-search">
+          <button class="inventory-button" mat-raised-button id="clientes" routerLink="/ventas-y-clientes">
             <mat-icon>
             search
             </mat-icon>

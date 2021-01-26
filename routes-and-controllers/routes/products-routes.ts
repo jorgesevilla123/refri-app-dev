@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { Request, Response} from 'express';
 import upload from "../../fileProcessing";
-import { addProduct, deleteOneProduct, getAllProducts, getOneProduct, 
+import { addProduct, deleteOneProduct, getAllProducts, getLowStockProducts, getOneProduct, 
+    getOutOfStockProducts, 
     justForTest, 
+    paginateProducts, 
     searchProducts, updateOneProduct, updateProductImage
  } from "../controllers/products-controllers";
 
@@ -22,9 +24,27 @@ router.route('/').get(getAllProducts);
 
 
 
+//Route for getting out of stock products
+
+router.route('/out-of-stock').get(getOutOfStockProducts);
+
+
+
+//Route for getting products that are low in stock
+
+router.route('/low-stock').get(getLowStockProducts);
+
+
+
 
 //Route for searching products
 router.route('/search?').get(searchProducts);
+
+
+
+
+//Route for paginating the checkProducts
+router.route('/products?').get(paginateProducts);
 
 
 

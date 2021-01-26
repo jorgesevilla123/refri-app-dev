@@ -1,6 +1,7 @@
 <div class="login-bounds">
 
-    <h2 class="login-title">Inicia sesion para acceder !</h2>
+    
+    <button  style="font-size: 18px; margin-left: 20px; margin-top: 20px; font-weight: 200;" mat-button routerLink="/dashboard">Volver al inicio <mat-icon>home</mat-icon></button>
 
     <div class="login-form">
         <mat-card class="login-card">
@@ -30,7 +31,7 @@
                     <mat-error class="already-in" *ngIf="notFound">
                         Este correo electronico no esta registrado
                     </mat-error>
-                   
+                
                     </div>
 
                  
@@ -39,8 +40,15 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Contraseña</mat-label>
                         <input id="password" matInput type="password" formControlName="password">
-                        
                     </mat-form-field>
+
+                    <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+                        Debes escribir una contraseña
+                    </mat-error>
+
+
+
+
                     <mat-error class="password-match" *ngIf="incorrectPassword">
                         Las contraseñas es incorrecta
                     </mat-error>

@@ -47,7 +47,8 @@ export class InventoryService {
     title: new FormControl(),
     modelo: new FormControl(),
     precio: new FormControl(),
-    cantidad: new FormControl()
+    cantidad: new FormControl(),
+    categoria: new FormControl()
 
 
 
@@ -75,8 +76,30 @@ export class InventoryService {
     return this.http.get<Products[]>(this.productsUrl).pipe(
       map(products => {return products})
     )
-
   }
+
+  getPaginateProducts(page: any): Observable<any> {
+    return this.http.get<any>(`${this.productsUrl}/products?page=${page}`).pipe(
+      map(products => {return products})
+    )
+  }
+
+
+
+  getOutOfStockProducts(): Observable<Products[]> {
+    return this.http.get<Products[]>(`${this.productsUrl}/out-of-stock`).pipe(
+      map(products => {return products})
+    )
+  }
+
+
+  getLowStockProducts(): Observable<Products[]> {
+    return this.http.get<Products[]>(`${this.productsUrl}/low-stock`).pipe(
+      map(products => {return products})
+    )
+  }
+
+
 
   countProducts(): Observable<any>{
     return this.http.get<any>(this.productsUrl).pipe(
@@ -139,6 +162,22 @@ export class InventoryService {
 
 
   }
+
+
+  searchProductAndPaginate(keyLetter, page){
+    if(!keyLetter.trim()){
+      return of([]);
+    }
+    else{
+    return this.http.get<any>(`${this.productsUrl}/search?q=${keyLetter}&page=${page}`).pipe(
+      map( res => {return res})
+    )
+ 
+  }
+
+  }
+
+
 
 
     searchEntries(keyLetter){

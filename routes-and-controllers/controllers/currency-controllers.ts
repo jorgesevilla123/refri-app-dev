@@ -22,7 +22,6 @@ export const getAllCurrencies = (req: Request, res: Response) => {
         }
         else {
             res.json(currencyData)
-            console.log(currencyData)
         }
     }).sort({'date': -1});
 }
@@ -40,7 +39,6 @@ export const getMostRecentCurrency = (req: Request, res: Response) => {
         }
         else {
             res.json(currencyData)
-            console.log(currencyData)
         }
     }).sort({'date': -1});
 

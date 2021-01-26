@@ -1,54 +1,53 @@
-<div class="inventory-search-div">
 
-
-     <button id="add-button" mat-stroked-button (click)="onAdd()">
-    Añadir producto <mat-icon id="add-icon">add</mat-icon>
-  </button>
+<app-main-nav></app-main-nav>
 
 
 
-   
-
-      <button mat-raised-button routerLink="/inventory-table" >Ver productos en tabla <mat-icon>table_chart</mat-icon></button>
-      <button class="search-inventory" mat-raised-button routerLink="/inventory-search" >Buscar productos en inventario <mat-icon>search</mat-icon></button>
+<h2 style="font-weight: 200; margin-left: 20px">Inventario</h2>
 
 
-    </div>
 
+<button  style="font-size: 18px; margin-left: 20px; margin-top: 20px; font-weight: 200;" mat-button routerLink="/dashboard">Volver al inicio <mat-icon>home</mat-icon></button>
+
+
+
+    <div class="bounds">
+
+      <mat-grid-list class="inventory-grid" cols="2" rowHeight="100px">
+        <mat-grid-tile class="inventory-tile"
+            *ngFor="let tile of tiles"
+            [colspan]="tile.cols"
+            [rowspan]="tile.rows">
+            <mat-card class="inventory-card">
+              <mat-card-header>
+                <mat-card-title class="cards-title">
+                  {{tile.text}}
+                </mat-card-title>
+      
+              </mat-card-header>
+              <!-- card body  -->
+              <mat-card-content class="inventory-card-content">
+
+                <button [style.background]="tile.color" [routerLink]="tile.routeLink" [queryParams]="tile.queryParams"  class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
+                  <mat-icon class="inventory-icon">
+                    {{tile.icon}}
+                  </mat-icon>
+                </button>
+      
+              </mat-card-content>
+            </mat-card>
+        
+        </mat-grid-tile>
+      </mat-grid-list>
+
+    
+  
+  </div>
 
 
 
 
   
-    
-<mat-grid-list cols="3" gutterSize="10px" rowHeight="450px">
-  <h3 style="margin-left: 30px; font-weight: 200" >mostrando <b>{{products.length}}</b> productos de <b>{{allProducts}}</b> en inventario</h3>
-  <mat-grid-tile *ngFor="let product of products">
-    <mat-card class="inventory-products-card">
-      <mat-card-header>
-        <mat-card-title class="card-title">
-          {{product.title}}
-        </mat-card-title>
-     
-      </mat-card-header>
-      <div *ngIf="product.imagePath == 'no-photo'; else image">
-        <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
-      </div>
-      <ng-template #image>
-        <img class="product-card-img" mat-card-image [src]="product.imagePath">
-      </ng-template>
-      <mat-card-content>
-        <h3>Modelo: {{product.modelo}}</h3>
-        <h3>Precio: {{product.precio | currency}}</h3>
-        <h3>Cantidad: {{product.cantidad}}</h3>
-      </mat-card-content>
-
-    </mat-card>
-
-  </mat-grid-tile>
-
-</mat-grid-list>
-    
 
 
 

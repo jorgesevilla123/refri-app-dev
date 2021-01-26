@@ -8,7 +8,7 @@
   </mat-form-field>
 
 
-<mat-grid-list cols="4" rowHeight="200px">
+<mat-grid-list cols="4" rowHeight="200px"> 
     <mat-grid-tile *ngFor="let client of clients">
       <mat-card class="clients-card">
         <mat-card-header>
@@ -19,7 +19,7 @@
           <mat-card-subtitle>{{client.phoneNumber}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-          <button class="client-details" mat-mini-fab matTooltip="Mas informacion" [routerLink]="['/clients', client._id]"><mat-icon>info</mat-icon></button>
+          <button class="client-details" mat-mini-fab matTooltip="Mas informacion" [routerLink]="['/detalles-cliente', client._id]"><mat-icon>info</mat-icon></button>
           <button class="client-edit" mat-mini-fab (click)="onEditClient(client)" matTooltip="Editar cliente"><mat-icon>create</mat-icon></button>
           <button class="delete" mat-mini-fab matTooltip="Eliminar cliente" (click)="deleteClient(client)"><mat-icon class="delete-icon">delete</mat-icon></button>
         </mat-card-actions> 

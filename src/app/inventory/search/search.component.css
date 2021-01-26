@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.page-item{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 15px;
+}
+
+.page-link{
+    height: 36px;
+  
+}
+
+.card-footer{
+    margin-bottom: 40px;
+}
+
+
+
+.inventory-search-form{
+    width: 60%;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+

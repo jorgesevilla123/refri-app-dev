@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
-import { InventoryService } from "../../../services/inventory.service";
-import { DialogService } from "../../../reusable-components/dialogs/dialog/dialog.service";
-import { InventoryManageProductsComponent } from "../../inventory-module/inventory-manage-products/inventory-manage-products.component";
+import { InventoryService } from "../../services/inventory.service";
+import { DialogService } from "../../reusable-components/dialogs/dialog/dialog.service";
+import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { InventoryProductEditComponent } from "../inventory-product-edit/inventory-product-edit.component";
 import { InventoryImageEditComponent } from "../inventory-image-edit/inventory-image-edit.component";
-import { Products } from "../../../interfaces-models/products";
+import { Products } from "../../interfaces-models/products";
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/en-DE";
-import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 registerLocaleData(localeDe, 'fr');
@@ -23,18 +24,22 @@ registerLocaleData(localeDe, 'fr');
   styleUrls: ['./inventory-search.component.css']
 })
 export class InventorySearchComponent implements OnInit {
-  searchKeyTitle: string
-  products: any
-  productsArray: any
-  searchKeys$ = new Subject<string>();
-  product: Promise<Products>
+
+
+
+
   productsCount: number;
+  pager: any = {};
+  pageOfItems: Products[] = []
+  searchQuery: string 
 
   constructor(
     private inventoryService: InventoryService,
     private dialogService: DialogService,
     private alert: AlertService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   //Pushing a search term into the Observable stream
@@ -43,23 +48,77 @@ export class InventorySearchComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+     this.route.queryParams.subscribe(
+      query => {
+        this.loadPage(query.q, query.page || 1);
+        console.log(query.q);
+        this.searchQuery = query.q
+  
+
+        
+
+        
+      }
+
+    )
+
+
+    
+        
+
     this.countedProducts();
 
-    this.inventoryService.searchProduct(this.searchKeys$).subscribe(
-      products => { this.products = products }
-    )
+
+
+
   }
 
 
-  getProducts(): void {
-    this.inventoryService.getProducts().subscribe(
-      products => {
-        if (products.length > 1) {
-          this.products = products.splice(0, products.length);
 
+  loadPage(searchTerm, page) {
+    if(searchTerm === undefined) {
+      return
+
+    } else {
+      this.inventoryService.searchProductAndPaginate(searchTerm, page).subscribe(
+        paginationObject => {
+  
+          this.pager = paginationObject.pager
+          this.pageOfItems = paginationObject.pageOfItems
+        
+       
         }
-      })
+  
+      )
+
+    }
+   
+
+
+
   }
+
+
+
+
+  searchProducts(searchkey){
+
+     let queryString = unescape(searchkey);
+
+     this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  queryString, page: 1 }});
+      
+ 
+
+    
+         
+   
+
+     
+  
+  }
+
+
 
   countedProducts(){
     this.inventoryService.countProducts().subscribe(
@@ -82,7 +141,7 @@ export class InventorySearchComponent implements OnInit {
         if (product) {
           this.alert.notifySuccess(`Se añadio ${product.data.title} a los productos`, 2500, 'top', 'center')
           setTimeout( () => {
-            location.reload()
+            this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page: 1 }});
           }, 2000)
         }
         else {
@@ -95,13 +154,10 @@ export class InventorySearchComponent implements OnInit {
   }
 
 
-  onSearchClear() {
-    this.searchKeyTitle = '';
-  }
+
 
   onEdit(productForm: Products) {
     this.inventoryService.populateForm(productForm)
-    console.log(productForm);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '40%';
     dialogConfig.data = productForm;
@@ -116,12 +172,15 @@ export class InventorySearchComponent implements OnInit {
 
           this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
 
+          return 
+
+
         }
         else {
 
           this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
           setTimeout( () => {
-            location.reload()
+            this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page: 1 }});
           }, 2000)
 
         }
@@ -150,22 +209,6 @@ export class InventorySearchComponent implements OnInit {
     const dialogRef = this.dialog.open(InventoryImageEditComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       product => {
-        let theOne = ''
-        let array = ''
-        for (var i = 0; i < this.products.length; i++) {
-          array += [
-            this.products[i]
-          ]
-          if (this.products[i]._id == product.data._id) {
-            this.products[i] = product.data
-            array += [
-              this.products[i]
-            ]
-
-          }
-
-
-        }
 
         if (productChosen.imagePath === product.data.imagePath) {
 
@@ -175,6 +218,7 @@ export class InventorySearchComponent implements OnInit {
         else {
 
           this.alert.notifySuccess('Imagen editada', 2500, 'top', 'center');
+          this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page: 1 }});
 
         }
 
@@ -199,29 +243,10 @@ export class InventorySearchComponent implements OnInit {
     this.inventoryService.deleteProduct(product).subscribe(
       product => {
         if (product) {
-          console.log(product)
-          // let array = ''
-          // for (var i = 0; i < this.products.length; i++) {
-
-          //   if (this.products[i]._id == product._id) {
-          //     this.products[i] = ''
-
-          //     array += [
-          //       this.products[i]
-          //     ]
-
-          //   }
-
-          //   array += [
-          //     this.products[i]
-          //   ]
-          // }
+         
 
 
-          let productCard = document.getElementById(`${product._id}`)
-          productCard.remove()
-
-          this.alert.notifyWarn(`Producto ${product.title} eliminado`, 2500, 'top', 'center');
+          this.alert.notifyWarn(`Eliminando ${product.title}`, 2500, 'top', 'center');
 
         }
         else {

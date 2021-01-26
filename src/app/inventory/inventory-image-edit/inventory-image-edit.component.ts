@@ -1,8 +1,8 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { InventoryService } from "../../../services/inventory.service";
+import { InventoryService } from "../../services/inventory.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Products } from 'src/app/interfaces-models/products';
-import { AlertService } from "../../../reusable-components/alerts/alert/alert.service";
+import { Products } from "../../interfaces-models/products";
+import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 
 
 
