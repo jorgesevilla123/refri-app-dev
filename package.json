@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "server:test": "ts-node server.ts",
-    "start": "npm build",
+    "start": "npm run build",
     "build": "npm run build:ssr",
     "config": "ts-node set-env.ts",
     "test": "ng test",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1100.5",
-    "@angular/cli": "^10.1.7",
+    "@angular/cli": "^10.1.0",
     "@angular/compiler-cli": "^10.2.0",
     "@nguniversal/builders": "^10.1.0",
     "@types/bcryptjs": "^2.4.2",
