@@ -13,22 +13,23 @@
 
     <div class="bounds">
 
-      <mat-grid-list class="inventory-grid" cols="2" rowHeight="100px">
-        <mat-grid-tile class="inventory-tile"
-            *ngFor="let tile of tiles"
-            [colspan]="tile.cols"
-            [rowspan]="tile.rows">
+
+<!-- 
+
+      <div class="category-section">
+            *ngFor="let category of categories"
+          
             <mat-card class="inventory-card">
               <mat-card-header>
                 <mat-card-title class="cards-title">
-                  {{tile.text}}
+  
                 </mat-card-title>
       
-              </mat-card-header>
+              </mat-card-header> -->
               <!-- card body  -->
-              <mat-card-content class="inventory-card-content">
+              <!-- <mat-card-content class="inventory-card-content">
 
-                <button [style.background]="tile.color" [routerLink]="tile.routeLink" [queryParams]="tile.queryParams"  class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
+                <button [style.background]="t" [routerLink]="tile.routeLink" [queryParams]="tile.queryParams"  class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
                   <mat-icon class="inventory-icon">
                     {{tile.icon}}
                   </mat-icon>
@@ -36,9 +37,7 @@
       
               </mat-card-content>
             </mat-card>
-        
-        </mat-grid-tile>
-      </mat-grid-list>
+      </div> -->
 
     
   

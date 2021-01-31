@@ -45,7 +45,7 @@ button{
 .inventory-card {
   /* main card styling */
       
-  width: 80%;
+  width: 200px;
   height: 300px;
   margin-right: auto;
   margin-left: auto;

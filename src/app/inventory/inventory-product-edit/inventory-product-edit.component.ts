@@ -16,7 +16,7 @@ import { AlertService } from "../../reusable-components/alerts/alert/alert.servi
 })
 export class InventoryProductEditComponent implements OnInit {
 
-  product: Products
+  product: any
 
   constructor(
     public inventoryService: InventoryService,
@@ -49,33 +49,27 @@ export class InventoryProductEditComponent implements OnInit {
     formData.append('modelo', modelo);
     formData.append('precio', precio);
     formData.append('categoria', categoria);
-    formData.append('cantidad', cantidad);
-    this.inventoryService.editProduct(formData).subscribe(
-      product =>{
-        if(product){
+    formData.append('cantidad', cantidad);  
+    let products = {
+      title : title,
+      modelo: modelo,
+      precio: precio,
+      cantidad: cantidad,
+      categorias: categoria
+    }
+  
+          this.dialogRef.close({data: products, formData: formData});
+          this.product = products
+
         
-          this.dialogRef.close({data: product})
 
-        }
-        else {
-    
-          this.alert.notifyWarn('No se ha editado el producto', 2500, 'top', 'center');
-          this.dialogRef.close({data: product})
-        }
-
-
-
-      },
-      error => console.log(error),
-      () => console.log('Completed')
-      
-    )
-    
-    
 
   }
 
+
+
   onClose(){
+    console.log(this.product);
     this.dialogRef.close({data: this.product})
     console.log('onClose')
   }

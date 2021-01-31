@@ -32,6 +32,7 @@ export class InventorySearchComponent implements OnInit {
   pager: any = {};
   pageOfItems: Products[] = []
   searchQuery: string 
+  page: number
 
   constructor(
     private inventoryService: InventoryService,
@@ -53,7 +54,8 @@ export class InventorySearchComponent implements OnInit {
       query => {
         this.loadPage(query.q, query.page || 1);
         console.log(query.q);
-        this.searchQuery = query.q
+        this.searchQuery = query.q;
+        this.page = query.page
   
 
         
@@ -164,11 +166,14 @@ export class InventorySearchComponent implements OnInit {
     const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       product => {
+
+        
        
       
 
         if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
-          productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio) {
+          productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio 
+          && product.data.categoria === productForm.categorias) {
 
           this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
 
@@ -177,12 +182,15 @@ export class InventorySearchComponent implements OnInit {
 
         }
         else {
-
-          this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
-          setTimeout( () => {
-            this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page: 1 }});
-          }, 2000)
-
+          this.inventoryService.editProduct(product.formData).subscribe(
+            () => {
+              this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
+              setTimeout( () => {
+                window.location.reload()
+                this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page:  this.page}});
+              }, 2000)
+            }
+          )
         }
 
       },

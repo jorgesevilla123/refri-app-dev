@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Request, Response} from 'express';
 import upload from "../../fileProcessing";
 import { addProduct, deleteOneProduct, getAllProducts, getLowStockProducts, getOneProduct, 
     getOutOfStockProducts, 

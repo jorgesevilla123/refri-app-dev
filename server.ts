@@ -13,6 +13,7 @@ import productsRoutes from "./routes-and-controllers/routes/products-routes";
 import clientsRoutes from "./routes-and-controllers/routes/clients-routes";
 import currencyRoutes from "./routes-and-controllers/routes/currency-routes";
 import usersRoutes from "./routes-and-controllers/routes/users-routes";
+import categoryRoutes from "./routes-and-controllers/routes/category-routes";
 import * as dotenv from "dotenv"
 import session from "express-session";
 import connectRedis from "connect-redis";
@@ -67,10 +68,10 @@ export function app() {
   server.use(parser.json());
 
 
- const redisClient = redis.createClient();
+//  const redisClient = redis.createClient();
 
 
-  var redisStore = connectRedis(session)
+//   var redisStore = connectRedis(session)
 
 
 
@@ -79,16 +80,18 @@ export function app() {
 
   
   //Session configuration
-  server.use(session({
-    secret : "redisSecret",
-    name: "redis_practice",
-    resave: false,
-    saveUninitialized: true,
-    cookie : {
-      secure: false,
-      sameSite: true,},
-    store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
-  }))
+
+
+  // server.use(session({
+  //   secret : "redisSecret",
+  //   name: "redis_practice",
+  //   resave: false,
+  //   saveUninitialized: true,
+  //   cookie : {
+  //     secure: false,
+  //     sameSite: true,},
+  //   store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
+  // }))
 
 
 
@@ -98,6 +101,7 @@ export function app() {
   server.use('/api/clients', clientsRoutes);
   server.use('/api/currency-change', currencyRoutes);
   server.use('/api/users', usersRoutes);
+  server.use('/api/categories', categoryRoutes)
 
   //Path for the navigator to access the photos 
   server.use('/uploads', express.static(path.resolve('uploads')));
