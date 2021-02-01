@@ -27,16 +27,13 @@ export const userSchema = new Schema({
 
 
 
-const userModel = model('Users', userSchema)
-
-
-const doc = new userModel();
+ let user: userInterface
 
 
 
 
 userSchema.methods.matchesPassword = function(password: string) {
-    return bcryptjs.compare(password, this.password);
+    return bcryptjs.compare(password, user.password);
     
 }
 
