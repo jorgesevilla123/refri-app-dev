@@ -68,10 +68,10 @@ export function app() {
   server.use(parser.json());
 
 
- const redisClient = redis.createClient();
+//  const redisClient = redis.createClient();
 
 
-  var redisStore = connectRedis(session)
+//   var redisStore = connectRedis(session)
 
 
 
@@ -82,16 +82,16 @@ export function app() {
   //Session configuration
 
 
-  server.use(session({
-    secret : "redisSecret",
-    name: "redis_practice",
-    resave: false,
-    saveUninitialized: true,
-    cookie : {
-      secure: false,
-      sameSite: true,},
-    store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
-  }))
+  // server.use(session({
+  //   secret : "redisSecret",
+  //   name: "redis_practice",
+  //   resave: false,
+  //   saveUninitialized: true,
+  //   cookie : {
+  //     secure: false,
+  //     sameSite: true,},
+  //   store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400})
+  // }))
 
 
 
