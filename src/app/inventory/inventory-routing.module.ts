@@ -14,13 +14,13 @@ import { AuthGuard } from "../services/auth.guard"
 
 
 const routes: Routes = [
-  {path: '', component: InventoryMainComponent, canActivate: [AuthGuard]},
-  {path: 'inventario/busqueda', component: InventorySearchComponent, canActivate: [AuthGuard]},
-  {path: 'inventario/tabla', component: InventoryComponent, canActivate: [AuthGuard]},
-  {path: 'inventario/fuera-de-stock', component: InventoryOutOfStockComponent, canActivate: [AuthGuard]},
-  {path: 'inventario/fuera-de-stock/search', component: SearchComponent, canActivate: [AuthGuard]},
-  {path: 'inventario/bajo-stock', component: InventoryLowStockComponent, canActivate: [AuthGuard]},
-  {path: 'inventario/por-pedir', component: InventoryProductsToBuyComponent, canActivate: [AuthGuard]}
+{path: '', component: InventoryMainComponent,   /* canActivate: [AuthGuard] */ },
+{path: 'inventario/busqueda', component: InventorySearchComponent,   /* canActivate: [AuthGuard] */ },
+{path: 'inventario/tabla', component: InventoryComponent,  /*  canActivate: [AuthGuard] */},
+{path: 'inventario/fuera-de-stock', component: InventoryOutOfStockComponent,  /* canActivate: [AuthGuard] */ },
+{path: 'inventario/fuera-de-stock/search', component: SearchComponent,   /* canActivate: [AuthGuard] */},
+  {path: 'inventario/bajo-stock', component: InventoryLowStockComponent,  /* canActivate: [AuthGuard] */ },
+{path: 'inventario/por-pedir', component: InventoryProductsToBuyComponent,  /* canActivate: [AuthGuard] */}
 ];
 
 @NgModule({
