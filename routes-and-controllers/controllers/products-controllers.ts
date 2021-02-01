@@ -2,7 +2,6 @@
 import { Request, Response } from 'express';
 import Product, { ProductInterface } from "../../models/products-model";
 import * as fs from "fs-extra";
-import { QueryFindOneAndRemoveOptions } from 'mongoose';
 
 
 function paginate(
@@ -258,7 +257,7 @@ export const addProduct = (req: Request, res: Response) => {
 
 export const deleteOneProduct = (req: Request, res: Response) => {
     const id = req.params.id
-    Product.findOneAndRemove({ _id: id }, async (err, product) => {
+    Product.findOneAndRemove({ _id: id }, (err, product) => {
         if (err) {
             console.log(err)
             res.json({ message: 'Error deleting product' })
@@ -270,7 +269,7 @@ export const deleteOneProduct = (req: Request, res: Response) => {
             } else {
 
 
-                await fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
+                 fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
                 res.json(product);
                 console.log('Product deleted!');
             }
