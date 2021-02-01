@@ -255,9 +255,9 @@ export const addProduct = (req: Request, res: Response) => {
 
 
 
-export const deleteOneProduct = (req: Request, res: Response) => {
+export const deleteOneProduct = (req: Request, res: Response): any => {
     const id = req.params.id
-    Product.findOneAndRemove({ _id: id }, (err, product) => {
+    Product.findOneAndRemove({ _id: id }, (err, product): any => {
         if (err) {
             console.log(err)
             res.json({ message: 'Error deleting product' })
