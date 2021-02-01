@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "server:test": "ts-node server.ts",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run server:ssr",
+    "build": "npm run build:ssr",
     "config": "ts-node set-env.ts",
     "test": "ng test",
     "lint": "ng lint",
