@@ -18,7 +18,7 @@ export const getUsers = (req: Request, res: Response) => {
 
 
 
-export const checkSession = (req: Request, res: Response) => {
+export const checkSession = (req: any, res: Response) => {
     try {
         if(!!req.session.userId){
             return res.json({LOGGED_IN: true});
@@ -50,7 +50,7 @@ export const checkObservable = (req: Request, res: Response) => {
 
 
 
-export const register = async (req: Request, res: Response, next: NextFunction) => {
+export const register = async (req: any, res: Response, next: NextFunction) => {
         const { email, password, passwordConfirm } = req.body
 
         const found = await Users.exists({ email });
@@ -134,7 +134,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
 
 
-export const getLogin = async (req: Request, res: Response, next: NextFunction) => {
+export const getLogin = async (req: any, res: Response, next: NextFunction) => {
     // await loginSchema.validateAsync(req.body, { abortEarly: false });
 
     const { email, password } = req.body
@@ -221,7 +221,7 @@ export const getLogin = async (req: Request, res: Response, next: NextFunction) 
 
 
 export const getLogout = async (req: Request, res: Response, next: NextFunction) => {
-    new Promise((resolve, reject) => {
+    new Promise<void>((resolve, reject) => {
         req.session!.destroy((err) => {
             if (err) {
                 reject(err);
