@@ -255,14 +255,38 @@ export const addProduct = (req: Request, res: Response) => {
 
 
 
-export const deleteOneProduct = (req: Request, res: Response): any => {
+// export const deleteOneProduct = (req: Request, res: Response) => {
+//     const id = req.params.id
+//     Product.findOneAndRemove({ _id: id }, (err, product) => {
+//         if (err) {
+//             console.log(err)
+//             res.json({ message: 'Error deleting product' })
+//         }
+//         else {
+//             if (product.imagePath == 'no-photo') {
+//                 res.json(product);
+
+//             } else {
+
+
+//                  fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
+//                 res.json(product);
+//                 console.log('Product deleted!');
+//             }
+//         }
+//     })
+
+
+// }
+
+
+
+
+
+export const deleteOneProduct = (req: Request, res: Response) => {
     const id = req.params.id
-    Product.findOneAndRemove({ _id: id }, (err, product): any => {
-        if (err) {
-            console.log(err)
-            res.json({ message: 'Error deleting product' })
-        }
-        else {
+    Product.findOneAndRemove({ _id: id }).then(
+        product => {
             if (product.imagePath == 'no-photo') {
                 res.json(product);
 
@@ -273,11 +297,16 @@ export const deleteOneProduct = (req: Request, res: Response): any => {
                 res.json(product);
                 console.log('Product deleted!');
             }
+
         }
-    })
-
-
+    ).catch(
+        err => {
+            console.log(err)
+            res.json({ message: 'Error deleting product' })
+        }
+    )
 }
+
 
 
 
