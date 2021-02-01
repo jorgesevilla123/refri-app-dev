@@ -120,17 +120,37 @@ export const addToCart = (req: Request, res: Response) => {
 
 
 
+// export const deleteClient = (req: Request, res: Response) => {
+//     const id = req.params.id
+//     Client.findByIdAndDelete({_id : id}, (err, client) => {
+//         if(err) {
+//             console.log(err)
+//         }
+//         else {
+//             res.json(client);
+//         }
+// })
+// }
+
+
+
+
 export const deleteClient = (req: Request, res: Response) => {
-    const id = req.params.id
-    Client.findByIdAndDelete({_id : id}, (err, client) => {
-        if(err) {
-            console.log(err)
-        }
-        else {
-            res.json(client);
-        }
-})
+  const id = req.params.id
+  Client.findByIdAndDelete({_id : id}).then(
+    client => {
+      res.json(client);
+    }
+
+  ).catch(
+    err => {
+      console.log(err);
+    }
+  )
+
+
 }
+
 
 
 
