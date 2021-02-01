@@ -36,12 +36,12 @@ export class MainNavComponent implements OnInit{
 
 
   ngOnInit(){
-    this.signedIn$ = this.userService.checkSession().pipe(
-      map(
-        res => {return res.LOGGED_IN}
-      )
-    )
-  
+    // this.signedIn$ = this.userService.checkSession().pipe(
+    //   map(
+    //     res => {return res.LOGGED_IN}
+    //   )
+    // )
+
   }
 
 
