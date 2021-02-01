@@ -4,6 +4,9 @@ import bcryptjs from "bcryptjs";
 
 
 
+
+
+
 export interface userInterface extends Document{
     email: string,
     password: string,
@@ -21,6 +24,16 @@ export const userSchema = new Schema({
 
     
 });
+
+
+
+const userModel = model('Users', userSchema)
+
+
+const doc = new userModel();
+
+
+
 
 userSchema.methods.matchesPassword = function(password: string) {
     return bcryptjs.compare(password, this.password);
