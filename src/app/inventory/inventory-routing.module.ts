@@ -20,7 +20,9 @@ const routes: Routes = [
 {path: 'inventario/fuera-de-stock', component: InventoryOutOfStockComponent,  /* canActivate: [AuthGuard] */ },
 {path: 'inventario/fuera-de-stock/search', component: SearchComponent,   /* canActivate: [AuthGuard] */},
   {path: 'inventario/bajo-stock', component: InventoryLowStockComponent,  /* canActivate: [AuthGuard] */ },
-{path: 'inventario/por-pedir', component: InventoryProductsToBuyComponent,  /* canActivate: [AuthGuard] */}
+{path: 'inventario/por-pedir', component: InventoryProductsToBuyComponent,  /* canActivate: [AuthGuard] */},
+{path: 'inventario/categorias', component: InventoryMainComponent,  /* canActivate: [AuthGuard] */}
+
 ];
 
 @NgModule({

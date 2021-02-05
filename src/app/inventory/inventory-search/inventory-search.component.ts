@@ -30,9 +30,9 @@ export class InventorySearchComponent implements OnInit {
 
   productsCount: number;
   pager: any = {};
-  pageOfItems: Products[] = []
-  searchQuery: string 
-  page: number
+  pageOfItems: Products[] = [];
+  searchQuery: string ;
+  page: number;
 
   constructor(
     private inventoryService: InventoryService,
@@ -55,14 +55,8 @@ export class InventorySearchComponent implements OnInit {
         this.loadPage(query.q, query.page || 1);
         console.log(query.q);
         this.searchQuery = query.q;
-        this.page = query.page
-  
-
-        
-
-        
+        this.page = query.page;
       }
-
     )
 
 
@@ -110,13 +104,6 @@ export class InventorySearchComponent implements OnInit {
 
      this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  queryString, page: 1 }});
       
- 
-
-    
-         
-   
-
-     
   
   }
 

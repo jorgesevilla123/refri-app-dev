@@ -69,6 +69,14 @@ export class InventoryService {
   }
 
 
+  getProductsByCategory(category, page): any {
+    return this.http.get<any>(`${this.productsUrl}/get-categories?category=${category}&page=${page}`).pipe(
+      map(filteredProducts => {return filteredProducts})
+    )
+
+  }
+
+
 
 
 

@@ -2,6 +2,7 @@
 import { Request, Response } from 'express';
 import Product, { ProductInterface } from "../../models/products-model";
 import * as fs from "fs-extra";
+import { filter } from 'rxjs/operators';
 
 
 function paginate(
@@ -146,24 +147,56 @@ export const searchProducts = (req: Request, res: Response) => {
                 
                 let pageToInt = parseInt(page);
                 const pager = paginate(foundProducts.length, pageToInt, itemsPerPage);
-                Product.find((err, products) => {
-
+        
 
                     const pageOfItems = foundProducts.slice(pager.startIndex, pager.endIndex + 1);
 
 
                     res.json({products: foundProducts, current: page, pages: Math.ceil(foundProducts.length / itemsPerPage), count: count, pageOfItems, pager})
 
-                })
+               
             }
         })
         
     })
 
-
-
-
 }
+
+
+
+
+
+
+export const filterCategories = (req: Request, res: Response) => {
+    let itemsPerPage = 40;
+    let category = req.query.category;
+    let pageQuery: any = req.query.page;
+    let page = parseInt(pageQuery);
+    Product.find({ categorias: new RegExp(`${category}`, 'gi')}).exec(
+        (err, filteredProducts) => {
+            Product.countDocuments( (err, count) => {
+                if(err) {
+                    console.log(err) 
+                }
+                else {
+
+                    const pager = paginate(filteredProducts.length, page, itemsPerPage)
+
+                    const pageOfItems = filteredProducts.slice(pager.startIndex, pager.endIndex + 1);
+
+                    res.json({products: filteredProducts, current: page, pages: Math.ceil(filteredProducts.length / itemsPerPage), count: count, pageOfItems, pager})
+
+
+                }
+
+            })
+
+        })
+    
+}
+
+
+
 
 export const paginateProducts = (req: Request, res: Response) => {
     let itemsPerPage = 40;

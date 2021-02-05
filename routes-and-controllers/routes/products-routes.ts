@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import upload from "../../fileProcessing";
-import { addProduct, deleteOneProduct, getAllProducts, getLowStockProducts, getOneProduct, 
+import { addProduct, deleteOneProduct, filterCategories, getAllProducts, getLowStockProducts, getOneProduct, 
     getOutOfStockProducts, 
     justForTest, 
     paginateProducts, 
@@ -38,6 +38,14 @@ router.route('/low-stock').get(getLowStockProducts);
 
 //Route for searching products
 router.route('/search?').get(searchProducts);
+
+
+
+
+//Route for getting categories
+router.route('/get-categories?').get(filterCategories);
+
+
 
 
 

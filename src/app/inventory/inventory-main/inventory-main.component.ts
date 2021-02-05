@@ -6,16 +6,11 @@ import { Products } from "../../interfaces-models/products";
 import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Categories } from '../../interfaces-models/categories';
+import { Router, ActivatedRoute } from '@angular/router';
+import { InventoryProductEditComponent } from "../inventory-product-edit/inventory-product-edit.component";
+import { InventoryImageEditComponent } from "../inventory-image-edit/inventory-image-edit.component";
 
 
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  icon?: string;
-  routeLink: string | string[]
-  queryParams?: Object
-}
 
 
 @Component({
@@ -25,20 +20,17 @@ export interface Tile {
 })
 export class InventoryMainComponent implements OnInit {
   
-  searchKey: string
-  products: Products[]
-  allProducts: number 
-  response: any
-  firstPage: any = 1
-  categories : Categories[]
-
-
-  tiles: Tile[] = [
-    {cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'search', routeLink: '/inventario/busqueda'},
-    {cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'report_problem', routeLink: '/inventario/bajo-stock'},
-    {cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'remove_shopping_cart', routeLink: ['/inventario/fuera-de-stock'], queryParams: {page : 1}  },
-    {cols: 1, rows: 4, color: 'rgba(255, 166, 0, 0.801)', icon: 'add_business', routeLink: '/inventario/por-pedir'},
-  ];
+  searchKey: string;
+  products: Products[];
+  allProducts: number; 
+  response: any;
+  firstPage: any = 1;
+  categories : Categories[];
+  pageOfItems: Products[] = [];
+  pager: any = {};
+  showProductsPager: boolean 
+  categoryQuery: string
+  currentPage: number
 
 
 
@@ -48,16 +40,64 @@ export class InventoryMainComponent implements OnInit {
     public inventoryService: InventoryService,
     public alert: AlertService,
      public dialog: MatDialog,
-     private categoriesService: CategoriesService
+     private categoriesService: CategoriesService,
+     private router : Router,
+     private route: ActivatedRoute
+
 
     ) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.route.queryParams.subscribe(
+      params => {
+
+
+        if(params.category === undefined) {
+          this.showProductsPager = true
+          this.router.navigate(['/inventario'], {queryParams:  { page: params.page || 1 }});
+          this.loadProducts(params.page || 1);
+        } 
+
+        else {
+          this.showProductsPager = false
+          this.getProductsByCategories(params.category, params.page || 1);
+        }
+      }
+    )
     this.getCategories();
   
     
   }
+
+
+
+
+
+
+  getProductsByCategories(category, page){
+    this.inventoryService.getProductsByCategory(category, page).subscribe(
+      paginationObject => {
+        this.pager = paginationObject.pager,
+        this.products = paginationObject.pageOfItems,
+        this.categoryQuery = category,
+        this.currentPage = page
+      }
+
+    )
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   onAdd() {
     const dialogConfig = new MatDialogConfig();
@@ -87,11 +127,93 @@ export class InventoryMainComponent implements OnInit {
 
 
 
+
+
+    searchProducts(searchkey){
+
+     let queryString = unescape(searchkey);
+
+     this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  queryString, page: 1 }});
+      
+  
+  }
+
+
+
+
+
+
+
   getCategories() {
     this.categoriesService.getCategories().subscribe(
       categories => {
         this.categories = categories
       }
+    )
+  }
+
+
+
+
+
+  loadProducts(page): void {
+  
+    this.inventoryService.getPaginateProducts(page).subscribe(
+      paginationObject => {
+        this.pager = paginationObject.pager,
+        this.products = paginationObject.pageOfItems
+      }
+    )
+   
+
+  }
+
+
+
+  
+  onEdit(productForm: Products) {
+    this.inventoryService.populateForm(productForm)
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = productForm;
+    const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      product => {
+
+        
+       
+      
+
+        if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
+          productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio 
+          && product.data.categoria === productForm.categorias) {
+
+          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
+
+          return 
+
+
+        }
+        else {
+          this.inventoryService.editProduct(product.formData).subscribe(
+            () => {
+              this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
+              setTimeout( () => {
+                window.location.reload()
+                this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.categoryQuery, page:  this.currentPage}});
+              }, 2000)
+            }
+          )
+        }
+
+      },
+
+
+      error => console.log(error),
+
+      () => console.log('completed')
+
+
     )
 
 
@@ -99,19 +221,77 @@ export class InventoryMainComponent implements OnInit {
 
   }
 
+  onEditPhoto(productChosen: Products) {
+    
+    this.inventoryService.populatePhotoForm(productChosen);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = productChosen
+    const dialogRef = this.dialog.open(InventoryImageEditComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      product => {
+
+        if (productChosen.imagePath === product.data.imagePath) {
+
+          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
+
+        }
+        else {
+
+          this.alert.notifySuccess('Imagen editada', 2500, 'top', 'center');
+          this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.categoryQuery, page: 1 }});
+
+        }
+
+      },
+
+
+      error => console.log(error),
+
+      () => console.log('completed')
+
+
+    )
 
 
 
-  onSearchClear() {
-    this.searchKey = '';
+    
   }
 
-  getProducts(): void {
-    this.inventoryService.getProducts()
-    .subscribe(products => {
-      this.products = products.slice(0, products.length/(products.length/40)),
-    this.allProducts = products.length});
+
+
+  onDelete(product: Products) {
+    this.inventoryService.deleteProduct(product).subscribe(
+      product => {
+        if (product) {
+         
+
+
+          this.alert.notifyWarn(`Eliminando ${product.title}`, 2500, 'top', 'center');
+
+        }
+        else {
+          this.alert.notifyWarn(`No se elimino ningun producto`, 2500, 'top', 'center');
+        }
+      }
+
+    )
+ 
+
 
   }
+
+
+
+
+
+
+
+
+
+
+
 
 }
+
+

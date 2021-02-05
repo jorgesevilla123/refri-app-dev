@@ -34,59 +34,10 @@ button{
 
 
 
-/* inventory options cards from here */
-
 .bounds{
   margin-right: 50px;
   margin-left: 50px;
   margin-bottom: 20px;
-}
-
-.inventory-card {
-  /* main card styling */
-      
-  width: 200px;
-  height: 300px;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 20px;
-  border-radius: 2%;
-  background-color: rgba(255, 166, 0, 0.801);
-  
-} 
-
-
-.inventory-grid {
-  margin-top: 20px;
-
-}
-
-.inventory-tile {
-  margin: 10px;
-
-}
-
-.inventory-card-content {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-.inventory-button {
-  height: 200px;
-  width: 200px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-   transition: 200ms;
-}
-
-
-.inventory-button:hover {
-  width: 250px;
-  height: 250px;
-
 }
 
 
@@ -100,8 +51,27 @@ button{
 
 
 
-.cards-title {
-  width: 100%;
-  float: left;
+.inventory-search-form {
+  width: 60%;
   margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
+
+
+.inventory-table-categories {
+  display: flex;
+  margin: auto;
+}
+
+
+.inventory-categories {
+  display: flex;
+  margin-left: 20px;
+} 
+
+mat-chip {
+  display: inline;
+}
+
+
