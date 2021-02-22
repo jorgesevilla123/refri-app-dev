@@ -68,7 +68,7 @@ export function app() {
   server.use(parser.json());
 
 
- const redisClient = redis.createClient();
+ const redisClient = redis.createClient(process.env.REDIS_URL);
 
 
   var redisStore = connectRedis(session)
