@@ -88,7 +88,7 @@ export class InventoryService {
 
   getPaginateProducts(page: any): Observable<any> {
     return this.http.get<any>(`${this.productsUrl}/products?page=${page}`).pipe(
-      map(products => {return products})
+      map(products => { return products})
     )
   }
 

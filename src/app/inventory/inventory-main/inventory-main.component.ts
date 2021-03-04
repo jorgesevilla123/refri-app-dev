@@ -160,8 +160,9 @@ export class InventoryMainComponent implements OnInit {
   
     this.inventoryService.getPaginateProducts(page).subscribe(
       paginationObject => {
-        this.pager = paginationObject.pager,
-        this.products = paginationObject.pageOfItems
+        console.log(paginationObject)
+        this.pager = paginationObject.paginator,
+        this.products = paginationObject.pageItems
       }
     )
    

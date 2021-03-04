@@ -3,12 +3,13 @@ import { Request, Response } from 'express';
 import Product, { ProductInterface } from "../../models/products-model";
 import * as fs from "fs-extra";
 import { filter } from 'rxjs/operators';
+import redis from 'redis';
 
 
 function paginate(
     totalItems: number,
-    currentPage: any ,
-    pageSize: number    ,
+    currentPage: any,
+    pageSize: number,
     maxPages: number = 10
 ) {
     // calculate total pages
@@ -46,13 +47,13 @@ function paginate(
     }
 
     // calculate start and end item indexes
-    let startIndex= (currentPage - 1) * pageSize;
+    let startIndex = (currentPage - 1) * pageSize;
     let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
     // create an array of pages to ng-repeat in the pager control
     let pages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
-    
-    
+
+
 
     // return object with all pager properties required by the view
     return {
@@ -72,7 +73,7 @@ function paginate(
 
 
 
-
+const redisClient = redis.createClient(process.env.REDIS_URL);
 
 
 
@@ -100,12 +101,12 @@ export const getAllProducts = (req: Request, res: Response) => {
 
 
 export const getOutOfStockProducts = (req: Request, res: Response) => {
-    Product.find({ cantidad: 0  }, (err, products) => {
+    Product.find({ cantidad: 0 }, (err, products) => {
         if (err) {
             console.log(err);
             res.json({ ERROR_MESSAGE: 'error finding out of stock products' })
         }
-        else {  
+        else {
             res.json(products);
         }
     })
@@ -115,8 +116,8 @@ export const getOutOfStockProducts = (req: Request, res: Response) => {
 
 
 export const getLowStockProducts = (req: Request, res: Response) => {
-    Product.find({ cantidad: { $lte: 5}}, (err, products) => {
-        if(err) {
+    Product.find({ cantidad: { $lte: 5 } }, (err, products) => {
+        if (err) {
             console.log(err)
         } else {
             res.json(products);
@@ -135,30 +136,44 @@ export const searchProducts = (req: Request, res: Response) => {
 
     let product = req.query.q
     let page: any = req.query.page
+
+
+
+    let redisQuery = 
+
+
+
+
+
+
+
+
     Product.find({ $or: [{ title: new RegExp(`${product}`, 'gi') }, { modelo: new RegExp(`${product}`, 'gi') }] })
-    .exec((err, foundProducts) => {
-        Product.countDocuments((err, count) => {
-            if(err) {
-                console.log(err)
-            }
+        .exec((err, foundProducts) => {
+            Product.countDocuments((err, count) => {
+                if (err) {
+                    console.log(err)
+                }
 
-            else {
+                else {
 
-                
-                let pageToInt = parseInt(page);
-                const pager = paginate(foundProducts.length, pageToInt, itemsPerPage);
-        
+
+                    let pageToInt = parseInt(page);
+                    const pager = paginate(foundProducts.length, pageToInt, itemsPerPage);
+
 
                     const pageOfItems = foundProducts.slice(pager.startIndex, pager.endIndex + 1);
 
+                 
 
-                    res.json({products: foundProducts, current: page, pages: Math.ceil(foundProducts.length / itemsPerPage), count: count, pageOfItems, pager})
 
-               
-            }
+                    res.json({ products: foundProducts, current: page, pages: Math.ceil(foundProducts.length / itemsPerPage), count: count, pageOfItems, pager })
+
+
+                }
+            })
+
         })
-        
-    })
 
 }
 
@@ -172,11 +187,11 @@ export const filterCategories = (req: Request, res: Response) => {
     let category = req.query.category;
     let pageQuery: any = req.query.page;
     let page = parseInt(pageQuery);
-    Product.find({ categorias: new RegExp(`${category}`, 'gi')}).exec(
+    Product.find({ categorias: new RegExp(`${category}`, 'gi') }).exec(
         (err, filteredProducts) => {
-            Product.countDocuments( (err, count) => {
-                if(err) {
-                    console.log(err) 
+            Product.countDocuments((err, count) => {
+                if (err) {
+                    console.log(err)
                 }
                 else {
 
@@ -184,7 +199,7 @@ export const filterCategories = (req: Request, res: Response) => {
 
                     const pageOfItems = filteredProducts.slice(pager.startIndex, pager.endIndex + 1);
 
-                    res.json({products: filteredProducts, current: page, pages: Math.ceil(filteredProducts.length / itemsPerPage), count: count, pageOfItems, pager})
+                    res.json({ products: filteredProducts, current: page, pages: Math.ceil(filteredProducts.length / itemsPerPage), count: count, pageOfItems, pager })
 
 
                 }
@@ -192,7 +207,7 @@ export const filterCategories = (req: Request, res: Response) => {
             })
 
         })
-    
+
 }
 
 
@@ -200,42 +215,80 @@ export const filterCategories = (req: Request, res: Response) => {
 
 export const paginateProducts = (req: Request, res: Response) => {
     let itemsPerPage = 40;
-    
-   
+
+
     let page: any = req.query.page
     let pageToInt = parseInt(page);
-   
 
-
-    Product.find({}).skip((itemsPerPage * page) - itemsPerPage).limit(itemsPerPage)
-    .exec((err, paginatedProducts) => {
-        Product.countDocuments( (err, count) => {
-            if(err) {
-                console.log(err)
-                
-            } else {
-                const pageSize = 40;
-
-                const pager = paginate(count, pageToInt, pageSize);
-                Product.find( (err, products) => { 
-                   const pageOfItems = products.slice(pager.startIndex, pager.endIndex + 1);
-
-
-                   res.json({products: paginatedProducts, current: page, pages: Math.ceil(count / itemsPerPage), count: count, pageOfItems, pager})
-
-                });
-
-            
-
-        
-             
-            }
-        })
+    redisClient.get(page, (err, products) => {
         if (err) {
-            console.log('Error executing products pagination', err)
+            throw err
+        }
+         if (products) {
+            const parsedProducts = JSON.parse(products);
+            res.json(parsedProducts);
+            console.log('sended by in-memory db')
+            return
+        }
+        else {
+
+            Product.find({}).skip((itemsPerPage * page) - itemsPerPage).limit(itemsPerPage)
+                .exec((err, paginatedProducts) => {
+                    Product.countDocuments((err, count) => {
+                        if (err) {
+                            console.log(err)
+
+                        } else {
+                            const pageSize = 40;
+
+                            const pager = paginate(count, pageToInt, pageSize);
+                            Product.find((err, products) => {
+                                const pageOfItems = products.slice(pager.startIndex, pager.endIndex + 1);
+
+                                const productsObj = {
+                                    products: paginatedProducts,
+                                    current: page,
+                                    pages: Math.ceil(paginatedProducts.length / itemsPerPage),
+                                    count: count,
+                                    pageItems: pageOfItems, 
+                                    paginator: pager
+                                }
+            
+            
+                                redisClient.set(page, JSON.stringify(productsObj), (err, reply) => {
+                                    if(err) {
+                                        console.log(err)
+                                    } else {
+                                        console.log(reply, 'product saved in memory');
+                                    }
+                                    
+                                })
+
+
+                                res.json(productsObj);
+                                console.log('sended by mongodb')
+                                return
+
+                            });
+
+
+
+
+
+                        }
+                    })
+                    if (err) {
+                        console.log('Error executing products pagination', err)
+                    }
+                })
+
         }
     })
-  
+
+
+
+
+
 }
 
 
@@ -326,7 +379,7 @@ export const deleteOneProduct = (req: Request, res: Response) => {
             } else {
 
 
-                 fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
+                fs.unlink(`C:/Users/jsdel/refridata${product.imagePath}`)
                 res.json(product);
                 console.log('Product deleted!');
             }
@@ -349,7 +402,7 @@ export const deleteOneProduct = (req: Request, res: Response) => {
 export const updateOneProduct = (req: Request, res: Response) => {
     const id = req.params.id
     const { title, modelo, precio, cantidad, categoria } = req.body
-    Product.findByIdAndUpdate({ _id: id }, { title: title, modelo: modelo, precio: precio, cantidad: cantidad, $push: {categorias: categoria}}, { upsert: false },  (err, product) => {
+    Product.findByIdAndUpdate({ _id: id }, { title: title, modelo: modelo, precio: precio, cantidad: cantidad, $push: { categorias: categoria } }, { upsert: false }, (err, product) => {
         if (err) {
             console.log(err)
             res.json({ message: 'Error updating product' })
@@ -378,3 +431,17 @@ export const updateProductImage = (req: Request, res: Response) => {
 
     });
 }
+
+
+
+
+
+
+
+
+   
+    
+
+    
+
+

@@ -25,7 +25,7 @@ registerLocaleData(localeDe, 'fr');
 })
 export class InventorySearchComponent implements OnInit {
 
-
+s
 
 
   productsCount: number;
