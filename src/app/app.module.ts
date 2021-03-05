@@ -24,6 +24,13 @@ import { ClientsManageModule } from "./clients-manage/clients-manage.module";
 import { FinanceModule } from "./finance/finance.module";
 import { MainNavModule } from './main-nav/main-nav.module';
 import { DashboardModule } from "./dashboard/dashboard.module";
+import { ResponsiveNavModule } from "./responsive-nav/responsive-nav.module";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+
 
 
 
@@ -39,7 +46,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
     UsersComponent,
     UserSignupComponent,
     UserLoginComponent,
-    
+   
 
   ],
   imports: [
@@ -56,7 +63,13 @@ import { DashboardModule } from "./dashboard/dashboard.module";
     ClientsManageModule,
     FinanceModule,
     MainNavModule,
-    DashboardModule
+    DashboardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    ResponsiveNavModule
   
 
 

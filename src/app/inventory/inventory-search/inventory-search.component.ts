@@ -12,6 +12,7 @@ import localeDe from "@angular/common/locales/en-DE";
 import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Router, ActivatedRoute } from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 registerLocaleData(localeDe, 'fr');
@@ -33,6 +34,7 @@ s
   pageOfItems: Products[] = [];
   searchQuery: string ;
   page: number;
+  isSmallScreen: boolean
 
   constructor(
     private inventoryService: InventoryService,
@@ -40,7 +42,8 @@ s
     private alert: AlertService,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private breakPointObserver: BreakpointObserver
   ) { }
 
   //Pushing a search term into the Observable stream
@@ -49,6 +52,22 @@ s
 
 
   ngOnInit(): void {
+    //Breakpoint observer returning true if the viewport is less than 600px
+    if(this.breakPointObserver.isMatched('(max-width: 600px)')) {
+      console.log('the screen size is less than 600px')
+    }
+
+    this.breakPointObserver.observe('(max-width: 600px)').subscribe(
+      breakpoints => {
+        this.isSmallScreen = breakpoints.matches,
+        console.log(breakpoints.matches)
+      }
+    )
+    
+
+
+
+
 
      this.route.queryParams.subscribe(
       query => {

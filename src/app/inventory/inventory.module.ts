@@ -16,6 +16,8 @@ import { InventoryLowStockComponent } from './inventory-low-stock/inventory-low-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InventoryProductsToBuyComponent } from './inventory-products-to-buy/inventory-products-to-buy.component';
 import { SearchComponent } from './search/search.component';
+import { ResponsiveNavModule } from '../responsive-nav/responsive-nav.module';
+import { LayoutModule } from '@angular/cdk/layout'
 
 
 
@@ -38,8 +40,10 @@ import { SearchComponent } from './search/search.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    ResponsiveNavModule,
     MainNavModule,
     FlexLayoutModule,
+    LayoutModule
   ],
   exports: [
     InventoryImageEditComponent,

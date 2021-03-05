@@ -9,6 +9,7 @@ import { Categories } from '../../interfaces-models/categories';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryProductEditComponent } from "../inventory-product-edit/inventory-product-edit.component";
 import { InventoryImageEditComponent } from "../inventory-image-edit/inventory-image-edit.component";
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 
@@ -31,6 +32,7 @@ export class InventoryMainComponent implements OnInit {
   showProductsPager: boolean 
   categoryQuery: string
   currentPage: number
+  isSmallScreen: boolean
 
 
 
@@ -42,12 +44,27 @@ export class InventoryMainComponent implements OnInit {
      public dialog: MatDialog,
      private categoriesService: CategoriesService,
      private router : Router,
-     private route: ActivatedRoute
+     private route: ActivatedRoute,
+     private breakpointObserver: BreakpointObserver
 
 
     ) { }
 
   ngOnInit(): void {
+
+    this.breakpointObserver.observe('(max-width: 600px)').subscribe(
+      breakpoints => {
+        this.isSmallScreen = breakpoints.matches,
+        console.log(breakpoints.matches)
+      }
+    )
+    
+
+
+
+
+
+
     this.route.queryParams.subscribe(
       params => {
 
