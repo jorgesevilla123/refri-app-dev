@@ -22,6 +22,7 @@ export class MainNavComponent implements OnInit{
     );
 
   signedIn$: Observable<boolean>
+  isSmallScreen: boolean
 
 
 
@@ -36,8 +37,18 @@ export class MainNavComponent implements OnInit{
 
 
   ngOnInit(){
+
+
+    this.breakpointObserver.observe('(max-width: 600px)').subscribe(
+      breakpoints => {
+        this.isSmallScreen = breakpoints.matches,
+        console.log(breakpoints.matches)
+      }
+    )
+
+
     // this.signedIn$ = this.userService.checkSession().pipe(
-    //   map(
+    //   map( 
     //     res => {return res.LOGGED_IN}
     //   )
     // )

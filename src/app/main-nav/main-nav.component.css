@@ -70,51 +70,17 @@ mat-toolbar a img{
 }
 
 
+@media(min-width: 600px){
+    #small-dv-toolbar{
+        padding: 10px;
+        width: auto;
 
-
-@media (max-width: 881px) and (min-width: 581px){
-
-    
-mat-toolbar .desktop-display{
-    display: none;
-}        
-
-
-
-mat-toolbar a img {
-
-    display: inline-block;
-    margin-right: auto;
-    margin-left: auto;  
-    width: 200px;
     }
-
+    mat-icon{
+        padding-left: 8px;
+    }
 }
 
 
-
-
-/* media breakpoints for mobile devices  */
-@media (max-width: 580px ) and (min-width: 280px){
-
-    
-
-mat-toolbar .desktop-display{
-    display: none;
-}        
-
-
-
-mat-toolbar a img {
-
-    
-    display: inline-block;
-    margin-right: auto;
-    margin-left: auto;
-    width: 200px;
-}
-
-
-}
 
 
