@@ -5,7 +5,7 @@
 
 
 <mat-sidenav-container style="height: 100%; " class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [ngClass]="{hidden: !(isHandset$ | async)}"
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [ngClass]="{hidden: !(isHandset$ | async)}"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="padding: 10px; width: auto;">Navegacion <mat-icon>apps</mat-icon></mat-toolbar>
@@ -16,7 +16,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar id="small-dv-toolbar">
+    <mat-toolbar class="desktop-toolbar">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
