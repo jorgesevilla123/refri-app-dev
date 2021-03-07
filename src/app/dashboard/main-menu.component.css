@@ -1,6 +1,15 @@
 
 
 
+
+
+/* media breakpoint for laptops and desktop devices */
+@media (max-width: 1483px) and (min-width: 1183px){
+
+
+  
+
+
 * { /* general fonts display */
   font-weight: 200;
   color: black;
@@ -63,12 +72,6 @@
 .inventory-button {
   transition: 200ms;
 }
-
-
-
-
-/* media breakpoint for laptops and desktop devices */
-@media (max-width: 1483px) and (min-width: 1183px){
 
   #more-button{
     width: auto;
@@ -213,6 +216,11 @@ font-size: 20px;
 }
 
 
+
+
+
+
+
 /* media breakpoint for laptops */
 @media (max-width: 1182px) and (min-width: 882px){
 
@@ -234,21 +242,12 @@ font-size: 20px;
 
 
 
-@media (max-width: 580px ) and (min-width: 280px){
+@media (max-width: 700px ) and (min-width: 280px){
+
 
   * { /* general base font styles */
     font-weight: 200;
   }
-
-
-  #more-link{  /* more icon alignment and sizing */
-    font-size: 25px;
-    float: right;
-  }
-
-
-
-
 
 
   
@@ -262,10 +261,6 @@ font-size: 20px;
   }
 
 
-  div .sec1{
-    width: 300px;
-    height: 300px;
-  }
 
   mat-card{
     height: 200px;
@@ -273,34 +268,11 @@ font-size: 20px;
 
 
 
-  div{ /* card alignment and spacing */
-  
-    text-align: center;
-    margin: 10px;
-
-  }
-
-
- 
-
-
-
-  #main-menu-cards{
-    display: inline;
-  
-  }
-
-
-
-
  .cards-title{  /* cards title font size and positioning */
    font-size: 18px;
-   float: left;
-   width: 100%;
+
    text-align: center;
   
-
-
  }
 
   
@@ -308,8 +280,8 @@ font-size: 20px;
 
 #inventory-card{  /* main card styling */
       
-  width: 250px;
-  height: 200px;
+  width: 300px;
+  height: 250px;
   margin-right: auto;
   margin-left: auto;
   background-color: rgba(255, 166, 0, 0.801);
@@ -318,30 +290,51 @@ font-size: 20px;
 }
 
 #inventory-button{  /* main button styling */
+display: block;
+margin: auto;
   width: 200px;
   height: 150px;
   background-color: rgba(255, 166, 0, 0.801);
 
 }
 
-#pos{
+/* color, position, and size styles for the button */
+#config-button {
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 150px;
+    background-color: rgba(0, 102, 255, 0.822);
+}
+
+#clientes{
+  width: 300px;
+  height: 250px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: rgba(2, 148, 2, 0.76);
 
 }
 
+#clientes-button {
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 150px;
+   background-color: rgba(2, 148, 2, 0.76);
+
+}
+
+/*config card styles  */
 #config{
-  background-color: rgba(0, 102, 255, 0.822);
+     background-color: rgba(0, 102, 255, 0.822);
+     width: 300px;
+     height: 250px;
+
 
 }
 
-#busqueda{
-  background-color: rgba(255, 0, 0, 0.753);
 
-}
-
-#more-button{
-  float: right;
-}
 
 button .regular-icon{  /* general icon alignment and sizing */
   display: inline; 
@@ -354,8 +347,115 @@ button .regular-icon{  /* general icon alignment and sizing */
   
 }
 
-
   
   
   }
   
+
+
+
+
+
+
+
+
+
+
+/* media breakpoint for laptops and desktop devices */
+@media (max-width: 1483px) and (min-width: 1183px){
+
+  #more-button{
+    width: auto;
+  }
+
+  mat-card-title{
+    width: 200px;
+  }
+
+  
+
+  #more-link{
+    font-size: 30px;
+    float: right;
+  }
+
+
+  button mat-icon{
+    font-size: 20px;
+  }
+
+
+
+
+  mat-icon #card-title-icon{ /* card title icons */
+     display: inline;
+   
+  }
+
+
+  button mat-icon{  /* main buttons icons alignment and sizing */
+    display: inline; 
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 80px;
+    
+  }
+
+
+  
+  button .regular-icon{  /* general icon alignment and sizing */
+    display: inline; 
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 22px;
+    color: black;
+
+   
+    
+  }
+
+   .inventory-button{  /* main buttons alignment */
+    
+    height: 200px;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    
+  }
+
+  div mat-card{   /* cards height */
+    height: 300px;
+  }
+
+
+  div{   /* cards div positioning and spacing */
+    text-align: center;
+    margin: 10px;
+    margin-top: 20px;
+    height: 200px;
+  }
+
+
+  
+h1, p{
+  color: black;
+  font-weight: 100;
+  font-size: 23px;
+}
+
+
+
+
+
+p {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+font-size: 20px;
+}
+
+}
+
+  
+
+
+
