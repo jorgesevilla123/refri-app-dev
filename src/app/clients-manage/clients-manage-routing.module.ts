@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'ventas-y-clientes', component: SalesClientsComponent, canActivate: [AuthGuard]},
   {path: 'clientes/ventas-por-clientes', component: SalesComponent, canActivate: [AuthGuard]},
   {path: 'clientes/administrar-clientes', component: ClientsMainComponent, canActivate: [AuthGuard]},
-  {path: 'detalles-clientes/:id', redirectTo: '/detalles-cliente/:id', canActivate: [AuthGuard]}, 
+  { path: 'detalles-clientes/:id', redirectTo: '/detalles-cliente/:id' }, 
   {path: 'detalles-cliente/:id', component: ClientDetailsComponent, canActivate: [AuthGuard]},
   {path: 'venta-por-cliente/:id', component: SalesProcessComponent, canActivate: [AuthGuard]},
 
