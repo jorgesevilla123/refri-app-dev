@@ -6,7 +6,7 @@ export interface ProductInterface extends Document {
     precio: number,
     cantidad: number,
     imagePath: string,
-    categorias: string[]
+    categorias: string[],
 }
 
 

@@ -25,6 +25,8 @@ import { FinanceModule } from "./finance/finance.module";
 import { MainNavModule } from './main-nav/main-nav.module';
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { ResponsiveNavModule } from "./responsive-nav/responsive-nav.module";
+import { WarehouseModule } from "./warehouse/warehouse.module";
+import { SupplierModule } from "./supplier/supplier.module";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -64,6 +66,8 @@ import { MatListModule } from '@angular/material/list';
     FinanceModule,
     MainNavModule,
     DashboardModule,
+    WarehouseModule,
+    SupplierModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

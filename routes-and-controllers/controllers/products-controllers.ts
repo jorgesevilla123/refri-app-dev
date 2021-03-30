@@ -73,7 +73,7 @@ function paginate(
 
 
 
-const redisClient = redis.createClient(process.env.REDIS_URL);
+export const redisClient = redis.createClient(process.env.REDIS_URL);
 
 
 
@@ -88,15 +88,45 @@ export const justForTest = (req: Request, res: Response) => {
 
 
 export const getAllProducts = (req: Request, res: Response) => {
-    Product.find((err, products) => {
-        if (err) {
-            console.log(err)
-            res.json({ message: 'error fetching products' })
+
+
+    redisClient.get('products', (err, products) => {
+        if(err) {
+            res.json({ message: "Error consultando la cache"})
+        }
+        if (products) {
+            var parsedProducts = JSON.parse(products)
+            res.json({ message: "Productos enviado por cache", parsedProducts})
+            return parsedProducts
         }
         else {
-            res.json(products);
+            Product.find((err, products) => {
+                if (err) {
+                    console.log(err)
+                    res.json({ message: 'error fetching products' })
+                }
+                else {
+                    redisClient.set('products', JSON.stringify(products), (err, reply) => {
+                        if(err) {
+                            console.log(err)
+                        } else {
+                            console.log(reply, 'product saved in memory');
+                        }
+                        
+                    })
+
+                    res.json({ message: "Productos enviado desde la base de datos", products})
+                    return products
+                }
+            })
+
         }
     })
+
+
+
+
+    
 }
 
 

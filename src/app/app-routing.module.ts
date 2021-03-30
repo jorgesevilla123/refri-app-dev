@@ -16,6 +16,8 @@ const routes: Routes = [
   {path: 'inventario', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule)},
   {path: 'finanzas', loadChildren: () => import('./finance/finance.module').then(m => m.FinanceModule)},
   {path: 'clientes', loadChildren: () => import('./clients-manage/clients-manage.module').then(m => m.ClientsManageModule)},
+  {path: 'almacenes', loadChildren: () => import('./warehouse/warehouse.module').then(m => m.WarehouseModule)},
+  {path: 'proveedores', loadChildren: () => import('./supplier/supplier.module').then(m => m.SupplierModule)}
 
 
 

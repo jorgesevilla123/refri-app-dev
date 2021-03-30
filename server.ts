@@ -1,4 +1,4 @@
-import 'zone.js/dist/zone-node';
+import 'zone.js/dist/zone.js';
 import 'multer';
 import * as parser from "body-parser";
 import { ngExpressEngine } from '@nguniversal/express-engine';
@@ -14,10 +14,12 @@ import clientsRoutes from "./routes-and-controllers/routes/clients-routes";
 import currencyRoutes from "./routes-and-controllers/routes/currency-routes";
 import usersRoutes from "./routes-and-controllers/routes/users-routes";
 import categoryRoutes from "./routes-and-controllers/routes/category-routes";
+import suppliersRoutes from "./routes-and-controllers/routes/suppliers-routes";
 import * as dotenv from "dotenv"
 import session from "express-session";
 import connectRedis from "connect-redis";
 import redis from 'redis';
+import warehouseRoutes from "./routes-and-controllers/routes/warehouse-routes";
 
 
 
@@ -107,7 +109,9 @@ const redisClient = redis.createClient(process.env.REDIS_URL);
   server.use('/api/clients', clientsRoutes);
   server.use('/api/currency-change', currencyRoutes);
   server.use('/api/users', usersRoutes);
-  server.use('/api/categories', categoryRoutes)
+  server.use('/api/categories', categoryRoutes);
+  server.use('/api/suppliers', suppliersRoutes);
+  server.use('/api/warehouse', warehouseRoutes);
 
   //Path for the navigator to access the photos 
   server.use('/uploads', express.static(path.resolve('uploads')));
