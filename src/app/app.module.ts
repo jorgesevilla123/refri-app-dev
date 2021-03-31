@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { FlexLayoutModule } from "@angular/flex-layout"
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "./material/material.module";
@@ -53,7 +52,6 @@ import { MatListModule } from '@angular/material/list';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    FlexLayoutModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,

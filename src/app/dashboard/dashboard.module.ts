@@ -5,7 +5,6 @@ import { MainMenuComponent } from "./main-menu.component";
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MainNavModule } from '../main-nav/main-nav.module';
 import { MaterialModule } from "../material/material.module"
-import { FlexLayoutModule } from "@angular/flex-layout"
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import { FlexLayoutModule } from "@angular/flex-layout"
     DashboardRoutingModule,
     MainNavModule,
     MaterialModule,
-    FlexLayoutModule
   ]
 })
 export class DashboardModule { }

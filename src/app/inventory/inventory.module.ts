@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainNavModule } from "../main-nav/main-nav.module";
 import { InventoryOutOfStockComponent } from './inventory-out-of-stock/inventory-out-of-stock.component';
 import { InventoryLowStockComponent } from './inventory-low-stock/inventory-low-stock.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { InventoryProductsToBuyComponent } from './inventory-products-to-buy/inventory-products-to-buy.component';
 import { SearchComponent } from './search/search.component';
 import { ResponsiveNavModule } from '../responsive-nav/responsive-nav.module';
@@ -42,7 +41,6 @@ import { LayoutModule } from '@angular/cdk/layout'
     CommonModule,
     ResponsiveNavModule,
     MainNavModule,
-    FlexLayoutModule,
     LayoutModule
   ],
   exports: [
