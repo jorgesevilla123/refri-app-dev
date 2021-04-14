@@ -1,1 +1,34 @@
-<h4>Los almacenes funcionan</h4>
+<h2 class="warehouse-main-title">Almacenes</h2>
+
+
+
+<div class="warehouse-actions">
+
+    <button id="add-warehouse" mat-stroked-button (click)="onAdd()">
+        Añadir almacen <mat-icon id="add-icon"> add_business</mat-icon>
+      </button>
+
+</div>
+
+
+
+
+<mat-grid-list cols="4" rowHeight="200px">
+    <mat-grid-tile *ngFor="let warehouse of warehouses">
+        <mat-card class="clients-card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon>store</mat-icon>
+                </div>
+                <button class="settings-button" style="float: right;" mat-icon-button (click)="onEdit(warehouse)">
+          <mat-icon class="settings-icon">settings</mat-icon>
+        </button>
+                <mat-card-title>{{warehouse.warehouse_name}}</mat-card-title>
+                <mat-card-subtitle>{{warehouse.warehouse_location}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+                <button class="warehouse-details" mat-stroked-button [routerLink]="['/almacenes/administrar-almacen', warehouse._id, warehouse.warehouse_name]" [queryParams]="{page: 1}">Ingresar a {{warehouse.warehouse_name}}</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

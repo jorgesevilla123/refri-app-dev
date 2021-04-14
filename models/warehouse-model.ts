@@ -4,7 +4,7 @@ import { ProductInterface, ProductSchema } from "../models/products-model";
 export interface warehouseInterface extends Document{
     warehouse_location: string,
     warehouse_name: string,
-    products: ProductInterface[],
+    products: any[],
     total_stock: number
 }
 
@@ -12,7 +12,7 @@ export interface warehouseInterface extends Document{
 export const warehouseSchema: Schema = new Schema({
     warehouse_location: String,
     warehouse_name: String,
-    products: {type: [ProductSchema], default: ['No hay productos en el almacen todavia']},
+    products: {type: []},
     total_stock: Number
 })
 

@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Crear almacen</h2>
+<form [formGroup]="warehouseService.addWarehouseForm" (submit)="addWarehouse()" enctype="multipart/form-data">
+
+    <div mat-dialog-content>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Ubicacion del almacen</mat-label>
+            <input #description matInput placeholder="Av. 2 El milagro" formControlName="warehouse_location">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre del almacen</mat-label>
+            <input #model matInput placeholder="El milagro, almacen 1, alamacen Sierra Maestra" formControlName="warehouse_name">
+        </mat-form-field>
+    </div>
+
+
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button> <mat-icon>add</mat-icon> Crear</button>
+        <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
+    </div>
+</form>

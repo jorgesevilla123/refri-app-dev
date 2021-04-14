@@ -1,0 +1,10 @@
+/* making the form field full width */
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-dialog-actions {
+    display: block;
+    margin: auto;
+}

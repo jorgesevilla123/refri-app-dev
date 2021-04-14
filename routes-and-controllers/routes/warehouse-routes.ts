@@ -1,13 +1,19 @@
 import { Router } from "express";
-import { addWarehouse, getWarehouse, deleteWarehouse, searchWarehouse, updateWarehouse, removeProductFromWarehouse, removeAllProducts, addProductToWarehouse, addAllProductsToWarehouse  } from "../controllers/warehouse-controllers";
-
+import { addWarehouse, getWarehouse, deleteWarehouse, searchWarehouse, updateWarehouse, removeProductFromWarehouse, removeAllProducts, addProductToWarehouse, addAllProductsToWarehouse, getOneWarehouse, searchWarehouseProducts  } from "../controllers/warehouse-controllers";
+import upload from "../../fileProcessing";
 
 const router = Router();
 
 
 
 
-router.route('/get-warehouses').get(getWarehouse)
+router.route('/get-warehouses').get(getWarehouse);
+
+
+
+
+router.route('/get-one-warehouse/:id').get(getOneWarehouse);
+
 
 
 
@@ -15,8 +21,12 @@ router.route('/search-warehouse?').get(searchWarehouse);
 
 
 
+router.route('/search-products-warehouse/:id?').get(searchWarehouseProducts);
 
-router.route('/add-warehouse').post(addWarehouse);
+
+
+
+router.route('/add-warehouse').post(upload.none(), addWarehouse);
 
 
 
@@ -58,7 +68,7 @@ router.route('/remove-all-products/:id').delete(removeAllProducts);
 
 
 
-router.route('/update-warehouse/:id').put(updateWarehouse);
+router.route('/update-warehouse/:id').put(upload.none(),updateWarehouse);
 
 
 

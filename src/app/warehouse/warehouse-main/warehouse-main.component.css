@@ -1,0 +1,42 @@
+/* media breakpoint for laptops and desktop devices */
+
+@media (max-width: 1483px) and (min-width: 1183px) {
+    .warehouse-main-title {
+        font-weight: 200;
+        margin: 20px;
+    }
+    /* warehouse actions div */
+    .warehouse-actions {
+        margin: 20px;
+    }
+    /* add button icon */
+    #add-icon {
+        font-size: 24px;
+        padding-bottom: 1px;
+    }
+    /* warehouse fonts colors */
+    #add-warehouse {
+        color: rgba(255, 0, 0, 0.672)
+    }
+    /* warehouse cards's detail button coloring */
+    .warehouse-details {
+        background-color: dodgerblue;
+        float: right;
+        color: white;
+        font-size: 14px;
+    }
+    .warehouse-delete {
+        color: red;
+    }
+    .settings-icon {
+        transition: 200ms
+    }
+    .settings-icon:hover {
+        font-size: 30px;
+    }
+}
+
+
+/* media breakpoints for mobile devices  */
+
+@media (max-width: 700px) and (min-width: 280px) {}

@@ -17,7 +17,7 @@ export const ProductSchema: Schema = new Schema({
     cantidad: Number,
     imagePath: String,
     categorias: Array
-    
+
 })
 
 

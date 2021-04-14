@@ -33,6 +33,7 @@ export class InventoryMainComponent implements OnInit {
   categoryQuery: string
   currentPage: number
   isSmallScreen: boolean
+  count: number
 
 
 
@@ -176,10 +177,11 @@ export class InventoryMainComponent implements OnInit {
   loadProducts(page): void {
   
     this.inventoryService.getPaginateProducts(page).subscribe(
-      paginationObject => {
+      paginationObject => { 
         console.log(paginationObject)
         this.pager = paginationObject.paginator,
         this.products = paginationObject.pageItems
+        this.count = paginationObject.count
       }
     )
    

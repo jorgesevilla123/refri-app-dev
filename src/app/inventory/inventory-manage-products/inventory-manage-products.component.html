@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>Añadir producto</h2>
 <form [formGroup]="productsForm" (submit)="addProduct()" enctype="multipart/form-data">
 
-<div mat-dialog-content>
-   
+    <div mat-dialog-content>
+
         <mat-form-field appearance="outline">
 
             <mat-label>Descripcion del producto</mat-label>
@@ -21,31 +21,25 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Cantidad en almacen</mat-label>
-            <input  #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
+            <input #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
         </mat-form-field>
 
 
-        
+
         <mat-form-field appearance="outline">
             <mat-label>Categoria del producto</mat-label>
-            <input  #category matInput placeholder="Categoria del producto" formControlName="categoria">
+            <input #category matInput placeholder="Categoria del producto" formControlName="categoria">
         </mat-form-field>
 
 
-     
-            <button type="button" id="file-button" mat-raised-button (click)="fileInput.click()"><mat-icon>get_app</mat-icon> Subir imagen</button>
-        <input name="imagePath" #fileInput  style="display: none;" type="file" (change)="onFileUpload($event)">
-       </div>
-    
 
-        <div mat-dialog-actions>
-            <button type="submit" mat-raised-button > <mat-icon>add</mat-icon> Crear</button>
-            <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
-        </div>
-    </form>
+        <button type="button" id="file-button" mat-raised-button (click)="fileInput.click()"><mat-icon>get_app</mat-icon> Subir imagen</button>
+        <input name="imagePath" #fileInput style="display: none;" type="file" (change)="onFileUpload($event)">
+    </div>
 
 
-
-
-
-
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button> <mat-icon>add</mat-icon> Crear</button>
+        <button mat-raised-button [mat-dialog-close]="true"><mat-icon>close</mat-icon> Cancelar</button>
+    </div>
+</form>

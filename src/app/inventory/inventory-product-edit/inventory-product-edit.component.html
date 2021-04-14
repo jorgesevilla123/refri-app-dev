@@ -2,13 +2,13 @@
 
 
 <form [formGroup]="inventoryService.productsForm" (submit)="editProduct()">
-<div mat-dialog-content>
+    <div mat-dialog-content>
 
 
-    <mat-form-field  id="id-field" appearance="outline">
-        <mat-label>Descripcion del producto</mat-label>
-        <input  #description matInput formControlName="_id">
-    </mat-form-field>
+        <mat-form-field id="id-field" appearance="outline">
+            <mat-label>Descripcion del producto</mat-label>
+            <input #description matInput formControlName="_id">
+        </mat-form-field>
 
 
 
@@ -30,26 +30,19 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Cantidad en almacen</mat-label>
-            <input  #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
+            <input #quantity type="number" matInput placeholder="Cantidad en almacen" formControlName="cantidad">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Categoria</mat-label>
-            <input  #category matInput placeholder="Categoria" formControlName="categoria">
+            <input #category matInput placeholder="Categoria" formControlName="categoria">
         </mat-form-field>
-</div>
-        
-
-    
-        <div mat-dialog-actions>
-            <button mat-raised-button (click)="editProduct()"><mat-icon>add</mat-icon> Editar</button>
-            <button mat-raised-button (click)="onClose()"><mat-icon>close</mat-icon> Cancelar</button>
-        </div>
-        </form>
-  
+    </div>
 
 
 
-
-
-
+    <div mat-dialog-actions>
+        <button mat-raised-button (click)="editProduct()"><mat-icon>add</mat-icon> Editar</button>
+        <button mat-raised-button (click)="onClose()"><mat-icon>close</mat-icon> Cancelar</button>
+    </div>
+</form>

@@ -1,89 +1,78 @@
-
-
-
-
-
-
-
-
-
-
-
 <div *ngIf="isSmallScreen; else bigScreen">
 
 
 
-  <h2 style="text-align: center; font-weight: 100;">Benvenuti al panel de control</h2>
+    <h2 style="text-align: center; font-weight: 100;">Benvenuti al panel de control</h2>
 
 
 
-  <mat-grid-list cols="1" rowHeight="300px">
-    <mat-grid-tile>
+    <mat-grid-list cols="1" rowHeight="300px">
+        <mat-grid-tile>
 
 
-      <!-- card header -->
-      <mat-card id="inventory-card">
-        <mat-card-header>
-          <mat-card-title class="cards-title">
-            Inventario
-          </mat-card-title>
-        </mat-card-header>
-        <!-- card body  -->
-        <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
+            <!-- card header -->
+            <mat-card id="inventory-card">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Inventario
+                    </mat-card-title>
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
             <mat-icon>
               store
             </mat-icon>
           </button>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
 
 
-      <!-- card header -->
-      <mat-card id="config">
-        <mat-card-header>
-          <mat-card-title class="cards-title">
-            Configuraciones del negocio
-          </mat-card-title>
-        </mat-card-header>
-        <!-- card body  -->
-        <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="config-button" routerLink="/finanzas">
+            <!-- card header -->
+            <mat-card id="config">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Configuraciones del negocio
+                    </mat-card-title>
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="inventory-button" mat-raised-button id="config-button" routerLink="/finanzas">
             <mat-icon>
               settings
             </mat-icon>
           </button>
 
-        </mat-card-content>
-      </mat-card>
+                </mat-card-content>
+            </mat-card>
 
-    </mat-grid-tile>
-    <mat-grid-tile>
+        </mat-grid-tile>
+        <mat-grid-tile>
 
 
-      <!-- card header -->
-      <mat-card id="clientes">
-        <mat-card-header>
-          <mat-card-title class="cards-title">
-            Clientes y compras
-          </mat-card-title>
+            <!-- card header -->
+            <mat-card id="clientes">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Clientes y compras
+                    </mat-card-title>
 
-        </mat-card-header>
-        <!-- card body  -->
-        <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="clientes-button" routerLink="/ventas-y-clientes">
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="inventory-button" mat-raised-button id="clientes-button" routerLink="/ventas-y-clientes">
             <mat-icon>
               search
             </mat-icon>
           </button>
 
-        </mat-card-content>
-      </mat-card>
+                </mat-card-content>
+            </mat-card>
 
-    </mat-grid-tile>
-  </mat-grid-list>
+        </mat-grid-tile>
+    </mat-grid-list>
 
 
 </div>
@@ -94,107 +83,126 @@
 
 <ng-template #bigScreen>
 
-<div class="bounds">
-  <h1>Panel de control</h1>
-  <div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
 
-    <div fxFlex="50" class="sec1" fxFlex.xs="50" fxFlexAlign="center center">
-      <!-- card header -->
-      <mat-card id="inventory-card">
-        <mat-card-header>
-          <mat-card-title class="cards-title">
-            Inventario
-            <button id="more-button" mat-button [matMenuTriggerFor]="inventoryMenu">
-              <mat-icon id="more-link">more_vert</mat-icon>
-            </button>
-            <mat-menu #inventoryMenu="matMenu">
-              <button class="inventory-search-button" mat-menu-item routerLink="/inventory-search">
-                <mat-icon class="regular-icon">search</mat-icon> Buscar en inventario
-              </button>
-              <button class="inventory-table-button" mat-menu-item routerLink="/inventory-table">
-                <mat-icon class="regular-icon">toc</mat-icon> Ver productos en tabla
-              </button>
-            </mat-menu>
-          </mat-card-title>
 
-        </mat-card-header>
-        <!-- card body  -->
-        <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
+
+    <mat-grid-list cols="3" rowHeight="300px">
+
+
+
+        <mat-grid-tile>
+            <!-- card header -->
+            <mat-card id="inventory-card">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Inventario
+                    </mat-card-title>
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="inventory-button" mat-raised-button id="inventory-button" routerLink="/inventario">
             <mat-icon>
-              store
+              inventory
             </mat-icon>
           </button>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
 
-        </mat-card-content>
-      </mat-card>
 
-    </div>
-    <div fxFlex="50" class="sec3" fxFlex.xs="50" fxFlexAlign="center">
-      <!-- card header -->
-      <mat-card id="config">
-        <mat-card-header>
-          <mat-card-title class="cards-title">
-            Configuraciones del negocio
-            <button id="more-button" mat-button [matMenuTriggerFor]="configMenu">
-              <mat-icon id="more-link">more_vert</mat-icon>
-            </button>
-            <mat-menu #configMenu="matMenu">
-              <button class="config-main-button" mat-menu-item>
-                <mat-icon class="regular-icon">settings</mat-icon>Acceder a configuraciones
-              </button>
-              <button class="config-main-button" mat-menu-item>
-                <mat-icon class="regular-icon">store</mat-icon> Ver configuraciones
-              </button>
-            </mat-menu>
-          </mat-card-title>
-
-        </mat-card-header>
-        <!-- card body  -->
-        <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="config" routerLink="/finanzas">
+            <!-- card header -->
+            <mat-card id="config">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Configuraciones del negocio
+                    </mat-card-title>
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="inventory-button" mat-raised-button id="config-button" routerLink="/finanzas">
             <mat-icon>
               settings
             </mat-icon>
           </button>
 
-        </mat-card-content>
-      </mat-card>
-    </div>
+                </mat-card-content>
+            </mat-card>
 
-    <div fxFlex="50" class="sec3" fxFlex.xs="50" fxFlexAlign="center">
-      <!-- card header -->
-      <mat-card id="clientes">
-        <mat-card-header>
-          <mat-card-title class="cards-title">
-            Clientes y compras
-            <button id="more-button" mat-button [matMenuTriggerFor]="searchMenu">
-              <mat-icon id="more-link">more_vert</mat-icon>
-            </button>
-            <mat-menu #searchMenu="matMenu">
-              <button class="search-main-button" mat-menu-item>
-                <mat-icon class="regular-icon">settings</mat-icon>Buscar productos
-              </button>
-              <button class="search-main-button" mat-menu-item>
-                <mat-icon class="regular-icon">store</mat-icon> Ver inventario
-              </button>
-            </mat-menu>
-          </mat-card-title>
+        </mat-grid-tile>
+        <mat-grid-tile>
 
-        </mat-card-header>
-        <!-- card body  -->
-        <mat-card-content>
-          <button class="inventory-button" mat-raised-button id="clientes" routerLink="/ventas-y-clientes">
+
+            <!-- card header -->
+            <mat-card id="clientes">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Clientes y compras
+                    </mat-card-title>
+
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="inventory-button" mat-raised-button id="clientes-button" routerLink="/ventas-y-clientes">
             <mat-icon>
               search
             </mat-icon>
           </button>
 
-        </mat-card-content>
-      </mat-card>
-    </div>
+                </mat-card-content>
+            </mat-card>
 
-  </div>
+        </mat-grid-tile>
 
-</div>
+
+
+        <mat-grid-tile>
+            <!-- card header -->
+            <mat-card id="warehouse-card">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Almacenes
+                    </mat-card-title>
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="warehouse-button" mat-raised-button id="warehouse-button" routerLink="/almacenes">
+            <mat-icon>
+              store
+            </mat-icon>
+          </button>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+
+
+
+        <mat-grid-tile>
+            <!-- card header -->
+            <mat-card id="supplier-card">
+                <mat-card-header>
+                    <mat-card-title class="cards-title">
+                        Proveedores
+                    </mat-card-title>
+                </mat-card-header>
+                <!-- card body  -->
+                <mat-card-content>
+                    <button class="supplier-button" mat-raised-button id="supplier-button" routerLink="/proveedores">
+            <mat-icon>
+              local_shipping
+            </mat-icon>
+          </button>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+
+
+
+
+    </mat-grid-list>
+
+
+
 </ng-template>

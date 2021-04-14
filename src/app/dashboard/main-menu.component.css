@@ -1,461 +1,186 @@
-
-
-
-
-
 /* media breakpoint for laptops and desktop devices */
-@media (max-width: 1483px) and (min-width: 1183px){
 
-
-  
-
-
-* { /* general fonts display */
-  font-weight: 200;
-  color: black;
-
-
+@media (max-width: 1483px) and (min-width: 1183px) {
+    * {
+        /* general fonts display */
+        font-weight: 200;
+        color: black;
+    }
+    #inventory-card {
+        /* inventory card styling */
+        width: 300px;
+        height: 250px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgba(255, 166, 0, 0.801);
+    }
+    /* clients card styling */
+    #clientes {
+        width: 300px;
+        height: 250px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgba(2, 148, 2, 0.76);
+    }
+    /* config card styling */
+    #config {
+        width: 300px;
+        height: 250px;
+        background-color: rgba(0, 102, 255, 0.822);
+    }
+    /* warehouse card styling */
+    #warehouse-card {
+        width: 300px;
+        height: 250px;
+        background-color: rgba(255, 0, 0, 0.823)
+    }
+    /* suppliers card styling */
+    #supplier-card {
+        width: 300px;
+        height: 250px;
+        background-color: rgba(0, 187, 255, 0.822);
+    }
+    /* color, position, and size styles for the button */
+    #inventory-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(255, 166, 0, 0.801);
+    }
+    /* color, position, and size styles for the button */
+    #config-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(0, 102, 255, 0.822);
+    }
+    /* color, position, and size styles for the button */
+    #clientes-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(2, 148, 2, 0.76);
+    }
+    /* color, position, and size styles for the button */
+    #warehouse-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(255, 0, 0, 0.823)
+    }
+    /* color, position, and size styles for the button */
+    #supplier-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(0, 187, 255, 0.822);
+    }
+    /* inventory button transitions */
+    #inventory-button:hover {}
+    button mat-icon {
+        /* icons alignment */
+        display: inline;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 60px;
+    }
+    /*config card styles  */
+    h1,
+    p {
+        color: black;
+        font-weight: 100;
+        font-size: 23px;
+    }
+    p {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+    }
+    .cards-title {
+        width: 100%;
+        float: left;
+        margin-left: 10px;
+        font-size: 18px;
+    }
 }
 
 
+/* media breakpoints for mobile devices  */
 
-
-
-.inventory-search-button:hover, .inventory-table-button:hover, .regular-icon:hover {
-  
-  color: rgba(255, 166, 0, 0.801);
-  font-size: 16px;
-
+@media (max-width: 700px) and (min-width: 280px) {
+    * {
+        /* general base font styles */
+        font-weight: 200;
+    }
+    button mat-icon {
+        /* icons alignment */
+        display: inline;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 70px;
+    }
+    mat-card {
+        height: 200px;
+    }
+    .cards-title {
+        /* cards title font size and positioning */
+        font-size: 18px;
+        text-align: center;
+    }
+    #inventory-card {
+        /* main card styling */
+        width: 300px;
+        height: 250px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgba(255, 166, 0, 0.801);
+    }
+    #inventory-button {
+        /* main button styling */
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(255, 166, 0, 0.801);
+    }
+    /* color, position, and size styles for the button */
+    #config-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(0, 102, 255, 0.822);
+    }
+    #clientes {
+        width: 300px;
+        height: 250px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgba(2, 148, 2, 0.76);
+    }
+    #clientes-button {
+        display: block;
+        margin: auto;
+        width: 200px;
+        height: 150px;
+        background-color: rgba(2, 148, 2, 0.76);
+    }
+    /*config card styles  */
+    #config {
+        background-color: rgba(0, 102, 255, 0.822);
+        width: 300px;
+        height: 250px;
+    }
+    button .regular-icon {
+        /* general icon alignment and sizing */
+        display: inline;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 22px;
+        color: black;
+    }
 }
-
-.inventory-search-button, .inventory-table-button, .regular-icon {
-  transition: 300ms;
-  
-}
-
-.config-main-button:hover {
-
-  color: rgba(0, 102, 255, 0.822);
-  font-size: 16px;
-
-}
-
-.config-main-button {
-
-  transition: 300ms;
-
-}
-
-
-
-.search-main-button:hover {
-
-  color:  rgba(255, 0, 0, 0.753);
-  font-size: 16px;
-  
-
-}
-
-.search-main-button {
-
-  transition: 300ms;
-
-}
-
-
-.inventory-button:hover {
-  width: 250px;
-  height: 250px;
-
-}
-
-.inventory-button {
-  transition: 200ms;
-}
-
-  #more-button{
-    width: auto;
-  }
-
-  mat-card-title{
-    width: 200px;
-  }
-
-  
-
-  #more-link{
-    font-size: 30px;
-    float: right;
-  }
-
-
-  button mat-icon{
-    font-size: 20px;
-  }
-
-
-
-
-  mat-icon #card-title-icon{ /* card title icons */
-     display: inline;
-   
-  }
-
-
-  button mat-icon{  /* main buttons icons alignment and sizing */
-    display: inline; 
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 80px;
-    
-  }
-
-
-  
-  button .regular-icon{  /* general icon alignment and sizing */
-    display: inline; 
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 22px;
-    color: black;
-
-   
-    
-  }
-
-   .inventory-button{  /* main buttons alignment */
-    
-    height: 200px;
-    width: 200px;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-    
-  }
-
-  div mat-card{   /* cards height */
-    height: 300px;
-  }
-
-
-  div{   /* cards div positioning and spacing */
-    text-align: center;
-    margin: 10px;
-    margin-top: 20px;
-    height: 200px;
-  }
-
-
-  
-h1, p{
-  color: black;
-  font-weight: 100;
-  font-size: 23px;
-}
-
-
-
-
-
-
-
-#inventory-button, #inventory-card{
-  background-color: rgba(255, 166, 0, 0.801);
-  
-
-}
-
-#clientes{
-  background-color: rgba(2, 148, 2, 0.76);
-
-}
-
-#config{
-  background-color: rgba(0, 102, 255, 0.822);
-
-}
-
-#busqueda{
-  background-color: rgba(255, 0, 0, 0.753);
-
-}
-
-mat-card{
-  color: white
-}
-
-
-
-
-
-#main-menu-cards-icon{
-  font-size: 80px;
-  display: inline;
-  margin-right: auto;
-  margin-left: auto;
-
-}
-
-#main-menu-cards{
-  display: inline;
-
-}
-
-p {
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-size: 20px;
-}
-
-.cards-title{
-  width: 100%;
-  float: left;
-  margin-left: 10px;
-}
-
-
-}
-
-
-
-
-
-
-
-/* media breakpoint for laptops */
-@media (max-width: 1182px) and (min-width: 882px){
-
-  
-
-}
-
-
-/* media breakpoints for tablets  */
-@media (max-width: 881px) and (min-width: 581px){
-
-    
-  
-} 
-  
- 
-  
-  /* media breakpoints for mobile devices  */
-
-
-
-@media (max-width: 700px ) and (min-width: 280px){
-
-
-  * { /* general base font styles */
-    font-weight: 200;
-  }
-
-
-  
-
-  button mat-icon{  /* icons alignment */
-    display: inline; 
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 70px;
-    
-  }
-
-
-
-  mat-card{
-    height: 200px;
-  }
-
-
-
- .cards-title{  /* cards title font size and positioning */
-   font-size: 18px;
-
-   text-align: center;
-  
- }
-
-  
-
-
-#inventory-card{  /* main card styling */
-      
-  width: 300px;
-  height: 250px;
-  margin-right: auto;
-  margin-left: auto;
-  background-color: rgba(255, 166, 0, 0.801);
-  
-
-}
-
-#inventory-button{  /* main button styling */
-display: block;
-margin: auto;
-  width: 200px;
-  height: 150px;
-  background-color: rgba(255, 166, 0, 0.801);
-
-}
-
-/* color, position, and size styles for the button */
-#config-button {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: 150px;
-    background-color: rgba(0, 102, 255, 0.822);
-}
-
-#clientes{
-  width: 300px;
-  height: 250px;
-  margin-right: auto;
-  margin-left: auto;
-  background-color: rgba(2, 148, 2, 0.76);
-
-}
-
-#clientes-button {
-  display: block;
-  margin: auto;
-  width: 200px;
-  height: 150px;
-   background-color: rgba(2, 148, 2, 0.76);
-
-}
-
-/*config card styles  */
-#config{
-     background-color: rgba(0, 102, 255, 0.822);
-     width: 300px;
-     height: 250px;
-
-
-}
-
-
-
-button .regular-icon{  /* general icon alignment and sizing */
-  display: inline; 
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 22px;
-  color: black;
-
- 
-  
-}
-
-  
-  
-  }
-  
-
-
-
-
-
-
-
-
-
-
-/* media breakpoint for laptops and desktop devices */
-@media (max-width: 1483px) and (min-width: 1183px){
-
-  #more-button{
-    width: auto;
-  }
-
-  mat-card-title{
-    width: 200px;
-  }
-
-  
-
-  #more-link{
-    font-size: 30px;
-    float: right;
-  }
-
-
-  button mat-icon{
-    font-size: 20px;
-  }
-
-
-
-
-  mat-icon #card-title-icon{ /* card title icons */
-     display: inline;
-   
-  }
-
-
-  button mat-icon{  /* main buttons icons alignment and sizing */
-    display: inline; 
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 80px;
-    
-  }
-
-
-  
-  button .regular-icon{  /* general icon alignment and sizing */
-    display: inline; 
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 22px;
-    color: black;
-
-   
-    
-  }
-
-   .inventory-button{  /* main buttons alignment */
-    
-    height: 200px;
-    width: 200px;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: center;
-    
-  }
-
-  div mat-card{   /* cards height */
-    height: 300px;
-  }
-
-
-  div{   /* cards div positioning and spacing */
-    text-align: center;
-    margin: 10px;
-    margin-top: 20px;
-    height: 200px;
-  }
-
-
-  
-h1, p{
-  color: black;
-  font-weight: 100;
-  font-size: 23px;
-}
-
-
-
-
-
-p {
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-font-size: 20px;
-}
-
-}
-
-  
-
-
-

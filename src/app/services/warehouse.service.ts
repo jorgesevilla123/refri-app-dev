@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from  "../../environments/environment";
 import { map } from "rxjs/operators";
+import {  FormControl, FormGroup } from "@angular/forms";
+import {  Warehouse } from "../interfaces-models/warehouses"
 
 
 @Injectable({
@@ -12,12 +14,25 @@ export class WarehouseService {
 
   // env variable for warehouse url 
   warehouseUrl: string
-
+  warehouse: Warehouse
   constructor(
     private http : HttpClient
   ) {
       this.warehouseUrl = environment.WAREHOUSE_API;
     }
+
+
+    warehouseForm: FormGroup = new FormGroup({
+      _id: new FormControl(),
+      warehouse_location: new FormControl(),
+      warehouse_name: new FormControl(),
+    })
+
+    addWarehouseForm: FormGroup = new FormGroup({
+      _id: new FormControl(),
+      warehouse_location: new FormControl(),
+      warehouse_name: new FormControl()
+    })
 
 
 
@@ -28,6 +43,18 @@ export class WarehouseService {
         })
       )
     }
+
+
+
+    
+    getOneWarehouse(wwarehouseId, page: number): Observable<any>{
+      return this.http.get(`${this.warehouseUrl}/get-one-warehouse/${wwarehouseId}?page=${page}`).pipe(
+        map( res => {
+          return res
+        })
+      )
+    }
+
 
     
     AddWarehouse(product): Observable<any> {
@@ -91,14 +118,21 @@ export class WarehouseService {
         map( res => {
           return res
         })
-      )
+      ) 
 
     }
 
 
    
 
+    populateForm(warehouse: Warehouse){
+      this.warehouseForm.patchValue({
+        _id: warehouse._id,
+        warehouse_location: warehouse.warehouse_location,
+        warehouse_name: warehouse.warehouse_name
+      })
 
+    }
 
 
 

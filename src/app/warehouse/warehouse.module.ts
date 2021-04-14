@@ -5,11 +5,15 @@ import { WarehouseMainComponent } from './warehouse-main/warehouse-main.componen
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainNavModule } from "../main-nav/main-nav.module";
+import { AddWarehouseFormComponent } from './add-warehouse-form/add-warehouse-form.component';
+import { DeleteWarehouseDialogComponent } from './delete-warehouse-dialog/delete-warehouse-dialog.component';
+import { WarehouseSettingComponent } from './warehouse-setting/warehouse-setting.component';
+import { WarehouseManageComponent } from './warehouse-manage/warehouse-manage.component';
 
 
 
 @NgModule({
-  declarations: [WarehouseMainComponent],
+  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent],
   imports: [
     CommonModule,
     WarehouseRoutingModule,

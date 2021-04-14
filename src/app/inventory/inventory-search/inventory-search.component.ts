@@ -26,7 +26,7 @@ registerLocaleData(localeDe, 'fr');
 })
 export class InventorySearchComponent implements OnInit {
 
-s
+
 
 
   productsCount: number;
@@ -80,12 +80,6 @@ s
 
 
     
-        
-
-    this.countedProducts();
-
-
-
 
   }
 
@@ -100,9 +94,7 @@ s
         paginationObject => {
   
           this.pager = paginationObject.pager
-          this.pageOfItems = paginationObject.pageOfItems
-        
-       
+          this.pageOfItems = paginationObject.pageOfItems        
         }
   
       )
@@ -128,15 +120,6 @@ s
 
 
 
-  countedProducts(){
-    this.inventoryService.countProducts().subscribe(
-      count => this.productsCount = count,
-      error => console.log(error),
-      () => console.log('completed')
-
-
-    )
-  }
 
 
 

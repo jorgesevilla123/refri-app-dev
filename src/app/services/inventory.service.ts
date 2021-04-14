@@ -109,13 +109,6 @@ export class InventoryService {
 
 
 
-  countProducts(): Observable<any>{
-    return this.http.get<any>(this.productsUrl).pipe(
-      map(products => {return products.length})
-    )
-  }
-
-
 
 
   addProducts(product: FormData): Observable<Products> {

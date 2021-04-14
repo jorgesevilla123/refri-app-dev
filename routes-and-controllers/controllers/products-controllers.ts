@@ -122,12 +122,11 @@ export const getAllProducts = (req: Request, res: Response) => {
 
         }
     })
-
-
-
-
-    
 }
+
+
+
+
 
 
 export const getOutOfStockProducts = (req: Request, res: Response) => {
@@ -141,6 +140,9 @@ export const getOutOfStockProducts = (req: Request, res: Response) => {
         }
     })
 }
+
+
+
 
 
 
@@ -174,10 +176,6 @@ export const searchProducts = (req: Request, res: Response) => {
 
 
 
-
-
-
-
     Product.find({ $or: [{ title: new RegExp(`${product}`, 'gi') }, { modelo: new RegExp(`${product}`, 'gi') }] })
         .exec((err, foundProducts) => {
             Product.countDocuments((err, count) => {
@@ -202,13 +200,12 @@ export const searchProducts = (req: Request, res: Response) => {
 
                 }
             })
-
         })
 
 }
 
 
-
+ 
 
 
 
