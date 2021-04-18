@@ -9,11 +9,12 @@ import { AddWarehouseFormComponent } from './add-warehouse-form/add-warehouse-fo
 import { DeleteWarehouseDialogComponent } from './delete-warehouse-dialog/delete-warehouse-dialog.component';
 import { WarehouseSettingComponent } from './warehouse-setting/warehouse-setting.component';
 import { WarehouseManageComponent } from './warehouse-manage/warehouse-manage.component';
+import { WarehouseSearchComponent } from './warehouse-search/warehouse-search.component';
 
 
 
 @NgModule({
-  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent],
+  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent, WarehouseSearchComponent],
   imports: [
     CommonModule,
     WarehouseRoutingModule,

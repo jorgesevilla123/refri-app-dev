@@ -57,6 +57,7 @@ export class InventorySearchComponent implements OnInit {
       console.log('the screen size is less than 600px')
     }
 
+      // Observer that checks the breakpoints and returns true when the screen is small
     this.breakPointObserver.observe('(max-width: 600px)').subscribe(
       breakpoints => {
         this.isSmallScreen = breakpoints.matches,
@@ -65,10 +66,7 @@ export class InventorySearchComponent implements OnInit {
     )
     
 
-
-
-
-
+      //gets query params and load the page with the search and page
      this.route.queryParams.subscribe(
       query => {
         this.loadPage(query.q, query.page || 1);
@@ -77,14 +75,10 @@ export class InventorySearchComponent implements OnInit {
         this.page = query.page;
       }
     )
-
-
-    
-
   }
 
 
-
+  //gets the search and page term from the route query param and executes and returns the pagination object
   loadPage(searchTerm, page) {
     if(searchTerm === undefined) {
       return
@@ -108,7 +102,7 @@ export class InventorySearchComponent implements OnInit {
 
 
 
-
+  // Navigates to inventory route for searching
   searchProducts(searchkey){
 
      let queryString = unescape(searchkey);

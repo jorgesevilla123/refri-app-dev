@@ -4,7 +4,7 @@ import { connect } from 'mongoose'
 
 export function startConnection(){
     
- connect(process.env.REFRI_DB, {
+ connect(process.env.REFRI_ONLINE_DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false

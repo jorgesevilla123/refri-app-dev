@@ -23,6 +23,8 @@ export class WarehouseManageComponent implements OnInit {
   page: number 
   warehouseId: string
   warehouseName: string
+  pageOfItems: Products[] = []
+  isSearchParam: boolean
 
   constructor(
     public warehouseService: WarehouseService,
@@ -38,6 +40,7 @@ export class WarehouseManageComponent implements OnInit {
         this.getWarehouse(params[0].id, params[1].page);
         this.warehouseId = params[0].id,
         this.warehouseName = params[0].name
+        
       }
     )
     }
@@ -47,15 +50,13 @@ export class WarehouseManageComponent implements OnInit {
   
   
 
-
-
-
   getWarehouse(warehouseId, page) {
     this.warehouseService.getOneWarehouse(warehouseId, page).subscribe(
       warehouse => {
         this.warehouse = warehouse.warehouse,
         this.products = warehouse.pageOfItems,
         this.pager = warehouse.pager
+        this.isSearchParam = false
 
 
       }
@@ -67,8 +68,45 @@ export class WarehouseManageComponent implements OnInit {
 
   }
 
-  searchProducts(key: string){
+
+
+//gets the search and page term from the route query param and executes and returns the pagination object
+  loadPage(searchTerm, page){
+    if(searchTerm === undefined){
+      return
+    }
+    else {
+      this.warehouseService.searchWarehouseProducts(this.warehouseId, searchTerm, page).subscribe(
+        paginationObject => {
+          this.pager = paginationObject.pager
+          this.pageOfItems = paginationObject.pagOfItems
+          this.isSearchParam = true
+        }
+      )
+    }
+
 
   }
+
+
+
+
+
+// Navigates to inventory route for searching
+  searchProducts(queryKey){
+
+    let queryString = unescape(queryKey);
+
+    this.router.navigate(['/warehouse/administrar-almacen', this.warehouseId, this.warehouseName], {queryParams: {q: queryString}})
+
+
+  }
+
+
+
+
+
+
+  
 
 }

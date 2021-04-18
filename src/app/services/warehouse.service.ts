@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { environment } from  "../../environments/environment";
 import { map } from "rxjs/operators";
 import {  FormControl, FormGroup } from "@angular/forms";
@@ -53,6 +53,22 @@ export class WarehouseService {
           return res
         })
       )
+    }
+
+
+    searchWarehouseProducts(id, query, page): Observable<any>{
+      if(!query.trim()){
+        return of([]);
+      }
+      else {
+        return this.http.get<any>(`${this.warehouseUrl}/${id}?q=${query}&page=${page}`).pipe(
+          map(
+            res => {
+              return res
+            }
+          )
+        )
+      }
     }
 
 

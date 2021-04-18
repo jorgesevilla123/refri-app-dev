@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Warehouse, { warehouseInterface } from "../../models/warehouse-model";
 import Products, { ProductInterface } from "../../models/products-model";
 import { redisClient } from "./products-controllers";
+import {ObjectID} from 'mongodb'
 
 
 
@@ -145,14 +146,27 @@ export const searchWarehouse = (req: Request, res: Response) => {
 export const searchWarehouseProducts = (req: Request, res: Response) => {
     const query = req.query.q;
     const id = req.params.id
+    var warehouseId = new ObjectID(`${id}`)
+    let regex = new RegExp(`${query}`,'gi')
+    var page: any = req.query.page || 1;
+    const itemsPerPage = 40;
+    var pageToint = parseInt(page);
     
 
-    Warehouse.findOne({$and: [{_id: id}, {products: {title: new RegExp(`${query}`, 'gi')} || {modelo: new RegExp(`${query}`, 'gi')}}]}, (err, products) => {
+    Warehouse.aggregate([
+        {'$match': {'_id': warehouseId}},
+        {'$project': {"warehouse_location": 0, '_id': 0}},
+        {'$unwind': '$products'},
+        {'$match': {'products.title': regex}}
+
+    ], (err, products) => {
         if(err) {
-            res.json({ message: 'error buscando productos', err})
-        } 
+            res.json({message: 'Error retrieveng the products', err})
+        }
         else {
-            res.json({ message: 'producto encontrado', products})
+            let pager = paginate(products.length, pageToint, itemsPerPage);
+            const pageOfItems = products.slice(pager.startIndex, pager.endIndex + 1)
+            res.json({current: page, pages: Math.ceil(products.length / itemsPerPage), pageOfItems, pager});
         }
     })
 
@@ -216,14 +230,15 @@ export const removeProductFromWarehouse = (req: Request, res: Response) => {
     const id = req.params.id
 
 
-    Warehouse.findOneAndUpdate({_id: id}, {$pull: { products : {_id: productId}}}, (err, warehouse) => {
-        if(err) {
+    Warehouse.findOneAndUpdate({_id: id}, {$pull: { products : {_id: productId}}}).then(
+        warehouse => {
+            res.json(warehouse);  
+        }
+    ).catch(
+        err => {
             res.json({ message: 'Error eliminando producto', err})
         }
-        else {
-            res.json(warehouse);
-        }
-    })
+    )
 }    
 
 
@@ -319,14 +334,16 @@ export const removeAllProducts = (req: Request, res: Response) => {
     const id = req.params.id
 
 
-    Warehouse.findByIdAndUpdate({ _id: id}, {$set: {products: []}}, (err, warehouse) => {
-        if(err) {
-            res.json({ message: "Error borrando todos los productos", warehouse})
-        } 
-        else {
+    Warehouse.findByIdAndUpdate({ _id: id}, {$set: {products: []}}).then(
+        warehouse => {
+           
             res.json({ message: "Productos borrados!", warehouse})
         }
-    })
+    ).catch(
+        err => {
+            res.json({ message: "Error borrando todos los productos", err})
+        }
+    )
 
  
 
