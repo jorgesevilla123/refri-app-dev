@@ -47,8 +47,8 @@ export class WarehouseService {
 
 
     
-    getOneWarehouse(wwarehouseId, page: number): Observable<any>{
-      return this.http.get(`${this.warehouseUrl}/get-one-warehouse/${wwarehouseId}?page=${page}`).pipe(
+    getOneWarehouse(warehouseId, page: number): Observable<any>{
+      return this.http.get(`${this.warehouseUrl}/get-one-warehouse/${warehouseId}?page=${page}`).pipe(
         map( res => {
           return res
         })
@@ -56,19 +56,15 @@ export class WarehouseService {
     }
 
 
-    searchWarehouseProducts(id, query, page): Observable<any>{
-      if(!query.trim()){
-        return of([]);
-      }
-      else {
-        return this.http.get<any>(`${this.warehouseUrl}/${id}?q=${query}&page=${page}`).pipe(
+    searchWarehouseProducts(id, keyLetter, page): Observable<any>{
+        return this.http.get<any>(`${this.warehouseUrl}/search-products-warehouse/${id}?q=${keyLetter}&page=${page}`).pipe(
           map(
             res => {
               return res
             }
           )
         )
-      }
+      
     }
 
 
@@ -79,7 +75,6 @@ export class WarehouseService {
           return res
         })
       )
-      
     }
 
 

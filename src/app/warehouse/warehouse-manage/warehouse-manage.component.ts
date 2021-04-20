@@ -37,12 +37,24 @@ export class WarehouseManageComponent implements OnInit {
     const urlParameters = combineLatest([this.route.params, this.route.queryParams])
     urlParameters.subscribe(
       params => {
+        console.log(params);
         this.getWarehouse(params[0].id, params[1].page);
         this.warehouseId = params[0].id,
-        this.warehouseName = params[0].name
+        this.warehouseName = params[0]['name?'];
+        if(params[1].q){
+          this.loadPage(this.route.queryParams, params[1].page);
+        }
+       
         
       }
     )
+
+    
+
+
+
+
+
     }
 
 
@@ -96,8 +108,11 @@ export class WarehouseManageComponent implements OnInit {
   searchProducts(queryKey){
 
     let queryString = unescape(queryKey);
+    console.log(this.warehouseId);
+    console.log(this.warehouseName);
+    console.log(queryString);
 
-    this.router.navigate(['/warehouse/administrar-almacen', this.warehouseId, this.warehouseName], {queryParams: {q: queryString}})
+    this.router.navigate(['/almacenes/administrar-almacen', this.warehouseId, this.warehouseName], {queryParams: {q: queryString, page: 1}})
 
 
   }
