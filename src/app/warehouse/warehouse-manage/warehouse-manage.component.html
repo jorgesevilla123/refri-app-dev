@@ -1,7 +1,17 @@
-<div class="card-div" *ngIf="warehouse">
-    <h2 style="font-weight: 300; margin-left: 20px">
+
+
+
+<div>
+    <button mat-stroked-button appBackbutton><mat-icon>arrow_back</mat-icon>  Volver</button>
+</div>
+
+
+
+
+<div>
+<h2 style="font-weight: 300; margin-left: 20px">
         <mat-card class="warehouse-card">
-            <mat-card-title>{{warehouse.warehouse_name}}</mat-card-title>
+            <mat-card-title>{{warehouse_name}}</mat-card-title>
         </mat-card>
     </h2>
 </div>
@@ -27,7 +37,7 @@
     <form (submit)="searchProducts(searchBox.value)">
         <mat-form-field appearance="outline" class="warehouse-search-form">
             <mat-label>Buscar productos</mat-label>
-            <input #searchBox matInput id="search-box" placeholder="Buscar"/>
+            <input #searchBox matInput id="search-box" placeholder="Buscar" />
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <button style="background-color: dodgerblue" type="submit" mat-fab>
@@ -129,10 +139,3 @@
         </li>
     </ul>
 </div>
-
-
-
-
-
-
- 

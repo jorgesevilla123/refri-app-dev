@@ -40,7 +40,7 @@ export class WarehouseManageComponent implements OnInit {
         console.log(params);
         this.getWarehouse(params[0].id, params[1].page);
         this.warehouseId = params[0].id,
-        this.warehouseName = params[0]['name?'];  
+        this.warehouseName = params[0]['name?'];    
       }
     )
 
@@ -77,8 +77,6 @@ export class WarehouseManageComponent implements OnInit {
 
 
 
-//gets the search and page term from the route query param and executes and returns the pagination object
- 
 
 
 
@@ -92,7 +90,7 @@ export class WarehouseManageComponent implements OnInit {
     console.log(this.warehouseName);
     console.log(queryString);
 
-    this.router.navigate(['/almacenes/administrar-almacen', this.warehouseId, this.warehouseName], {queryParams: {q: queryString, page: 1}})
+    this.router.navigate(['/almacenes/administrar-almacen/busqueda', this.warehouseId, this.warehouseName], {queryParams: {q: queryString, page: 1}})
 
 
   }

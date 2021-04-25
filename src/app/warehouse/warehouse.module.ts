@@ -10,11 +10,12 @@ import { DeleteWarehouseDialogComponent } from './delete-warehouse-dialog/delete
 import { WarehouseSettingComponent } from './warehouse-setting/warehouse-setting.component';
 import { WarehouseManageComponent } from './warehouse-manage/warehouse-manage.component';
 import { WarehouseSearchComponent } from './warehouse-search/warehouse-search.component';
+import { BackbuttonDirective } from "../directives/backbutton.directive";
 
 
 
 @NgModule({
-  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent, WarehouseSearchComponent],
+  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent, WarehouseSearchComponent, BackbuttonDirective],
   imports: [
     CommonModule,
     WarehouseRoutingModule,
