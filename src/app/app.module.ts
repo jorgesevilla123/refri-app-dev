@@ -47,9 +47,8 @@ import { BackbuttonDirective } from './directives/backbutton.directive';
     LoadingComponent,
     UsersComponent,
     UserSignupComponent,
-    UserLoginComponent,
-    BackbuttonDirective,
-   
+    UserLoginComponent
+  
 
   ],
   imports: [

@@ -34,11 +34,12 @@ export class WarehouseSearchComponent implements OnInit {
     const urlParameters = combineLatest([this.route.params, this.route.queryParams])
     urlParameters.subscribe(
       params => {
-        this.loadPage(params[1].q, params[1].page)
-        this.getWarehouse(params[0].id, params[1].page);
         this.warehouseId = params[0].id,
         this.warehouseName = params[0]['name?'];  
         this.searchQuery = params[1].q  
+        this.loadPage(params[1].q, params[1].page, params[0].id)
+        this.getWarehouse(params[0].id, params[1].page);
+     
       }
     )
   }
@@ -67,7 +68,7 @@ export class WarehouseSearchComponent implements OnInit {
 
 
   //gets the search and page term from the route query param and executes and returns the pagination object
-  loadPage(searchTerm, page){
+  loadPage(searchTerm, page, warehouseId){
     if(searchTerm === undefined){
       return
     }
@@ -75,7 +76,7 @@ export class WarehouseSearchComponent implements OnInit {
 
 
     else {
-      this.warehouseService.searchWarehouseProducts(this.warehouseId, searchTerm, page).subscribe(
+      this.warehouseService.searchWarehouseProducts(warehouseId, searchTerm, page).subscribe(
         paginationObject => {
           this.pager = paginationObject.pager
           this.pageOfItems = paginationObject.pageOfItems
