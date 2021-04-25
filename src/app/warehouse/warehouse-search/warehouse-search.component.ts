@@ -10,19 +10,48 @@ import { WarehouseService } from '../../services/warehouse.service';
 })
 export class WarehouseSearchComponent implements OnInit {
   
-  @Input()
-  products: Products[];
+
 
 
 
   constructor(
     private warehouseService: WarehouseService
   ) { }
+
+
   pager: any = {}
   pageOfItems: Products[]
 
   ngOnInit(): void {
+   
   }
+
+
+
+
+
+  loadPage(searchTerm, page){
+    if(searchTerm === undefined){
+      return
+    }
+    else {
+      this.warehouseService.searchWarehouseProducts(this.warehouseId, searchTerm, page).subscribe(
+        paginationObject => {
+          this.pager = paginationObject.pager
+          this.pageOfItems = paginationObject.pagOfItems
+        }
+      )
+    }
+
+
+  }
+
+
+
+
+
+
+
 
 
 

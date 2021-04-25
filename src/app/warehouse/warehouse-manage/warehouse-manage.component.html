@@ -18,9 +18,12 @@
 
 
 
+
+
+<!-- 
+  Search box block  -->
+
 <div class="warehouse-options-div">
-
-
     <form (submit)="searchProducts(searchBox.value)">
         <mat-form-field appearance="outline" class="warehouse-search-form">
             <mat-label>Buscar productos</mat-label>
@@ -31,11 +34,17 @@
       <mat-icon>search</mat-icon>
     </button>
     </form>
-
-
 </div>
 
 
+
+
+
+
+
+
+
+<!-- warehouse products cards block -->
 
 
 
@@ -82,15 +91,18 @@
                 <h3>Cantidad: {{product.cantidad}}</h3>
 
                 <h2><b>Categoria: {{product.categorias}}</b></h2>
-
-
             </mat-card-content>
-
         </mat-card>
-
     </mat-grid-tile>
-
 </mat-grid-list>
+
+
+
+
+
+
+
+<!-- pagination block -->
 
 
 
@@ -118,11 +130,6 @@
     </ul>
 </div>
 
-
-
-<div *ngIf="isSearchParam">
-    <app-warehouse-search [products]="pageOfItems"></app-warehouse-search>
-</div>
 
 
 

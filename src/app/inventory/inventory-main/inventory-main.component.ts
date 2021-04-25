@@ -48,7 +48,6 @@ export class InventoryMainComponent implements OnInit {
      private route: ActivatedRoute,
      private breakpointObserver: BreakpointObserver
 
-
     ) { }
 
   ngOnInit(): void {
