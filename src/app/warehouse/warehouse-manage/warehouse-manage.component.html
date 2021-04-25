@@ -24,7 +24,7 @@
     <form (submit)="searchProducts(searchBox.value)">
         <mat-form-field appearance="outline" class="warehouse-search-form">
             <mat-label>Buscar productos</mat-label>
-            <input #searchBox matInput id="search-box" placeholder="Buscar"/>
+            <input #searchBox matInput id="search-box" placeholder="Buscar" />
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <button style="background-color: dodgerblue" type="submit" mat-fab>
@@ -117,15 +117,3 @@
         </li>
     </ul>
 </div>
-
-
-
-<div *ngIf="isSearchParam">
-    <app-warehouse-search [products]="pageOfItems"></app-warehouse-search>
-</div>
-
-
-
-
-
- 

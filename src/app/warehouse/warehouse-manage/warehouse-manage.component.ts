@@ -40,12 +40,7 @@ export class WarehouseManageComponent implements OnInit {
         console.log(params);
         this.getWarehouse(params[0].id, params[1].page);
         this.warehouseId = params[0].id,
-        this.warehouseName = params[0]['name?'];
-        if(params[1].q){
-          this.loadPage(this.route.queryParams, params[1].page);
-        }
-       
-        
+        this.warehouseName = params[0]['name?'];    
       }
     )
 
@@ -82,23 +77,7 @@ export class WarehouseManageComponent implements OnInit {
 
 
 
-//gets the search and page term from the route query param and executes and returns the pagination object
-  loadPage(searchTerm, page){
-    if(searchTerm === undefined){
-      return
-    }
-    else {
-      this.warehouseService.searchWarehouseProducts(this.warehouseId, searchTerm, page).subscribe(
-        paginationObject => {
-          this.pager = paginationObject.pager
-          this.pageOfItems = paginationObject.pagOfItems
-          this.isSearchParam = true
-        }
-      )
-    }
 
-
-  }
 
 
 
@@ -112,7 +91,7 @@ export class WarehouseManageComponent implements OnInit {
     console.log(this.warehouseName);
     console.log(queryString);
 
-    this.router.navigate(['/almacenes/administrar-almacen', this.warehouseId, this.warehouseName], {queryParams: {q: queryString, page: 1}})
+    this.router.navigate(['/almacenes/administrar-almacen/busqueda', this.warehouseId, this.warehouseName], {queryParams: {q: queryString, page: 1}})
 
 
   }
