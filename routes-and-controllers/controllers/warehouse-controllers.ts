@@ -207,6 +207,7 @@ export const addProductToWarehouse = (req: Request, res: Response) => {
 
     const product = req.body.product;
     const id = req.params.id
+    console.log(product)
 
 
 
@@ -216,6 +217,7 @@ export const addProductToWarehouse = (req: Request, res: Response) => {
         }
         else {
             res.json({message: "Producto agregado", warehouse});
+            console.log('saved')
         }
     })
 }    

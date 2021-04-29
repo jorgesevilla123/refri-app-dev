@@ -47,21 +47,20 @@ export class WarehouseProductsAddComponent implements OnInit {
         this.productsAdded.push(product);  
         console.log(index)
       } 
-      // logic for increasing quantity
-      else {
-          console.log(this.productsAdded[index]);
-        if(this.productsAdded[index].cantidad >= 1){
-          this.productsAdded[index].cantidad += 1
-        }
-      }
-    
+
+
   }
 
 
 
 
   save(){
-    console.log(this.productsAdded, 'productos guardados correctamente');
+
+    this.warehouseService.AddProductToWarehouse('6084fcf5f2f6fa17a8be91f6', this.productsAdded).subscribe(
+      res => {
+        console.log(res)
+      }
+    )
     
   }
 
