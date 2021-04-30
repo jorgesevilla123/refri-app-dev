@@ -1,0 +1,23 @@
+<div style="margin-left: 30px;" *ngIf="productsAdded">
+    <mat-chip-list *ngFor="let product of  productsAdded" style="margin-right: 10px;" class="added-products">
+        <mat-chip matBadge="{{product.cantidad}}" matBadgePosition="before">{{product.title}}</mat-chip>
+        <button mat-mini-fab (click)="increase(product)"><mat-icon>add</mat-icon></button>
+        <button mat-mini-fab (click)="decrease(product)"><mat-icon>remove</mat-icon></button>
+    </mat-chip-list>
+</div>
+
+<button mat-raised-button (click)="save()">Guardar productos</button>
+<button mat-raised-button (click)="deleteAll()">Borrar todos</button>
+
+
+
+
+
+
+
+<div>
+    <ul *ngFor="let product of products">
+        <li>{{product.title}}</li>
+        <button mat-raised-button (click)="selectProduct(product)">Agregar</button>
+    </ul>
+</div>

@@ -78,6 +78,7 @@ export class InventorySearchComponent implements OnInit {
   }
 
 
+
   //gets the search and page term from the route query param and executes and returns the pagination object
   loadPage(searchTerm, page) {
     if(searchTerm === undefined) {
@@ -94,23 +95,18 @@ export class InventorySearchComponent implements OnInit {
       )
 
     }
-   
-
-
-
   }
+
+
 
 
 
   // Navigates to inventory route for searching
   searchProducts(searchkey){
-
      let queryString = unescape(searchkey);
-
      this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  queryString, page: 1 }});
-      
-  
   }
+
 
 
 
@@ -141,6 +137,8 @@ export class InventorySearchComponent implements OnInit {
 
 
 
+
+
   onEdit(productForm: Products) {
     this.inventoryService.populateForm(productForm)
     const dialogConfig = new MatDialogConfig();
@@ -150,10 +148,6 @@ export class InventorySearchComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       product => {
 
-        
-       
-      
-
         if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
           productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio 
           && product.data.categoria === productForm.categorias) {
@@ -161,7 +155,6 @@ export class InventorySearchComponent implements OnInit {
           this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
 
           return 
-
 
         }
         else {
@@ -178,18 +171,20 @@ export class InventorySearchComponent implements OnInit {
 
       },
 
-
       error => console.log(error),
 
       () => console.log('completed')
-
-
     )
-
-
-
-
   }
+
+
+
+
+
+
+
+
+  
 
   onEditPhoto(productChosen: Products) {
     

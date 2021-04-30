@@ -10,19 +10,23 @@ import { DeleteWarehouseDialogComponent } from './delete-warehouse-dialog/delete
 import { WarehouseSettingComponent } from './warehouse-setting/warehouse-setting.component';
 import { WarehouseManageComponent } from './warehouse-manage/warehouse-manage.component';
 import { WarehouseSearchComponent } from './warehouse-search/warehouse-search.component';
-import { BackbuttonDirective } from "../directives/backbutton.directive";
+import { SharedModule } from "../shared/shared.module";
+import { WarehouseProductsAddComponent } from './warehouse-products-add/warehouse-products-add.component';
+
+
 
 
 
 @NgModule({
-  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent, WarehouseSearchComponent, BackbuttonDirective],
+  declarations: [WarehouseMainComponent, AddWarehouseFormComponent, DeleteWarehouseDialogComponent, WarehouseSettingComponent, WarehouseManageComponent, WarehouseSearchComponent, WarehouseProductsAddComponent],
   imports: [
     CommonModule,
     WarehouseRoutingModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MainNavModule
+    MainNavModule,
+    SharedModule
   ]
 })
 export class WarehouseModule { }

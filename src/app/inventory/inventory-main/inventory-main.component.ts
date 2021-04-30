@@ -171,7 +171,7 @@ export class InventoryMainComponent implements OnInit {
 
 
 
-
+ 
 
   loadProducts(page): void {
   

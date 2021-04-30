@@ -157,7 +157,7 @@ export const searchWarehouseProducts = (req: Request, res: Response) => {
         {'$match': {'_id': warehouseId}},
         {'$project': {"warehouse_location": 0, '_id': 0}},
         {'$unwind': '$products'},
-        {'$match': {'products.title': regex}}
+        {'$match': { '$or': [{'products.title': regex}, {'products.modelo': regex}]   }}
 
     ], (err, products) => {
         if(err) {

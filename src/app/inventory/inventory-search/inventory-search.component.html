@@ -1,32 +1,33 @@
+<div style="margin: 20px;">
+    <button mat-stroked-button appBackbutton><mat-icon>arrow_back</mat-icon>  Volver</button>
+</div>
 
 
 
-
-<button  style="font-size: 18px; margin-left: 20px; margin-top: 20px; font-weight: 200;" mat-button routerLink="/inventario">Volver a inventario <mat-icon>store</mat-icon></button>
 
 
 <div class="inventory-search-div">
 
-  <button id="add-button" mat-stroked-button (click)="onAdd()">
+    <button id="add-button" mat-stroked-button (click)="onAdd()">
     Añadir producto <mat-icon id="add-icon">add</mat-icon>
   </button>
 
 
 
- 
 
-  <form (submit)="searchProducts(searchBox.value)">
-    <mat-form-field appearance="outline" class="inventory-search-form">
-        <mat-label>Buscar productos</mat-label>
-        <input #searchBox matInput id="search-box" placeholder="Buscar"/>
-          <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-      <button style="background-color: dodgerblue" type="submit" mat-fab>
+
+    <form (submit)="searchProducts(searchBox.value)">
+        <mat-form-field appearance="outline" class="inventory-search-form">
+            <mat-label>Buscar productos</mat-label>
+            <input #searchBox matInput id="search-box" placeholder="Buscar" />
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button style="background-color: dodgerblue" type="submit" mat-fab>
        <mat-icon>search</mat-icon>
       </button>
-      </form>
-    
-  <button mat-raised-button routerLink="/inventario/tabla">Ver productos en tabla <mat-icon>table_chart</mat-icon>
+    </form>
+
+    <button mat-raised-button routerLink="/inventario/tabla">Ver productos en tabla <mat-icon>table_chart</mat-icon>
     </button>
 
 
@@ -35,126 +36,126 @@
 
 
 
-<h3 style="margin: 30px; font-weight: 200" >Hay <b>{{productsCount}}</b> productos en el inventario</h3>
+<h3 style="margin: 30px; font-weight: 200">Hay <b>{{productsCount}}</b> productos en el inventario</h3>
 
 
 
- <div *ngIf="isSmallScreen; else bigScreen">
-   
+<div *ngIf="isSmallScreen; else bigScreen">
 
 
-<mat-grid-list cols="1" gutterSize="10px" rowHeight="420px">
-  <mat-grid-tile *ngFor="let product of pageOfItems">
-    <mat-card id="{{product._id}}" class="inventory-products-card">
-      <mat-card-header>
-        <mat-card-title class="card-title" style="font-size: 15px;">
-          {{product.title}}
-        </mat-card-title>
-        <button [matMenuTriggerFor]="menu" style="float: right;" mat-icon-button>
+
+    <mat-grid-list cols="1" gutterSize="10px" rowHeight="420px">
+        <mat-grid-tile *ngFor="let product of pageOfItems">
+            <mat-card id="{{product._id}}" class="inventory-products-card">
+                <mat-card-header>
+                    <mat-card-title class="card-title" style="font-size: 15px;">
+                        {{product.title}}
+                    </mat-card-title>
+                    <button [matMenuTriggerFor]="menu" style="float: right;" mat-icon-button>
           <mat-icon>more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
             </mat-icon></button>
-          <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
+                        <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
             </mat-icon></button>
-          <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
+                        <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
               add_photo_alternate</mat-icon></button>
-        </mat-menu>
-      </mat-card-header>
-      <div *ngIf="product.cantidad < 5; else onStock">
-        <mat-card-subtitle style="color: red">
-          Bajo stock
-        </mat-card-subtitle>
-        </div>
-        <ng-template #onStock>
-          <mat-card-subtitle style="color: #49ce49">
-            En stock
-          </mat-card-subtitle>
-           
-        </ng-template>
-      <div *ngIf="product.imagePath == 'no-photo'; else image">
-        <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
-      </div>
-      <ng-template #image>
-        <img class="product-card-img" mat-card-image [src]="product.imagePath">
-      </ng-template>
-      <mat-card-content>
-        <h3>Modelo: {{product.modelo}}</h3>
-        <h3>Precio: {{product.precio | currency}}</h3>
-        <h3>Cantidad: {{product.cantidad}}</h3>
+                    </mat-menu>
+                </mat-card-header>
+                <div *ngIf="product.cantidad < 5; else onStock">
+                    <mat-card-subtitle style="color: red">
+                        Bajo stock
+                    </mat-card-subtitle>
+                </div>
+                <ng-template #onStock>
+                    <mat-card-subtitle style="color: #49ce49">
+                        En stock
+                    </mat-card-subtitle>
 
-        <h2><b>Categoria: {{product.categorias}}</b></h2>
+                </ng-template>
+                <div *ngIf="product.imagePath == 'no-photo'; else image">
+                    <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
+                </div>
+                <ng-template #image>
+                    <img class="product-card-img" mat-card-image [src]="product.imagePath">
+                </ng-template>
+                <mat-card-content>
+                    <h3>Modelo: {{product.modelo}}</h3>
+                    <h3>Precio: {{product.precio | currency}}</h3>
+                    <h3>Cantidad: {{product.cantidad}}</h3>
+
+                    <h2><b>Categoria: {{product.categorias}}</b></h2>
 
 
-      </mat-card-content>
+                </mat-card-content>
 
-    </mat-card>
+            </mat-card>
 
-  </mat-grid-tile>
+        </mat-grid-tile>
 
-</mat-grid-list>
+    </mat-grid-list>
 
-    
- </div>
 
- <ng-template #bigScreen>
-   
+</div>
 
-<mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
-  <mat-grid-tile *ngFor="let product of pageOfItems">
-    <mat-card id="{{product._id}}" class="inventory-products-card">
-      <mat-card-header>
-        <mat-card-title class="card-title" style="font-size: 15px;">
-          {{product.title}}
-        </mat-card-title>
-        <button [matMenuTriggerFor]="menu" style="float: right;" mat-icon-button>
+<ng-template #bigScreen>
+
+
+    <mat-grid-list cols="3" gutterSize="10px" rowHeight="420px">
+        <mat-grid-tile *ngFor="let product of pageOfItems">
+            <mat-card id="{{product._id}}" class="inventory-products-card">
+                <mat-card-header>
+                    <mat-card-title class="card-title" style="font-size: 15px;">
+                        {{product.title}}
+                    </mat-card-title>
+                    <button [matMenuTriggerFor]="menu" style="float: right;" mat-icon-button>
           <mat-icon>more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
             </mat-icon></button>
-          <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
+                        <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
             </mat-icon></button>
-          <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
+                        <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
               add_photo_alternate</mat-icon></button>
-        </mat-menu>
-      </mat-card-header>
-      <div *ngIf="product.cantidad < 5; else onStock">
-        <mat-card-subtitle style="color: red">
-          Bajo stock
-        </mat-card-subtitle>
-        </div>
-        <ng-template #onStock>
-          <mat-card-subtitle style="color: #49ce49">
-            En stock
-          </mat-card-subtitle>
-           
-        </ng-template>
-      <div *ngIf="product.imagePath == 'no-photo'; else image">
-        <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
-      </div>
-      <ng-template #image>
-        <img class="product-card-img" mat-card-image [src]="product.imagePath">
-      </ng-template>
-      <mat-card-content>
-        <h3>Modelo: {{product.modelo}}</h3>
-        <h3>Precio: {{product.precio | currency}}</h3>
-        <h3>Cantidad: {{product.cantidad}}</h3>
+                    </mat-menu>
+                </mat-card-header>
+                <div *ngIf="product.cantidad < 5; else onStock">
+                    <mat-card-subtitle style="color: red">
+                        Bajo stock
+                    </mat-card-subtitle>
+                </div>
+                <ng-template #onStock>
+                    <mat-card-subtitle style="color: #49ce49">
+                        En stock
+                    </mat-card-subtitle>
 
-        <h2><b>Categoria: {{product.categorias}}</b></h2>
+                </ng-template>
+                <div *ngIf="product.imagePath == 'no-photo'; else image">
+                    <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
+                </div>
+                <ng-template #image>
+                    <img class="product-card-img" mat-card-image [src]="product.imagePath">
+                </ng-template>
+                <mat-card-content>
+                    <h3>Modelo: {{product.modelo}}</h3>
+                    <h3>Precio: {{product.precio | currency}}</h3>
+                    <h3>Cantidad: {{product.cantidad}}</h3>
+
+                    <h2><b>Categoria: {{product.categorias}}</b></h2>
 
 
-      </mat-card-content>
+                </mat-card-content>
 
-    </mat-card>
+            </mat-card>
 
-  </mat-grid-tile>
+        </mat-grid-tile>
 
-</mat-grid-list>
+    </mat-grid-list>
 
-   
- </ng-template>
+
+</ng-template>
 
 
 
@@ -166,24 +167,25 @@
 
 
 <div class="card-footer pb-0 pt-3 mb-4 d-block mx-auto">
-  <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-      <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-          <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: 1 }" class="page-link">Primera</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-          <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: pager.currentPage - 1 }" class="page-link"><mat-icon>navigate_before</mat-icon></a>
-      </li>
-      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-          <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: page }" class="page-link">{{page}}</a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-          <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: pager.currentPage + 1 }" class="page-link"><mat-icon>navigate_next</mat-icon></a>
-      </li>
-      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-          <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: pager.totalPages }" class="page-link">Ultima</a>
-      </li>
-  </ul>
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+            <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: 1 }" class="page-link">Primera</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+            <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: pager.currentPage - 1 }" class="page-link">
+                <mat-icon>navigate_before</mat-icon>
+            </a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+            <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: page }" class="page-link">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+            <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: pager.currentPage + 1 }" class="page-link">
+                <mat-icon>navigate_next</mat-icon>
+            </a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+            <a [routerLink]="['/inventario/busqueda']" [queryParams]="{q: searchQuery, page: pager.totalPages }" class="page-link">Ultima</a>
+        </li>
+    </ul>
 </div>
-
-
-

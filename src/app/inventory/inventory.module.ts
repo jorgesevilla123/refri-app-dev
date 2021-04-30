@@ -17,6 +17,8 @@ import { InventoryProductsToBuyComponent } from './inventory-products-to-buy/inv
 import { SearchComponent } from './search/search.component';
 import { ResponsiveNavModule } from '../responsive-nav/responsive-nav.module';
 import { LayoutModule } from '@angular/cdk/layout'
+import { SharedModule } from "../shared/shared.module";
+
 
 
 
@@ -32,6 +34,7 @@ import { LayoutModule } from '@angular/cdk/layout'
     InventoryLowStockComponent,
     InventoryProductsToBuyComponent,
     SearchComponent,
+
   ],
   imports: [
     InventoryRoutingModule,
@@ -41,7 +44,8 @@ import { LayoutModule } from '@angular/cdk/layout'
     CommonModule,
     ResponsiveNavModule,
     MainNavModule,
-    LayoutModule
+    LayoutModule,
+    SharedModule
   ],
   exports: [
     InventoryImageEditComponent,

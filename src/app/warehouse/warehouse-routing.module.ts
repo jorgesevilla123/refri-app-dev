@@ -4,11 +4,13 @@ import { WarehouseMainComponent } from './warehouse-main/warehouse-main.componen
 import { WarehouseSettingComponent } from "./warehouse-setting/warehouse-setting.component";
 import { WarehouseManageComponent } from "./warehouse-manage/warehouse-manage.component"
 import { WarehouseSearchComponent } from "./warehouse-search/warehouse-search.component";
+import { WarehouseProductsAddComponent } from "./warehouse-products-add/warehouse-products-add.component";
 
 const routes: Routes = [
   {path: '', component: WarehouseMainComponent},
   {path: 'almacenes/administrar-almacen/:id/:name?', component: WarehouseManageComponent},
-  {path: 'almacenes/administrar-almacen/busqueda/:id/:name?', component: WarehouseSearchComponent}
+  {path: 'almacenes/administrar-almacen/busqueda/:id/:name?', component: WarehouseSearchComponent},
+  {path: 'almacenes/agregar-producto', component: WarehouseProductsAddComponent}
 ];
 
 @NgModule({
