@@ -205,21 +205,21 @@ export const addWarehouse = (req: Request, res: Response) => {
 
 export const addProductToWarehouse = (req: Request, res: Response) => {
 
-    const product = req.body.product;
+    console.log(req.body)
     const id = req.params.id
-    console.log(product)
 
 
 
-    Warehouse.findOneAndUpdate({_id: id}, {$push: { products: product}}, {new: true}, (err, warehouse) => {
-        if(err) {
-            res.json({ message: 'Error agregando producto', err})
-        }
-        else {
-            res.json({message: "Producto agregado", warehouse});
-            console.log('saved')
-        }
-    })
+
+    // Warehouse.findOneAndUpdate({_id: id}, {$push: { products: product}}, {new: true}, (err, warehouse) => {
+    //     if(err) {
+    //         res.json({ message: 'Error agregando producto', err})
+    //     }
+    //     else {
+    //         res.json({message: "Producto agregado", warehouse});
+    //         console.log('saved')
+    //     }
+    // })
 }    
 
 
