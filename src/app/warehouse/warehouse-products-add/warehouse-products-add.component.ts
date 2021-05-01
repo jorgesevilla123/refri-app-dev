@@ -54,16 +54,26 @@ export class WarehouseProductsAddComponent implements OnInit {
           this.productsAdded[index].cantidad += 1
         }
       }
-    
   }
+
+
+
 
 
 
 
   save(){
-    console.log(this.productsAdded, 'productos guardados correctamente');
-    
+    this.warehouseService.AddProductToWarehouse('606801340c171047c46461f6', this.productsAdded).subscribe(
+      res => {
+        console.log(res)
+      }
+    )
   }
+
+
+
+
+  
 
 
   deleteAll(){
