@@ -101,14 +101,28 @@ export class WarehouseProductsAddComponent implements OnInit {
         this.productsAdded.push(product);  
         console.log(index)
       } 
+<<<<<<< HEAD
 
 
+=======
+      // logic for increasing quantity
+      else {
+          console.log(this.productsAdded[index]);
+        if(this.productsAdded[index].cantidad >= 1){
+          this.productsAdded[index].cantidad += 1
+        }
+      }
+>>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
   }
 
 
 
 
+
+
+
   save(){
+<<<<<<< HEAD
 
     this.warehouseService.AddProductToWarehouse(this.warehouseId, this.productsAdded).subscribe(
       res => {
@@ -118,14 +132,24 @@ export class WarehouseProductsAddComponent implements OnInit {
         this.alert.notifyWarn(err, 2500, 'top', 'center')
       },
       () => { this.deleteAll()}
+=======
+    this.warehouseService.AddProductToWarehouse('606801340c171047c46461f6', this.productsAdded).subscribe(
+      res => {
+        console.log(res)
+      }
+>>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
     )
   }
 
 
 
 
+<<<<<<< HEAD
 
 
+=======
+  
+>>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
 
 
   deleteAll(){
