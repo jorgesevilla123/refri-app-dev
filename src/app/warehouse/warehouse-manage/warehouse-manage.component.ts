@@ -84,7 +84,6 @@ export class WarehouseManageComponent implements OnInit {
 
 // Navigates to inventory route for searching
   searchProducts(queryKey){
-
     let queryString = unescape(queryKey);
     console.log(this.warehouseId);
     console.log(this.warehouseName);

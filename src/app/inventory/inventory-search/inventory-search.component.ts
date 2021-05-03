@@ -65,7 +65,6 @@ export class InventorySearchComponent implements OnInit {
       }
     )
     
-
       //gets query params and load the page with the search and page
      this.route.queryParams.subscribe(
       query => {
@@ -83,7 +82,6 @@ export class InventorySearchComponent implements OnInit {
   loadPage(searchTerm, page) {
     if(searchTerm === undefined) {
       return
-
     } else {
       this.inventoryService.searchProductAndPaginate(searchTerm, page).subscribe(
         paginationObject => {
@@ -93,7 +91,6 @@ export class InventorySearchComponent implements OnInit {
         }
   
       )
-
     }
   }
 

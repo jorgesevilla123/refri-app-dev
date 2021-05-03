@@ -20,9 +20,10 @@
 
 
 
-<button id="add-button" mat-stroked-button (click)="onAdd()">
-    Añadir producto a almacen <mat-icon id="add-icon">add</mat-icon>
+<button id="add-button" mat-stroked-button [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{ page: 1 }">
+    Añadir productos a almacen <mat-icon id="add-icon">add</mat-icon>
   </button>
+
 
 
 
