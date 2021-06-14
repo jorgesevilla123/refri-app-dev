@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { WarehouseService } from '../../services/warehouse.service';
 import {  MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Warehouse } from "../../interfaces-models/warehouses"
+import { Warehouse } from "../../interfaces-models/warehouses";
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-delete-warehouse-dialog',
@@ -15,6 +16,7 @@ export class DeleteWarehouseDialogComponent implements OnInit {
   constructor(
     private warehouseService: WarehouseService,
     public dialogRef: MatDialogRef<DeleteWarehouseDialogComponent>,
+    public route: Router,
     @Inject(MAT_DIALOG_DATA)  public data: Warehouse
   ) {
     this.warehouse = this.data
@@ -23,11 +25,18 @@ export class DeleteWarehouseDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+ 
   deleteWarehouse(){
     this.warehouseService.DeleteWarehouse(this.warehouse._id).subscribe(
       warehouse => {
         this.dialogRef.close({ data: warehouse})
+      },
+      err => {
+        console.log(err)
+
+      },
+      () => {
+        this.route.navigate(['/almacenes'])
       }
     )
   }

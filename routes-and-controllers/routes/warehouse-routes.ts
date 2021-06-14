@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addWarehouse, getWarehouse, deleteWarehouse, searchWarehouse, updateWarehouse, removeProductFromWarehouse, removeAllProducts, addProductToWarehouse, addAllProductsToWarehouse, getOneWarehouse, searchWarehouseProducts  } from "../controllers/warehouse-controllers";
+import { addWarehouse, getWarehouse, deleteWarehouse, searchWarehouse, updateWarehouse, removeProductFromWarehouse, removeAllProducts, addProductToWarehouse, addAllProductsToWarehouse, getOneWarehouse, searchWarehouseProducts, updateWarehouseProducts  } from "../controllers/warehouse-controllers";
 import upload from "../../fileProcessing";
 
 const router = Router();
@@ -68,7 +68,19 @@ router.route('/remove-all-products/:id').delete(removeAllProducts);
 
 
 
+
+
+
+
+
+
 router.route('/update-warehouse/:id').put(upload.none(),updateWarehouse);
+
+
+
+
+
+router.route('/update-warehouse-products/:warehouseId/:productId').get( updateWarehouseProducts)
 
 
 

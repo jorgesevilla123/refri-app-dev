@@ -62,8 +62,6 @@
 
 <div *ngIf="isSmallScreen; else bigScreen">
 
-
-
     <mat-grid-list cols="1" gutterSize="10px" rowHeight="420px">
         <mat-grid-tile *ngFor="let product of products">
             <mat-card id="{{product._id}}" class="inventory-products-card">

@@ -5,7 +5,8 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { AddWarehouseFormComponent } from '../add-warehouse-form/add-warehouse-form.component';
 import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import { DeleteWarehouseDialogComponent } from '../delete-warehouse-dialog/delete-warehouse-dialog.component';
-import { WarehouseSettingComponent } from "../warehouse-setting/warehouse-setting.component"
+import { WarehouseSettingComponent } from "../warehouse-setting/warehouse-setting.component";
+
 
 
 @Component({
@@ -64,33 +65,13 @@ export class WarehouseMainComponent implements OnInit {
       },
       () => { this.getWarehouses()}
     )
- 
-    
   }
 
 
 
-  onDelete(warehouse: Warehouse){
-    const dialogConfig =  new MatDialogConfig();
-    dialogConfig.width = '40%'
-    dialogConfig.data = warehouse
-    const dialogRef = this.dialog.open(DeleteWarehouseDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      warehouse => {
-        if(warehouse.data.success) { 
-          this.alert.notifySuccess(`${warehouse.data.message}`, 2500, 'top', 'center');
-        }
-        else {
-          this.alert.notifyWarn(`${warehouse.data.message}`, 2500, 'top', 'center')
-        }
-      },
-      err => {
-        console.log(err)
-      },
-      () => { this.getWarehouses(); }
-    )
   
-  }
+
+
 
 
   onEdit(warehouse: Warehouse){
@@ -114,14 +95,5 @@ export class WarehouseMainComponent implements OnInit {
       },
       () => { this.getWarehouses();} 
     )
-
-
   }
-
-
-
-
-
-
-
 }

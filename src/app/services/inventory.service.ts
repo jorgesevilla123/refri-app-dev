@@ -166,15 +166,12 @@ export class InventoryService {
 
 
   searchProductAndPaginate(keyLetter, page){
-    if(!keyLetter.trim()){
-      return of([]);
-    }
-    else{
+    
     return this.http.get<any>(`${this.productsUrl}/search?q=${keyLetter}&page=${page}`).pipe(
       map( res => {return res})
     )
  
-  }
+  
 
   }
 

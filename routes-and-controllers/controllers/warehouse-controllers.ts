@@ -206,10 +206,7 @@ export const addWarehouse = (req: Request, res: Response) => {
 export const addProductToWarehouse = (req: Request, res: Response) => {
 
     const products = req.body
-    const id = req.params.id
-
- 
-
+    const id = req.params.id 
 
     Warehouse.findOneAndUpdate({_id: id}, {$push: { products: { $each: products}}}, {new: true}, (err, warehouse) => {
         if(err) {
@@ -221,6 +218,12 @@ export const addProductToWarehouse = (req: Request, res: Response) => {
         }
     })
 }    
+
+
+
+
+
+
 
 
 
@@ -242,6 +245,11 @@ export const removeProductFromWarehouse = (req: Request, res: Response) => {
         }
     )
 }    
+
+
+
+
+
 
 
 
@@ -319,12 +327,12 @@ export const addAllProductsToWarehouse = (req: Request, res: Response) => {
 
         }
     })
-    
-
-
-
-
 }    
+
+
+
+
+
 
 
 
@@ -346,9 +354,6 @@ export const removeAllProducts = (req: Request, res: Response) => {
             res.json({ message: "Error borrando todos los productos", err})
         }
     )
-
- 
-
 }
 
     
@@ -357,6 +362,9 @@ export const removeAllProducts = (req: Request, res: Response) => {
 
 
 
+
+
+ 
 
 
 
@@ -374,11 +382,21 @@ export const deleteWarehouse = (req: Request, res: Response) => {
             res.json({ message: 'Error eliminando almacen', error, success: false});
         }
     )
-    
-
 }
 
+
+
+
+
+
+
     
+
+
+
+
+
+
 
 
 
@@ -413,6 +431,60 @@ export const updateWarehouse = (req: Request, res: Response) => {
     })
 }
 
+
+
+
+
+
+
+export const updateWarehouseProducts = (req: Request, res: Response) => {
+    const productTitle = req.query.title
+    const productModel = req.query.modelo
+    const productQuant = req.query.cantidad
+    const productsPrice = req.query.precio
+    const warehouse_id = req.params.warehouseId;
+    const product_id = req.params.productId;
+    const warehouseId = new ObjectID(`${warehouse_id}`);
+
+ 
+    
+    console.log(req.query.title);
+
+
+    Warehouse.update({_id: warehouseId, products: {$elemMatch: { _id: product_id}}},
+         {$set: {"products.$.title": productTitle, "products.$.modelo": productModel, "products.$.cantidad": productQuant, "products.$.precio": productsPrice}}, (err, product) => {
+             if(err) {
+                 res.json({message: 'Erorr editando producto', err})
+             }
+             else {
+                 res.json({message: 'Producto editado', product})
+             }
+
+
+         })
+
+
+
+
+
+
+
+
+    // Warehouse.aggregate([
+    //     {'$match': {'_id': warehouseId}},
+    //     {'$match': { 'products._id':  product_id}},
+    //     {'$set': { 'products.title':  productTitle, 'products.modelo': productModel, 'products.cantidad': productQuant, 'products.precio': productsPrice   }}
+
+
+    // ], (err, product) => {
+    //     if(err) {
+    //         res.json({ message: 'Error getting products', err});
+    //     }
+    //     else {
+    //         res.json({ message: 'Success getting products', product});
+    //     }
+    // })
+}
 
 
 

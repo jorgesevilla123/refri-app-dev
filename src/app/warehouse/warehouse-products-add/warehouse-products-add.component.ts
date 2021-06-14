@@ -20,6 +20,7 @@ export class WarehouseProductsAddComponent implements OnInit {
   pager: any = {}
   searchQuery: string
   pageOfItems: string
+  isSearch: boolean = false
 
   constructor(
     public inventoryService: InventoryService,
@@ -40,12 +41,11 @@ export class WarehouseProductsAddComponent implements OnInit {
     const urlParameters = combineLatest([this.route.params, this.route.queryParams])
     urlParameters.subscribe(
       params => {
-        console.log(params);
         this.warehouseId = params[0].id,
         this.warehouseName = params[0]['name?']; 
         this.page = params[1].page;   
         this.searchQuery = params[1].q
-        this.loadPage(params[1].q, params[1].page, params[0].id)
+        this.loadPage(params[1].q, params[1].page)
       }
     )
   }
@@ -53,33 +53,42 @@ export class WarehouseProductsAddComponent implements OnInit {
 
 
 
-  loadPage(searchTerm, page, warehouseId){
+  loadPage(searchTerm, page){
+    console.log(searchTerm)
     if(searchTerm === undefined){
-      this.getWarehouse(this.warehouseId, this.page);
+      this.getProducts(this.page);
     }
     else {
-      this.warehouseService.searchWarehouseProducts(warehouseId, searchTerm, page).subscribe(
-        paginationObject => {
-          this.pager = paginationObject.pager
-          this.pageOfItems = paginationObject.pageOfItems
-          console.log(paginationObject.pageOfItems);
-        }
-      )
-      
-  
+      this.isSearch = true
+      this.browseProduct(searchTerm, page)
     }
-
   }
 
 
 
-  getWarehouse(warehouseId, page) {
-    this.warehouseService.getOneWarehouse(warehouseId, page).subscribe(
-      warehouse => {
-        this.pageOfItems = warehouse.pageOfItems,
-        this.pager = warehouse.pager
+
+
+  getProducts(page) {
+    this.inventoryService.getPaginateProducts(page).subscribe(
+      paginate => {
+        this.pageOfItems = paginate.pageItems
+        this.pager = paginate.paginator
+        console.log(paginate)
       }
     )
+  }
+
+
+
+  browseProduct(searchTerm, page){
+    this.inventoryService.searchProductAndPaginate(searchTerm, page).subscribe(
+      paginate => {
+        console.log(paginate);
+        this.pageOfItems = paginate.pageOfItems
+        this.pager = paginate.pager
+      }
+    )
+
   }
 
 
@@ -101,18 +110,8 @@ export class WarehouseProductsAddComponent implements OnInit {
         this.productsAdded.push(product);  
         console.log(index)
       } 
-<<<<<<< HEAD
 
 
-=======
-      // logic for increasing quantity
-      else {
-          console.log(this.productsAdded[index]);
-        if(this.productsAdded[index].cantidad >= 1){
-          this.productsAdded[index].cantidad += 1
-        }
-      }
->>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
   }
 
 
@@ -122,7 +121,6 @@ export class WarehouseProductsAddComponent implements OnInit {
 
 
   save(){
-<<<<<<< HEAD
 
     this.warehouseService.AddProductToWarehouse(this.warehouseId, this.productsAdded).subscribe(
       res => {
@@ -132,24 +130,14 @@ export class WarehouseProductsAddComponent implements OnInit {
         this.alert.notifyWarn(err, 2500, 'top', 'center')
       },
       () => { this.deleteAll()}
-=======
-    this.warehouseService.AddProductToWarehouse('606801340c171047c46461f6', this.productsAdded).subscribe(
-      res => {
-        console.log(res)
-      }
->>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
     )
   }
 
 
 
 
-<<<<<<< HEAD
 
 
-=======
-  
->>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
 
 
   deleteAll(){

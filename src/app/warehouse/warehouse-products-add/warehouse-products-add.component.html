@@ -47,3 +47,66 @@
         <button mat-raised-button (click)="selectProduct(product)">Agregar</button>
     </ul>
 </div>
+
+
+
+
+
+<div *ngIf="isSearch; else notSearch">
+    <div class="card-footer pb-0 pt-3 mb-4 d-block mx-auto">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{q: searchQuery, page: 1 }" class="page-link">Primera</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]=" {q: searchQuery, page: pager.currentPage - 1 }" class="page-link">
+                    <mat-icon>navigate_before</mat-icon>
+                </a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{q: searchQuery, page: page }" class="page-link">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{q: searchQuery, page: pager.currentPage + 1 }" class="page-link">
+                    <mat-icon>navigate_next</mat-icon>
+                </a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{q: searchQuery, page: pager.totalPages }" class="page-link">Ultima</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+<ng-template #notSearch>
+
+    <div class="card-footer pb-0 pt-3 mb-4 d-block mx-auto">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{ page: 1 }" class="page-link">Primera</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]=" { page: pager.currentPage - 1 }" class="page-link">
+                    <mat-icon>navigate_before</mat-icon>
+                </a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{ page: page }" class="page-link">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{ page: pager.currentPage + 1 }" class="page-link">
+                    <mat-icon>navigate_next</mat-icon>
+                </a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+                <a [routerLink]="['/almacenes/agregar-producto', warehouseId, warehouseName]" [queryParams]="{ page: pager.totalPages }" class="page-link">Ultima</a>
+            </li>
+        </ul>
+    </div>
+
+</ng-template>

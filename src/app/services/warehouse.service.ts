@@ -79,15 +79,9 @@ export class WarehouseService {
 
 
 
-<<<<<<< HEAD
-    AddProductToWarehouse(warehouseId, products): Observable<any>{
-      console.log(products)
-      return this.http.put(`${this.warehouseUrl}/add-product/${warehouseId}`, products).pipe(
-=======
     AddProductToWarehouse(warehouseId, product): Observable<any>{
       console.log(product);
       return this.http.put(`${this.warehouseUrl}/add-product/${warehouseId}`, product).pipe(
->>>>>>> ed9a9d52b62d7a83dde338c9124c24e4a762cf82
       map( res => {
           return res
         })
