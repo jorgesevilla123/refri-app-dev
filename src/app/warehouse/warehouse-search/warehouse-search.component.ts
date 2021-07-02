@@ -3,6 +3,8 @@ import {combineLatest, Observable} from 'rxjs'
 import { Products } from 'src/app/interfaces-models/products';
 import { WarehouseService } from '../../services/warehouse.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { ProductDeleteDialogComponent } from "../../reusable-components/product-delete-dialog/product-delete-dialog.component";
 
  @Component({
   selector: 'app-warehouse-search',
@@ -16,7 +18,9 @@ export class WarehouseSearchComponent implements OnInit {
   constructor(
     private warehouseService: WarehouseService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
+
   ) { }
 
 
@@ -26,6 +30,7 @@ export class WarehouseSearchComponent implements OnInit {
   warehouseName: string
   warehouse: any
   searchQuery: string
+  page: number 
 
 
 
@@ -37,6 +42,7 @@ export class WarehouseSearchComponent implements OnInit {
         this.warehouseId = params[0].id,
         this.warehouseName = params[0]['name?'];  
         this.searchQuery = params[1].q  
+        this.page = params[1].page;
         this.loadPage(params[1].q, params[1].page, params[0].id)
         this.getWarehouse(params[0].id, params[1].page);
      
@@ -97,6 +103,38 @@ export class WarehouseSearchComponent implements OnInit {
 
     this.router.navigate(['/almacenes/administrar-almacen/busqueda', this.warehouseId, this.warehouseName], {queryParams: {q: queryString, page: 1}})
 
+
+  }
+
+
+
+  onDelete(product){
+    let warehouseId = this.warehouseId
+    const dialogConfig =  new MatDialogConfig();
+    dialogConfig.width = '40%'
+    dialogConfig.data = {product, warehouseId}
+    const dialogRef = this.dialog.open(ProductDeleteDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      warehouse => {
+        console.log(warehouse.data);
+      },
+      err => {
+        console.log(err)
+      },
+    ),
+    () => {
+      this.loadPage(this.searchQuery, this.page, this.warehouseId)
+      console.log('Passed complete and deleted')
+    }
+
+  }
+
+
+  onEdit(product){
+
+  }
+
+  onEditPhoto(product){
 
   }
 

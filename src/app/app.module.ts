@@ -31,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { ProductDeleteDialogComponent } from './reusable-components/product-delete-dialog/product-delete-dialog.component';
 
 
 
@@ -46,7 +47,8 @@ import { MatListModule } from '@angular/material/list';
     LoadingComponent,
     UsersComponent,
     UserSignupComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ProductDeleteDialogComponent
 
 
   ],

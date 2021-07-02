@@ -84,7 +84,6 @@
                 <mat-card-subtitle style="color: #49ce49">
                     En stock
                 </mat-card-subtitle>
-
             </ng-template>
             <div *ngIf="product.imagePath == 'no-photo'; else image">
                 <img class="product-card-img" mat-card-image src="../../../../assets/no-image.png">
@@ -96,7 +95,6 @@
                 <h3>Modelo: {{product.modelo}}</h3>
                 <h3>Precio: {{product.precio | currency}}</h3>
                 <h3>Cantidad: {{product.cantidad}}</h3>
-
                 <h2><b>Categoria: {{product.categorias}}</b></h2>
             </mat-card-content>
         </mat-card>

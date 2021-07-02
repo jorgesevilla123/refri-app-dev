@@ -62,12 +62,12 @@
             <mat-icon>more_vert</mat-icon>
           </button>
                 <mat-menu #menu="matMenu">
-                    <!-- <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
+                    <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
               </mat-icon></button>
                     <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
               </mat-icon></button>
                     <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
-                add_photo_alternate</mat-icon></button> -->
+                add_photo_alternate</mat-icon></button>
                 </mat-menu>
             </mat-card-header>
             <div *ngIf="product.products.cantidad < 5; else onStock">

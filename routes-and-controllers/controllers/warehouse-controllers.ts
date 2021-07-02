@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Warehouse, { warehouseInterface } from "../../models/warehouse-model";
 import Products, { ProductInterface } from "../../models/products-model";
 import { redisClient } from "./products-controllers";
-import {ObjectID} from 'mongodb'
+import { ObjectID } from 'mongodb'
 
 
 
@@ -80,19 +80,19 @@ function paginate(
 
 export const getWarehouse = (req: Request, res: Response) => {
     const itemsPerPage = 40
-    var page : any= req.query.page
+    var page: any = req.query.page
 
-    Warehouse.find( ( err, warehouses) => {
-        if( err ) {
-            res.json({ message: 'Error buscando los almacenes', err})
+    Warehouse.find((err, warehouses) => {
+        if (err) {
+            res.json({ message: 'Error buscando los almacenes', err })
             console.log(err);
         }
         else {
-        
+
             res.json(warehouses);
         }
     })
-    
+
 }
 
 
@@ -102,11 +102,11 @@ export const getWarehouse = (req: Request, res: Response) => {
 export const getOneWarehouse = (req: Request, res: Response) => {
     const id = req.params.id
     const itemsPerPage = 40
-    var page : any = req.query.page || 1
+    var page: any = req.query.page || 1
 
-    Warehouse.findOne({_id: id}, ( err, warehouse) => {
-        if( err ) {
-            res.json({ message: 'Error buscando los almacenes', err})
+    Warehouse.findOne({ _id: id }, (err, warehouse) => {
+        if (err) {
+            res.json({ message: 'Error buscando los almacenes', err })
             console.log(err);
         }
         else {
@@ -115,10 +115,10 @@ export const getOneWarehouse = (req: Request, res: Response) => {
 
             const pageOfItems = warehouse.products.slice(pager.startIndex, pager.endIndex + 1)
 
-            res.json({warehouse, current: page, pages: Math.ceil(warehouse.products.length / itemsPerPage), pageOfItems, pager});
+            res.json({ warehouse, current: page, pages: Math.ceil(warehouse.products.length / itemsPerPage), pageOfItems, pager });
         }
     })
-    
+
 }
 
 
@@ -128,9 +128,9 @@ export const getOneWarehouse = (req: Request, res: Response) => {
 export const searchWarehouse = (req: Request, res: Response) => {
     const searchQuery = req.query.q;
 
-    Warehouse.find({ warehouse_name: new RegExp(`${searchQuery}`, 'gi')}, (err, warehouses) => {
-        if(err) {
-            res.json({ message: 'Error en la busqueda de almacenes'})
+    Warehouse.find({ warehouse_name: new RegExp(`${searchQuery}`, 'gi') }, (err, warehouses) => {
+        if (err) {
+            res.json({ message: 'Error en la busqueda de almacenes' })
         }
         else {
             res.json(warehouses);
@@ -138,8 +138,8 @@ export const searchWarehouse = (req: Request, res: Response) => {
         }
     })
 
-    
-    
+
+
 }
 
 
@@ -147,31 +147,31 @@ export const searchWarehouseProducts = (req: Request, res: Response) => {
     const query = req.query.q;
     const id = req.params.id
     var warehouseId = new ObjectID(`${id}`)
-    let regex = new RegExp(`${query}`,'gi')
+    let regex = new RegExp(`${query}`, 'gi')
     var page: any = req.query.page || 1;
     const itemsPerPage = 40;
     var pageToint = parseInt(page);
-    
+
 
     Warehouse.aggregate([
-        {'$match': {'_id': warehouseId}},
-        {'$project': {"warehouse_location": 0, '_id': 0}},
-        {'$unwind': '$products'},
-        {'$match': { '$or': [{'products.title': regex}, {'products.modelo': regex}]   }}
+        { '$match': { '_id': warehouseId } },
+        { '$project': { "warehouse_location": 0, '_id': 0 } },
+        { '$unwind': '$products' },
+        { '$match': { '$or': [{ 'products.title': regex }, { 'products.modelo': regex }] } }
 
     ], (err, products) => {
-        if(err) {
-            res.json({message: 'Error retrieveng the products', err})
+        if (err) {
+            res.json({ message: 'Error retrieveng the products', err })
         }
         else {
             let pager = paginate(products.length, pageToint, itemsPerPage);
             const pageOfItems = products.slice(pager.startIndex, pager.endIndex + 1)
-            res.json({current: page, pages: Math.ceil(products.length / itemsPerPage), pageOfItems, pager});
+            res.json({ current: page, pages: Math.ceil(products.length / itemsPerPage), pageOfItems, pager });
         }
     })
 
-    
-    
+
+
 }
 
 
@@ -185,19 +185,19 @@ export const searchWarehouseProducts = (req: Request, res: Response) => {
 
 export const addWarehouse = (req: Request, res: Response) => {
 
-    const {warehouse_location, warehouse_name} = req.body
+    const { warehouse_location, warehouse_name } = req.body
 
-            const newWarehouse = new Warehouse({warehouse_location, warehouse_name})
-            newWarehouse.save( (err, warehouse) => {
-                if(err) {
-                    res.json({message: 'Error guardando almacen', sucess: false});
-                }
-                else {
-                res.json({message: 'Almacen guardado!', warehouse, success: true});
-            }
-                    
-            })
-}    
+    const newWarehouse = new Warehouse({ warehouse_location, warehouse_name })
+    newWarehouse.save((err, warehouse) => {
+        if (err) {
+            res.json({ message: 'Error guardando almacen', sucess: false });
+        }
+        else {
+            res.json({ message: 'Almacen guardado!', warehouse, success: true });
+        }
+
+    })
+}
 
 
 
@@ -206,18 +206,18 @@ export const addWarehouse = (req: Request, res: Response) => {
 export const addProductToWarehouse = (req: Request, res: Response) => {
 
     const products = req.body
-    const id = req.params.id 
+    const id = req.params.id
 
-    Warehouse.findOneAndUpdate({_id: id}, {$push: { products: { $each: products}}}, {new: true}, (err, warehouse) => {
-        if(err) {
-            res.json({ message: 'Error agregando producto', err})
+    Warehouse.findOneAndUpdate({ _id: id }, { $push: { products: { $each: products } } }, { new: true }, (err, warehouse) => {
+        if (err) {
+            res.json({ message: 'Error agregando producto', err })
         }
         else {
-            res.json({message: "Producto agregado", warehouse});
+            res.json({ message: "Producto agregado", warehouse });
             console.log('saved')
         }
     })
-}    
+}
 
 
 
@@ -231,20 +231,20 @@ export const addProductToWarehouse = (req: Request, res: Response) => {
 
 export const removeProductFromWarehouse = (req: Request, res: Response) => {
 
-    const productId= req.body.product._id;
+    const productID = req.params.productId
     const id = req.params.id
 
 
-    Warehouse.findOneAndUpdate({_id: id}, {$pull: { products : {_id: productId}}}).then(
+    Warehouse.findOneAndUpdate({ _id: id }, { $pull: { products: { _id: productID } } }).then(
         warehouse => {
-            res.json(warehouse);  
+            res.json({ message: 'Producto eliminado del alamacen', warehouse });
         }
     ).catch(
         err => {
-            res.json({ message: 'Error eliminando producto', err})
+            res.json({ message: 'Error eliminando producto', err })
         }
     )
-}    
+}
 
 
 
@@ -261,25 +261,25 @@ export const addAllProductsToWarehouse = (req: Request, res: Response) => {
 
 
     redisClient.get('products', (err, products) => {
-        if(err) {
-            res.json({ message: "Error consultando la cache"})
+        if (err) {
+            res.json({ message: "Error consultando la cache" })
         }
         if (products) {
             var parsedProducts = JSON.parse(products)
-            Warehouse.findOne({_id: id}, (err, warehouse) => {
-                if(err) {
-                    res.json({ message: "Error obteniendo los almacenes", err})
-                }  
+            Warehouse.findOne({ _id: id }, (err, warehouse) => {
+                if (err) {
+                    res.json({ message: "Error obteniendo los almacenes", err })
+                }
                 else {
-                    parsedProducts.forEach( product => {
+                    parsedProducts.forEach(product => {
                         warehouse.products.push(product);
                     })
-                    warehouse.save( (err, warehouse) => {
-                        if(err) {
-                            res.json({ message: "Error agregando productos al almacen", err})
+                    warehouse.save((err, warehouse) => {
+                        if (err) {
+                            res.json({ message: "Error agregando productos al almacen", err })
                         }
                         else {
-                            res.json({ message: "Productos agregados con exito!", warehouse})
+                            res.json({ message: "Productos agregados con exito!", warehouse })
                         }
                     })
                 }
@@ -293,41 +293,41 @@ export const addAllProductsToWarehouse = (req: Request, res: Response) => {
                 }
                 else {
                     redisClient.set('products', JSON.stringify(products), (err, reply) => {
-                        if(err) {
+                        if (err) {
                             console.log(err)
                         } else {
                             console.log(reply, 'product saved in memory');
                         }
-                        
+
                     })
 
-                    Warehouse.findOne({_id: id}, (err, warehouse) => {
-                        if(err) {
-                            res.json({ message: "Error obteniendo los almacenes", err}) 
-                        }  
+                    Warehouse.findOne({ _id: id }, (err, warehouse) => {
+                        if (err) {
+                            res.json({ message: "Error obteniendo los almacenes", err })
+                        }
                         else {
-                            products.forEach( product => {
+                            products.forEach(product => {
                                 warehouse.products.push(product);
                             })
-                            warehouse.save( (err, warehouse) => {
-                                if(err) {
-                                    res.json({ message: "Error agregando productos al almacen", err})
+                            warehouse.save((err, warehouse) => {
+                                if (err) {
+                                    res.json({ message: "Error agregando productos al almacen", err })
                                 }
                                 else {
-                                    res.json({ message: "Productos agregados con exito!", warehouse})
+                                    res.json({ message: "Productos agregados con exito!", warehouse })
                                 }
                             })
                         }
                     })
 
-                    
-                   
+
+
                 }
             })
 
         }
     })
-}    
+}
 
 
 
@@ -344,19 +344,18 @@ export const removeAllProducts = (req: Request, res: Response) => {
     const id = req.params.id
 
 
-    Warehouse.findByIdAndUpdate({ _id: id}, {$set: {products: []}}).then(
+    Warehouse.findByIdAndUpdate({ _id: id }, { $set: { products: [] } }).then(
         warehouse => {
-           
-            res.json({ message: "Productos borrados!", warehouse})
+
+            res.json({ message: "Productos borrados!", warehouse })
         }
     ).catch(
         err => {
-            res.json({ message: "Error borrando todos los productos", err})
+            res.json({ message: "Error borrando todos los productos", err })
         }
     )
 }
 
-    
 
 
 
@@ -364,22 +363,23 @@ export const removeAllProducts = (req: Request, res: Response) => {
 
 
 
- 
+
+
 
 
 
 export const deleteWarehouse = (req: Request, res: Response) => {
     const id = req.params.id
 
-    Warehouse.findByIdAndDelete({_id : id}).then(
+    Warehouse.findByIdAndDelete({ _id: id }).then(
         warehouse => {
-            res.json({ message: 'Almacen eliminado!', warehouse, success: true});
+            res.json({ message: 'Almacen eliminado!', warehouse, success: true });
 
         }
 
     ).catch(
         error => {
-            res.json({ message: 'Error eliminando almacen', error, success: false});
+            res.json({ message: 'Error eliminando almacen', error, success: false });
         }
     )
 }
@@ -390,7 +390,7 @@ export const deleteWarehouse = (req: Request, res: Response) => {
 
 
 
-    
+
 
 
 
@@ -406,26 +406,26 @@ export const updateWarehouse = (req: Request, res: Response) => {
 
     const updateData: any = {};
 
-    if( req.body.warehouse_location !== undefined || null) {
+    if (req.body.warehouse_location !== undefined || null) {
         updateData.warehouse_location = req.body.warehouse_location;
     }
- if( req.body.warehouse_name !== undefined || null) {
+    if (req.body.warehouse_name !== undefined || null) {
         updateData.warehouse_name = req.body.warehouse_name;
     }
- if (req.body.total_stock !== undefined || null) {
+    if (req.body.total_stock !== undefined || null) {
         updateData.total_stock = req.body.total_stock;
     }
-    
+
     console.log(updateData);
 
 
-    Warehouse.findOneAndUpdate({ _id: id}, updateData, {new: true}, (err, warehouse) => {
-        if(err) {
-            res.json({ message: 'Error actualizando Almacen', success: false});
+    Warehouse.findOneAndUpdate({ _id: id }, updateData, { new: true }, (err, warehouse) => {
+        if (err) {
+            res.json({ message: 'Error actualizando Almacen', success: false });
 
-        } 
+        }
         else {
-            res.json({ message: 'Almacen actualizado!', warehouse, success: true});
+            res.json({ message: 'Almacen actualizado!', warehouse, success: true });
         }
 
     })
@@ -446,44 +446,22 @@ export const updateWarehouseProducts = (req: Request, res: Response) => {
     const product_id = req.params.productId;
     const warehouseId = new ObjectID(`${warehouse_id}`);
 
- 
-    
+
+
     console.log(req.query.title);
 
 
-    Warehouse.update({_id: warehouseId, products: {$elemMatch: { _id: product_id}}},
-         {$set: {"products.$.title": productTitle, "products.$.modelo": productModel, "products.$.cantidad": productQuant, "products.$.precio": productsPrice}}, (err, product) => {
-             if(err) {
-                 res.json({message: 'Erorr editando producto', err})
-             }
-             else {
-                 res.json({message: 'Producto editado', product})
-             }
+    Warehouse.update({ _id: warehouseId, products: { $elemMatch: { _id: product_id } } },
+        { $set: { "products.$.title": productTitle, "products.$.modelo": productModel, "products.$.cantidad": productQuant, "products.$.precio": productsPrice } }, (err, product) => {
+            if (err) {
+                res.json({ message: 'Erorr editando producto', err })
+            }
+            else {
+                res.json({ message: 'Producto editado', product })
+            }
 
 
-         })
-
-
-
-
-
-
-
-
-    // Warehouse.aggregate([
-    //     {'$match': {'_id': warehouseId}},
-    //     {'$match': { 'products._id':  product_id}},
-    //     {'$set': { 'products.title':  productTitle, 'products.modelo': productModel, 'products.cantidad': productQuant, 'products.precio': productsPrice   }}
-
-
-    // ], (err, product) => {
-    //     if(err) {
-    //         res.json({ message: 'Error getting products', err});
-    //     }
-    //     else {
-    //         res.json({ message: 'Success getting products', product});
-    //     }
-    // })
+        })
 }
 
 

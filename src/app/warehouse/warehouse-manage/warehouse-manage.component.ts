@@ -7,8 +7,8 @@ import { Warehouse } from "../../interfaces-models/warehouses"
 import { Products } from "../../interfaces-models/products"
 import { HttpParams } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { DeleteWarehouseDialogComponent } from '../delete-warehouse-dialog/delete-warehouse-dialog.component';
 import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import {  ProductDeleteDialogComponent } from "../../reusable-components/product-delete-dialog/product-delete-dialog.component"
 
 
 
@@ -22,11 +22,12 @@ export class WarehouseManageComponent implements OnInit {
   warehouse: Warehouse
   products: any
   pager: any = {}
-  page: number
+  page: any
   warehouseId: string
   warehouseName: string
   pageOfItems: Products[] = []
   isSearchParam: boolean
+  query: any
 
   constructor(
     public warehouseService: WarehouseService,
@@ -42,6 +43,8 @@ export class WarehouseManageComponent implements OnInit {
     urlParameters.subscribe(
       params => {
         console.log(params);
+        this.page = params[1].page;
+        console.log(this.page);
         this.getWarehouse(params[0].id, params[1].page);
         this.warehouseId = params[0].id,
           this.warehouseName = params[0]['name?'];
@@ -85,6 +88,7 @@ export class WarehouseManageComponent implements OnInit {
     console.log(this.warehouseId);
     console.log(this.warehouseName);
     console.log(queryString);
+    this.query = queryString;
     this.router.navigate(['/almacenes/administrar-almacen/busqueda', this.warehouseId, this.warehouseName], { queryParams: { q: queryString, page: 1 } })
   }
 
@@ -92,28 +96,38 @@ export class WarehouseManageComponent implements OnInit {
 
   onEdit(product) {
 
-  }
+  }3
 
 
-  onDelete(warehouse: Warehouse){
+  onDelete(product){
+    let warehouseId = this.warehouseId
+    let page = this.page;
     const dialogConfig =  new MatDialogConfig();
     dialogConfig.width = '40%'
-    dialogConfig.data = warehouse
-    const dialogRef = this.dialog.open(DeleteWarehouseDialogComponent, dialogConfig);
+    dialogConfig.data = {product, warehouseId}
+    const dialogRef = this.dialog.open(ProductDeleteDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       warehouse => {
-        if(warehouse.data.success) { 
-          this.alert.notifySuccess(`${warehouse.data.message}`, 2500, 'top', 'center');
-        }
-        else {
-          this.alert.notifyWarn(`${warehouse.data.message}`, 2500, 'top', 'center')
-        }
+        console.log(warehouse.data);
       },
       err => {
+
         console.log(err)
+
+      },
+      () => {
+        console.log('Reloaded')
+
+  
+ 
+  
       }
+ 
     )
   }
+
+
+
 
 
 

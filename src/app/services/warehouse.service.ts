@@ -116,8 +116,8 @@ export class WarehouseService {
     }
 
 
-    RemoveOneProductFromWarehouse(warehouseId): Observable<any>{
-      return this.http.delete(`${this.warehouseUrl}/delete-product/${warehouseId}`).pipe(
+    RemoveOneProductFromWarehouse(warehouseId, productId): Observable<any>{
+      return this.http.delete(`${this.warehouseUrl}/delete-product/${warehouseId}/${productId}`).pipe(
         map( res => {
           return res
         })
@@ -133,6 +133,26 @@ export class WarehouseService {
       ) 
 
     }
+
+
+
+    UpdateWarehouseProduct(warehouseId, product): Observable<any>{
+      let productTitle = product.title;
+      let productModelo = product.modelo;
+      let productCantidad = product.cantidad;
+      let productPrecio = product.precio;
+
+      let productId = product._id
+      return this.http.put(`${this.warehouseUrl}/update-warehouse-products/${warehouseId}/${productId}?title=${productTitle}&modelo=${productModelo}&cantidad=${productCantidad}&precio=${productPrecio}`, product).pipe(
+        map( res => {
+          return res
+        })
+      ) 
+
+    }
+
+
+    
 
 
    

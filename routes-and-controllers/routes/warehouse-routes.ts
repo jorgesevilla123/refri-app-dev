@@ -53,7 +53,7 @@ router.route('/delete-warehouse/:id').delete(deleteWarehouse);
 
 
 
-router.route('/delete-product/:id').delete(removeProductFromWarehouse);
+router.route('/delete-product/:id/:productId').delete(removeProductFromWarehouse);
 
 
 
