@@ -11,7 +11,7 @@
 <div class="card-div" *ngIf="warehouse">
     <h2 style="font-weight: 300; margin-left: 20px">
         <mat-card class="warehouse-card">
-            <mat-card-title>{{warehouse.warehouse_name}}</mat-card-title>
+            <mat-card-title>{{warehouse.warehouse_name}}</mat-card-title>s
         </mat-card>
     </h2>
 </div>
@@ -64,7 +64,7 @@
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
               </mat-icon></button>
-                    <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
+                    <button mat-menu-item (click)="onDeleteProduct(product)">Eliminar <mat-icon class="inventory-delete-button">delete
               </mat-icon></button>
                     <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
                 add_photo_alternate</mat-icon></button>

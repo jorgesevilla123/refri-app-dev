@@ -108,7 +108,7 @@ export class WarehouseSearchComponent implements OnInit {
 
 
 
-  onDelete(product){
+  onDeleteProduct(product){
     let warehouseId = this.warehouseId
     const dialogConfig =  new MatDialogConfig();
     dialogConfig.width = '40%'
@@ -121,12 +121,13 @@ export class WarehouseSearchComponent implements OnInit {
       err => {
         console.log(err)
       },
-    ),
-    () => {
-      this.loadPage(this.searchQuery, this.page, this.warehouseId)
-      console.log('Passed complete and deleted')
-    }
-
+      () => {
+        console.log('completed')
+        this.loadPage(this.searchQuery, this.page, this.warehouseId)
+     
+      }
+    )
+   
   }
 
 

@@ -9,6 +9,7 @@ import { HttpParams } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
 import {  ProductDeleteDialogComponent } from "../../reusable-components/product-delete-dialog/product-delete-dialog.component"
+import { DeleteWarehouseDialogComponent } from '../delete-warehouse-dialog/delete-warehouse-dialog.component';
 
 
 
@@ -99,7 +100,7 @@ export class WarehouseManageComponent implements OnInit {
   }3
 
 
-  onDelete(product){
+  onDeleteProduct(product){
     let warehouseId = this.warehouseId
     let page = this.page;
     const dialogConfig =  new MatDialogConfig();
@@ -116,7 +117,7 @@ export class WarehouseManageComponent implements OnInit {
 
       },
       () => {
-        console.log('Reloaded')
+        this.getWarehouse(this.warehouseId, this.page);
 
   
  
@@ -124,6 +125,28 @@ export class WarehouseManageComponent implements OnInit {
       }
  
     )
+  }
+
+
+  onDeleteWarehouse(){
+    let warehouseId = this.warehouseId;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = this.warehouse;
+    const dialogRef = this.dialog.open(DeleteWarehouseDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      warehouse => {
+        console.log(warehouse.data)
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log('warehouse deleted')
+      }
+    )
+
+
   }
 
 

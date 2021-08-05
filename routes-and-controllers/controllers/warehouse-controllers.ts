@@ -451,17 +451,20 @@ export const updateWarehouseProducts = (req: Request, res: Response) => {
     console.log(req.query.title);
 
 
-    Warehouse.update({ _id: warehouseId, products: { $elemMatch: { _id: product_id } } },
-        { $set: { "products.$.title": productTitle, "products.$.modelo": productModel, "products.$.cantidad": productQuant, "products.$.precio": productsPrice } }, (err, product) => {
-            if (err) {
-                res.json({ message: 'Erorr editando producto', err })
-            }
-            else {
+    Warehouse.updateOne({ _id: warehouseId, products: { $elemMatch: { _id: product_id } } },
+        { $set: { "products.$.title": productTitle, "products.$.modelo": productModel, "products.$.cantidad": productQuant, "products.$.precio": productsPrice } }).then(
+            product => {
                 res.json({ message: 'Producto editado', product })
             }
+        ).catch(
+            err => {
+                res.json({ message: 'Erorr editando producto', err })
+            }
+        )
+            
+            
 
-
-        })
+            
 }
 
 

@@ -1,6 +1,6 @@
 <div style="margin: 20px;">
     <button mat-stroked-button appBackbutton><mat-icon>arrow_back</mat-icon> Volver</button>
-    <button class="opt-button" mat-stroked-button (click)="onDelete(warehouse)"><mat-icon>delete</mat-icon>  Eliminar almacen</button>
+    <button class="opt-button" mat-stroked-button (click)="onDeleteWarehouse()"><mat-icon>delete</mat-icon>  Eliminar almacen</button>
 </div>
 
 
@@ -69,7 +69,7 @@
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="onEdit(product)">Editar <mat-icon class="inventory-edit-button">create
               </mat-icon></button>
-                    <button mat-menu-item (click)="onDelete(product)">Eliminar <mat-icon class="inventory-delete-button">delete
+                    <button mat-menu-item (click)="onDeleteProduct(product)">Eliminar <mat-icon class="inventory-delete-button">delete
               </mat-icon></button>
                     <button mat-menu-item (click)="onEditPhoto(product)">Editar foto<mat-icon class="inventory-edit-img-button">
                 add_photo_alternate</mat-icon></button>
