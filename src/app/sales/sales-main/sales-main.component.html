@@ -1,0 +1,39 @@
+<p>sales-main works!</p>
+
+
+<h2>Testing services</h2>
+
+
+<div class="sales-options-div">
+
+    <button id="add-button" mat-stroked-button routerLink="/ventas/hacer-venta">
+    Realizar venta <mat-icon id="add-icon">add</mat-icon>
+  </button>
+
+<!-- 
+
+
+    <form (submit)="searchProducts(searchBox.value)">
+        <mat-form-field appearance="outline" class="inventory-search-form">
+            <mat-label>Buscar productos</mat-label>
+            <input #searchBox matInput id="search-box" placeholder="Buscar" />
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button style="background-color: dodgerblue" type="submit" mat-fab>
+      <mat-icon>search</mat-icon>
+    </button>
+    </form> -->
+
+
+
+
+</div>
+
+
+
+
+<div *ngFor="let sale of sales">
+    <h2>{{sale.fecha | date}}</h2>
+</div>
+
+

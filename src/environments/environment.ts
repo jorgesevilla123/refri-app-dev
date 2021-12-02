@@ -7,5 +7,6 @@ export const environment = {
     USERS_API: "http://localhost:4200/api/users",
     CATEGORY_API: "http://localhost:4200/api/categories",
     SUPPLIERS_API: "http://localhost:4200/api/suppliers",
-    WAREHOUSE_API: "http://localhost:4200/api/warehouse"
+    WAREHOUSE_API: "http://localhost:4200/api/warehouse",
+    SALES_API: "http://localhost:4200/api/sales"
 };

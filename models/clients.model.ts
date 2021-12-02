@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, SchemaType, ObjectId, SchemaTypes } from "mongoose";
 
 
 export interface shoppingBasketInterface extends Document {
@@ -17,7 +17,7 @@ export interface Client extends Document {
     cedula: number,
     email: string
     constantBuyer: boolean,
-    productsBought: [shoppingBasketInterface],
+    productsBought_id: [ObjectId],
     cart: [shoppingBasketInterface],
     mostBought: shoppingBasketInterface,
     phoneNumber: number,
@@ -35,12 +35,12 @@ const ProductSchema: Schema = new Schema({
 
 })
 
-const ClientSchema: Schema = new Schema({
+export const ClientSchema: Schema = new Schema({
     name: String,
     cedula: Number,
     email: String,
     constantBuyer: Boolean,
-    productsBought: {type: [ProductSchema]},
+    productsBought: {type: [SchemaTypes.ObjectId]},
     cart: {type: [ProductSchema]},
     mostBought: ProductSchema,
     phoneNumber: Number,

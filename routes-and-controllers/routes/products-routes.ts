@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import upload from "../../fileProcessing";
 import { addProduct, deleteOneProduct, filterCategories, getAllProducts, getLowStockProducts, getOneProduct, 
     getOutOfStockProducts, 
@@ -7,7 +7,7 @@ import { addProduct, deleteOneProduct, filterCategories, getAllProducts, getLowS
     searchProducts, updateOneProduct, updateProductImage
  } from "../controllers/products-controllers";
 
- import Product, { ProductInterface } from "../../models/products-model";
+
 
 const router = Router();
 

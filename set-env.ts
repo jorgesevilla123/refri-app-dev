@@ -29,7 +29,8 @@ export const environment = {
     USERS_API: "${process.env.USERS_API}",
     CATEGORY_API: "${process.env.CATEGORY_API}",
     SUPPLIERS_API: "${process.env.SUPPLIERS_API}",
-    WAREHOUSE_API: "${process.env.WAREHOUSE_API}"
+    WAREHOUSE_API: "${process.env.WAREHOUSE_API}",
+    SALES_API: "${process.env.SALES_API}"
 };
 `;
 

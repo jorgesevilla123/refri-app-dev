@@ -1,0 +1,55 @@
+
+
+table{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+
+.customer-selection-section {
+    margin: 30px;
+
+}
+
+.search-client-form{
+    width: 100%;
+    min-width: 150px;
+    max-width: 500px;
+}
+
+.client-mat-form{
+    width: 100%;
+}
+
+
+.autocomplete-img{
+    vertical-align: middle;
+    margin-right: 8px
+}
+
+
+[dir='rtl'] .autocomplete-img {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+
+
+  .add-product{
+      float: right;
+      width: 35px;
+      height: 35px;
+      margin-top: 10px;
+      margin-right: 10px;
+  }
+
+
+
+
+
+  
+
+  .table-header{
+      font-weight: bold;
+      color: black;
+  }

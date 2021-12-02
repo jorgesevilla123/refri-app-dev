@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { WarehouseService } from "../../services/warehouse.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
@@ -22,7 +22,7 @@ export class WarehouseManageComponent implements OnInit {
 
   warehouse: Warehouse
   products: any
-  pager: any = {}
+  pager: any = {} 
   page: any
   warehouseId: string
   warehouseName: string

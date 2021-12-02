@@ -15,11 +15,13 @@ import currencyRoutes from "./routes-and-controllers/routes/currency-routes";
 import usersRoutes from "./routes-and-controllers/routes/users-routes";
 import categoryRoutes from "./routes-and-controllers/routes/category-routes";
 import suppliersRoutes from "./routes-and-controllers/routes/suppliers-routes";
+import warehouseRoutes from "./routes-and-controllers/routes/warehouse-routes";
+import salesRoutes from "./routes-and-controllers/routes/sales-routes";
 import * as dotenv from "dotenv"
 import session from "express-session";
 import connectRedis from "connect-redis";
 import redis from 'redis';
-import warehouseRoutes from "./routes-and-controllers/routes/warehouse-routes";
+import cors from 'cors'
 
 
 
@@ -62,6 +64,7 @@ export function app() {
 
 
   //Middlewares
+  server.use(cors())
   server.set('view engine', 'html');
   server.set('views', distFolder);
   server.use(express.urlencoded({extended: false}));
@@ -112,9 +115,19 @@ const redisClient = redis.createClient(process.env.REDIS_URL);
   server.use('/api/categories', categoryRoutes);
   server.use('/api/suppliers', suppliersRoutes);
   server.use('/api/warehouse', warehouseRoutes);
+  server.use('/api/sales', salesRoutes);
 
+
+
+
+
+
+  
   //Path for the navigator to access the photos 
   server.use('/uploads', express.static(path.resolve('uploads')));
+
+
+
 
 
   //Handleling routes errors and timeouts

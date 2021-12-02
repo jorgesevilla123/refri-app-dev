@@ -53,7 +53,7 @@ export class InventoryManageProductsComponent implements OnInit {
     const modelo = this.productsForm.get('modelo').value;
     const precio = this.productsForm.get('precio').value;
     const cantidad = this.productsForm.get('cantidad').value;
-    const categoria = this.productsForm.get('caegoria').value;
+    const categoria = this.productsForm.get('categoria').value;
     const formData = new FormData();
     formData.append('title', title);
     formData.append('modelo', modelo);

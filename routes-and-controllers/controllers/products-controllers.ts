@@ -1,8 +1,6 @@
-
 import { Request, Response } from 'express';
 import Product, { ProductInterface } from "../../models/products-model";
 import * as fs from "fs-extra";
-import { filter } from 'rxjs/operators';
 import redis from 'redis';
 
 
@@ -228,13 +226,9 @@ export const filterCategories = (req: Request, res: Response) => {
 
                     res.json({ products: filteredProducts, current: page, pages: Math.ceil(filteredProducts.length / itemsPerPage), count: count, pageOfItems, pager })
 
-
                 }
-
             })
-
         })
-
 }
 
 
@@ -247,17 +241,17 @@ export const paginateProducts = (req: Request, res: Response) => {
     let page: any = req.query.page
     let pageToInt = parseInt(page);
 
-    redisClient.get(page, (err, products) => {
-        if (err) {
-            throw err
-        }
-         if (products) {
-            const parsedProducts = JSON.parse(products);
-            res.json(parsedProducts);
-            console.log('sended by in-memory db')
-            return
-        }
-        else {
+    // redisClient.get(page, (err, products) => {
+    //     if (err) {
+    //         throw err
+    //     }
+    //      if (products) {
+    //         const parsedProducts = JSON.parse(products);
+    //         res.json(parsedProducts);
+    //         console.log('sended by in-memory db')
+    //         return
+    //     }
+    //     else {
 
             Product.find({}).skip((itemsPerPage * page) - itemsPerPage).limit(itemsPerPage)
                 .exec((err, paginatedProducts) => {
@@ -297,25 +291,12 @@ export const paginateProducts = (req: Request, res: Response) => {
                                 return
 
                             });
-
-
-
-
-
                         }
                     })
                     if (err) {
                         console.log('Error executing products pagination', err)
                     }
                 })
-
-        }
-    })
-
-
-
-
-
 }
 
 

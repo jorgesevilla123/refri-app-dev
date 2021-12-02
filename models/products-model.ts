@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, ObjectId, SchemaTypes } from 'mongoose';
 
 export interface ProductInterface extends Document {
     title: string,
@@ -7,6 +7,8 @@ export interface ProductInterface extends Document {
     cantidad: number,
     imagePath: string,
     categorias: string[],
+    warehouse_id: [ObjectId]
+    
 }
 
 
@@ -16,7 +18,8 @@ export const ProductSchema: Schema = new Schema({
     precio: Number,
     cantidad: Number,
     imagePath: String,
-    categorias: Array
+    categorias: Array,
+    warehouse_id:  [SchemaTypes.ObjectId]
 
 })
 

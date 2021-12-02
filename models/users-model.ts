@@ -21,8 +21,6 @@ export const userSchema = new Schema({
     password: String,
     nivel: String,
  
-
-    
 });
 
 
