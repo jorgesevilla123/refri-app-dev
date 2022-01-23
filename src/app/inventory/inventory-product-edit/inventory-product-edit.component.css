@@ -8,6 +8,18 @@ mat-form-field
 
 }
 
+.close-button{
+    background-color: #FC1808;
+    color: white;
+}
+
+
+.create-button{
+    background-color: dodgerblue;
+    color: white;
+
+}
+
 
 
 

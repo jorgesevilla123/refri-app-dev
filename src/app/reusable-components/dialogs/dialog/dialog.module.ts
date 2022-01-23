@@ -11,8 +11,7 @@ import { DialogComponent } from "./dialog.component";
     CommonModule
   ],
   exports: [DialogComponent],
-  entryComponents: [DialogComponent],
-  providers: [DialogService]
+   providers: [DialogService]
   
 })
 export class DialogModule { }

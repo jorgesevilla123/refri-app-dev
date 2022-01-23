@@ -6,7 +6,7 @@ import { Products } from "../../interfaces-models/products";
 import { Client } from "../../interfaces-models/clients";
 import {ActivatedRoute} from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../shared/alert-module/alert.service";
 
 
 

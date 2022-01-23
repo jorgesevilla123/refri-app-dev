@@ -7,7 +7,6 @@ import { InventoryProductEditComponent } from "./inventory-product-edit/inventor
 import { InventorySearchComponent } from "./inventory-search/inventory-search.component";
 import { InventoryComponent } from "./inventory-table/inventory-table.component";
 import { InventoryRoutingModule } from "./inventory-routing.module";
-import { InventoryService } from "../services/inventory.service"
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainNavModule } from "../main-nav/main-nav.module";
@@ -18,7 +17,10 @@ import { SearchComponent } from './search/search.component';
 import { ResponsiveNavModule } from '../responsive-nav/responsive-nav.module';
 import { LayoutModule } from '@angular/cdk/layout'
 import { SharedModule } from "../shared/shared.module";
-
+import { SearchBoxModule } from '../shared/search-box/search-box.module';
+import { AlertService } from  '../shared/alert-module/alert.service';
+import { ConfirmationModule } from '../shared/confirmation/confirmation.module';
+import { InventoryOverviewComponent } from './inventory-overview/inventory-overview.component'
 
 
 
@@ -34,18 +36,21 @@ import { SharedModule } from "../shared/shared.module";
     InventoryLowStockComponent,
     InventoryProductsToBuyComponent,
     SearchComponent,
+    InventoryOverviewComponent,
 
   ],
   imports: [
+    CommonModule,
     InventoryRoutingModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
     ResponsiveNavModule,
     MainNavModule,
     LayoutModule,
-    SharedModule
+    SharedModule,
+    SearchBoxModule,
+    ConfirmationModule
   ],
   exports: [
     InventoryImageEditComponent,
@@ -55,9 +60,8 @@ import { SharedModule } from "../shared/shared.module";
     InventorySearchComponent,
     InventoryComponent
   ],
-
   providers: [
-    InventoryService
+    AlertService
   ]
 })
 export class InventoryModule { }

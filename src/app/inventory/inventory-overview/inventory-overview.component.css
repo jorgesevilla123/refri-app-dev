@@ -1,0 +1,13 @@
+  
+  .product-card-img{
+    height: 100px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.inventory-products-card{
+    width: 320px;
+}

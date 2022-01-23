@@ -5,20 +5,18 @@ import { UserSignupComponent } from "./auth-routes/user-signup/user-signup.compo
 import { AuthGuard } from "./services/auth.guard";
 import { LoadPermissionGuard } from "./services/load-permission.guard"
 import { LoginGuard } from './services/login.guard';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 
 //Routes to render all the views in main-routes folder
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/dashboard'},
-  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
+  {path: '',  redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'login', component: UserLoginComponent},
   {path: 'signup', component: UserSignupComponent},
   {path: 'inventario', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule)},
-  {path: 'finanzas', loadChildren: () => import('./finance/finance.module').then(m => m.FinanceModule)},
   {path: 'clientes', loadChildren: () => import('./clients-manage/clients-manage.module').then(m => m.ClientsManageModule)},
-  {path: 'almacenes', loadChildren: () => import('./warehouse/warehouse.module').then(m => m.WarehouseModule)},
-  {path: 'proveedores', loadChildren: () => import('./supplier/supplier.module').then(m => m.SupplierModule)},
-  {path: 'ventas', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule)}
+  {path: 'ventas', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule)},
+ 
 
 
 

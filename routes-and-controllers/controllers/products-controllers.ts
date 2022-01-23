@@ -77,7 +77,8 @@ export const redisClient = redis.createClient(process.env.REDIS_URL);
 
 
 export const justForTest = (req: Request, res: Response) => {
-    res.json({ message: 'Product route working good' });
+    
+    console.log(req.query.rh)
 }
 
 
@@ -161,46 +162,81 @@ export const getLowStockProducts = (req: Request, res: Response) => {
 
 
 export const searchProducts = (req: Request, res: Response) => {
-    let itemsPerPage = 40;
-
-
-    let product = req.query.q
-    let page: any = req.query.page
-
-
-
-    let redisQuery = 
+    const q: any = req.query.q
+    const itemsPerPage: any = 43
+    const page: any =  req.query.page
+    const category: any = req.query.category
+ 
 
 
 
 
-    Product.find({ $or: [{ title: new RegExp(`${product}`, 'gi') }, { modelo: new RegExp(`${product}`, 'gi') }] })
-        .exec((err, foundProducts) => {
-            Product.countDocuments((err, count) => {
-                if (err) {
-                    console.log(err)
-                }
-
-                else {
 
 
-                    let pageToInt = parseInt(page);
-                    const pager = paginate(foundProducts.length, pageToInt, itemsPerPage);
-
-
-                    const pageOfItems = foundProducts.slice(pager.startIndex, pager.endIndex + 1);
-
-                 
-
-
-                    res.json({ products: foundProducts, current: page, pages: Math.ceil(foundProducts.length / itemsPerPage), count: count, pageOfItems, pager })
-
-
-                }
-            })
+    if (category === undefined) {
+        console.log('first executed')
+                  //executed if no category is specified
+    Product.find({ $or: [{ title: new RegExp(`${q}`, 'gi') }, { modelo: new RegExp(`${q}`, 'gi')}]})
+    .exec((err, foundProducts) => {
+        Product.countDocuments((err, count) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                let pageToInt = parseInt(page);
+                const pager = paginate(foundProducts.length, pageToInt, itemsPerPage);
+                const pageOfItems = foundProducts.slice(pager.startIndex, pager.endIndex + 1);
+                res.json({ products: foundProducts, current: page, pages: Math.ceil(foundProducts.length / itemsPerPage), count: count, pageOfItems, pager })
+                console.log(foundProducts)
+              }
         })
+    })
+
+        
+    } else {
+
+        
+       // executed if category is specified to render products by category 
+       console.log('second executed')
+    Product.find({ $or: [{ title: new RegExp(`${q}`, 'gi') }, { modelo: new RegExp(`${q}`, 'gi') }], $and: [ {categorias: category} ] })
+    .exec((err, foundProducts) => {
+        Product.countDocuments((err, count) => {
+            if (err) {
+                console.log(err)
+            }
+
+            else {
+                let pageToInt = parseInt(page);
+                const pager = paginate(foundProducts.length, pageToInt, itemsPerPage);
+                const pageOfItems = foundProducts.slice(pager.startIndex, pager.endIndex + 1);
+                res.json({ products: foundProducts, current: page, pages: Math.ceil(foundProducts.length / itemsPerPage), count: count, pageOfItems, pager })
+                console.log(foundProducts);
+
+            }
+        })
+    })
+    
+
+
+
+
+        
+    }
+
+    
+   
+
+
+
+
 
 }
+
+
+
+
+
+
 
 
  
@@ -323,7 +359,9 @@ export const getOneProduct = (req: Request, res: Response) => {
 
 
 export const addProduct = (req: Request, res: Response) => {
-    const { title, modelo, precio, cantidad } = req.body;
+    const { title, modelo, precio, cantidad, categorias } = req.body;
+    console.log(categorias);
+    console.log(req.file);
 
     let imagePath
     if (req.file == undefined) {
@@ -332,7 +370,7 @@ export const addProduct = (req: Request, res: Response) => {
     else {
         imagePath = `/${req.file.destination}/${req.file.filename}`
     }
-    const newProduct = new Product({ title, modelo, cantidad, precio, imagePath })
+    const newProduct = new Product({ title, modelo, cantidad, precio, imagePath, categorias })
     newProduct.save((err, product) => {
         if (err) {
             console.log(err)
@@ -409,8 +447,11 @@ export const deleteOneProduct = (req: Request, res: Response) => {
 
 export const updateOneProduct = (req: Request, res: Response) => {
     const id = req.params.id
+    console.log(req.body)
+    
     const { title, modelo, precio, cantidad, categoria } = req.body
-    Product.findByIdAndUpdate({ _id: id }, { title: title, modelo: modelo, precio: precio, cantidad: cantidad, $push: { categorias: categoria } }, { upsert: false }, (err, product) => {
+   
+    Product.findByIdAndUpdate({ _id: id }, { title: title, modelo: modelo, precio: precio, cantidad: cantidad, categorias: categoria }, { upsert: false }, (err, product) => {
         if (err) {
             console.log(err)
             res.json({ message: 'Error updating product' })

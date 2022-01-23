@@ -17,6 +17,7 @@ import categoryRoutes from "./routes-and-controllers/routes/category-routes";
 import suppliersRoutes from "./routes-and-controllers/routes/suppliers-routes";
 import warehouseRoutes from "./routes-and-controllers/routes/warehouse-routes";
 import salesRoutes from "./routes-and-controllers/routes/sales-routes";
+import testRoutes from './routes-and-controllers/routes/tests-route';
 import * as dotenv from "dotenv"
 import session from "express-session";
 import connectRedis from "connect-redis";
@@ -116,6 +117,7 @@ const redisClient = redis.createClient(process.env.REDIS_URL);
   server.use('/api/suppliers', suppliersRoutes);
   server.use('/api/warehouse', warehouseRoutes);
   server.use('/api/sales', salesRoutes);
+  server.use('/api/test', testRoutes);
 
 
 

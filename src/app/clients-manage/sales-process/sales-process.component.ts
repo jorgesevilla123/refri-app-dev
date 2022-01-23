@@ -10,7 +10,7 @@ import { shoppingBasket } from '../../interfaces-models/shopping-basket';
 import {ChangeDetectorRef} from '@angular/core'
 import { SalesProductSearchComponent } from "../sales-product-search/sales-product-search.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service"; 
+import { AlertService } from "../../shared/alert-module/alert.service"; 
 
 
 

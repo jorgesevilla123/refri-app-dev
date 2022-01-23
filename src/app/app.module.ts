@@ -8,24 +8,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "./material/material.module";
 import { DialogComponent } from './reusable-components/dialogs/dialog/dialog.component';
-import { ConfirmationComponent } from './reusable-components/confirmation/confirmation.component';
 import { LoadingComponent } from './reusable-components/loading/loading/loading.component';
 import { LoadingInterceptorService } from './services/loading-interceptor.service';
 import { UsersComponent } from './auth-routes/users/users.component';
 import { UserSignupComponent } from './auth-routes/user-signup/user-signup.component';
 import { UserLoginComponent } from './auth-routes/user-login/user-login.component';
-import { RouterModule } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { LoginGuard } from "./services/login.guard";
 import { AuthService } from './services/auth.service';
 import { InventoryModule } from "./inventory/inventory.module";
 import { ClientsManageModule } from "./clients-manage/clients-manage.module";
-import { FinanceModule } from "./finance/finance.module";
 import { MainNavModule } from './main-nav/main-nav.module';
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { ResponsiveNavModule } from "./responsive-nav/responsive-nav.module";
-import { WarehouseModule } from "./warehouse/warehouse.module";
-import { SupplierModule } from "./supplier/supplier.module";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -33,6 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ProductDeleteDialogComponent } from './reusable-components/product-delete-dialog/product-delete-dialog.component';
 import { SalesModule } from "./sales/sales.module";
+import { InventoryService } from './services/inventory.service';
+import { SalesService } from './services/sales.service';
 
 
 
@@ -41,21 +38,30 @@ import { SalesModule } from "./sales/sales.module";
 
 
 @NgModule({
+
+
+
+
+  //We only declare here the component of the root app
   declarations: [
     AppComponent,
-    DialogComponent,
-    ConfirmationComponent,
     LoadingComponent,
     UsersComponent,
     UserSignupComponent,
     UserLoginComponent,
     ProductDeleteDialogComponent
-
-
   ],
+
+
+
+
+
+
+
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
+    DashboardModule,
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
@@ -64,18 +70,15 @@ import { SalesModule } from "./sales/sales.module";
     MaterialModule,
     InventoryModule,
     ClientsManageModule,
-    FinanceModule,
     MainNavModule,
-    DashboardModule,
-    WarehouseModule,
-    SupplierModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     ResponsiveNavModule,
-    SalesModule
+    SalesModule,
+ 
   
 
 
@@ -90,8 +93,9 @@ import { SalesModule } from "./sales/sales.module";
     },
     AuthGuard,
     LoginGuard,
-    AuthService
-
+    AuthService,
+    InventoryService, //services on the root of the dependency injection tree
+    SalesService
 
     
   ],

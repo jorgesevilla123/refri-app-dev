@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { InventoryService } from "../../services/inventory.service"
 import { CategoriesService } from '../../services/categories.service';
 import { Products } from "../../interfaces-models/products";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../shared/alert-module/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Categories } from '../../interfaces-models/categories';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InventoryProductEditComponent } from "../inventory-product-edit/inventory-product-edit.component";
 import { InventoryImageEditComponent } from "../inventory-image-edit/inventory-image-edit.component";
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
+
+
+
 
 
 
@@ -19,21 +23,41 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './inventory-main.component.html',
   styleUrls: ['./inventory-main.component.css']
 })
-export class InventoryMainComponent implements OnInit {
-  
+export class InventoryMainComponent implements OnInit, AfterViewInit {
+
+
+
+
+
+  favProducts: any = [
+    { value: 'fav car', viewValue: 'Tesla X' },
+    { value: 'fav phone', viewValue: 'Iphone Y' },
+    { value: 'fav ship', viewValue: 'Starsteer' },
+  ];
+
+  @Input() value: string;
+
+  toppings = new FormControl();
+  toppingList: string[] = ['COMPRESORES', 'SELLOS', 'ACEITES', 'AUTOMOTRIZ'];
+
   searchKey: string;
   products: Products[];
-  allProducts: number; 
+  allProducts: number;
   response: any;
   firstPage: any = 1;
-  categories : Categories[];
+  categories: Categories[];
   pageOfItems: Products[] = [];
   pager: any = {};
-  showProductsPager: boolean 
+  showProductsPager: boolean
   categoryQuery: string
   currentPage: number
   isSmallScreen: boolean
   count: number
+  queryParams: string
+  Categories: any = []
+
+
+
 
 
 
@@ -42,66 +66,30 @@ export class InventoryMainComponent implements OnInit {
   constructor(
     public inventoryService: InventoryService,
     public alert: AlertService,
-     public dialog: MatDialog,
-     private categoriesService: CategoriesService,
-     private router : Router,
-     private route: ActivatedRoute,
-     private breakpointObserver: BreakpointObserver
+    public dialog: MatDialog,
+    private categoriesService: CategoriesService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-
+    console.log('hey im the parent ')
     this.breakpointObserver.observe('(max-width: 600px)').subscribe(
       breakpoints => {
         this.isSmallScreen = breakpoints.matches,
-        console.log(breakpoints.matches)
+          console.log(breakpoints.matches)
       }
     )
-    
-
-
-
-
-
-
-    this.route.queryParams.subscribe(
-      params => {
-
-
-        if(params.category === undefined) {
-          this.showProductsPager = true
-          this.router.navigate(['/inventario'], {queryParams:  { page: params.page || 1 }});
-          this.loadProducts(params.page || 1);
-        } 
-
-        else {
-          this.showProductsPager = false
-          this.getProductsByCategories(params.category, params.page || 1);
-        }
-      }
-    )
-    this.getCategories();
-  
-    
   }
 
 
 
 
+  ngAfterViewInit(): void {
 
-
-  getProductsByCategories(category, page){
-    this.inventoryService.getProductsByCategory(category, page).subscribe(
-      paginationObject => {
-        this.pager = paginationObject.pager,
-        this.products = paginationObject.pageOfItems,
-        this.categoryQuery = category,
-        this.currentPage = page
-      }
-
-    )
-
+      
   }
 
 
@@ -110,6 +98,49 @@ export class InventoryMainComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+  onChange(event: MatSelectChange) 
+
+  {
+    console.log(event.source.value);
+    console.log(event.source.selected);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  addCategory(category: string)
+   {
+    const isFound = this.Categories.find(value => value === category)
+
+    if (isFound !== undefined) 
+    {
+      const index = this.Categories.indexOf(category);
+      this.Categories.splice(index, 1);
+      console.log(this.Categories)
+    }
+    else 
+    {
+      this.Categories.push(`${category}`)
+      console.log(this.Categories)
+    }
+  }
 
 
 
@@ -119,40 +150,45 @@ export class InventoryMainComponent implements OnInit {
   onAdd() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '40%';
+    dialogConfig.id = 'product-add-dialog'
     const dialogRef = this.dialog.open(InventoryManageProductsComponent, dialogConfig)
     dialogRef.afterClosed().subscribe(
-      product => {
-        if (product) {
-          this.alert.notifySuccess(`Se añadio ${product.data.title} a los productos`, 2500, 'top', 'center')
-          setTimeout( () => {
-            location.reload()
-          }, 2000)
+      product => 
+      {
+        if (product) 
+    
+      {
+          this.alert.notifySuccess
+
         }
-        else {
+        else 
+        {
           this.alert.notifyWarn('No se ha añadido el producto', 2500, 'top', 'center');
         }
       }
-
     )
-
-
-
-
-   
-
   }
 
 
 
 
 
-    searchProducts(searchkey){
 
-     let queryString = unescape(searchkey);
 
-     this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  queryString, page: 1 }});
-      
+
+
+
+
+  searchProducts(searchkey) {
   
+    console.log('searching')
+    let queryString = unescape(searchkey);
+    let queryObject = {
+      q: queryString,
+      page: 1,
+      category: this.Categories
+    }
+    this.router.navigate(['/inventario/busqueda'], { queryParams: queryObject });
   }
 
 
@@ -161,120 +197,25 @@ export class InventoryMainComponent implements OnInit {
 
 
 
-  getCategories() {
-    this.categoriesService.getCategories().subscribe(
-      categories => {
-        this.categories = categories
-      }
-    )
-  }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+  onEditPhoto(productChosen: Products) {
 
  
 
-  loadProducts(page): void {
-  
-    this.inventoryService.getPaginateProducts(page).subscribe(
-      paginationObject => { 
-        console.log(paginationObject)
-        this.pager = paginationObject.paginator,
-        this.products = paginationObject.pageItems
-        this.count = paginationObject.count
-      }
-    )
-   
 
-  }
-
-
-
-  
-  onEdit(productForm: Products) {
-    this.inventoryService.populateForm(productForm)
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
-    dialogConfig.data = productForm;
-    const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      product => {
-
-        
-       
-      
-
-        if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
-          productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio 
-          && product.data.categoria === productForm.categorias) {
-
-          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
-
-          return 
-
-
-        }
-        else {
-          this.inventoryService.editProduct(product.formData).subscribe(
-            () => {
-              this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
-              setTimeout( () => {
-                window.location.reload()
-                this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.categoryQuery, page:  this.currentPage}});
-              }, 2000)
-            }
-          )
-        }
-
-      },
-
-
-      error => console.log(error),
-
-      () => console.log('completed')
-
-
-    )
-
-
-
-
-  }
-
-  onEditPhoto(productChosen: Products) {
-    
-    this.inventoryService.populatePhotoForm(productChosen);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
-    dialogConfig.data = productChosen
-    const dialogRef = this.dialog.open(InventoryImageEditComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      product => {
-
-        if (productChosen.imagePath === product.data.imagePath) {
-
-          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
-
-        }
-        else {
-
-          this.alert.notifySuccess('Imagen editada', 2500, 'top', 'center');
-          this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.categoryQuery, page: 1 }});
-
-        }
-
-      },
-
-
-      error => console.log(error),
-
-      () => console.log('completed')
-
-
-    )
-
-
-
-    
   }
 
 
@@ -283,7 +224,8 @@ export class InventoryMainComponent implements OnInit {
     this.inventoryService.deleteProduct(product).subscribe(
       product => {
         if (product) {
-         
+          console.log(product)
+
 
 
           this.alert.notifyWarn(`Eliminando ${product.title}`, 2500, 'top', 'center');
@@ -295,7 +237,7 @@ export class InventoryMainComponent implements OnInit {
       }
 
     )
- 
+
 
 
   }
@@ -313,4 +255,8 @@ export class InventoryMainComponent implements OnInit {
 
 }
 
+
+function Last(arg0: number): import("rxjs").OperatorFunction<import("@angular/router").Params, unknown> {
+  throw new Error('Function not implemented.');
+}
 

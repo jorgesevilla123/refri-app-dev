@@ -7,6 +7,7 @@ import { InventoryOutOfStockComponent } from "./inventory-out-of-stock/inventory
 import { InventoryLowStockComponent } from './inventory-low-stock/inventory-low-stock.component';
 import { InventoryProductsToBuyComponent } from './inventory-products-to-buy/inventory-products-to-buy.component'
 import { SearchComponent } from './search/search.component'
+import { InventoryOverviewComponent } from './inventory-overview/inventory-overview.component'
 import { AuthGuard } from "../services/auth.guard"
 
 
@@ -14,17 +15,23 @@ import { AuthGuard } from "../services/auth.guard"
 
 
 const routes: Routes = [
-{path: '', component: InventoryMainComponent,   /* canActivate: [AuthGuard] */ },
-{path: 'inventario/busqueda', component: InventorySearchComponent,   /* canActivate: [AuthGuard] */ },
-{path: 'inventario/tabla', component: InventoryComponent,  /*  canActivate: [AuthGuard] */},
-{path: 'inventario/fuera-de-stock', component: InventoryOutOfStockComponent,  /* canActivate: [AuthGuard] */ },
-{path: 'inventario/fuera-de-stock/search', component: SearchComponent,   /* canActivate: [AuthGuard] */},
-{path: 'inventario/bajo-stock', component: InventoryLowStockComponent,  /* canActivate: [AuthGuard] */ },
-{path: 'inventario/por-pedir', component: InventoryProductsToBuyComponent,  /* canActivate: [AuthGuard] */},
-{path: 'inventario/categorias', component: InventoryMainComponent,  /* canActivate: [AuthGuard] */}
+  {
+    path: '', component: InventoryMainComponent, //this is the parent route, child routes will derive from this one 
+      children: [
+      {path: '', redirectTo: '/inventario/principal', pathMatch: 'full'},
+      {path: 'inventario/principal', component: InventoryOverviewComponent},
+      { path: 'inventario/busqueda', component: InventorySearchComponent },
+      { path: 'inventario/fuera-de-stock', component: InventoryOutOfStockComponent,  /* canActivate: [AuthGuard] */ },
+      { path: 'inventario/fuera-de-stock/search', component: SearchComponent,   /* canActivate: [AuthGuard] */ },
+      { path: 'inventario/bajo-stock', component: InventoryLowStockComponent,  /* canActivate: [AuthGuard] */ },
+      { path: 'inventario/por-pedir', component: InventoryProductsToBuyComponent,  /* canActivate: [AuthGuard] */ },
+      { path: 'inventario/categorias', component: InventoryMainComponent,  /* canActivate: [AuthGuard] */ }
+
+    ] /* canActivate: [AuthGuard] */
+  },
+
 
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

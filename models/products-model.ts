@@ -6,7 +6,7 @@ export interface ProductInterface extends Document {
     precio: number,
     cantidad: number,
     imagePath: string,
-    categorias: string[],
+    categorias: string
     warehouse_id: [ObjectId]
     
 }
@@ -18,7 +18,7 @@ export const ProductSchema: Schema = new Schema({
     precio: Number,
     cantidad: Number,
     imagePath: String,
-    categorias: Array,
+    categorias: String,
     warehouse_id:  [SchemaTypes.ObjectId]
 
 })

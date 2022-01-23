@@ -1,42 +1,6 @@
-<div style="margin: 20px;">
-    <button mat-stroked-button appBackbutton><mat-icon>arrow_back</mat-icon>  Volver</button>
-</div>
 
 
 
-
-
-<div class="inventory-search-div">
-
-    <button id="add-button" mat-stroked-button (click)="onAdd()">
-    Añadir producto <mat-icon id="add-icon">add</mat-icon>
-  </button>
-
-
-
-
-
-    <form (submit)="searchProducts(searchBox.value)">
-        <mat-form-field appearance="outline" class="inventory-search-form">
-            <mat-label>Buscar productos</mat-label>
-            <input #searchBox matInput id="search-box" placeholder="Buscar" />
-            <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-        <button style="background-color: dodgerblue" type="submit" mat-fab>
-       <mat-icon>search</mat-icon>
-      </button>
-    </form>
-
-    <button mat-raised-button routerLink="/inventario/tabla">Ver productos en tabla <mat-icon>table_chart</mat-icon>
-    </button>
-
-
-</div>
-
-
-
-
-<h3 style="margin: 30px; font-weight: 200">Hay <b>{{productsCount}}</b> productos en el inventario</h3>
 
 
 

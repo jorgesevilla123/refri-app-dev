@@ -6,7 +6,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
 import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { DialogService } from "../../reusable-components/dialogs/dialog/dialog.service";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../shared/alert-module/alert.service";
 import { InventoryProductEditComponent } from '../inventory-product-edit/inventory-product-edit.component';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
+import { FormBuilder } from "@angular/forms";
 import { InventoryService } from "../../services/inventory.service";
 import { Products } from "../../interfaces-models/products";
 import {  MatDialogRef } from "@angular/material/dialog";
@@ -54,12 +54,13 @@ export class InventoryManageProductsComponent implements OnInit {
     const precio = this.productsForm.get('precio').value;
     const cantidad = this.productsForm.get('cantidad').value;
     const categoria = this.productsForm.get('categoria').value;
+    console.log(categoria);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('modelo', modelo);
     formData.append('precio', precio);
     formData.append('cantidad', cantidad);
-    formData.append('categoria', categoria);
+    formData.append('categorias', categoria);
     formData.append('imagePath', this.imagePath);
       this.inventoryService.addProducts(formData).subscribe(
         product => {

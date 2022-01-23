@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, Optional} from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { InventoryService } from "../../services/inventory.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Products } from "../../interfaces-models/products";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../shared/alert-module/alert.service";
 
 
 
@@ -23,20 +23,20 @@ export class InventoryProductEditComponent implements OnInit {
     public dialogRef: MatDialogRef<InventoryProductEditComponent>,
     public alert: AlertService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Products
-  ) { 
+  ) {
     this.product = this.data
   }
 
 
 
   ngOnInit(): void {
-  
 
-    
-    
+
+
+
   }
 
-  editProduct(){
+  editProduct() {
     let _id = this.inventoryService.productsForm.get('_id').value;
     let title = this.inventoryService.productsForm.get('title').value;
     let modelo = this.inventoryService.productsForm.get('modelo').value;
@@ -49,39 +49,41 @@ export class InventoryProductEditComponent implements OnInit {
     formData.append('modelo', modelo);
     formData.append('precio', precio);
     formData.append('categoria', categoria);
-    formData.append('cantidad', cantidad);  
+    formData.append('cantidad', cantidad);
     let products = {
-      title : title,
+      title: title,
       modelo: modelo,
       precio: precio,
       cantidad: cantidad,
       categorias: categoria
     }
-  
-          this.dialogRef.close({data: products, formData: formData});
-          this.product = products
 
-        
+    
 
-
+    this.inventoryService.editProduct(formData).subscribe(
+      product => {
+        this.dialogRef.close({data: product})
+      }
+    )
+ 
   }
 
 
 
-  onClose(){
+  onClose() {
     console.log(this.product);
-    this.dialogRef.close({data: this.product})
+    this.dialogRef.close({ data: this.product })
     console.log('onClose')
   }
 
 
 
 
-  
-    
-  
 
 
-  
+
+
+
+
 
 }

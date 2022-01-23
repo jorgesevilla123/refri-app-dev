@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import {ScrollingModule} from "@angular/cdk/scrolling"
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {ScrollingModule} from "@angular/cdk/scrolling"
     MatProgressSpinnerModule,
     ScrollingModule,
     MatBadgeModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
     
   ],
   exports: [
@@ -80,7 +82,8 @@ import {ScrollingModule} from "@angular/cdk/scrolling"
     MatProgressSpinnerModule,
     ScrollingModule,
     MatBadgeModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
 
   ]
 })

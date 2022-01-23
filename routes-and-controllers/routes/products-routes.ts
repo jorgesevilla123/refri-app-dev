@@ -21,7 +21,7 @@ const router = Router();
 
 
 //This route is only for testing that the routing to api is working good
-router.route('/checkProducts').get(justForTest);
+router.route('/checkProducts?').get(justForTest);
 
 
 

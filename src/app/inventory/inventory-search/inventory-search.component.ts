@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, DoCheck, AfterViewInit, AfterViewChecked, AfterContentChecked, AfterContentInit, SimpleChanges } from '@angular/core';
 import { Observable, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { InventoryService } from "../../services/inventory.service";
 import { DialogService } from "../../reusable-components/dialogs/dialog/dialog.service";
-import { InventoryManageProductsComponent } from "../inventory-manage-products/inventory-manage-products.component";
 import { InventoryProductEditComponent } from "../inventory-product-edit/inventory-product-edit.component";
 import { InventoryImageEditComponent } from "../inventory-image-edit/inventory-image-edit.component";
 import { Products } from "../../interfaces-models/products";
 import { registerLocaleData } from "@angular/common";
 import localeDe from "@angular/common/locales/en-DE";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../shared/alert-module/alert.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Router, ActivatedRoute } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import * as querystring from 'querystring'
 
 
 registerLocaleData(localeDe, 'fr');
@@ -24,7 +24,7 @@ registerLocaleData(localeDe, 'fr');
   templateUrl: './inventory-search.component.html',
   styleUrls: ['./inventory-search.component.css']
 })
-export class InventorySearchComponent implements OnInit {
+export class InventorySearchComponent implements OnInit, OnDestroy {
 
 
 
@@ -32,9 +32,10 @@ export class InventorySearchComponent implements OnInit {
   productsCount: number;
   pager: any = {};
   pageOfItems: Products[] = [];
-  searchQuery: string ;
+  searchQuery: any
   page: number;
   isSmallScreen: boolean
+  appquery
 
   constructor(
     private inventoryService: InventoryService,
@@ -44,7 +45,9 @@ export class InventorySearchComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private breakPointObserver: BreakpointObserver
-  ) { }
+  ) {
+    
+   }
 
   //Pushing a search term into the Observable stream
 
@@ -52,10 +55,15 @@ export class InventorySearchComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log('component initialized');
+  
+
+    console.log('im the search child')
     //Breakpoint observer returning true if the viewport is less than 600px
     if(this.breakPointObserver.isMatched('(max-width: 600px)')) {
       console.log('the screen size is less than 600px')
     }
+
 
       // Observer that checks the breakpoints and returns true when the screen is small
     this.breakPointObserver.observe('(max-width: 600px)').subscribe(
@@ -64,72 +72,65 @@ export class InventorySearchComponent implements OnInit {
         console.log(breakpoints.matches)
       }
     )
-    
+
+
+
       //gets query params and load the page with the search and page
      this.route.queryParams.subscribe(
       query => {
-        this.loadPage(query.q, query.page || 1);
+        this.appquery = querystring.stringify(query)
+        console.log(query);
+        console.log(this.appquery)
         console.log(query.q);
-        this.searchQuery = query.q;
+        console.log(query.categories)
+        this.loadPage(query);
+        this.searchQuery = query
         this.page = query.page;
       }
     )
   }
 
 
+  ngOnDestroy(): void {
+      console.log('component destroyed');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //gets the search and page term from the route query param and executes and returns the pagination object
-  loadPage(searchTerm, page) {
-    if(searchTerm === undefined) {
-      return
-    } else {
-      this.inventoryService.searchProductAndPaginate(searchTerm, page).subscribe(
+
+
+  loadPage(query) {
+    console.log(query)
+      this.inventoryService.searchProductAndPaginate(query).subscribe(
         paginationObject => {
-  
           this.pager = paginationObject.pager
           this.pageOfItems = paginationObject.pageOfItems        
         }
   
       )
     }
-  }
+  
 
 
 
-
-
-  // Navigates to inventory route for searching
-  searchProducts(searchkey){
-     let queryString = unescape(searchkey);
-     this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  queryString, page: 1 }});
-  }
-
-
-
-
-
-
-
-  onAdd() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '40%';
-    const dialogRef = this.dialog.open(InventoryManageProductsComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      product => {
-        if (product) {
-          this.alert.notifySuccess(`Se añadio ${product.data.title} a los productos`, 2500, 'top', 'center')
-          setTimeout( () => {
-            this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page: 1 }});
-          }, 2000)
-        }
-        else {
-          this.alert.notifyWarn('No se ha añadido el producto', 2500, 'top', 'center');
-        }
-      }
-
-    )
-
-  }
 
 
 
@@ -144,33 +145,19 @@ export class InventorySearchComponent implements OnInit {
     const dialogRef = this.dialog.open(InventoryProductEditComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       product => {
-
-        if (productForm.title === product.data.title && productForm.modelo === product.data.modelo &&
-          productForm.cantidad === product.data.cantidad && productForm.precio === product.data.precio 
-          && product.data.categoria === productForm.categorias) {
-
-          this.alert.notifySuccess('No se han hecho cambios', 2500, 'top', 'center');
-
-          return 
-
-        }
-        else {
+          console.log(product.formData)
           this.inventoryService.editProduct(product.formData).subscribe(
             () => {
               this.alert.notifySuccess('Producto editado', 2500, 'top', 'center');
-              setTimeout( () => {
-                window.location.reload()
-                this.router.navigate(['/inventario/busqueda'], {queryParams:  { q :  this.searchQuery, page:  this.page}});
-              }, 2000)
             }
           )
-        }
+  
 
       },
 
       error => console.log(error),
 
-      () => console.log('completed')
+      () => this.loadPage(this.searchQuery)
     )
   }
 

@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
     this.route.queryParams.subscribe(
       query => {
         console.log(query.q);
-        this.loadPage(query.q, query.page || 1);
+        this.loadPage(query);
         this.searchQuery = query.q
 
         
@@ -43,8 +43,8 @@ export class SearchComponent implements OnInit {
 
 
 
-  loadPage(searchTerm, page) {
-    this.inventoryService.searchProductAndPaginate(searchTerm, page).subscribe(
+  loadPage(query) {
+    this.inventoryService.searchProductAndPaginate(query).subscribe(
 
       paginationObject => {
 

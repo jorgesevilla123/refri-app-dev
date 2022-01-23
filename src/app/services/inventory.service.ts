@@ -6,6 +6,7 @@ import {  FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, switchMap, map } from "rxjs/operators";
 import { tap, catchError } from 'rxjs/operators';
 import { environment } from "../../environments/environment"
+import * as querystring from 'querystring';
 
 
 
@@ -118,6 +119,7 @@ export class InventoryService {
   }
 
   deleteProduct(product: Products | string): Observable<any>{
+    
     const id = typeof product === 'string' ? product : product._id;
     const url = `${this.productsUrl}/delete-product/${id}`;
     return this.http.delete<Products>(url).pipe(
@@ -127,6 +129,7 @@ export class InventoryService {
   }
 
   editProduct(product: FormData): Observable<Products>{
+    console.log(`from service ${product.get('categoria')}`)
     const id = product.get('_id');
     const url = `${this.productsUrl}/update/${id}`;
     return this.http.put<Products>(url, product).pipe(
@@ -164,10 +167,14 @@ export class InventoryService {
 
   }
 
+  //Accepts a complete query as argument 
+  searchProductAndPaginate(query){
+    let parsedQuery = querystring.stringify(query)
+    console.log(query)
+    console.log(parsedQuery)
 
-  searchProductAndPaginate(keyLetter, page){
     
-    return this.http.get<any>(`${this.productsUrl}/search?q=${keyLetter}&page=${page}`).pipe(
+    return this.http.get<any>(`${this.productsUrl}/search?${parsedQuery}`).pipe(
       map( res => {return res})
     )
  
@@ -212,14 +219,27 @@ export class InventoryService {
 
 
   populateForm(product){
+    console.log(product)
     this.productsForm.patchValue({
       _id: product._id,
       title: product.title,
       modelo: product.modelo,
       precio: product.precio,
-      cantidad: product.cantidad
+      cantidad: product.cantidad,
+      categoria: product.categorias
     })
   }
+
+
+
+
+
+
+
+
+
+
+
 
   populatePhotoForm(product){
     this.photoForm.patchValue({

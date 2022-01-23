@@ -2,7 +2,7 @@ import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { InventoryService } from "../../services/inventory.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Products } from "../../interfaces-models/products";
-import { AlertService } from "../../reusable-components/alerts/alert/alert.service";
+import { AlertService } from "../../shared/alert-module/alert.service";
 
 
 
@@ -40,14 +40,10 @@ export class InventoryImageEditComponent implements OnInit {
     formData.append('newImage', this.imagePath);
     this.inventoryService.editProductPhoto(formData).subscribe(
       product => {
-        if(product) {
+        
           this.product = product
           this.dialogRef.close({data: product})
-        }
-        else {
-          this.product = product;
-          this.alert.notifyWarn('No se ha editado la imagen', 2500, 'top', 'center')
-        }
+  
       },
       error => console.log(error),
       () => console.log('Edit completed')
@@ -65,8 +61,9 @@ export class InventoryImageEditComponent implements OnInit {
   }
 
   onClose(){
-    this.dialogRef.close({data: this.product})
-    console.log('onClose')
+    console.log('on close executed')
+    this.dialogRef.close({data: undefined})
+  
   }
 
 
